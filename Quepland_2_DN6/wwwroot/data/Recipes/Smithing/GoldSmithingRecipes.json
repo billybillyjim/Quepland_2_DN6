@@ -1,0 +1,137 @@
+[
+  {
+    "outputItemName": "Molten Gold Bar",
+    "ingredients": [
+      {
+        "itemName": "Gold Ore"
+      }
+    ],
+    "experienceGained": "Smithing:420",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 85
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Gold Bar",
+    "ingredients": [
+      {
+        "itemName": "Gold Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 85
+      }
+    ]
+  },
+  {
+    "outputItemName": "Golden Knife",
+    "ingredients": [
+      {
+        "itemName": "Molten Gold Bar"
+      }
+    ],
+    "experienceGained": "Smithing:420",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 85
+      }
+    ]
+  },
+  {
+    "outputItemName": "Golden Sword",
+    "ingredients": [
+      {
+        "itemName": "Molten Gold Bar"
+      }
+    ],
+    "experienceGained": "Smithing:420",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 85
+      }
+    ]
+  },
+  {
+    "outputItemName": "Golden Axe",
+    "ingredients": [
+      {
+        "itemName": "Molten Gold Bar"
+      }
+    ],
+    "experienceGained": "Smithing:420",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 85
+      }
+    ]
+  },
+  {
+    "outputItemName": "Golden Hammer",
+    "ingredients": [
+      {
+        "itemName": "Molten Gold Bar"
+      }
+    ],
+    "experienceGained": "Smithing:420",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 85
+      }
+    ]
+  },
+  {
+    "outputItemName": "Gold Bar",
+    "ingredients": [
+      {
+        "itemName": "Molten Gold Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 85
+      }
+    ]
+  },
+  {
+    "outputItemName": "Gold Necklace",
+    "ingredients": [
+      {
+        "itemName": "Molten Gold Bar"
+      }
+    ],
+    "experienceGained": "Smithing:420",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 85
+      }
+    ]
+  },
+  {
+    "outputItemName": "Golden Arrowtips",
+    "ingredients": [
+      {
+        "itemName": "Molten Gold Bar"
+      }
+    ],
+    "outputAmount": 10,
+    "experienceGained": "Smithing:420",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 85
+      }
+    ]
+  }
+
+]

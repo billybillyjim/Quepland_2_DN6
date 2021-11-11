@@ -1,0 +1,158 @@
+[
+  {
+    "outputItemName": "Molten Steel Bar",
+    "ingredients": [
+      {
+        "itemName": "Iron Bar"
+      },
+      {
+        "itemName": "Coal"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 65
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Steel Bar",
+    "ingredients": [
+      {
+        "itemName": "Iron Ore"
+      },
+      {
+        "itemName": "Coal"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 65
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Steel Bar",
+    "ingredients": [
+      {
+        "itemName": "Steel Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 65
+      }
+    ]
+  },
+  {
+    "outputItemName": "Steel Knife",
+    "ingredients": [
+      {
+        "itemName": "Molten Steel Bar"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 65
+      }
+    ]
+  },
+  {
+    "outputItemName": "Steel Sword",
+    "ingredients": [
+      {
+        "itemName": "Molten Steel Bar"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 65
+      }
+    ]
+  },
+  {
+    "outputItemName": "Steel Axe",
+    "ingredients": [
+      {
+        "itemName": "Molten Steel Bar"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 65
+      }
+    ]
+  },
+  {
+    "outputItemName": "Steel Hammer",
+    "ingredients": [
+      {
+        "itemName": "Molten Steel Bar"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 65
+      }
+    ]
+  },
+  {
+    "outputItemName": "Steel Pickaxe",
+    "ingredients": [
+      {
+        "itemName": "Molten Steel Bar"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 65
+      }
+    ]
+  },
+  {
+    "outputItemName": "Steel Arrowtips",
+    "ingredients": [
+      {
+        "itemName": "Molten Steel Bar"
+      }
+    ],
+    "outputAmount": 10,
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 65
+      }
+    ]
+  },
+  {
+    "outputItemName": "Steel Bar",
+    "ingredients": [
+      {
+        "itemName": "Molten Steel Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 65
+      }
+    ]
+  }
+
+]

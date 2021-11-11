@@ -1,0 +1,12 @@
+{
+  "$schema": "npc-schema.json#",
+  "name": "Jumoku",
+  "id": 100,
+  "dialogs": [
+    {
+      "buttonText": "Hello",
+      "responseText": "Meguumbappa, Rakuba. Welcome to Nmekufu. We do not get many visitors. Follow the path to our village, our elder will want to meet you.",
+      "newDepthOnTalk": 1
+    }
+  ]
+}

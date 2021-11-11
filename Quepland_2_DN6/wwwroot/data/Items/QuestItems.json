@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Mound's House Key",
+    "description": "A key to a house near Darkbourne Bridge.",
+    "value": 0,
+    "icon": "Key",
+    "isSellable": false
+  },
+  {
+    "name": "Mound's Hat",
+    "description": "A large, leather pirate's hat. No idea how someone would sleep in this.",
+    "value": 0,
+    "icon": "Mound's Hat",
+    "armorInfo": {
+      "armorBonus": 1
+    }
+  },
+  {
+    "name": "Treasure Map",
+    "description": "A map leading to an island north of Quepland. Mound gave it to you.",
+    "value": 0,
+    "icon": "Map",
+    "isSellable": false
+  },
+  {
+    "name": "Mound's Map",
+    "description": "A map that shows the location of a secret island to the west. You'll have to find someone to sail you there.",
+    "value": 0,
+    "icon": "Map",
+    "isSellable": false
+  },
+  {
+    "name": "Bloody Knife",
+    "description": "A knife covered in blood. It was found in First Mate Fremp's bed.",
+    "value": 0,
+    "icon": "BloodyKnife",
+    "isSellable": false
+  },
+  {
+    "name": "No Sulicitin Sign",
+    "description": "A poorly written sign.",
+    "gatherString": "You get an ugly sign.",
+    "value": 0,
+    "gatherSpeed": 8,
+    "icon": "Sign"
+  },
+  {
+    "name": "A lot of Camels",
+    "description": "A huge number of dromedaries owned by Carl, the camel salesman at Desert's Mouth.",
+    "value": 0,
+    "icon": "Camels"
+  },
+  {
+    "name": "Queple's Giant Sword",
+    "description": "A massive sword. You definitely can't use it the way it is now. Maybe there's a way to change that...",
+    "value": 0,
+    "icon": "BigSword",
+    "isSellable": false
+  },
+  {
+    "name": "Queple's Sword(Inactive)",
+    "description": "A strange sword. It doesn't seem to work quite right. Maybe you should return it...",
+    "value": 0,
+    "icon": "BigSword",
+    "isSellable": false
+  }
+]

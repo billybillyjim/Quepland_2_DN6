@@ -1,0 +1,149 @@
+﻿@inherits LayoutComponentBase
+@inject GameState GameState
+
+
+<div class="row v-100" style="background-color:@GameState.BGColor;color:white;">
+            @if (GameState.ShowStartMenu == false)
+    {
+        <div class="sidebar col-3 v-100 p-0" style="z-index:5; max-width:300px; @GetGradient()">
+            <UpdatedNavMenu />
+        </div>
+    }
+     <div class="col-6 p-0" id="main-window">
+        @if (GameState.ShowStartMenu == false)
+        {
+            @if (GameState.ShowSettings)
+            {
+
+                <Quepland_2_DN6.Pages.SettingsComponent></Quepland_2_DN6.Pages.SettingsComponent>
+
+            }
+        }
+        <div class="p-2">
+            @Body
+        </div>
+    </div>
+            @if (GameState.ShowStartMenu == false)
+        {     
+                <div class="fixed-bottom justify-content-center">                  
+                    <div class="@GetMessageWindowClass() col-6 ml-0 custom-scroll" style="left:292px;">    
+                        <button class="btn btn-outline-light" style=" margin-top: -28px; margin-left: -10px; padding: 0px 5px; border-radius: 0.5rem;"
+                            @onclick="@(() => ToggleMessageMenu())">
+                                    Hide
+                            </button>
+                            <div style="display:flex;margin-top:-38px;margin-left:40px;padding-bottom:10px;">
+                                @foreach (string filter in messageFilters)
+                                {
+                                    if (MessageManager.CurrentTag == filter)
+                                    {
+                                        <button class="btn btn-light" style="padding: 0px 5px; border-radius: 0.5rem;"
+                                                @onclick="@(() => FilterMessages(filter))">
+                                            @filter
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-outline-light" style="padding: 0px 5px; border-radius: 0.5rem;"
+                                                @onclick="@(() => FilterMessages(filter))">
+                                            @filter
+                                        </button>
+                                    }
+                                }
+                            </div>
+                            @if (showMessages)
+                            {
+                            <Quepland_2_DN6.Components.MessagesMenuComponent NumToShow="100"></Quepland_2_DN6.Components.MessagesMenuComponent>
+                            }
+                            else
+                            {
+                            <Quepland_2_DN6.Components.MessagesMenuComponent NumToShow="1"></Quepland_2_DN6.Components.MessagesMenuComponent>
+                            }
+                        </div>  
+                </div>
+               
+            }
+            else
+            {
+                <div class="hide-message-window col-12 custom-scroll">
+                    <button class="btn btn-outline-light" style="margin-left: -30px; padding: 0px 5px; border-radius: 0.5rem;"
+                            @onclick="@(() => ToggleMessageMenu())">
+                        Show Messages
+                    </button>
+
+                </div>
+            }
+        
+     @if (GameState.ShowStartMenu == false)
+        {
+            <div id="side-bar" class="col-3 p-0" style="background-color:#4d4d4d;z-index:5;">
+                <Quepland_2_DN6.Components.RightSidebarComponent></Quepland_2_DN6.Components.RightSidebarComponent>
+            </div>
+
+            @if (GameState.ShowTome)
+            {
+                <div>
+                    <Quepland_2_DN6.Components.TomeComponent></Quepland_2_DN6.Components.TomeComponent>
+                </div>
+            }
+            @if (GameState.ShowMap)
+            {
+                <div>
+                    <Quepland_2_DN6.Components.MapComponent></Quepland_2_DN6.Components.MapComponent>
+                </div>
+            }
+        }
+
+    @if (TooltipManager.ShouldShow())
+    {
+        <Quepland_2_DN6.Components.TooltipComponent Tip="@TooltipManager.CurrentTip" xPos="@TooltipManager.xPos" yPos="@TooltipManager.yPos"></Quepland_2_DN6.Components.TooltipComponent>
+    }
+    @if (TooltipManager.ShowContext)
+    {
+        <Quepland_2_DN6.Components.ContextMenuComponent Menu="@GameState.CurrentContextMenu" xPos="@TooltipManager.xPos" yPos="@TooltipManager.yPos"></Quepland_2_DN6.Components.ContextMenuComponent>
+    }
+
+</div>
+
+@code{
+
+    private bool showMessages = true;
+    private List<string> messageFilters = new List<string>() { "All", "Loot" };
+
+    public string GetMessageWindowClass()
+    {
+        if(showMessages){
+            return "message-window";
+        }
+        return "hide-message-window";
+    }
+    private void ToggleMessageMenu()
+    {
+        showMessages = !showMessages;
+        GameState.UpdateState();
+    }
+    private int GetMessageWidth()
+    {
+        return GameState.MinWindowWidth - 30;
+    }
+    private void FilterMessages(string tag)
+    {
+        MessageManager.CurrentTag = tag;
+        GameState.UpdateState();
+    }
+    private string GetGradient()
+    {
+        string bg = "background-image:linear-gradient(";
+        bg += GameState.CurrentLand.TopColor + " 0%, " + GameState.CurrentLand.BottomColor + " 60%);";
+        return bg;
+    }
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+
+}

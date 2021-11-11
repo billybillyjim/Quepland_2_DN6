@@ -1,0 +1,74 @@
+﻿@inject GameState GameState
+@implements IDisposable
+@inject NavigationManager UriHelper
+
+@if (TripInfo != null)
+{
+    if (TripInfo.IsActive)
+    {
+        @if (TripInfo.ReturnTime.CompareTo(DateTime.UtcNow) <= 0)
+        {
+            <div>You completed your hunt.</div>
+            <button class="btn btn-primary" @onclick="@(() => EndHunt(TripInfo.ReturnTime.Subtract(TripInfo.StartTime).TotalSeconds, true))">Complete Hunt</button>
+        }
+        else
+        {
+            <div>Hunting... @(TripInfo.ReturnTime.Subtract(DateTime.UtcNow).ToString(@"hh\:mm\:ss"))</div>
+            <button class="btn btn-primary" @onclick="@(() => CancelHuntingTrip())">Cancel Hunt</button>
+        }
+
+    }
+    else
+    {
+        if (huntingMenu == "Unopened")
+        {
+            <button class="btn btn-primary" @onclick="@(() => OpenMenu())">Go Hunting</button>
+        }
+        else if (huntingMenu == "Opened")
+        {
+            <button class="btn btn-primary" @onclick="@(() => StartHuntingTrip(1))">1 Hour</button>
+            <button class="btn btn-primary" @onclick="@(() => StartHuntingTrip(4))">4 Hours</button>
+            <button class="btn btn-primary" @onclick="@(() => StartHuntingTrip(8))">8 Hours</button>
+        }
+
+    }
+}
+
+
+@code {
+
+    [Parameter]
+    public HuntingTripInfo TripInfo { get; set; }
+    private string huntingMenu = "Unopened";
+
+    public void StartHuntingTrip(int hours)
+    {
+        HuntingManager.StartHuntingTrip(TripInfo, hours);
+        SaveManager.SaveGame();
+    }
+    public void CancelHuntingTrip()
+    {
+        double amountCompleted = DateTime.UtcNow.Subtract(TripInfo.StartTime).TotalHours / TripInfo.ReturnTime.Subtract(TripInfo.StartTime).TotalHours;
+        EndHunt(amountCompleted * TripInfo.ReturnTime.Subtract(TripInfo.StartTime).TotalSeconds, false);
+
+    }
+
+    public void EndHunt(double totalTimeHunting, bool useFloor)
+    {
+        HuntingManager.EndHunt(TripInfo, totalTimeHunting, useFloor);
+        GameState.UpdateState();
+    }
+    private void OpenMenu()
+    {
+        huntingMenu = "Opened";
+    }
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

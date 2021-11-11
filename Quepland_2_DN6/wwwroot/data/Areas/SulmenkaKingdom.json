@@ -1,0 +1,104 @@
+[
+  {
+    "name": "Nakneg Hall",
+    "id": 150,
+    "image": "Hall",
+    "description": "You push through a strange force that keeps the water at bay to find yourself at the entrance to a brilliant red palace. Though no light from the surface can reach this deep underwater, giant schools of glowing fish and jellifish illuminate the whole complex as if it were day. To the right there is a large docks, straight ahead is a large marketplace.",
+    "areaURL": "NaknegHall",
+    "unlockableAreas": [
+      {
+        "areaURL": "RusterakDocks",
+        "buttonText": "Visit the docks"
+      },
+      {
+        "areaURL": "ManihojMarket",
+        "buttonText": "Enter the market"
+      }
+
+    ]
+  },
+  {
+    "name": "Rusterak Docks",
+    "id": 151,
+    "image": "Docks",
+    "description": "You enter the docks of the palace. Wooden walkways lead outward to the edge of the water. There are groups of hunters going out and others returning with hauls of glowing fish. From the looks of it, they'll take just about anybody on a hunting trip.",
+    "areaURL": "RusterakDocks"
+  },
+  {
+    "name": "Manihoj Market",
+    "id": 152,
+    "image": "Market",
+    "description": "Manihoj is the largest marketplace under the sea, if you believe the signage. There are many shops here, mostly consisting of bulk goods. Most places seem to accept gold pieces, though a few only trade via Sashcom Scales. A station in the corner appears to be open for anyone skilled at lapidary.",
+    "areaURL": "ManihojMarket",
+    "actions": [ "Gem Cutting" ],
+    "buildings": [
+      {
+        "name": "Sulmenkan Local Goods",
+        "buttonText": "Local Goods Stall",
+        "url": "SulmenkanLocalGoods",
+        "description": "The sizeable stall sells a variety of locally made Sulmenkan products. Most of them are of no use to you, but you notice a few helpful items in a case behind the counter.",
+        "shops": [
+          {
+            "name": "Sulmenkan Local Goods",
+            "limitBoughtItemsToSoldItems": true,
+            "itemNames": [
+              "Sulmenkan Trident",
+              "Fish Knife",
+              "Bucket of Water",
+              "Tome of Fish"
+            ],
+            "costMultiplier": 5
+
+          }
+        ]
+      },
+      {
+        "name": "Hunted Wares",
+        "buttonText": "Hunting Stall",
+        "url": "HuntedWares",
+        "description": "A small and smelly market stall sits in the corner of the plaza. There's a pile of every kind of dead animal, some tanned and some apparently still fresh.",
+        "shops": [
+          {
+            "name": "Hunted Wares",
+            "limitBoughtItemsToSoldItems": true,
+            "itemNames": [
+              "Rabbit",
+              "Deer",
+              "Pigeon",
+              "Rabbit Leather",
+              "Deer Leather",
+              "Wild Boar Leather",
+              "Black Bear Leather",
+              "Moose Leather"
+            ],
+            "costMultiplier": 5,
+            "currencyName": "Sashcom Scales"
+
+          }
+        ]
+      },
+      {
+        "name": "Fin's Fine Fabrics",
+        "buttonText": "Fabrics Stall",
+        "url": "FinsFineFabrics",
+        "description": "A small and smelly market stall sits in the corner of the plaza. There's a pile of every kind of dead animal, some tanned and some apparently still fresh.",
+        "shops": [
+          {
+            "name": "Fin's Fine Fabrics",
+            "limitBoughtItemsToSoldItems": true,
+            "itemNames": [
+              "Needle",
+              "Spindle",
+              "Wool Fabric",
+              "Cotton Fabric",
+              "Fabrician's Gauntlet"
+            ],
+            "costMultiplier": 5,
+            "currencyName": "Sashcom Scales"
+
+          }
+        ]
+      }
+    ]
+  }
+]

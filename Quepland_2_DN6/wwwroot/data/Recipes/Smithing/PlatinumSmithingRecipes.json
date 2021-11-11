@@ -1,0 +1,137 @@
+[
+  {
+    "outputItemName": "Molten Platinum Bar",
+    "ingredients": [
+      {
+        "itemName": "Platinum Ore"
+      }
+    ],
+    "experienceGained": "Smithing:600",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 93
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Platinum Bar",
+    "ingredients": [
+      {
+        "itemName": "Platinum Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 93
+      }
+    ]
+  },
+  {
+    "outputItemName": "Platinum Knife",
+    "ingredients": [
+      {
+        "itemName": "Molten Platinum Bar"
+      }
+    ],
+    "experienceGained": "Smithing:600",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 93
+      }
+    ]
+  },
+  {
+    "outputItemName": "Platinum Sword",
+    "ingredients": [
+      {
+        "itemName": "Molten Platinum Bar"
+      }
+    ],
+    "experienceGained": "Smithing:600",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 93
+      }
+    ]
+  },
+  {
+    "outputItemName": "Platinum Axe",
+    "ingredients": [
+      {
+        "itemName": "Molten Platinum Bar"
+      }
+    ],
+    "experienceGained": "Smithing:600",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 93
+      }
+    ]
+  },
+  {
+    "outputItemName": "Platinum Hammer",
+    "ingredients": [
+      {
+        "itemName": "Molten Platinum Bar"
+      }
+    ],
+    "experienceGained": "Smithing:600",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 93
+      }
+    ]
+  },
+  {
+    "outputItemName": "Platinum Bar",
+    "ingredients": [
+      {
+        "itemName": "Molten Platinum Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 93
+      }
+    ]
+  },
+  {
+    "outputItemName": "Platinum Necklace",
+    "ingredients": [
+      {
+        "itemName": "Molten Platinum Bar"
+      }
+    ],
+    "experienceGained": "Smithing:600",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 93
+      }
+    ]
+  },
+  {
+    "outputItemName": "Platinum Arrowtips",
+    "ingredients": [
+      {
+        "itemName": "Molten Platinum Bar"
+      }
+    ],
+    "outputAmount": 10,
+    "experienceGained": "Smithing:600",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 93
+      }
+    ]
+  }
+
+]

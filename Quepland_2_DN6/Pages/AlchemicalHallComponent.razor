@@ -1,0 +1,200 @@
+﻿@inject GameState GameState
+@inject NavigationManager UriHelper
+@implements IDisposable
+
+@if (ShowAlchemyOptions)
+{
+    @if (GameState.AlchemyStage == 0)
+    {
+        <div>
+            <Quepland_2_DN6.Components.CustomDropdownComponent EmptyText="You have no metal bars" BoxText="Select Metal" DropdownItems="@Metals" @bind="metal"></Quepland_2_DN6.Components.CustomDropdownComponent>
+        </div>
+
+        <div>
+            <Quepland_2_DN6.Components.CustomDropdownComponent EmptyText="You have no base elements" BoxText="Select Element" DropdownItems="@Elements" @bind="element"></Quepland_2_DN6.Components.CustomDropdownComponent>
+
+        </div>
+
+        <div>
+            <Quepland_2_DN6.Components.CustomDropdownComponent EmptyText="Select Action" BoxText="Select Action" DropdownItems="@Actions" @bind="action"></Quepland_2_DN6.Components.CustomDropdownComponent>
+
+        </div>
+        @if (metal != null && element != null && action != null)
+        {
+            <button class="btn btn-primary" @onclick="@(() => BeginAlchemy())">
+                Attempt Alchemy
+            </button>
+        }
+        else
+        {
+            <button class="btn btn-primary" style="opacity:0.5" @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "You need an element, metal, and action selected to continue.")))"
+                    @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+                Attempt Alchemy
+            </button>
+        }
+    }
+    @if (GameState.AlchemyStage == 1)
+    {
+        <button class="btn btn-primary" style="margin-bottom:10px;" @onclick="@(() => GameState.StopActions())">Stop Alchemy</button>
+        <div>
+            Adding Metal...
+            <div class="progress">
+                <div class="progress-bar" style="width:@GetWidth()">
+
+                </div>
+            </div>
+        </div>
+    }
+    @if (GameState.AlchemyStage == 2)
+    {
+        <button class="btn btn-primary" style="margin-bottom:10px;" @onclick="@(() => GameState.StopActions())">Stop Alchemy</button>
+        <div>
+            Applying Element...
+            <div class="progress">
+                <div class="progress-bar" style="width:@GetWidth()">
+
+                </div>
+            </div>
+        </div>
+    }
+    @if (GameState.AlchemyStage == 3)
+    {
+        <button class="btn btn-primary" style="margin-bottom:10px;" @onclick="@(() => GameState.StopActions())">Stop Alchemy</button>
+        <div>
+            Doing Action...
+            <div class="progress">
+                <div class="progress-bar" style="width:@GetWidth()">
+
+                </div>
+            </div>
+        </div>
+    }
+
+}
+else
+{
+
+    <button class="btn btn-primary" @onclick="ShowOptions">Start Alchemy</button>
+}
+
+
+
+
+@code {
+
+    public bool ShowAlchemyOptions;
+    [Parameter]
+    public double QueplarMultiplier { get; set; } = 1;
+    [Parameter]
+    public string HallName { get; set; }
+
+    private string metal;
+    private string element;
+    private string action;
+
+    private double ticksToComplete;
+
+    private List<string> Metals = new List<string>();
+    private List<string> Elements = new List<string>();
+    private List<string> Actions = new List<string>() { "Calcinate", "Dissolve", "Fermentate", "Sublimate", "Project", "Cibate" };
+
+    public void ShowOptions()
+    {
+        ShowAlchemyOptions = true;
+        GameState.UpdateState();
+    }
+    private void LoadMetals()
+    {
+        Metals.Clear();
+        foreach (KeyValuePair<GameItem, int> item in Player.Instance.Inventory.GetItems())
+        {
+            if (item.Key.Category == "Bars")
+            {
+                Metals.Add(item.Key.Name);
+            }
+        }
+    }
+    private void LoadElements()
+    {
+        Elements.Clear();
+        foreach (KeyValuePair<GameItem, int> item in Player.Instance.Inventory.GetItems())
+        {
+            if (item.Key.AlchemyInfo != null && item.Key.Category != "Bars")
+            {
+                Elements.Add(item.Key.Name);
+            }
+        }
+    }
+    public void BeginAlchemy()
+    {
+        if (metal == null || element == null)
+        {
+            MessageManager.AddMessage("You need to select a metal and an element.");
+            return;
+        }
+        AlchemicalFormula formula = new AlchemicalFormula();
+        formula.InputMetal = ItemManager.Instance.GetItemByName(metal);
+        formula.Element = ItemManager.Instance.GetItemByName(element);
+        formula.ActionString = action;
+        formula.ActionMultiplier = GetActionMultiplier();
+        formula.LocationMultiplier = QueplarMultiplier;
+        GameState.CurrentAlchemyFormula = formula;
+        ticksToComplete = 10;
+        GameState.AlchemyStage = 0;
+    }
+    private double GetActionMultiplier()
+    {
+        if (action == "Calcinate")
+        {
+            return 0.1;
+        }
+        else if (action == "Dissolve")
+        {
+            return 0.2;
+        }
+        else if (action == "Fermentate")
+        {
+            return 0.4;
+        }
+        else if (action == "Sublimate")
+        {
+            return 0.5;
+        }
+        else if (action == "Project")
+        {
+            return 0.8;
+        }
+        else if (action == "Cibate")
+        {
+            return 0.9;
+        }
+        else
+        {
+            Console.WriteLine("Action multiplier not found.");
+            return 0.1;
+        }
+    }
+    public string GetWidth()
+    {
+        return (100 - ((GameState.TicksToNextAction / ticksToComplete) * 100)) + "%;";
+    }
+    public void UpdateLists()
+    {
+        LoadMetals();
+        LoadElements();
+        GameState.UpdateState();
+    }
+    protected override void OnInitialized()
+    {
+        UpdateLists();
+        GameState.AlchemicalHallComponent = this;
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StopActions();
+        GameState.AlchemicalHallComponent = null;
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

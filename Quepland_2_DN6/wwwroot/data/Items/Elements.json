@@ -1,0 +1,120 @@
+[
+  {
+    "name": "Carquen",
+    "description": "A pure elemental powder. It's black.",
+    "value": 10,
+    "isStackable": true,
+    "secondaryColor": "#595959",
+    "icon": "PowderBag",
+    "alchemyInfo": {
+      "queplarValue": 15
+    }
+  },
+  {
+    "name": "Quencium",
+    "description": "A pure elemental powder. It's white.",
+    "value": 25,
+    "isStackable": true,
+    "secondaryColor": "#ffffff",
+    "icon": "PowderBag",
+    "alchemyInfo": {
+      "queplarValue": 20
+    }
+  },
+  {
+    "name": "Oxyquen",
+    "description": "A pure elemental powder. It's a light blue.",
+    "value": 50,
+    "isStackable": true,
+    "icon": "PowderBag",
+    "secondaryColor": "#bafeff",
+    "alchemyInfo": {
+      "queplarValue": 25
+    }
+  },
+  {
+    "name": "Nitroquen",
+    "description": "A pure elemental powder. It's dark red.",
+    "value": 80,
+    "isStackable": true,
+    "secondaryColor": "#a33e3b",
+    "icon": "PowderBag",
+    "alchemyInfo": {
+      "queplarValue": 30
+    }
+  },
+  {
+    "name": "Siliquen",
+    "description": "A pure elemental powder. It's gray.",
+    "value": 110,
+    "secondaryColor": "#8c8c8c",
+    "isStackable": true,
+    "icon": "PowderBag",
+    "alchemyInfo": {
+      "queplarValue": 40
+    }
+  },
+  {
+    "name": "Quephorus",
+    "description": "A pure elemental powder. It's violet.",
+    "value": 150,
+    "isStackable": true,
+    "secondaryColor": "#9a7cc4",
+    "icon": "PowderBag",
+    "alchemyInfo": {
+      "queplarValue": 50
+    }
+  },
+  {
+    "name": "Quelfur",
+    "description": "A pure elemental powder. It's yellow.",
+    "value": 190,
+    "isStackable": true,
+    "secondaryColor": "#e6e360",
+    "icon": "PowderBag",
+    "alchemyInfo": {
+      "queplarValue": 60
+    }
+  },
+  {
+    "name": "Bariquem",
+    "description": "A pure elemental powder. It's dark blue.",
+    "value": 210,
+    "isStackable": true,
+    "secondaryColor": "#4572a8",
+    "icon": "PowderBag",
+    "alchemyInfo": {
+      "queplarValue": 75
+    }
+  },
+  {
+    "name": "Uraniquep",
+    "description": "A pure elemental powder. It glows green.",
+    "value": 260,
+    "isStackable": true,
+    "secondaryColor": "#63d64f",
+    "icon": "PowderBag",
+    "alchemyInfo": {
+      "queplarValue": 90
+    }
+  },
+  {
+    "name": "Queplonium",
+    "description": "A pure elemental powder. It glows purple.",
+    "value": 350,
+    "isStackable": true,
+    "icon": "PowderBag",
+    "secondaryColor": "#9c40de",
+    "alchemyInfo": {
+      "queplarValue": 100
+    }
+  },
+  {
+    "name": "Alchemical Dust",
+    "description": "A dull powder that is all that remains of a failed alchemy attempt.",
+    "value": 1,
+    "isStackable": true,
+    "secondaryColor": "",
+    "icon": "Powder"
+  }
+]

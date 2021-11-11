@@ -1,0 +1,122 @@
+[
+  {
+    "outputItemName": "Molten Aluminum Bar",
+    "ingredients": [
+      {
+        "itemName": "Bauxite"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 75
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Aluminum Bar",
+    "ingredients": [
+      {
+        "itemName": "Aluminum Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 75
+      }
+    ]
+  },
+  {
+    "outputItemName": "Aluminum Knife",
+    "ingredients": [
+      {
+        "itemName": "Molten Aluminum Bar"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 75
+      }
+    ]
+  },
+  {
+    "outputItemName": "Aluminum Sword",
+    "ingredients": [
+      {
+        "itemName": "Molten Aluminum Bar"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 75
+      }
+    ]
+  },
+  {
+    "outputItemName": "Aluminum Axe",
+    "ingredients": [
+      {
+        "itemName": "Molten Aluminum Bar"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 75
+      }
+    ]
+  },
+  {
+    "outputItemName": "Aluminum Hammer",
+    "ingredients": [
+      {
+        "itemName": "Molten Aluminum Bar"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 75
+      }
+    ]
+  },
+  {
+    "outputItemName": "Aluminum Bar",
+    "ingredients": [
+      {
+        "itemName": "Molten Aluminum Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 75
+      }
+    ]
+  },
+  {
+    "outputItemName": "Aluminum Arrowtips",
+    "ingredients": [
+      {
+        "itemName": "Molten Aluminum Bar"
+      }
+    ],
+    "experienceGained": "Smithing:200",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 75
+      }
+    ],
+    "outputAmount": 10
+  }
+
+]

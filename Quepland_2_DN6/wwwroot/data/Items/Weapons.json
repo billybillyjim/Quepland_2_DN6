@@ -1,0 +1,1526 @@
+[
+  {
+    "name": "Copper Knife",
+    "description": "Maybe the softest knife you've ever seen.",
+    "value": 150,
+    "enabledActions": "Knifesmanship",
+    "equipSlot": "R Hand",
+    "secondaryColor": "#B87333",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 3,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Stone Axe",
+    "description": "It's an axe made of stone.",
+    "value": 25,
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.1,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 4,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Copper Axe",
+    "description": "It's an axe made of a soft metal copper.",
+    "value": 150,
+    "enabledActions": "Axemanship Woodcutting",
+    "secondaryColor": "#B87333",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.2,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 8,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Copper Sword",
+    "description": "A soft metal sword for swinging.",
+    "secondaryColor": "#B87333",
+    "value": 150,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": 5,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Copper Hammer",
+    "description": "It's a hammer made of a soft metal copper.",
+    "secondaryColor": "#B87333",
+    "value": 150,
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 21,
+      "damage": 18,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Bandit's Knife",
+    "description": "The knife taken from a bandit. It probably wasn't his either.",
+    "value": 50,
+    "enabledActions": "Knifesmanship",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 5,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 5
+        }
+      ]
+    }
+  },
+  {
+    "name": "Ultimate Test Weapon",
+    "description": "A weapon for testing.",
+    "TestingItem": true,
+    "value": 0,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 1,
+      "damage": 500,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Ultimate Test Weapon Two, Electric Boogaloo",
+    "description": "A weapon for testing UI. This is a very long description to tests what the game does when there is a very long description, hopefully its not too bad.",
+    "value": 0,
+    "TestingItem": true,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 100,
+      "damage": 500,
+      "armorBonus": 100,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Bone Blade",
+    "description": "A lightweight blade crafted from the remains of a gashadokuro.",
+    "value": 1500,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 8,
+      "damage": 25,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 15
+        }
+      ]
+    }
+  },
+  {
+    "name": "Bandit's Sword",
+    "description": "A sword made from a bandit's blade and a brass sword put together.",
+    "value": 500,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": 33,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 20
+        }
+      ]
+    }
+  },
+  {
+    "name": "Brass Knife",
+    "description": "A soft but sturdy knife.",
+    "value": 240,
+    "enabledActions": "Knifesmanship",
+    "equipSlot": "R Hand",
+    "secondaryColor": "#B5A642",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 8,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 20
+        }
+      ]
+    }
+  },
+  {
+    "name": "Brass Sword",
+    "description": "A shiny metal sword for swinging.",
+    "value": 240,
+    "secondaryColor": "#B5A642",
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "requiredAction": "Swordsmanship",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": 19,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 20
+        }
+      ]
+    }
+  },
+  {
+    "name": "Brass Axe",
+    "description": "It's an axe made of brass. Shiny.",
+    "value": 240,
+    "secondaryColor": "#B5A642",
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.2,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 35,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 20
+        }
+      ]
+    }
+  },
+  {
+    "name": "Brass Hammer",
+    "description": "It's a hammer made of brass. It shimmers when you smash things.",
+    "value": 240,
+    "secondaryColor": "#B5A642",
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 21,
+      "damage": 60,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 20
+        }
+      ]
+    }
+  },
+  {
+    "name": "Tin Knife",
+    "description": "A small slice of tin metal with a handle attached.",
+    "value": 70,
+    "secondaryColor": "#D3D4D5",
+    "enabledActions": "Knifesmanship",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 5,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 5
+        }
+      ]
+    }
+  },
+  {
+    "name": "Tin Sword",
+    "description": "A flimsy tin sword.",
+    "value": 70,
+    "enabledActions": "Swordsmanship",
+    "secondaryColor": "#D3D4D5",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": 8,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 5
+        }
+      ]
+    }
+  },
+  {
+    "name": "Tin Axe",
+    "description": "It's an axe made of tin. Flimsy.",
+    "value": 70,
+    "enabledActions": "Axemanship Woodcutting",
+    "secondaryColor": "#D3D4D5",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.15,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 15,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 5
+        }
+      ]
+    }
+  },
+  {
+    "name": "Tin Hammer",
+    "description": "It's a hammer made of tin. It flattens a little whenever you smash things.",
+    "value": 70,
+    "enabledActions": "Hammermanship",
+    "secondaryColor": "#D3D4D5",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 21,
+      "damage": 32,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 5
+        }
+      ]
+    }
+  },
+  {
+    "name": "Zinc Knife",
+    "description": "A small knife made out of a soft metal.",
+    "value": 90,
+    "enabledActions": "Knifesmanship",
+    "secondaryColor": "#9E9EA0",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 7,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 15
+        }
+      ]
+    }
+  },
+  {
+    "name": "Zinc Sword",
+    "description": "A soft zinc sword.",
+    "secondaryColor": "#9E9EA0",
+    "value": 90,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": 12,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 15
+        }
+      ]
+    }
+  },
+  {
+    "name": "Zinc Axe",
+    "description": "A soft axe for soft woodcutting.",
+    "secondaryColor": "#9E9EA0",
+    "value": 90,
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.17,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 23,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 15
+        }
+      ]
+    }
+  },
+  {
+    "name": "Zinc Hammer",
+    "description": "It's a hammer made of zinc.",
+    "secondaryColor": "#9E9EA0",
+    "value": 90,
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 21,
+      "damage": 48,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 15
+        }
+      ]
+    }
+  },
+  {
+    "name": "Bronze Knife",
+    "description": "A sturdy knife made from cast bronze.",
+    "value": 150,
+    "enabledActions": "Knifesmanship",
+    "secondaryColor": "#CD7F32",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 15,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 30
+        }
+      ]
+    }
+  },
+  {
+    "name": "Bronze Sword",
+    "description": "A sturdy bronze sword.",
+    "secondaryColor": "#CD7F32",
+    "value": 150,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": 30,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 30
+        }
+      ]
+    }
+  },
+  {
+    "name": "Bronze Axe",
+    "description": "A sturdy axe for woodcutting.",
+    "secondaryColor": "#CD7F32",
+    "value": 150,
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.25,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 51,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 30
+        }
+      ]
+    }
+
+  },
+  {
+    "name": "Bronze Hammer",
+    "description": "A big hammer to smash things with.",
+    "secondaryColor": "#CD7F32",
+    "value": 150,
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 21,
+      "damage": 88,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 30
+        }
+      ]
+    }
+  },
+  {
+    "name": "Nickel Knife",
+    "description": "A sharp knife.",
+    "value": 210,
+    "enabledActions": "Knifesmanship",
+    "equipSlot": "R Hand",
+    "secondaryColor": "#A9A69B",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 19,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 35
+        }
+      ]
+    }
+  },
+  {
+    "name": "Nickel Sword",
+    "description": "A nickel sword.",
+    "secondaryColor": "#A9A69B",
+    "value": 210,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": 41,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 35
+        }
+      ]
+    }
+  },
+  {
+    "name": "Nickel Axe",
+    "description": "An axe made out of nickel.",
+    "secondaryColor": "#A9A69B",
+    "value": 210,
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.28,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 65,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 35
+        }
+      ]
+    }
+  },
+  {
+    "name": "Nickel Hammer",
+    "description": "A big hammer made of solid nickel.",
+    "secondaryColor": "#A9A69B",
+    "value": 210,
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 21,
+      "damage": 104,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 35
+        }
+      ]
+    }
+  },
+  {
+    "name": "Iron Knife",
+    "description": "A strong metal knife.",
+    "value": 280,
+    "enabledActions": "Knifesmanship",
+    "secondaryColor": "#434341",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 45,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 45
+        }
+      ]
+    }
+  },
+  {
+    "name": "Iron Sword",
+    "description": "A sharp metal sword.",
+    "secondaryColor": "#434341",
+    "value": 280,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": 78,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 45
+        }
+      ]
+    }
+  },
+  {
+    "name": "Iron Axe",
+    "description": "A sturdy axe to chop things with.",
+    "secondaryColor": "#434341",
+    "value": 280,
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.35,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 103,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 45
+        }
+      ]
+    }
+  },
+  {
+    "name": "Iron Hammer",
+    "description": "A heavy hammer.",
+    "secondaryColor": "#434341",
+    "value": 280,
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 21,
+      "damage": 162,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 45
+        }
+      ]
+    }
+  },
+  {
+    "name": "Lead Knife",
+    "description": "A heavy knife. Don't lick it!",
+    "secondaryColor": "#C0C0C0",
+    "value": 260,
+    "enabledActions": "Knifesmanship",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 7,
+      "damage": 60,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 55
+        }
+      ]
+    }
+  },
+  {
+    "name": "Lead Sword",
+    "description": "A very heavy sword.",
+    "secondaryColor": "#C0C0C0",
+    "value": 260,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 14,
+      "damage": 135,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 55
+        }
+      ]
+    }
+  },
+  {
+    "name": "Lead Axe",
+    "description": "A solid lead axe. Maybe not the best for chopping trees with.",
+    "secondaryColor": "#C0C0C0",
+    "value": 260,
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.2,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 22,
+      "damage": 220,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 55
+        }
+      ]
+    }
+  },
+  {
+    "name": "Lesser Lead Hammer",
+    "description": "A smaller lead hammer. It still weighs a ton.",
+    "secondaryColor": "#C0C0C0",
+    "value": 260,
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 28,
+      "damage": 303,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 55
+        }
+      ]
+    }
+  },
+  {
+    "name": "Greater Lead Hammer",
+    "description": "A giant lead hammer. Quite good for smashing things.",
+    "secondaryColor": "#C0C0C0",
+    "value": 520,
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 42,
+      "damage": 508,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 62
+        }
+      ]
+    }
+  },
+  {
+    "name": "Aluminum Knife",
+    "description": "A lightweight knife. It almost feels like air in your hand.",
+    "value": 350,
+    "enabledActions": "Knifesmanship",
+    "secondaryColor": "#F1F3F0",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 4,
+      "damage": 39,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 75
+        }
+      ]
+    }
+  },
+  {
+    "name": "Aluminum Sword",
+    "description": "A lightweight sword. You can swing it really fast! Be careful, though.",
+    "value": 350,
+    "enabledActions": "Swordsmanship",
+    "secondaryColor": "#F1F3F0",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 9,
+      "damage": 72,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 75
+        }
+      ]
+    }
+  },
+  {
+    "name": "Aluminum Axe",
+    "description": "A lightweight axe. You can really chop some trees with this baby.",
+    "value": 350,
+    "enabledActions": "Axemanship Woodcutting",
+    "secondaryColor": "#F1F3F0",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.45,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 13,
+      "damage": 91,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 75
+        }
+      ]
+    }
+  },
+  {
+    "name": "Aluminum Hammer",
+    "description": "A lightweight hammer. Good for smashing things quickly.",
+    "value": 350,
+    "enabledActions": "Hammermanship",
+    "secondaryColor": "#F1F3F0",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 17,
+      "damage": 145,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 75
+        }
+      ]
+    }
+  },
+
+  {
+    "name": "Mercurice Knife",
+    "description": "A magically crafted knife that is made of frozen mercury.",
+    "value": 880,
+    "secondaryColor": "#D2FFF5",
+    "enabledActions": "Knifesmanship",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 95,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 75
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Freeze",
+          "speed": 2,
+          "duration": 10,
+          "message": "The knife freezes your opponent!",
+          "procOdds": 0.05
+        }
+      ]
+    }
+  },
+  {
+    "name": "Mercurice Sword",
+    "secondaryColor": "#D2FFF5",
+    "description": "A magically crafted sword that is made of frozen mercury.",
+    "value": 880,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 10,
+      "damage": 204,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 75
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Freeze",
+          "speed": 2,
+          "duration": 10,
+          "message": "The sword freezes your opponent!",
+          "procOdds": 0.1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Mercurice Axe",
+    "secondaryColor": "#D2FFF5",
+    "description": "A magically crafted axe that is made of frozen mercury.",
+    "value": 880,
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.59,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 330,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 75
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Freeze",
+          "speed": 2,
+          "duration": 10,
+          "message": "The axe freezes your opponent!",
+          "procOdds": 0.2
+        }
+      ]
+    }
+  },
+  {
+    "name": "Mercurice Hammer",
+    "secondaryColor": "#D2FFF5",
+    "description": "A magically crafted hammer that is made of frozen mercury.",
+    "value": 880,
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 20,
+      "damage": 458,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 75
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Freeze",
+          "speed": 2,
+          "duration": 10,
+          "message": "The hammer freezes your opponent!",
+          "procOdds": 0.25
+        }
+      ]
+    }
+  },
+  {
+    "name": "Golden Knife",
+    "description": "A heavy knife. It's quite soft, and probably best used for decoration.",
+    "value": 1450,
+    "enabledActions": "Knifesmanship",
+    "secondaryColor": "#FFD700",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 7,
+      "damage": 52,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 65
+        }
+      ]
+    }
+  },
+  {
+    "name": "Golden Sword",
+    "description": "A very heavy sword. Probably too soft to be good in combat. It's quite shiny, though.",
+    "value": 1450,
+    "enabledActions": "Swordsmanship",
+    "secondaryColor": "#FFD700",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 14,
+      "damage": 110,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 65
+        }
+      ]
+    }
+  },
+  {
+    "name": "Golden Axe",
+    "description": "A solid gold axe. It's a good thing it can't degrade from use...",
+    "value": 1450,
+    "enabledActions": "Axemanship Woodcutting",
+    "secondaryColor": "#FFD700",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.3,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 22,
+      "damage": 192,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 65
+        }
+      ]
+    }
+  },
+  {
+    "name": "Golden Hammer",
+    "description": "A solid gold hammer. It flattens a bit every time you smash something with it.",
+    "value": 1450,
+    "enabledActions": "Hammermanship",
+    "secondaryColor": "#FFD700",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 28,
+      "damage": 273,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 65
+        }
+      ]
+    }
+  },
+  {
+    "name": "Platinum Knife",
+    "description": "A heavy, sharp knife. It's very valuable.",
+    "value": 2250,
+    "enabledActions": "Knifesmanship",
+    "secondaryColor": "#E5E4E2",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 7,
+      "damage": 70,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 93
+        }
+      ]
+    }
+  },
+  {
+    "name": "Platinum Sword",
+    "description": "A very heavy sword. It shines brightly in the sunlight.",
+    "value": 2250,
+    "enabledActions": "Swordsmanship",
+    "secondaryColor": "#E5E4E2",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 14,
+      "damage": 140,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 93
+        }
+      ]
+    }
+  },
+  {
+    "name": "Platinum Axe",
+    "description": "A shiny, metal axe. It's quite heavy.",
+    "value": 2250,
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "secondaryColor": "#E5E4E2",
+    "gatherSpeedBonus": 0.45,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 22,
+      "damage": 240,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 93
+        }
+      ]
+    }
+  },
+  {
+    "name": "Platinum Hammer",
+    "description": "A platinum hammer. It shimmers in the light as you smash things with it.",
+    "value": 2250,
+    "enabledActions": "Hammermanship",
+    "secondaryColor": "#E5E4E2",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 28,
+      "damage": 383,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 93
+        }
+      ]
+    }
+  },
+  {
+    "name": "Steel Knife",
+    "description": "A powerful and lightweight metal knife.",
+    "value": 680,
+    "secondaryColor": "#9DC6E8",
+    "enabledActions": "Knifesmanship",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 95,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 75
+        }
+      ]
+    }
+  },
+  {
+    "name": "Steel Sword",
+    "secondaryColor": "#9DC6E8",
+    "description": "A sharp and lightweight metal sword.",
+    "value": 680,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 10,
+      "damage": 204,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 75
+        }
+      ]
+    }
+  },
+  {
+    "name": "Steel Axe",
+    "secondaryColor": "#9DC6E8",
+    "description": "A sturdy and lightweight axe to chop things with.",
+    "value": 680,
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.55,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 330,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 75
+        }
+      ]
+    }
+  },
+  {
+    "name": "Steel Hammer",
+    "secondaryColor": "#9DC6E8",
+    "description": "A solid and strong hammer.",
+    "value": 680,
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 20,
+      "damage": 458,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 75
+        }
+      ]
+    }
+  },
+  {
+    "name": "Sahotite Knife",
+    "description": "A powerful knife that saps the heat out of whatever it touches.",
+    "value": 1280,
+    "secondaryColor": "#C3D3F3",
+    "enabledActions": "Knifesmanship",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 5,
+      "damage": 95,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 82
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Freeze",
+          "speed": 2,
+          "duration": 15,
+          "message": "The knife freezes your opponent!",
+          "procOdds": 0.08
+        }
+      ]
+    }
+  },
+  {
+    "name": "Sahotite Sword",
+    "secondaryColor": "#C3D3F3",
+    "description": "A sharp sword that saps heat from its victims.",
+    "value": 1280,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 10,
+      "damage": 204,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 82
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Freeze",
+          "speed": 2,
+          "duration": 15,
+          "message": "The sword freezes your opponent!",
+          "procOdds": 0.15
+        }
+      ]
+    }
+  },
+  {
+    "name": "Sahotite Axe",
+    "secondaryColor": "#C3D3F3",
+    "description": "A sturdy axe that saps heat from whatever it hits.",
+    "value": 1280,
+    "enabledActions": "Axemanship Woodcutting",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.65,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 330,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 82
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Freeze",
+          "speed": 2,
+          "duration": 20,
+          "message": "The axe freezes your opponent!",
+          "procOdds": 0.25
+        }
+      ]
+    }
+  },
+  {
+    "name": "Sahotite Hammer",
+    "secondaryColor": "#C3D3F3",
+    "description": "A powerful hammer that saps heat from its targets.",
+    "value": 1280,
+    "enabledActions": "Hammermanship",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 20,
+      "damage": 458,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 82
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Freeze",
+          "speed": 2,
+          "duration": 20,
+          "message": "The hammer freezes your opponent!",
+          "procOdds": 0.30
+        }
+      ]
+    }
+  },
+  {
+    "name": "Strongtium Knife",
+    "description": "A knife made from the rare metal strongtium",
+    "value": 2880,
+    "enabledActions": "Knifesmanship",
+    "secondaryColor": "#AF7979",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 6,
+      "damage": 192,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 99
+        }
+      ]
+    }
+  },
+  {
+    "name": "Strongtium Sword",
+    "description": "An extremely sharp sword.",
+    "value": 2880,
+    "enabledActions": "Swordsmanship",
+    "secondaryColor": "#AF7979",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": 425,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 99
+        }
+      ]
+    }
+  },
+  {
+    "name": "Strongtium Axe",
+    "description": "An extremely sharp axe.",
+    "value": 2880,
+    "enabledActions": "Axemanship Woodcutting",
+    "secondaryColor": "#AF7979",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.75,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 16,
+      "damage": 659,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 99
+        }
+      ]
+    }
+  },
+  {
+    "name": "Strongtium Hammer",
+    "description": "An extremely dense hammer.",
+    "value": 2880,
+    "enabledActions": "Hammermanship",
+    "secondaryColor": "#AF7979",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 21,
+      "damage": 945,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 99
+        }
+      ]
+    }
+  },
+  {
+    "name": "Cactus Club",
+    "description": "A club made from a special living cactus, covered in its spines.",
+    "value": 5000,
+    "enabledActions": "Axemanship",
+    "equipSlot": "R Hand",
+    "secondaryColor": "#45bf2a",
+    "icon": "CactusClubFull",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 60,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 50
+        }
+      ]
+    }
+  },
+  {
+    "name": "Mercurial Sword",
+    "description": "A sword of mercury, made from pieces collected from Mercurial creatures.",
+    "value": 1380,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": 230,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 65
+        }
+      ]
+    }
+  },
+  {
+    "name": "Zombisword",
+    "description": "A sword of the undead. It's quite large and feels much heavier than it looks.",
+    "value": 3280,
+    "enabledActions": "Swordsmanship",
+    "secondaryColor": "#999999",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 18,
+      "damage": 250,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 90
+        }
+      ]
+    }
+  },
+  {
+    "name": "Steelflame Axe",
+    "description": "A flaming axe. You can use it to chop down trees or enemies very quickly.",
+    "value": 32800,
+    "enabledActions": "Axemanship Woodcutting",
+    "secondaryColor": "#a51414",
+    "equipSlot": "R Hand",
+    "icon": "SteelflameAxe",
+    "gatherSpeedBonus": 0.8,
+    "weaponInfo": {
+      "attackSpeed": 14,
+      "damage": 200,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 80
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Burn",
+          "power": 35,
+          "speed": 2,
+          "duration": 60,
+          "message": "The axe burns your opponent!",
+          "procOdds": 0.1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Iron Knuckles",
+    "description": "They're like metal gloves for your knuckles. ",
+    "value": 350,
+    "secondaryColor": "#434341",
+    "equipSlot": "R Hand",
+    "icon": "Knuckles",
+    "weaponInfo": {
+      "attackSpeed": 7,
+      "damage": 55,
+      "wearRequirements": [
+        {
+          "skill": "Strength",
+          "skillLevel": 45
+        }
+      ]
+    }
+  },
+  {
+    "name": "Magic Iron Sword",
+    "description": "A sharp metal sword, but magical. It mostly swings itself.",
+    "secondaryColor": "#434341",
+    "value": 1280,
+    "enabledActions": "Swordsmanship",
+    "equipSlot": "R Hand",
+    "experienceGainBonus": -0.25,
+    "experienceBonusSkill": "Swordsmanship",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 8,
+      "damage": 90,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 55
+        }
+      ]
+    }
+  },
+  {
+    "name": "Queple's Sword",
+    "description": "A magical sword that once belonged to a hero. It glows with a soft purple light.",
+    "value": 29880,
+    "enabledActions": "Swordsmanship",
+    "secondaryColor": "#B787DC",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 9,
+      "damage": 525,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 100
+        }
+      ]
+    }
+  },
+  {
+    "name": "Sulmenkan Trident",
+    "description": "A giant fork used for poking things.",
+    "value": 40000,
+    "enabledActions": "Trident Hunting",
+    "secondaryColor": "#259078",
+    "equipSlot": "R Hand",
+    "icon": "Trident",
+    "weaponInfo": {
+      "attackSpeed": 14,
+      "damage": 135,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 55
+        }
+      ]
+    }
+  }
+]

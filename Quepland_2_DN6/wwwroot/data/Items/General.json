@@ -1,0 +1,441 @@
+[
+  {
+    "name": "Coins",
+    "description": "Cash Money.",
+    "value": 1,
+    "isStackable": true,
+    "icon": "Coins",
+    "isSellable": false,
+    "gatherSpeed": 25,
+    "gatherString": "You found a coin!"
+  },
+  {
+    "name": "Shuniku Berries",
+    "description": "Disgusting tasting berries that will stain your mouth red.",
+    "gatherString": "You gather some berries.",
+    "secondaryColor": "red",
+    "value": 2,
+    "gatherSpeed": 15,
+    "icon": "Berries"
+  },
+  {
+    "name": "Wood Carving Knife",
+    "description": "A specially designed knife for carving wood.",
+    "value": 40,
+    "icon": "Knife",
+    "openCraftingMenuText": "Carve",
+    "enabledActions": "Woodworking"
+  },
+  {
+    "name": "Magic Wood Carving Knife",
+    "description": "A specially designed knife for carving wood. This one's magical.",
+    "value": 600,
+    "secondaryColor": "#d9a668",
+    "icon": "Knife",
+    "openCraftingMenuText": "Carve"
+  },
+  {
+    "name": "No Soliciting Sign",
+    "description": "A nicely written sign.",
+    "gatherString": "You paint letters neatly onto the sign.",
+    "value": 2,
+    "gatherSpeed": 8,
+    "icon": "Sign"
+  },
+  {
+    "name": "Rock Tumbler",
+    "description": "A round box full of hard rocks. You can smooth gemstones down with it.",
+    "value": 5000,
+    "icon": "Tumbler"
+  },
+  {
+    "name": "Small Red Library Key",
+    "description": "A small key from the Sawoka dungeon library. It looks very fragile, but maybe it can open something.",
+    "value": 10,
+    "secondaryColor": "#cf5353",
+    "icon": "Key"
+  },
+  {
+    "name": "Small Orange Library Key",
+    "description": "A small key from the Sawoka dungeon library. It looks very fragile, but maybe it can open something.",
+    "value": 10,
+    "secondaryColor": "#d9a668",
+    "icon": "Key"
+  },
+  {
+    "name": "Small Green Library Key",
+    "description": "A small key from the Sawoka dungeon library. It looks very fragile, but maybe it can open something.",
+    "value": 10,
+    "secondaryColor": "#6cd665",
+    "icon": "Key"
+  },
+  {
+    "name": "Graingilt Treasure Key",
+    "description": "A luxurious key to some of the Graingilt treasure halls.",
+    "value": 600,
+    "secondaryColor": "#AAAAAA",
+    "icon": "Key"
+  },
+  {
+    "name": "Yoga Mat",
+    "description": "A soft mat to do yoga on. You wouldn't want to have to just use the ground, would you?",
+    "value": 1000,
+    "icon": "Mat"
+  },
+  {
+    "name": "Feather",
+    "description": "Soft, fluffy, and useful for making arrows with.",
+    "gatherString": "You separate the feathers into a pile.",
+    "value": 1,
+    "icon": "Feather",
+    "isStackable": true
+  },
+  {
+    "name": "Ice Feather",
+    "description": "Soft, fluffy, cold, and useful for making arrows with.",
+    "gatherString": "You separate the feathers into a pile.",
+    "value": 8,
+    "secondaryColor": "#D2FFF5",
+    "icon": "Feather",
+    "isStackable": true
+  },
+  {
+    "name": "Glittering Plume",
+    "description": "A beautiful feather that sparkles in the light.",
+    "gatherString": "You separate the feathers into a pile.",
+    "value": 1250,
+    "secondaryColor": "#6600ff",
+    "icon": "Feather",
+    "isStackable": true
+  },
+  {
+    "name": "Storm's Eye",
+    "description": "A terrifying eyeball. Can it see?",
+    "gatherString": "You find a glowing eye.",
+    "value": 2550,
+    "secondaryColor": "#04ba35",
+    "icon": "Eye",
+    "isStackable": true
+  },
+  {
+    "name": "Chicken Egg",
+    "description": "A small egg from a chicken.",
+    "value": 10,
+    "icon": "Egg"
+  },
+  {
+    "name": "Chicken Meat",
+    "description": "The meat of a chicken.",
+    "value": 10,
+    "icon": "PreppedBird",
+    "tanningInfo": {
+      "tansIntoString": "Chicken Jerky"
+    }
+  },
+  {
+    "name": "Rooster Plumage",
+    "description": "A bunch of feathers from a male chicken.",
+    "value": 15,
+    "icon": "Feathers",
+    "isStackable": true
+  },
+  {
+    "name": "Cheese",
+    "description": "Some stinky cheese.",
+    "gatherString": "You pick up some old cheese.",
+    "value": 5,
+    "gatherSpeed": 20,
+    "icon": "Cheese"
+  },
+  {
+    "name": "Bone Shard",
+    "description": "A shard of bone dropped by a gashadokuro. You could form this into some kind of weapon.",
+    "value": 150,
+    "icon": "Bone Shard"
+  },
+  {
+    "name": "Hemp",
+    "description": "A fast-growing weed useful for turning into fiber.",
+    "value": 10,
+    "isStackable": true,
+    "gatherSpeed": 20,
+    "gatherString": "You gather some hemp.",
+    "icon": "Hemp",
+    "tanningInfo": {
+      "tansIntoString": "Rope"
+    }
+  },
+  {
+    "name": "Rope",
+    "description": "A bunch of fibers tied together. You could use this to climb things, probably.",
+    "value": 30,
+    "isStackable": true,
+    "gatherSpeed": 20,
+    "gatherString": "You gather some rope.",
+    "icon": "Rope"
+  },
+  {
+    "name": "Leatherworking Toolkit",
+    "description": "A set of tools to work leather into form.",
+    "value": 100,
+    "icon": "Tools"
+  },
+  {
+    "name": "Lapidary Toolkit",
+    "description": "A set of tools to work gems into prettier gems.",
+    "value": 1000,
+    "secondaryColor": "#A2FFF5",
+    "icon": "Tools"
+  },
+  {
+    "name": "Mercurial Shard",
+    "description": "A smooth shard from the corpse of a mercurial being. With enough of them you could fashion some kind of weapon...",
+    "value": 30,
+    "isStackable": true,
+    "icon": "Shard"
+  },
+  {
+    "name": "Mercurial Hilt",
+    "description": "The hilt of a mercurial weapon. It'll need the blade and pommel to be made into a sword.",
+    "value": 700,
+    "icon": "Handle"
+  },
+  {
+    "name": "Mercurial Pommel",
+    "description": "The pommel of a mercurial weapon. It'll need the blade and hilt to be made into a sword.",
+    "value": 700,
+    "icon": "Pommel"
+  },
+  {
+    "name": "Mercurial Blade",
+    "description": "The blade of a mercurial weapon. It'll need the hilt and pommel to be made into a sword.",
+    "value": 700,
+    "icon": "Blade"
+  },
+  {
+    "name": "Koncave City Passport",
+    "description": "A passport into the underground city of Koncave.",
+    "value": 35000,
+    "icon": "Passport"
+  },
+  {
+    "name": "Camel",
+    "description": "A dromedary exceptionally capable of desert travel.",
+    "value": 60000,
+    "icon": "Camel",
+    "enabledActions": "Desert Travel"
+  },
+  {
+    "name": "Kyusa Toad",
+    "description": "A large, dry toad that will let you ride on its back.",
+    "value": 150000,
+    "icon": "Toad",
+    "enabledActions": "Toadback Riding,Desert Travel"
+  },
+  {
+    "name": "River Raft",
+    "description": "It's a shame you can't swim, or you wouldn't have needed to waste money on this.",
+    "value": 50000,
+    "icon": "Raft",
+    "enabledActions": "River Travel"
+  },
+  {
+    "name": "Tiny Rowboat",
+    "description": "A small boat you can take out to sea. You can't go out of sight of land with it, though.",
+    "value": 80000,
+    "icon": "Boat",
+    "enabledActions": "Shallow Ocean Travel"
+  },
+  {
+    "name": "Gym Membership Card",
+    "description": "This card will let you into the gym in Kogoe.",
+    "value": 500,
+    "icon": "Card"
+  },
+  {
+    "name": "Ice",
+    "description": "It's cold water.",
+    "gatherString": "You get some ice.",
+    "experienceGained": "Mining:15",
+    "value": 5,
+    "secondaryColor": "#D2FFF5",
+    "icon": "Ice"
+  },
+  {
+    "name": "Bandit's Blade",
+    "description": "The sharp part of a sword. You could probably reattach it to a hilt and make a working weapon with it.",
+    "value": 5,
+    "icon": "Blade"
+  },
+  {
+    "name": "Cactus Spines",
+    "description": "Pokey spines from a cactus.",
+    "gatherString": "You get some cactus spines.",
+    "value": 2,
+    "icon": "Spike",
+    "secondaryColor": "#45bf2a",
+    "isStackable": true
+  },
+  {
+    "name": "Cactus Club (Empty)",
+    "description": "A club made from a special living cactus. If you covered it in spines, it would really do some damage.",
+    "value": 50,
+    "secondaryColor": "#45bf2a",
+    "icon": "CactusClubEmpty"
+  },
+  {
+    "name": "Sand",
+    "description": "It's tiny little rocks, basically.",
+    "gatherString": "You get some sand.",
+    "value": 2,
+    "icon": "Powder",
+    "isStackable": true
+  },
+  {
+    "name": "Sandstone",
+    "description": "Is it stone? Is it sand?",
+    "gatherString": "You get some sandstone.",
+    "value": 20,
+    "icon": "Sandstone",
+    "isStackable": true
+  },
+  {
+    "name": "Honey",
+    "description": "Sweet, sweet honey.",
+    "value": 50,
+    "icon": "Honey"
+  },
+  {
+    "name": "Baobhan Hair",
+    "description": "Hair from the head of a baobhan. It's quite valuable.",
+    "value": 200,
+    "icon": "Hair",
+    "secondaryColor": "#333366"
+  },
+  {
+    "name": "Baobhan Tooth",
+    "description": "A tooth from the mouth of a baobhan. It's magical.",
+    "value": 120,
+    "icon": "Tooth"
+  },
+  {
+    "name": "Baobhan Jaw",
+    "description": "A jaw from the mouth of a baobhan. It's got teeth in it.",
+    "value": 1800,
+    "icon": "Jaw"
+  },
+  {
+    "name": "Great Tree Seed",
+    "description": "A seed from the Great Tree. It's a prized possesion among the root dwellers of Koncave.",
+    "value": 5000,
+    "icon": "Seeds",
+    "isStackable": true,
+    "secondaryColor": "#9F6F4F"
+  },
+  {
+    "name": "Steelflame Axe Handle",
+    "description": "A handle to a powerful flaming axe. It's missing a head.",
+    "value": 15000,
+    "icon": "AxeHandle"
+  },
+  {
+    "name": "Steelflame Axe Head",
+    "description": "A head to a powerful flaming axe. It's missing a handle.",
+    "value": 15000,
+    "icon": "AxeHead"
+  },
+  {
+    "name": "Shrinking Cloth",
+    "description": "A magical cloth once owned by the guardian Imaynimayn. It could be used to make a giant's weapon the right size for you to wield.",
+    "value": 15000,
+    "icon": "Cloth"
+  },
+  {
+    "name": "Dojo Tokens",
+    "description": "Tokens rewarded for defeating everyone at a dojo.",
+    "value": 1,
+    "icon": "Token",
+    "isStackable": true
+  },
+  {
+    "name": "Sweet Berries",
+    "description": "Delicious berries.",
+    "gatherString": "You gather some berries.",
+    "value": 5,
+    "secondaryColor": "paleblue",
+    "gatherSpeed": 15,
+    "icon": "Berries",
+    "foodInfo": {
+      "healDuration": 10,
+      "healAmount": 1,
+      "healSpeed": 10,
+      "buffedSkill": "Deftness",
+      "buffAmount": 1
+    }
+  },
+  {
+    "name": "Guild Membership Card",
+    "description": "A card that proves you are a true member of the artisan's guild.",
+    "value": 500,
+    "icon": "Card",
+    "enabledActions": "Guild Access"
+  },
+  {
+    "name": "Guild Exception Notice",
+    "description": "A notice that approves a guild member to cancel their current guild task.",
+    "value": 50,
+    "icon": "Note"
+  },
+  {
+    "name": "Bag of Assorted Gems",
+    "description": "A bag full of assorted gems.",
+    "value": 500,
+    "icon": "Bag"
+  },
+  {
+    "name": "Giltgrain Treasure",
+    "description": "A bag full of treasure.",
+    "value": 1500,
+    "icon": "Bag",
+    "secondaryColor": "#abcdef"
+  },
+  {
+    "name": "Empty Bottle",
+    "value": 5,
+    "description": "An empty bottle for storing things in.",
+    "icon": "EmptyBottle",
+    "secondaryColor": "#ffffff",
+    "gatherString": "You get a bottle.",
+    "gatherSpeed": 15
+  },
+  {
+    "name": "Bottle of Water",
+    "value": 8,
+    "description": "A bottle with water in it.",
+    "icon": "Bottle",
+    "secondaryColor": "#8edfed",
+    "gatherString": "You fill a bottle.",
+    "gatherSpeed": 15
+  },
+  {
+    "name": "Oil of Vitriol",
+    "value": 52,
+    "description": "A bottle of dangerous liquid.",
+    "icon": "Bottle",
+    "secondaryColor": "#dddddd",
+    "gatherString": "You collect some liquid.",
+    "gatherSpeed": 15
+  },
+  {
+    "name": "Shears",
+    "description": "A special pair of scissors made for harvesting the body hair off of unsuspecting animals.",
+    "value": 150,
+    "equipSlot": "R Hand",
+    "icon": "Shears",
+    "weaponInfo": {
+      "attackSpeed": 11,
+      "damage": -5
+    },
+    "enabledActions": "Shearing"
+  }
+]

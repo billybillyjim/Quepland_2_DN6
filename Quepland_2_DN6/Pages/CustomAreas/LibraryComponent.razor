@@ -1,0 +1,114 @@
+﻿@page "/World/SawokaLibrary"
+@inject GameState GameState
+@inject NavigationManager UriHelper
+@implements IDisposable
+
+<div>
+    <h1>Library</h1>
+    @if (GameState.BGColor == "#2d2d2d" )
+    {
+        <p>You find a library among the tunnels in the mine. The torches on the wall are still lit. You spot a book on the top of one of the shelves with a picture of a man with long hair and a beard sitting on another book.</p>
+
+        <Quepland_2_DN6.Components.NPCDialogComponent npc="The Book of Lost Things"></Quepland_2_DN6.Components.NPCDialogComponent>
+    }
+    else
+    {
+        @if (IsReading)
+        {
+            @if (GameState.CurrentBook != null)
+            {
+                <p>You are reading @GameState.CurrentBook.Description</p>
+                <button class="btn btn-primary" @onclick="@(() => StopReading())">Stop Reading</button>
+                <div style="margin-top:5px;">
+                    <div class="progress" style="width:300px;">
+                        <div class="progress-bar" style="@GetProgress()"></div>
+                    </div>
+                </div>
+                <div>@(GameState.CurrentBook.Progress) / @(GameState.CurrentBook.Length) Pages</div>
+            }
+            else
+            {
+                <button class="btn btn-primary" @onclick="@(() => GenerateBooks())">Browse Again</button>
+            }
+        }
+        else
+        {
+            <p>With the man gone, you can now browse the library.</p>
+            <button class="btn btn-primary" @onclick="@(() => GenerateBooks())">Browse</button>
+            @foreach (Book b in FoundBooks)
+            {
+                <div style="margin-top:10px;">
+               
+                    <div>
+                        <button class="btn btn-primary" style="margin-bottom:5px;" @onclick="@(() => Read(b))">Read</button>
+                        You found @b.Description
+                    </div>
+
+                    
+                </div>
+            }
+        }
+
+    }
+</div>
+
+
+
+
+@code {
+
+    private Random random = new Random();
+    private List<Book> FoundBooks = new List<Book>();
+    private bool IsReading;
+
+    private void GenerateBooks()
+    {
+        StopReading();
+        FoundBooks.Clear();
+        List<Skill> skills = Player.Instance.Skills.Where(x => x.Name != "Strength" && x.Name != "Deftness" && x.Name != "Artisan").ToList();
+        for (int i = 0; i < 3; i++)
+        {
+            FoundBooks.Add(new Book(skills[random.Next(0, skills.Count)], random.Next(0,5), random.Next(-50,50)));
+        }
+    }
+    private void Read(Book book)
+    {
+        StopReading();
+        GameState.StopActions();
+        GameState.NewBook = book;
+        IsReading = true;
+        GameState.TicksToNextAction = (int)Math.Max(100, ((1 + book.Difficulty * 5d) / (Player.Instance.GetLevel(book.Skill.Name)) * 100));
+        GameState.UpdateState();
+    }
+    private void StopReading()
+    {
+        GameState.CurrentBook = null;
+        IsReading = false;
+        GameState.UpdateState();
+    }
+    private string GetProgress()
+    {
+        if(GameState.CurrentBook != null)
+        {
+            return "width:" + (100 - ((double)GameState.TicksToNextAction / Math.Max(100, ((1 + GameState.CurrentBook.Difficulty * 5d) / (Player.Instance.GetLevel(GameState.CurrentBook.Skill.Name)) * 100))) * 100d) + "%";
+            
+        }
+        return "width:" + (100 - ((double)GameState.TicksToNextAction / 60d) * 100d) + "%";
+    }
+    protected override void OnInitialized()
+    {
+        NPCManager.Instance.GetNPCByName("The Book of Lost Things").ConversationDepth = 0;
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    protected override void OnParametersSet()
+    {
+        GameState.UpdateState();
+    }
+    public void Dispose()
+    {
+        GameState.BGColor = "#2d2d2d";
+        GameState.CurrentBook = null;
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

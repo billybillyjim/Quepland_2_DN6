@@ -1,0 +1,165 @@
+﻿@inherits LayoutComponentBase
+@inject GameState GameState
+
+
+<div style="width:1200px;display:flex;background-color:@GameState.BGColor;color:white;">
+    @if (GameState.ShowStartMenu == false)
+    {
+        <div class="sidebar" style="z-index:5; height: 100%;min-height:100vh; width: 300px !important; @GetGradient()">
+            <NavMenu />
+        </div>
+    }
+    <div class="main" style="min-width:@(GameState.MinWindowWidth)px!important;">
+        @if (GameState.ShowStartMenu == false)
+        {
+            <div class="top-row px-4" style="z-index:10;background-color:dimgray;border:none;height:60px;padding: 5px !important;">
+                <Quepland_2_DN6.Components.ExperienceTrackerComponent></Quepland_2_DN6.Components.ExperienceTrackerComponent>
+
+            </div>
+            <div>
+                                    @if (GameState.ShowSettings)
+        {
+
+                <Quepland_2_DN6.Pages.SettingsComponent></Quepland_2_DN6.Pages.SettingsComponent>
+
+        }
+            </div>
+
+
+        }
+
+        <div>
+                    
+            @Body
+        </div>
+        @if (GameState.ShowStartMenu == false)
+        {
+            @if (showMessages)
+            {
+
+                <div style="position: fixed;
+                                width: @(GetMessageWidth())px;
+                                overflow-y: scroll;
+                                max-height: 200px;
+                                height: 200px;
+                                bottom: 3px;
+                                background-color: #4d4d4d;
+                                border-radius:0.5rem;
+                                padding-left:10px!important;
+                                padding-top:15px!important;
+                                margin-left:15px;
+                                overflow-x: hidden;" class="custom-scroll">
+                    <button class="btn btn-outline-light" style=" margin-top: -28px; margin-left: -10px; padding: 0px 5px; border-radius: 0.5rem;"
+                            @onclick="@(() => ToggleMessageMenu())">
+                        Hide
+                    </button>
+                    <div style="display:flex;width:@(GetMessageWidth())px;margin-top:-38px;margin-left:40px;padding-bottom:10px;">
+                        @foreach (string filter in messageFilters)
+                        {
+                            if (MessageManager.CurrentTag == filter)
+                            {
+                                <button class="btn btn-light" style="padding: 0px 5px; border-radius: 0.5rem;"
+                                        @onclick="@(() => FilterMessages(filter))">
+                                    @filter
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-light" style="padding: 0px 5px; border-radius: 0.5rem;"
+                                        @onclick="@(() => FilterMessages(filter))">
+                                    @filter
+                                </button>
+                            }
+                        }
+                    </div>
+                    <Quepland_2_DN6.Components.MessagesMenuComponent NumToShow="100"></Quepland_2_DN6.Components.MessagesMenuComponent>
+                </div>
+            }
+            else
+            {
+                <div style="position: fixed;
+                                width: @(GetMessageWidth())px;
+                                height: 30px;
+                                bottom: 3px;
+                                background-color: #4d4d4d;
+                                border-radius:0.5rem;
+                                margin-left:15px;
+                                overflow-x: hidden;" class="custom-scroll">
+                    <button class="btn btn-outline-light" style="margin-left: -30px; padding: 0px 5px; border-radius: 0.5rem;"
+                            @onclick="@(() => ToggleMessageMenu())">
+                        Show Messages
+                    </button>
+
+                    <Quepland_2_DN6.Components.MessagesMenuComponent NumToShow="1" LeftMargin="105" TopMargin="-15"></Quepland_2_DN6.Components.MessagesMenuComponent>
+                </div>
+            }
+        }
+
+    </div>
+
+    @if (GameState.ShowStartMenu == false)
+    {
+        <div style="width: 360px!important;background-color:#4d4d4d;z-index:5;">
+            <Quepland_2_DN6.Components.RightSidebarComponent></Quepland_2_DN6.Components.RightSidebarComponent>
+        </div>
+
+        @if (GameState.ShowTome)
+        {
+            <div>
+                <Quepland_2_DN6.Components.TomeComponent></Quepland_2_DN6.Components.TomeComponent>
+            </div>
+        }@if (GameState.ShowMap)
+        {
+            <div>
+                <Quepland_2_DN6.Components.MapComponent></Quepland_2_DN6.Components.MapComponent>
+            </div>
+           
+        }
+    }
+    @if (TooltipManager.ShouldShow())
+    {
+        <Quepland_2_DN6.Components.TooltipComponent Tip="@TooltipManager.CurrentTip" xPos="@TooltipManager.xPos" yPos="@TooltipManager.yPos"></Quepland_2_DN6.Components.TooltipComponent>
+    }
+    @if (TooltipManager.ShowContext)
+    {
+        <Quepland_2_DN6.Components.ContextMenuComponent Menu="@GameState.CurrentContextMenu" xPos="@TooltipManager.xPos" yPos="@TooltipManager.yPos"></Quepland_2_DN6.Components.ContextMenuComponent>
+    }
+
+</div>
+
+@code{
+
+    private bool showMessages = true;
+    private List<string> messageFilters = new List<string>() { "All", "Loot" };
+
+    private void ToggleMessageMenu()
+    {
+        showMessages = !showMessages;
+        GameState.UpdateState();
+    }
+    private int GetMessageWidth()
+    {
+        return GameState.MinWindowWidth - 30;
+    }
+    private void FilterMessages(string tag)
+    {
+        MessageManager.CurrentTag = tag;
+        GameState.UpdateState();
+    }
+    private string GetGradient()
+    {
+        string bg = "background-image:linear-gradient(";
+        bg += GameState.CurrentLand.TopColor + " 0%, " + GameState.CurrentLand.BottomColor + " 60%);";
+        return bg;
+    }
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+
+}

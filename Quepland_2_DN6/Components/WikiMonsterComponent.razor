@@ -1,0 +1,140 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+<div style="display:flex;">
+    <div style="padding-left:10px;">
+        @Info.Description
+    </div>
+</div>
+
+
+<div>
+    Found In:
+    @foreach (Area area in Info.Areas)
+    {
+        <p style="cursor:pointer" @onclick="@(() => GoTo(area))">@area.Name</p>
+    }
+    @foreach(Dojo dojo in Info.Dojos)
+    {
+        <p>@dojo.Name</p>
+    }
+</div>
+<div>
+    <table style=" border: 1px solid #172136;background-color:#101126">
+        <tr style="text-align:center">
+            <td colspan="2">Stats</td>
+        </tr>
+        <tr style=" border: 1px solid #172136;">
+            <td style="padding: 10px;border: 1px solid #172136;">
+                <img style="height:50px;width:50px;background-color:darkgrey;border-radius:0.25rem;" src="data/Images/HP.png" />
+            </td>
+            <td style="padding:10px;width:70px;text-align:center;">
+                @Info.Monster.HP
+            </td>
+        </tr>
+        <tr style="padding: 10px;border: 1px solid #172136;">
+            <td style="padding: 10px;border: 1px solid #172136;">
+                <img style="height:50px;width:50px;background-color:darkgrey;border-radius:0.25rem;" src="data/Images/Armor.png" />
+            </td>
+            <td style="padding:10px;width:70px;text-align:center;">
+                @Info.Monster.Armor
+            </td>
+        </tr>
+        <tr style="padding: 10px;border: 1px solid #172136;">
+            <td style="padding: 10px;border: 1px solid #172136;">
+                <img style="height:50px;width:50px;background-color:darkgrey;border-radius:0.25rem;" src="data/Images/Deftness.png" />
+            </td>
+            <td style="padding:10px;width:70px;text-align:center;">
+                @Info.Monster.AttackSpeed
+            </td>
+        </tr>
+        <tr style="padding: 10px;border: 1px solid #172136;">
+            <td style="padding: 10px;border: 1px solid #172136;">
+                <img style="height:50px;width:50px;background-color:darkgrey;border-radius:0.25rem;" src="data/Images/Strength.png" />
+            </td>
+            <td style="padding:10px;width:70px;text-align:center;">
+                @Info.Monster.Damage
+            </td>
+        </tr>
+        <tr style="text-align:center">
+            <td colspan="2">Strengths</td>
+        </tr>
+        <tr style="padding: 10px;border: 1px solid #172136;">
+            @foreach (string strength in Info.Monster.Strengths.Split(','))
+            {
+                <td colspan="2" style="padding:10px;width:70px;text-align:center;">@strength</td>
+            }
+        </tr>
+        <tr style="text-align:center">
+            <td colspan="2">Weaknesses</td>
+        </tr>
+        <tr style="padding: 10px;border: 1px solid #172136;">
+            @foreach (string weakness in Info.Monster.Weaknesses.Split(','))
+            {
+                <td colspan="2" style="padding:10px;width:70px;text-align:center;">@weakness</td>
+            }
+        </tr>
+        @foreach (StatusEffectData effect in Info.Monster.StatusEffectData)
+        {
+            <tr style=" border: 1px solid #172136;">
+                <td>
+                    <img style="height:50px;width:50px;background-color:darkgrey;border-radius:0.25rem;" src="data/Images/@(effect.Name).png" />
+                </td>
+                <td>
+                    @effect.Name
+                </td>
+            </tr>
+
+        }
+    </table>
+    
+</div>
+<div>
+    @if(Info.Monster != null)
+    {
+    <div>Drop Table:</div>
+    <table style=" border: 1px solid #172136;background-color:#101126">
+
+        @foreach (Drop drop in Info.Monster.DropTable.Drops)
+        {
+            <tr style="border: 1px solid #172136;padding: 10px;">
+                <td style="padding: 10px;cursor:pointer" @onclick="@(() => GoTo(drop.Item))">@drop.ItemName</td>
+                <td style="padding: 10px;">@drop.Amount</td>  
+            </tr>
+        }
+    </table>
+    }
+   
+   
+</div>
+
+
+@code {
+
+    [Parameter]
+    public WikiInfo Info { get; set; }
+    [Parameter]
+    public Quepland_2_DN6.Pages.WikiComponent MainPage { get; set; }
+
+    public void GoTo(GameItem item)
+    {
+        MainPage.SetTopic(item);
+
+    }
+
+    public void GoTo(Area area)
+    {
+        MainPage.SetTopic(area);
+
+    }
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

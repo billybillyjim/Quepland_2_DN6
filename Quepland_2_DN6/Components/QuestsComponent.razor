@@ -1,0 +1,81 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+<div style="margin:5px;">
+    <h3>Quests</h3>
+    @if (SelectedQuest != "")
+    {
+        <button class="btn btn-primary" style="margin-bottom:5px;" @onclick="@(() => SelectQuest(""))">Back</button>
+
+        @if (QuestToShow != null)
+        {
+            <div>
+                <div>@QuestToShow.Description</div>
+                @foreach(QuestFlag flag in QuestToShow.Flags)
+                {
+                    if (flag.Completed)
+                    {
+                        <div>@flag.Description</div>
+                    }
+                }
+            </div>
+        }
+
+    }
+    else
+    {
+        @foreach (Quest q in QuestManager.Instance.Quests)
+        {
+            <div style="margin:5px;">
+                <div style="padding-left:5px;background-color:#b9b9b9;cursor:pointer;@GetStyle(q)" @onclick="@(() => SelectQuest(q.Name))">@q.Name</div>
+            </div>
+        }
+    }
+</div>
+
+
+
+
+@code {
+
+    public string SelectedQuest = "";
+    public Quest QuestToShow;
+
+    public void SelectQuest(string quest)
+    {
+        SelectedQuest = quest;
+        if (quest != "")
+        {
+            QuestToShow = QuestManager.Instance.GetQuestByName(quest);
+        }
+        GameState.UpdateState();
+    }
+
+    public string GetStyle(Quest q)
+    {
+        string color = "";
+        if (q.Progress == 0)
+        {
+            color = "color:black;";
+        }
+        else if (q.IsComplete)
+        {
+            color = "color:green;";
+        }
+        else
+        {
+            color = "color:yellow;";
+        }
+        return color;
+    }
+
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

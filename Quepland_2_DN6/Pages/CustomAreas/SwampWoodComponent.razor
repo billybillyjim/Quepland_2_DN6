@@ -1,0 +1,217 @@
+﻿@page "/World/Swampwood"
+@inject GameState GameState
+@inject NavigationManager UriHelper
+@implements IDisposable
+
+<div>This is Swampwood. It's dark, smelly, and full of mystery. It doesn't seem like you'll be able to cross without some kind of help.</div>
+<div style="position:relative;">
+    <div style="display:flex;margin:5px;">
+        <div style="flex:0.4"></div>
+        <button style="position:relative;flex:0.2" class="btn btn-primary" 
+                @onclick="@(() => Move(0,-1))"
+                onmouseover="@(new Action(() => Listen(0,-1)))">
+            Go North
+        </button>
+        <div style="flex:0.4"></div>
+    </div>
+    <div style="display:flex;margin:5px;">
+        <div style="flex:0.2"></div>
+        <button style="position:relative;flex:0.2" class="btn btn-primary" 
+                @onclick="@(() => Move(-1,0))"
+                onmouseover="@(new Action(() => Listen(-1,0)))">
+            Go West
+        </button>
+        <div style="flex:0.2"></div>
+        <button style="position:relative;flex:0.2" class="btn btn-primary" 
+                @onclick="@(() => Move(1,0))"
+                onmouseover="@(new Action(() => Listen(1,0)))">
+            Go East
+        </button>
+        <div style="flex:0.2"></div>
+    </div>
+    <div style="display: flex;margin: 5px;">
+        <div style="flex:0.4"></div>
+        <button style="position:relative;flex:0.2" class="btn btn-primary" 
+                @onclick="@(() => Move(0,1))"
+                onmouseover="@(new Action(() => Listen(0,1)))">
+            Go South
+        </button>
+        <div style="flex:0.4"></div>
+    </div>
+
+</div>
+
+
+
+@code {
+
+    private int xPos;
+    private int yPos;
+    private int soundLimit = 1;
+    private int soundCount = 0;
+
+    public async void Listen(int xChange, int yChange)
+    {
+        soundCount++;
+        if(soundCount > soundLimit)
+        {
+            soundCount--;
+            return;
+        }
+        int ticksToListen = 5;
+        while (ticksToListen > 0)
+        {
+            ticksToListen--;
+            if(soundCount > soundLimit)
+            {
+                soundCount--;
+                return;
+            }
+            await Task.Delay(GameState.GameSpeed);
+        }
+        if(ticksToListen == 0)
+        {
+            int newX = xPos + xChange;
+            int newY = yPos + yChange;
+            if (newX < 0 || newY < 0 || newX >= SwampMaze.Squares.Count || newY >= SwampMaze.Squares.Count)
+            {
+                MessageManager.AddMessage("The sound of strange creatures is all you can hear.");
+                soundCount--;
+                return;
+            }
+            string newLoc = SwampMaze.Squares[newY][newX];
+            if (newLoc == "Blocked")
+            {
+                MessageManager.AddMessage("A voice projects a sad tone as you gaze this way into the swamp.");
+            }
+            else if (newLoc == "Exit")
+            {
+                MessageManager.AddMessage("A voice gives a shrill warning as you gaze this way into the swamp.");
+            }
+            else if (newLoc.Contains("Teleport"))
+            {
+                MessageManager.AddMessage("A voice sounds from all around you as you gaze this way into the swamp.");
+            }
+            else if (newLoc == "Sawoka")
+            {
+                MessageManager.AddMessage("A voice welcomes you safely out of the swamp.");
+            }
+            else if (newLoc == "Open")
+            {
+                MessageManager.AddMessage("A voice bekons you further.");
+            }
+        }
+        soundCount--;
+    }
+    public void Move(int xChange, int yChange)
+    {
+        xPos += xChange;
+        yPos += yChange;
+        if(DoEffect() == false)
+        {
+            xPos -= xChange;
+            yPos -= yChange;
+        }
+
+        xPos = Math.Max(0, Math.Min(xPos, SwampMaze.Squares.Count - 1));
+        yPos = Math.Max(0, Math.Min(yPos, SwampMaze.Squares.Count - 1));
+        soundCount = 0;
+        GameState.UpdateState();
+    }
+    public bool DoEffect()
+    {
+        if (xPos < 0 || yPos < 0 || xPos >= SwampMaze.Squares.Count || yPos >= SwampMaze.Squares.Count)
+        {
+            xPos = 0;
+            yPos = 0;
+            MessageManager.AddMessage("You crawl over a fallen tree branch to you find yourself back where you started.");
+            return false;
+        }
+        string newLoc = SwampMaze.Squares[yPos][xPos];
+        if(newLoc == "Blocked")
+        {
+            MessageManager.AddMessage(SwampMaze.OpenMessages[SwampMaze.CurrentMessage] + " You look around and realize you have returned to where you were just a few minutes ago.");
+            SwampMaze.CurrentMessage++;
+
+            return false;
+        }
+        else if(newLoc == "Exit")
+        {
+            xPos = 0;
+            yPos = 0;
+            MessageManager.AddMessage("You crawl over a fallen tree branch to you find yourself back where you started.");
+        }
+        else if (newLoc.Contains("Teleport"))
+        {
+            string[] pos = newLoc.Split(':');
+            int x = int.Parse(pos[1].Split(',')[0]);
+            int y = int.Parse(pos[1].Split(',')[1]);
+            xPos = x;
+            yPos = y;
+            MessageManager.AddMessage(SwampMaze.TeleportMessages[SwampMaze.CurrentTeleportMessage]);
+            SwampMaze.CurrentTeleportMessage++;
+        }
+        else if(newLoc == "Sawoka")
+        {
+            GoToSawoka();
+        }
+        else if(newLoc == "Open")
+        {
+            MessageManager.AddMessage(SwampMaze.OpenMessages[SwampMaze.CurrentMessage]);
+            SwampMaze.CurrentMessage++;
+        }
+
+        return true;
+
+    }
+    private void GoToSawoka()
+    {
+        GameState.StopActions();
+        Area a = AreaManager.Instance.GetAreaByURL("Sawoka");
+        Land l = AreaManager.Instance.GetLandForArea(a);
+        if (l != null && l != GameState.CurrentLand)
+        {
+            GameState.CurrentLand = l;
+        }
+        GameState.Location = "Sawoka";
+        MessageManager.AddMessage("You reach a clearing and the ground rises above the swamp water. You made it to the other side of the swamp!");
+        a.Unlock();
+
+        UriHelper.NavigateTo("World/Sawoka");
+    }
+
+    public string GetColor(string s)
+    {
+        if (s.Contains("Teleport"))
+        {
+            return "lightblue";
+        }
+        else if(s == "Open")
+        {
+            return "green";
+        }
+        else if(s == "Exit")
+        {
+            return "red";
+        }
+        else if(s == "Blocked")
+        {
+            return "dimgray";
+        }
+        return "white";
+    }
+    protected override void OnInitialized()
+    {
+        SwampMaze.LoadMaze();
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    protected override void OnParametersSet()
+    {
+        GameState.UpdateState();
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

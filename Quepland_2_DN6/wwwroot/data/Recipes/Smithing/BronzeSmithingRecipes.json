@@ -1,0 +1,142 @@
+[
+  {
+    "outputItemName": "Molten Bronze Bar",
+    "ingredients": [
+      {
+        "itemName": "Copper Bar"
+      },
+      {
+        "itemName": "Tin Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 30
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Bronze Bar",
+    "ingredients": [
+      {
+        "itemName": "Copper Ore"
+      },
+      {
+        "itemName": "Tin Ore"
+      }
+    ],
+    "experienceGained": "Smithing:45",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 30
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Bronze Bar",
+    "ingredients": [
+      {
+        "itemName": "Bronze Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 30
+      }
+    ]
+  },
+  {
+    "outputItemName": "Bronze Bar",
+    "ingredients": [
+      {
+        "itemName": "Molten Bronze Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 30
+      }
+    ]
+  },
+  {
+    "outputItemName": "Bronze Knife",
+    "ingredients": [
+      {
+        "itemName": "Molten Bronze Bar"
+      }
+    ],
+    "experienceGained": "Smithing:45",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 30
+      }
+    ]
+  },
+  {
+    "outputItemName": "Bronze Sword",
+    "ingredients": [
+      {
+        "itemName": "Molten Bronze Bar"
+      }
+    ],
+    "experienceGained": "Smithing:45",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 30
+      }
+    ]
+  },
+  {
+    "outputItemName": "Bronze Axe",
+    "ingredients": [
+      {
+        "itemName": "Molten Bronze Bar"
+      }
+    ],
+    "experienceGained": "Smithing:45",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 30
+      }
+    ]
+  },
+  {
+    "outputItemName": "Bronze Hammer",
+    "ingredients": [
+      {
+        "itemName": "Molten Bronze Bar"
+      }
+    ],
+    "experienceGained": "Smithing:45",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 30
+      }
+    ]
+  },
+  {
+    "outputItemName": "Bronze Arrowtips",
+    "ingredients": [
+      {
+        "itemName": "Molten Bronze Bar"
+      }
+    ],
+    "outputAmount": 10,
+    "experienceGained": "Smithing:45",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 30
+      }
+    ]
+  }
+
+]

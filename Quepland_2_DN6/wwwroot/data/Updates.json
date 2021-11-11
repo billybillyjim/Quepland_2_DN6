@@ -1,0 +1,523 @@
+[
+  {
+    "versionNumber": "1.0.16c",
+    "updates": [
+      "Weaving now grants experience."
+    ]
+  },
+  {
+    "versionNumber": "1.0.16b",
+    "updates": [
+      "Fixed a bug that broke stackable items.",
+      "Fixed a bug that made crafting with locked items impossible."
+    ]
+  },
+  {
+    "versionNumber": "1.0.16",
+    "updates": [
+      "There are a few changes I failed to document well and have totally forgotten them. Hopefully I didn't break anything here.",
+      "Added the area of Crossmare near Sanbon Woods.",
+      "Fixed an issue with the bank when set to the smallest window width setting. Scrolling should now work as expected.",
+      "Unidentified gems should now work with the compact inventory view.",
+      "Fixed the item icon for Abalones.",
+      "You can no longer lock fishing bait and fish for free.",
+      "Added shields.",
+      "Added rings.",
+      "Added QR Codes for the upcoming mobile release.",
+      "Added Textile Arts",
+      "Added capes",
+      "Added Pansoph Plains",
+      "The game now tracks monster KC in the Beastiary menu at the bottom of the skills tab. I don't love its location so if you think of a better one let me know. Also, your old kills weren't being tracked so this is just for going forward.",
+      "Reworked how the bank works. Let me know if I accidentally broke everything, but it should run quite a bit faster.",
+      "Fixed a UI misalignment with worm hunting.",
+      "Added Hardcore and Ultimate game modes. These work on separate save files and have special rules. Hardcores will erase the save file when you die, Ultimates aren't allowed to access a bank. Followers also work differently for Ultimate accounts.",
+      "Follower inventories are now saved.",
+      "The bank now updates searches per key press.",
+      "Fixed a bug that made converting items slower for the first item.",
+      "Tomes now scroll to allow more items to be added to them, just like real books do.",
+      "Added a few textile arts items around various shops.",
+      "Fixed a bug concerning tooltips sometimes showing some nonsense about lacking a skill limit of over 2 billion",
+      "Fixed a bug where the first item you gather was actually rolling for gather speed twice, which usually didn't do anything, but it would sometimes cause the first gather to be either extremely fast or painfully slow.",
+      "Reworked a bunch of engine stuff to hopefully work more smoothly. This should mean fewer calls to garbage collection, which was a major factor in the game feeling jittery at times. Let me know if I totally broke something.",
+      "Fixed a bug that made armor with status effects not work properly. I have no idea if there were any armors with status effects before, but if there were they should work now?",
+      "I'll be monitoring the discord server for the next few days to respond to any major bugs that pop up. I did just get a new job that begins next month. I have no idea what that means for the game, it may mean more time to make updates because I am less focused on other things, or it may mean I run out of time to update the game. Only time will tell. Regardless, the next large update to come out will be the Android mobile port when it is finished."
+    ]
+  },
+  {
+    "versionNumber": "1.0.15",
+    "updates": [
+      "Fixed a typo in Lumpy's banking message.",
+      "The follower item slot duplication should actually be fixed now.",
+      "Follower levels now save properly.",
+      "Added Sanbon Wood.",
+      "Added Transit Branches.",
+      "You can now extract the yeast from bread dough."
+
+    ]
+  },
+  {
+    "versionNumber": "1.0.14b",
+    "updates": [
+      "Followers now have a levelling system. A follower will gain experience every time they bank items for you. A higher level follower will have a larger inventory. There will be more that levelling will do in the future. Big thanks to Patreon Subscriber Moonbreak for the suggestions!",
+      "The requirements for cancelling an artisan task have been changed to 10 Artisan and under 50 artisan points.",
+      "Certain items are now correctly blocked from artisan tasks.",
+      "Artisan tasks now properly load and save from imported save files.",
+      "Some inventory code has been reworked to make adding stacks of items a little bit faster.",
+      "Depositing artisan items will no longer remove equipped or locked items.",
+      "Compact inventory settings are now saved.",
+      "You can now hide locked items in the settings menu.",
+      "Added Kyusa Sands.",
+      "Added worm hunting.",
+      "Artisan tasks can now be cancelled at any level by paying an npc in Sunajo Fortress.",
+      "Added the Nittou dojo to Sunajo.",
+      "Added caiman and mammoth armors.",
+      "Fixed some typos.",
+      "Low level bars and high value bars now have different icons to make telling them apart a little bit easier.",
+      "Added a gem identifier who will identify all the gems in your inventory for a price.",
+      "Library books now tell you your page number.",
+      "Fixed the bug making followers depositing create duplicate item slots."
+    ]
+  },
+  {
+    "versionNumber": "1.0.13b",
+    "updates": [
+      "You can now import save files from the start menu.",
+      "When saves fail, the game will now give an error code to help me diagnose what is going on.",
+      "Some difficult recipes have been removed from artisan. No more mahogany arrows or mercurice weapons.",
+      "You can now catch shrimp at the southern Ufagari cliffs.",
+      "Added a gem cutting station to the market in Sulmenka.",
+      "Necklace recipes no longer consume lapidary toolkits.",
+      "Some UI has been readjusted.",
+      "The item system has been improved to support items created at runtime.",
+      "Added a compact inventory view that is a bit more similar to how the first game worked.",
+      "I finally had the save bug happen to me and I think I was able to diagnose it. Save games going forward will use a different, simpler, and supposedly more reliable form of compression. Let me know if you have any issues! This took a good while to figure out and fix, so the update took much longer than I planned.",
+      "I added a little menu in the settings options that will let you restore your followers. Sorry to everyone who experienced this bug."
+
+
+    ]
+  },
+  {
+    "versionNumber": "1.0.12b",
+    "updates": [
+      "Added some error checking for hunting trips, maybe fixed the hunting save issue.",
+      "Fixed a bug with item locks staying locked for all duplicate items created or acquired.",
+      "Trying to add the pluralizer again, hopefully nothing breaks this time.",
+      "Alchemy now produces items properly.",
+      "Fixed the issue with status effects only working the first time.",
+      "Some arrows now have an artisan requirement to create.",
+      "Buffed a number of higher level arrows.",
+      "The spine shooter should no longer shoot arrows.",
+      "You can now smith iron pickaxes.",
+      "Animations are slightly sped up to look less laggy in certain instances.",
+      "Food now has a progress bar above the player's HP. You can mouse over it to see how much time is left and what food it is.",
+      "Fixed a bug that prevented depositing coins into your bank.",
+      "Fixed some issues with loot text so it is now more clear what you got.",
+      "You can now gain combat experience again."
+
+    ]
+  },
+  {
+    "versionNumber": "1.0.11b",
+    "updates": [
+      "Fishing gear now correctly requires fishing levels to equip.",
+      "Removing items from bank tabs now actually removes them.",
+      "Fixed some bugs with items having two of the same tag for bank tabs.",
+      "You can now delete bank tabs. Don't worry though, if you accidentally delete a tab, readding it with the same name will bring all your items in the tab back.",
+      "Fixed a bug where artisan tasks weren't using lowered amounts for armor or lapidary tasks.",
+      "You can now catch sardines in Koya Hasa.",
+      "Made it harder to get softlocked by afk actions and hunting trips.",
+      "Fixed the bug that made armor calculations happen after the damage calculation in a way where you couldn't hit over your opponent's max hp.",
+      "Fixed a bug that made combat sometimes slow down for no apparent reason.",
+      "Added the Sulmenkan Kingdom."
+    ]
+  },
+  {
+    "versionNumber": "1.0.10",
+    "updates": [
+      "Fixed some skill descriptions to be more accurate to the actual game mechanics.",
+      "The library is now quite a bit slower and worse. I try to avoid nerfing things but it seems like it was the best way to train far too many skills, instead of being an alternative.",
+      "The gem mine is now a bit slower and works properly.",
+      "The drop rates on many rare items are now much better, they were accidentally a bit lower than they were supposed to be.",
+      "Added a simple message filter for loot. Let me know what else can be added to the list and if there are any loot drops that aren't showing up in the loot tab.",
+      "The bank should now render 10 rows of items regardless of the view width, and it will show the bottom row as expected.",
+      "Fixed a bug that let you make molten bronze bars but not their products.",
+      "Added a shop in Koncave city that will extract hides and meat from animals directly from your bank for a small fee."
+    ]
+  },
+  {
+    "versionNumber": "1.0.9",
+    "updates": [
+      "Carving a totem now requires a wood carving tool.",
+      "Some more items now have gathering messages.",
+      "The game no longer cancels your gathering if your inventory is full but the item is stackable and you already have it in your inventory.",
+      "Fixed a bug in HP and inventory calculations on load. Your inventory or HP may be over the limit when you load the game today.",
+      "Fixed a bug that sometimes let players gain experience instantly at the gym.",
+      "You can no longer train Strength or Deftness at the library. This is mostly because it doesn't make sense. If there's strong pushback to this change I'm not opposed to reverting it, strange as it is.",
+      "You can now get your hands on a Tome of Logs in the Castle Nid in Koncave City. It will take you to the location to harvest any logs you want, assuming you've gathered them before and been to the location.",
+      "After finding a number of bugs with lock saving, I think they finally should save even with equipped items. Please let me know if they are somehow still broken for you.",
+      "Fixed a typo in Houchou Dojo"
+    ]
+  },
+  {
+    "versionNumber": "1.0.8b",
+    "updates": [
+      "Fixed another bug that would teleport players after completing battles in dungeons.",
+      "Added the ability to exchange exemption tickets with every artisan task giver.",
+      "Skills menus now show the skill's level.",
+      "The cancel task button now actually works."
+    ]
+  },
+  {
+    "versionNumber": "1.0.8",
+    "updates": [
+      "Players should no longer get teleported away from dojo battles.",
+      "Bows now properly require the archery skill to equip.",
+      "Added a total level counter.",
+      "You can now cancel a task with a Guild Exception Notice you can buy from the artisan guild.",
+      "Fixed a bug that was making library books much faster to read than intended.",
+      "Sahota Castle is now accessible.",
+      "Fixed a bug that made the only droppable gem amberite.",
+      "Fixed an issue that sometimes made food not heal.",
+      "The steelflame axe now enables woodcutting.",
+      "Fixed a bug that broke save import/export",
+      "Saves now calculate max HP and inventory slots based on stats instead of saving and loading them.",
+      "Players with no artisan points and under 5 Artisan are able to visit the artisan guild in Tsu City to cancel their tasks, in case they get one they feel is too difficult for where they are at in their account.",
+      "Skill menus now show their required items and recipes in level-order. Currently it shows items, then recipes. It's a bit of a complicated process to merge those two lists, so for now that's how it will have to be."
+    ]
+  },
+  {
+    "versionNumber": "1.0.7",
+    "updates": [
+      "The Sawoka Vault is now available. You'll have to spelunk in the Sawoka dungeon to find it.",
+      "You can now access the thieve's hideout any time, so players who failed to get the camels when they first visited still can access it.",
+      "You can now catch shrimp in Tackure.",
+      "Mercurial shards have been added to the mercurial creature drop tables.",
+      "You can now access one of the Ufagari islands through artisan membership.",
+      "The first items from the artisan shop can now be purchased in Tsu City.",
+      "Save exports and imports now properly include dungeon progress.",
+      "Text should no longer overflow the item stats info box.",
+      "There is now a button to stop smithing.",
+      "Item locks now save properly.",
+      "Hopefully the save changes didn't break anything for other cultures. Please let me know if something isn't working!"
+    ]
+  },
+  {
+    "versionNumber": "1.0.6b",
+    "updates": [
+      "Issues with accessing parts of Koncave Caverns have been fixed.",
+      "You can now right-click sell items in stores.",
+      "Added the recipe to complete the Mercurial sword.",
+      "Leatherworking now gives proper experience.",
+      "Alchemy now properly stops when you leave.",
+      "Alchemy can now be stopped mid action, though you won't get your items back.",
+      "An item's requirements are now always visible by mousing over the item's name in the item viewer.",
+      "If you have Snibbap following you, you can now directly sell items from the bank with a right click option.",
+      "Added the more quest info for some quests.",
+      "Increased the size of dropdown items to make it harder to accidentally mouse-out of them.",
+      "The message menu at the bottom now shows the most recent message even when closed.",
+      "Anthretagro now tells you his actual price when you speak to him.",
+      "The Artisan skill has been added.",
+      "I've added a way to make items listed as consistently plural, now I just need to find the places where that matters. If you see an incorrect plural item let me know!",
+      "There were a handful of other fixes but I forgot to write them down... Whoops!",
+      "Removed the Pluralizer until I can figure out why its breaking everything."
+    ]
+  },
+  {
+    "versionNumber": "1.0.5b",
+    "updates": [
+      "The library is now slightly slower for experience gains.",
+      "Dojo tokens are now properly awarded for defeating dojos.",
+      "Bank tabs should now save correctly.",
+      "The inventory now tells you your used and available spaces.",
+      "Fixed a number of UI issues with bank tabs so they work a bit more as intended.",
+      "Item rendering is now quite a bit faster than it was before. Hopefully nothing broke with this change, but if it did please let me know.",
+      "Added a missing icon to Koncave Gate.",
+      "The Mt. Yama mine is now accessible.",
+      "The root dwellers now properly apply status effects.",
+      "Fixed a huge issue where the game wasn't properly tracking item amounts."
+    ]
+  },
+  {
+    "versionNumber": "1.0.4",
+    "updates": [
+      "Test items will no longer appear on book covers, hopefully.",
+      "The deposit all button no longer keeps unlocked items equipped.",
+      "Fixed an issue that can softlock a player on a desert island.",
+      "Stone pickaxe now has a brighter color.",
+      "Button text to find another battle has been clarified.",
+      "The equip button now shows a tooltip of what an item requires even if you have the requirements."
+    ]
+  },
+  {
+    "versionNumber": "1.0.3",
+    "updates": [
+      "Fixed a bug that made AFK actions exploitable for extremely fast experience.",
+      "Unpacking items now shows a progress bar to make it more clear that it's not an instant action.",
+      "You can now access Mound's House as long as you have the key.",
+      "Saving a game with a broken equipment list no longer breaks the save.",
+      "Failing to load equipped items no longer will give a null reference exception.",
+      "Deposit all no longer unequips your items.",
+      "The most recent text box is also underlined to make it very clear which one it is. Let me know what you think!",
+      "Tanneries now properly save and load data."
+    ]
+  },
+  {
+    "versionNumber": "1.0.2",
+    "updates": [
+      "Changed a tile in the swamp. It should be much less confusing now.",
+      "Fixed a few dialogue typos.",
+      "Big bandits will now have the correct strengths and weaknesses.",
+      "Fixed a few bugs with the item locks. They should stay even after hitting deposit all and they should work on stacks of items.",
+      "Kai will now still be at the docks if you leave the thieve's island before defeating all the thieves.",
+      "Fixed a bug that made dojo battles show the wrong UI.",
+      "Fixed some issues with bank searching and made the banking interface slightly faster.",
+      "Fixed smithing tooltips to actually tell the player what they are missing.",
+      "The smithing sources dropdown will now properly fit the text inside it for Firefox users.",
+      "Unlocking areas now properly requires and consumes required items.",
+      "Fixed a bug that made AFK actions exploitable for extremely fast experience."
+    ]
+  },
+  {
+    "versionNumber": "1.0.1",
+    "updates": [
+      "Added Discord and Patreon links to the settings menu, as well as the version number.",
+      "Added a rotating loading image to let players know the game is loading. I'd like to add a whole progress bar but apparently that is not nearly as simple as one would think.",
+      "Fixed a bug that happened with bad tannery data.",
+      "Fixed a bug that made smithing impossible.",
+      "Currently certain CultureInfos which use spaces in place of commas break most of the progress bars in the game. There may be a better solution, but for now the game will try to set the culture info to use commas and a period for decimals. Hopefully that doesn't break anything.",
+      "Added some padding to the bottom of the messages bar to make it more clear it's supposed to end there.",
+      "Added a hide button to the messages bar."
+    ]
+  },
+  {
+    "versionNumber": "1.0.0",
+    "updates": [
+      "Release day! I'll be monitoring the discord and reddit post to make sure any bugs that pop up are fixed ASAP.",
+      "Fixed a bug that let you deposit locked items.",
+      "Fixed a bug that made some effect weapons not last like they should.",
+      "Fixed alignment issue with experience rate tracker."
+    ]
+  },
+  {
+    "versionNumber": "0.0.23",
+    "updates": [
+      "Added more ways to get seaweed.",
+      "Reworked the bank to use virtualized list. This makes it far less laggy, but it's still got a long way to go. Unless I learn enough Javascript to do it all in JS, this may be the best it can be."
+    ]
+  },
+  {
+    "versionNumber": "0.0.22",
+    "updates": [
+      "Finished work on Queple's Sword quest.",
+      "Fixed gem cutting recipes so they actually work now.",
+      "Added some missing items, fixed some item names to be more consistent.",
+      "Added a different icon for rice rolls.",
+      "Added more pickaxes.",
+      "Added missing smithing recipes.",
+      "Added the 40ish missing monsters to areas around the world.",
+      "Fixed the coloring on bread items.",
+      "Added ways to acquire more items."
+    ]
+  },
+  {
+    "versionNumber": "0.0.21",
+    "updates": [
+      "Fixed issue with some action tooltips.",
+      "Added woodworker's association.",
+      "The game can now check if a player's skill level is too high for a dialogue.",
+      "Made shop costs more readable.",
+      "Fixed a bug where right click menus didn't appear in the bank if you were searching.",
+      "Added a credits page.",
+      "Improved item locking to include preventing selling of items.",
+      "Fixed a bug where all items had a skill limit of -2,147,483,648 unless set otherwise.",
+      "Fixed a bug that made the game crash when using a certain weapon.",
+      "Added a way to access Koncave City.",
+      "Fixed the hunter's map to show multiple locations without disappearing.",
+      "Added items to the shops in Koncave City",
+      "Added the item's name beneath the item in the shop menu."
+    ]
+  },
+  {
+    "versionNumber": "0.0.20",
+    "updates": [
+      "Fixed alignment issue with AFK actions.",
+      "Made the game crash less from typos.",
+      "Fixed a bug that prevented players from accessing Ricechild.",
+      "Updated Grumpy the Gnome's dialogue.",
+      "Added a hunting map in Ricechild to show where to find some hunted animals.",
+      "Added a hunting guild to Ricechild where you can buy hunting traps.",
+      "Added more conversation functionality."
+    ]
+  },
+  {
+    "versionNumber": "0.0.19b",
+    "updates": [
+      "Fixed a crash with alchemy if using an item that shouldn't be alchemicable.",
+      "Reworked Oikaaz's dialogue to be more in line with the newer dialogue system.",
+      "Started work on Chrysopoeian Crisis quest.",
+      "Added tooltips to follower menu.",
+      "Trapping can no longer lock a player out when there is a typo.",
+      "Fixed a bug that made hunting traps show when they weren't ready, instead of when they were.",
+      "Added some NPCs to explain sushi and jerky.",
+      "Added an icon to help distinguish molten metal from metal.",
+      "Jerky now requires a culinary arts level to make.",
+      "Actually fixed trapping issues."
+    ]
+  },
+  {
+    "versionNumber": "0.0.18",
+    "updates": [
+      "Fixed some bugs with the smithing UI.",
+      "Made auto smithing work a little bit better when multiple ingredients are involved.",
+      "Made tooltips for smithing now tell your more specifically what you need.",
+      "Added more smithies with more strict metal requirements.",
+      "More changes to how smithies work.",
+      "Fixed name typos.",
+      "Increased the number of places you can find a boar.",
+      "Added Sahota Castle",
+      "Added ice smithing."
+    ]
+  },
+  {
+    "versionNumber": "0.0.17",
+    "updates": [
+      "Fixed some bugs with the Pirate Ship and dialogues.",
+      "Fixed an issue that could softlock an account to the Arawasago Archipelago.",
+      "Actually fixed the softlock.",
+      "Added the gem mine.",
+      "Added the remaining smithies.",
+      "Added sahotite weapons.",
+      "Reworked smithies to show all possible recipes."
+    ]
+  },
+  {
+    "versionNumber": "0.0.16",
+    "updates": [
+      "Added many more followers to the game.",
+      "Added quest guide text for Mound is Missing.",
+      "Fixed a bug where you might not get a map from Mound after talking to him.",
+      "Made it possible to get another map from Mound if you don't have one.",
+      "Rebalanced inventory growth rate.",
+      "Added an NPC to explain laying hunting traps."
+    ]
+  },
+  {
+    "versionNumber": "0.0.15",
+    "updates": [
+      "Added progress bar to crafting menu.",
+      "Made it possible to open crafting menu with crafting items.",
+      "Added item locks. Not sold on the design, let me know if you have a better idea!",
+      "Adjusted inventory growth rate.",
+      "Added a third line of info the tooltip for skills in the skills tab.",
+      "Added more commas.",
+      "Fixed a bug that broke idle gathering with followers.",
+      "Fixed issues with smithing experience being given at the wrong times from the wrong places.",
+      "Reworked the smithing and autosmithing functions, hopefully didn't break anything.",
+      "Reworked gathering to hopefully work as intented.",
+      "Fixed a bug that caused the first gather to not include gathering speed bonuses in calculating gather time."
+    ]
+  },
+  {
+    "versionNumber": "0.0.14",
+    "updates": [
+      "Added drops to the sawoka vault.",
+      "Fixed a bug where you could get too many keys.",
+      "Fixed a bug with library keys.",
+      "Fixed a crash in Koncave Caverns.",
+      "Mound will now take any extra keys you might have taking up bank space.",
+      "Combat followers no longer run to and from the bank while you are skilling.",
+      "Fixed a few bugs involving non-gathering followers.",
+      "Added ice fishing.",
+      "Added missing images to Sahota.",
+      "Added hunting camp.",
+      "Added ability to hunt polar bears and mammoths.",
+      "Fixed a bug that broke saves when hunting polar bears and mammoths.",
+      "Made a backup for if you somehow load a save that was on a schrodinger's hunting trip.",
+      "Added an NPC to explain how to upgrade gear.",
+      "Made it possible to open the Experience Tracker menu without gaining experience."
+
+    ]
+  },
+  {
+    "versionNumber": "0.0.13",
+    "updates": [
+      "Fixed a typo in Queple Cave.",
+      "Fixed a bug that didn't let you buy items with exact change.",
+      "Added version number to start screen.",
+      "Fixed a bug that made the crafting menu crash.",
+      "Made messages a bit more distinct.",
+      "Hid the debug menu."
+    ]
+  },
+  {
+    "versionNumber": "0.0.12",
+    "updates": [
+      "Added some missing NPCs",
+      "Renamed some NPCs to fix some typos.",
+      "Added some missing items.",
+      "Fixed a number of dialogue issues with Grand Theft Camel.",
+      "Added quest progress text for the Grand Theft Camel and Tutorial quests.",
+      "Made coal x20 easier to mine. It's not fast now, it just was incredibly slow before.",
+      "Added silver ore.",
+      "Added action start text for a number of actions.",
+      "Added necklaces.",
+      "Fixed capitalization on a few buttons",
+      "Added way to access Mt. Queple's peak.",
+      "Fixed a number of issues with alchemy.",
+      "Fixed Oikaaz's dialogue.",
+      "Added silver smithing recipes.",
+      "Added necklace recipes.",
+      "Made dropdowns look nicer.",
+      "Added missing area icons.",
+      "Added remaining alchemy halls.",
+      "Added a boat to the boat store.",
+      "Added a way to get a number of unobtainable items."
+    ]
+  },
+  {
+    "versionNumber": "0.0.11",
+    "updates": [
+      "Updated the version number to motivate me further.",
+      "Fixed a typo in the Mayor's Assistant quest.",
+      "Added quest progress logs for mayor's assistant.",
+      "Added the library",
+      "Fixed some bugs with Grand Theft Camel",
+      "Fixed an issue with crafting after fleeing battles.",
+      "Added support for changing the game background.",
+      "Fixed typos in recipe descriptions.",
+      "Added the Sawoka Library and Vault.",
+      "Added some NPCs to explain how to navigate the swamp.",
+      "Moved some ores around to make early smithing and mining more accessible.",
+      "Fixed a bug that made pickaxes not grant combat experience.",
+      "Fixed a number of bugs with NPCs not being properly set up.",
+      "Made tooltips much more consistent in staying up while gathering and crafting.",
+      "Improved readability of skills menus.",
+      "Improved Exp. Tracker to work with most recent skills more clearly."
+    ]
+  },
+  {
+    "versionNumber": "0.0.10",
+    "updates": [
+      "Added update list to start menu.",
+      "Filled out remaining monster drop tables.",
+      "Players can now right click a blocked area to withdraw the requirement from the bank if they have it.",
+      "Improved shop UI so players won't accidentally buy anything anymore.",
+      "Buy X is now available in shops.",
+      "Added Discord and Patreon links to start menu.",
+      "Added more fishing rods.",
+      "Removed duplicate items.",
+      "Completed the Swampwood maze.",
+      "Removed a number of debugging buttons from the game.",
+      "Completed more of the Togaru Hills region.",
+      "Follower inventories are now hidden on the equipment screen.",
+      "Didn't fix a bug with autosmithing, but now it's far less obvious that it's happening. Maybe someday I'll figure out what's happening...",
+      "Fixed a typo with bronze smithing recipes.",
+      "Improved the mayor's assistant quest.",
+      "Added a notification for when an area's traps are ready.",
+      "Improved the shop UI a bit.",
+      "Added more afk actions to make training without the game open more possible.",
+      "Fixed some bugs with saving afk actions.",
+      "Fixed a host of bugs involved with saving and loading."
+    ]
+  }
+]

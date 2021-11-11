@@ -1,0 +1,309 @@
+﻿@inject GameState GameState
+@inject NavigationManager UriHelper
+
+<div style="position:relative;padding-left:2rem">
+    <h1>Welcome to Quepland</h1>
+    <p>Quepland 2 is a semi-idle adventure game set in the world of Quepland. It is heavily inspired by the developer's childhood addiction to Runescape.</p>
+
+    @if (GameState.InitCompleted)
+    {
+        <div>
+            @if (hasSave)
+            {
+                <div>
+                    <button class="btn btn-primary" @onclick="@(() => LoadGame("Normal"))">
+                        Load Game (Normal)
+                    </button>
+                </div>
+                <br />
+            }
+            @if (hasHardcore)
+            {
+                <div>
+                    <button class="btn btn-primary" @onclick="@(() => LoadGame("Hardcore"))">
+                        Load Game (Hardcore)
+                    </button>
+                </div>
+                <br />
+            }
+            @if (hasUltimate)
+            {
+                <div>
+                    <button class="btn btn-primary" @onclick="@(() => LoadGame("Ultimate"))">
+                        Load Game (Ultimate)
+                    </button>
+                </div>
+                <br />
+            }
+        </div>
+        @if (GameState.CurrentGameMode == GameState.GameType.Hardcore && Player.Instance.JustDied)
+        {
+            <button class="btn btn-primary" onclick="@(new Action(() => ResetGame()))">Begin New Game (@selectedMode)</button>
+        }
+        else
+        {
+            @if (selectedMode == "Normal" && hasSave ||
+             selectedMode == "Hardcore" && hasHardcore ||
+             selectedMode == "Ultimate" && hasUltimate)
+            {
+                if (hasShownWarning == false)
+                {
+                    <button class="btn btn-primary" onclick="@(new Action(() => ShowWarning()))">Begin New Game (@selectedMode)</button>
+
+                }
+                else
+                {
+                    <button class="btn btn-primary" onclick="@(new Action(() => StartGame()))">Begin New Game (@selectedMode)</button>
+                    <div style="color:red">Warning:Creating a new game will override your current save with this game type.(@selectedMode)</div>
+                }
+            }
+            else
+            {
+                <button class="btn btn-primary" onclick="@(new Action(() => StartGame()))">Begin New Game (@selectedMode)</button>
+            }
+        }
+    }
+    else
+    {
+        <button class="btn btn-primary" disabled>Begin New Game</button>
+    }
+
+    <br />
+    <div>
+        <Quepland_2_DN6.Components.CustomDropdownComponent DropdownItems="@GetGameModes()" @bind-Value="@selectedMode" BoxText="Select Game Mode"></Quepland_2_DN6.Components.CustomDropdownComponent>
+
+    </div>
+    <br/>
+    <div>
+        @if (hasSave == false)
+        {
+            if (selectedMode == "Normal")
+            {
+                <div>Normal mode is the normal way to play the game. It's highly recommended you start out playing in this game mode.</div>
+            }
+            else if (selectedMode == "Hardcore")
+            {
+                <div>Hardcore mode gives the player a single life to live. If you die, the game will delete your save and bring you back to the start menu.</div>
+            }
+            else if (selectedMode == "Ultimate")
+            {
+                <div>Ultimate mode is an extreme version of the game where the player is not allowed to use the bank.</div>
+            }
+        }           
+        <Quepland_2_DN6.Components.HCDeathInfoComponent></Quepland_2_DN6.Components.HCDeathInfoComponent>
+        
+    </div>
+
+    @if (GameState.Updates.Count > 0 && showAllUpdates)
+    {
+        <div style="margin-top:10px;">
+            <button class="btn btn-primary" onclick="@(new Action(() => showAllUpdates = false))">Hide Updates</button>
+        </div>
+        <div style="height:200px;width:800px;overflow-y:scroll;background-color:dimgray;margin-top:10px;margin-bottom:10px;">
+            @foreach (Update update in GameState.Updates)
+            {
+                <div>
+                    <h2>Version @update.VersionNumber</h2>
+                    @foreach (string u in update.Updates)
+                    {
+                        <div>@u</div>
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div style="margin-top:10px;">
+            <button class="btn btn-primary" onclick="@(new Action(() => showAllUpdates = true))">See Updates</button>
+        </div>
+    }
+    @if (ShowSettings)
+    {
+        <div style="margin-top:10px;">
+            You can load an exported save here.
+            @if (exportedSave != "")
+            {
+                <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => ImportSave())">Import Save</button>
+            }
+            else
+            {
+                <button class="btn btn-primary" style="margin:10px;padding:10px;opacity:0.5"> Import Save</button>
+            }
+            <input @bind-value="@exportedSave" />
+        </div>
+        @if (importedSaveComplete)
+        {
+            <div>
+                Save loaded successfully.
+            </div>
+        }
+
+
+
+    }
+    else
+    {
+        <button class="btn btn-primary" style="margin-top:10px;" @onclick="@(() => ShowSettings = !ShowSettings)">Show Settings</button>
+
+    }
+
+    <div style="text-align: center;">
+        <a target="_blank" href="https://www.patreon.com/billybillyjim"><img style="height:50px;width:50px;background-color:white;border-radius:5px;padding:5px;cursor:pointer;" src="/data/Images/PatreonMark.png" /></a> Please consider supporting development on <a target="_blank" href="https://www.patreon.com/billybillyjim">Patreon</a>
+    </div>
+    <br />
+    <div style="text-align: center;">
+        <a target="_blank" href="https://discord.gg/bkH9MZa"><img style="height:50px;width:50px;background-color:white;border-radius:5px;cursor:pointer;" src="/data/Images/DiscordLogo.png" /></a> Join the <a target="_blank" href="https://discord.gg/bkH9MZa">Discord</a> for suggestions, guides, and community
+    </div>
+    <div>
+        Note:For best results, Quepland needs to be played in a separate window. Most browsers will pause the game after a few minutes in a background tab.
+    </div>
+    <div>
+        Version:@GameState.Version
+    </div>
+    @if (IsTesting())
+    {
+        <button @onclick="@(() => UriHelper.NavigateTo("/Rates/"))">Rates</button>
+        <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => EnableNewCompression())">Compression</button>
+
+    }
+    @if (ShowCredits)
+    {
+        <p>
+            Quepland 2 was coded entirely by billybillyjim, in Blazor. Almost all the art of the game was done by the amazingly talented people at
+            <a target="_blank" href="https://game-icons.net/">game-icons.net</a>,
+            including <a target="_blank" href="http://lorcblog.blogspot.com">Lorc</a>,
+            <a target="_blank" href="http://delapouite.com">Delapouite</a>, and <a target="_blank" href="https://game-icons.net/about.html#authors">others</a>.
+        </p>
+    }
+    else
+    {
+        <button class="btn btn-primary" @onclick="@(() => ShowCredits = !ShowCredits)">Credits</button>
+    }
+    <button class="btn btn-primary" @onclick="@(() => UriHelper.NavigateTo("/Wiki/Main"))">Wiki</button>
+</div>
+
+
+
+
+
+
+
+@code {
+
+    public string selectedMode = "Normal";
+    bool hasSave = false;
+    bool hasHardcore = false;
+    bool hasUltimate = false;
+    bool hasShownWarning = false;
+    bool showAllUpdates = false;
+    bool ShowCredits = false;
+    bool ShowSettings = false;
+    bool importedSaveComplete = false;
+    private string exportedSave;
+    bool isLoadingQRCodes = false;
+
+
+    private List<byte[]> byteList = new List<byte[]>();
+
+
+    public void EnableNewCompression()
+    {
+        GameState.UseNewSaveCompression = true;
+    }
+
+    public void ImportSave()
+    {
+        SaveManager.ImportSave(exportedSave);
+        SaveManager.SaveGame();
+        importedSaveComplete = true;
+        hasSave = true;
+    }
+    public List<string> GetGameModes()
+    {
+        List<string> modes = new List<string>();
+        var values = Enum.GetValues(typeof(GameState.GameType));
+        foreach (var v in values)
+        {
+            modes.Add(v.ToString());
+        }
+        return modes;
+    }
+    public void ResetGame()
+    {
+        GameState.ResetGame();
+        SetGameMode();
+        if (GameState.CurrentGameMode == GameState.GameType.Ultimate)
+        {
+            Player.Instance.Inventory.AddItem(ItemManager.Instance.GetItemByName("Stone Axe"));
+        }
+        AreaManager.Instance.GetAreaByName("Quepland Fields").Unlock();
+        GameState.ShowStartMenu = false;
+        UriHelper.NavigateTo("/World/QueplandFields");
+    }
+    public bool IsTesting()
+    {
+        return UriHelper.BaseUri.Contains("localhost");
+
+    }
+    public async Task LoadGame(string mode)
+    {
+        GameState.ShowStartMenu = false;
+        await SaveManager.LoadSaveGame(mode);
+        GameState.GoTo("/World/" + GameState.Location);
+    }
+    public async Task ShowWarning()
+    {
+        if (await SaveManager.HasSaveFile(selectedMode))
+        {
+            hasShownWarning = true;
+            GameState.UpdateState();
+        }
+    }
+    public void StartGame()
+    {
+        SetGameMode();
+        if (GameState.CurrentGameMode == GameState.GameType.Ultimate)
+        {
+            Player.Instance.Inventory.AddItem(ItemManager.Instance.GetItemByName("Stone Axe"));
+        }
+        GameState.ShowStartMenu = false;
+        AreaManager.Instance.GetAreaByName("Quepland Fields").Unlock();
+        GameState.GoTo("World/QueplandFields");
+    }
+    public void SetGameMode()
+    {
+        if (selectedMode == "Normal")
+        {
+            GameState.CurrentGameMode = GameState.GameType.Normal;
+        }
+        else if (selectedMode == "Hardcore")
+        {
+            GameState.CurrentGameMode = GameState.GameType.Hardcore;
+        }
+        else if (selectedMode == "Ultimate")
+        {
+            GameState.CurrentGameMode = GameState.GameType.Ultimate;
+        }
+    }
+    public void TestAlch()
+    {
+        GameState.ShowStartMenu = false;
+        GameState.Location = "MountQuepleAlchemicalHall";
+        UriHelper.NavigateTo("/World/AlchemicalHall/WindHall/");
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        hasSave = await SaveManager.HasSaveFile("Normal");
+        hasHardcore = await SaveManager.HasSaveFile("Hardcore");
+        hasUltimate = await SaveManager.HasSaveFile("Ultimate");
+
+        GameState.StateChanged += OnGameStateChanged;
+
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

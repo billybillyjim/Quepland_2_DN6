@@ -1,0 +1,195 @@
+[
+  {
+    "name": "Koncave Falls",
+    "id": 110,
+    "image": "Waterfall",
+    "description": "The waterfall is surrounded on all sides by a giant root system. Strange, humanlike creatures dart into the darkness as you approach. There are a number of sparkling rocks jutting out from the roots that cling to the roof of the cavern.",
+    "areaURL": "KoncaveFalls",
+    "actions": [
+      "Fish Something:Icefish,Salmon,Shad,Crab,Giant Clam",
+      "Chop Roots:Great Tree Logs"
+    ],
+    "unlockableAreas": [
+      {
+        "areaURL": "KoncaveFallsMine",
+        "buttonText": "Climb the vines to reach the rocks",
+        "requirements": [
+          {
+            "skill": "Deftness",
+            "skillLevel": 73
+          }
+        ]
+      },
+      {
+        "areaURL": "KoncaveCityGate",
+        "buttonText": "Head to the gate"
+      }
+
+    ],
+    "monsters": [
+      "Root Dweller",
+      "Stealthy Root Dweller"
+    ]
+  },
+  {
+    "name": "Koncave Falls Mine",
+    "id": 111,
+    "image": "Mine",
+    "description": "The mine hangs above the giant root system. Even more strange creatures appear to be hiding in the shadows. You can just barely reach the sparkling rocks jutting out from the roots that cling to the roof of the cavern.",
+    "areaURL": "KoncaveFallsMine",
+    "actions": [
+      "Mine Ores:Platinum Ore,Strongtium Ore,Sahotite Ore"
+    ],
+    "monsters": [
+      "Strong Root Dweller",
+      "Ravenous Root Dweller",
+      "Root Dweller",
+      "Stealthy Root Dweller"
+    ]
+  },
+  {
+    "name": "Koncave City Gate",
+    "id": 112,
+    "image": "Gate",
+    "description": "Two guards stand watch at the front of a massive gate. You'll have to pass through to continue. Off to the side you see a path leads around the castle wall.",
+    "areaURL": "KoncaveCityGate",
+    "unlockableAreas": [
+      {
+        "areaURL": "KoncaveCitySquare",
+        "buttonText": "Enter the city",
+        "requirements": [
+          {
+            "item": "Koncave City Passport",
+            "itemAmount": 1
+          }
+        ]
+      },
+      {
+        "areaURL": "KoncaveFalls",
+        "buttonText": "Follow the path around"
+      }
+
+    ],
+    "npcs": [
+      "Gate Guards"
+    ]
+  },
+  {
+    "name": "Koncave City Square",
+    "id": 113,
+    "image": "Fountain",
+    "description": "A large fountain fuelled by a waterfall coming out of the roof of the cavern stands in the middle of the square. Shops surround the perimeter, and a castle resides on the far side.",
+    "areaURL": "KoncaveCitySquare",
+    "dojoURL": "TsuyoDojo",
+    "buildings": [
+      {
+        "name": "Jason's Jewelry",
+        "buttonText": "Jason's Jewelry",
+        "url": "JasonsJewelry",
+        "description": "A rather shady individual sits at a stool in the corner of the shop, glaring at everyone who comes in. There isn't much here aside from necklaces. Everything here is very expensive.",
+        "shops": [
+          {
+            "name": "Jason's Jewelry",
+            "limitBoughtItemsToSoldItems": true,
+            "itemNames": [
+              "Lapidary Toolkit",
+              "Rock Tumbler",
+              "Silver Necklace",
+              "Gold Necklace",
+              "Platinum Necklace",
+              "Cut Amberite",
+              "Cut Lizardite",
+              "Cut Purpurite"
+            ],
+            "costMultiplier": 10
+
+          }
+        ]
+      },
+      {
+        "name": "Alchemiscellanea",
+        "buttonText": "Alchemiscellanea",
+        "url": "Alchemiscellanea",
+        "description": "Here and there roots penetrate the roof of this incredibly old building. The walls are decorated with a strange kind of artwork you've never seen before. There is no light source in the room, but somehow you can still see everything that is for sale.",
+        "shops": [
+          {
+            "name": "Alchemiscellanea",
+            "limitBoughtItemsToSoldItems": true,
+            "itemNames": [
+              "Carquen",
+              "Quencium",
+              "Oxyquen",
+              "Nitroquen",
+              "Siliquen",
+              "Quephorus",
+              "Quelfur",
+              "Bariquem",
+              "Uraniquep"
+            ],
+            "costMultiplier": 5
+
+          }
+        ]
+      }
+    ],
+    "npcs": [
+      "Pumpy the Gnome"
+    ],
+    "unlockableAreas": [
+      {
+        "areaURL": "CastleNid",
+        "buttonText": "Go to the castle"
+      },
+      {
+        "areaURL": "KoncaveCityBackstreets",
+        "buttonText": "Go down the alleyway"
+      }
+
+
+    ]
+  },
+  {
+    "name": "Koncave City Backstreets",
+    "id": 114,
+    "image": "BrokenWall",
+    "description": "The back alleys of Koncave City are damp and dirty. The great sources of light that illuminate the city square are obscured by crumbling walls and ancient passageways. Here and there is appears there are shops that are still operating, despite the conditions.",
+    "areaURL": "KoncaveCityBackstreets",
+    "buildings": [
+      {
+        "name": "Koncave Extractors",
+        "buttonText": "Shady Shack",
+        "url": "KoncaveExtractors",
+        "description": "You enter a dingy room. A single candle lights the space, which is filled with a terrible stench that you can't find the source of. A man with a strange mask is sitting behind a counter and waves in a friendly manner to you as you walk in.",
+        "npcs": [
+          "Hokorb"
+        ],
+        "shops": [
+          {
+            "name": "Koncave Extractors",
+            "itemNames": [
+              "Rabbit",
+              "Deer",
+              "Buck",
+              "Wild Boar",
+              "Black Bear",
+              "Moose",
+              "Grizzly Bear",
+              "Pigeon",
+              "Turkey",
+              "Chicken",
+              "Wild Boar",
+              "Pheasant",
+              "Bison",
+              "Big Moose",
+              "Polar Bear",
+              "Giant Polar Bear",
+              "Woolly Mammoth"
+            ]
+
+          }
+        ]
+      }
+    ]
+  }
+
+]

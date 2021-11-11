@@ -1,0 +1,123 @@
+﻿@page "/maptest"
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+@inject GameState GameState
+@inject IJSRuntime JSRuntime
+
+<div @ondragend="EndMove" @ondrag="Move" @ondragstart="StartMove" style="position:absolute;left:@xPosString;top:@yPosString;z-index:1;">
+    <div style="width:@(mapWidth)px;height:@(mapHeight)px;background-color:black;cursor:grab">
+        @foreach (string point in points)
+        {
+            <div style="background:white;border-radius:15px;height:15px;width:15px;position:relative;@(point)"></div>
+        }
+
+    </div>
+</div>
+
+@code {
+    public static Random random = new Random();
+    double mapHeight = 2000;
+    double mapWidth = 2000;
+    double endDragX;
+    double endDragY;
+
+    double startDragX;
+    double startDragY;
+    double x = 0;
+    public double startX = -1000;
+    public double startY = -1000;
+
+    public List<string> points = new List<string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        @for (int i = 0; i < 50; i++)
+        {
+            int a = random.Next(0, (int)mapHeight);
+            int b = random.Next(0, (int)mapWidth);
+            points.Add("top:" + a + "px;left:" + b + "px;");
+        }
+
+    Console.WriteLine(mapHeight - GameState.GameWindowHeight);
+        Console.WriteLine(mapWidth - GameState.GameWindowWidth);
+    }
+
+
+    public double xPos
+    {
+        get
+        {
+            return x;
+        }
+        set
+        {
+            x = Math.Clamp(value, 0, mapWidth - Math.Min(mapWidth, GameState.GameWindowWidth));
+        }
+    }
+    string xPosString
+    {
+        get
+        {
+            return (xPos + startX) + "px";
+        }
+    }
+    double y = 0;
+    public double yPos
+    {
+        get
+        {
+            return y;
+        }
+        set
+        {
+
+            y = Math.Clamp(value, 0, mapHeight - Math.Min(mapHeight, GameState.GameWindowHeight));
+        }
+    }
+
+    string yPosString
+    {
+        get
+        {
+            return (yPos + startY) + "px";
+        }
+    }
+    string position
+    {
+        get
+        {
+            return "Pos:" + xPosString + "," + yPosString;
+
+        }
+    }
+
+    public void StartMove(DragEventArgs e)
+    {
+
+            startDragX = e.ClientX;
+            startDragY = e.ClientY;
+
+        
+
+    }
+    public void Move(DragEventArgs e)
+    {
+        Console.WriteLine( e.Type = ":" + xPos + "," + yPos);
+        if(e.ClientX == 0 && e.ClientY == 0){
+            return;
+        }
+            xPos = endDragX + e.ClientX - startDragX;
+            yPos = endDragY + e.ClientY - startDragY;
+        
+        
+    }
+    public void EndMove(DragEventArgs e)
+    {
+
+            Move(e);
+
+            endDragX = xPos;
+            endDragY = yPos;
+
+    }
+}

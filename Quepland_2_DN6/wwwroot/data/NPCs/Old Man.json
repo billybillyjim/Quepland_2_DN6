@@ -1,0 +1,11 @@
+{
+  "$schema": "npc-schema.json#",
+  "name": "Old Man",
+  "id": 44,
+  "dialogs": [
+    {
+      "buttonText": "Hello",
+      "responseText": "Hello there. How are you? I'm just enjoying retired life on our little farm together. Headed to Tsu City?"
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+@if (Item != null)
+{
+
+    <div class="unselectable" style="@(GetBackground())margin:2px;height:50px;width:50px;position:relative;box-sizing: border-box;border-radius:0.25rem;" draggable="false">
+        @if (ShowAmount)
+        {
+
+            <div style="position:absolute;margin-left:2px;margin-top:-2px;color:white;font-size: 15px;font-weight: bold;text-shadow: 1px 1px 4px black;">@GetAmount()</div>
+            
+        }
+        @if (HideTooltip == false)
+        {
+            <img style="height: 46px;width: 46px;@GetMargin()" src="/data/Images/@(Item.Icon).png" draggable="false"
+                 @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowItemTooltip(e, GetTooltipTitle(), Item.Description)))"
+                 @onmouseout="@(new Action(() => GameState.HideTooltip()))" />
+        }
+        else
+        {
+            <img style="height: 46px;width: 46px;@GetMargin()" src="/data/Images/@(Item.Icon).png" draggable="false" />
+        }
+    </div>
+}
+else
+{
+    <div class="unselectable" style="border:solid black 1px;margin:2px;height:50px;width:50px;background-color:gray;border-radius:0.25rem"></div>
+}
+@code {
+    [Parameter]
+    public GameItem Item { get; set; }
+    [Parameter]
+    public bool ShowAmount { get; set; }
+    [Parameter]
+    public Inventory Inventory { get; set; }
+    [Parameter]
+    public bool IsSelected { get; set; }
+    [Parameter]
+    public bool shouldRender { get; set; }
+    [Parameter]
+    public bool HideTooltip { get; set; }
+
+    protected override bool ShouldRender() => shouldRender;
+
+    protected override void OnAfterRender(bool first)
+    {
+        if (Item != null)
+        {
+            Item.Rerender = false;
+        }
+
+        shouldRender = false;
+
+    }
+
+    private string GetAmount()
+    {
+        if (ShowAmount)
+        {
+            if (Inventory == null)
+            {
+                return "" + Player.Instance.Inventory.GetNumberOfItem(Item).CustomFormat();
+            }
+            return "" + Inventory.GetNumberOfItem(Item).CustomFormat();
+        }
+        return "";
+    }
+    private string GetBackground()
+    {
+        System.Text.StringBuilder styleBuilder = new System.Text.StringBuilder();
+        System.Text.StringBuilder borderBuilder = new System.Text.StringBuilder();
+        //string style = "";
+        //string border = "border:solid black 1px;";
+        if (IsSelected)
+        {
+            borderBuilder.Append("border:solid white 2px;");
+            styleBuilder.Append("background-color:lightgreen;");
+        }
+        else
+        {
+
+            if (Item != null)
+            {
+                styleBuilder.Append("background: linear-gradient(155deg, " + Item.SecondaryColor + " 60%, " + Item.PrimaryColor + " 50%);");
+
+            }
+            else
+            {
+                styleBuilder.Append("background-color:darkgray;");
+            }
+
+        }
+        if (Item != null && Item.IsEquipped)
+        {
+            borderBuilder.Append("border:solid 2px lightgreen;");
+        }
+        styleBuilder.Append(borderBuilder.ToString());
+        return styleBuilder.ToString();
+    }
+    private string GetMargin()
+    {
+        if (IsSelected)
+        {
+            return "margin:1px;";
+        }
+        return "margin:2px;";
+    }
+    public string GetTooltipTitle()
+    {
+        System.Text.StringBuilder builder = new System.Text.StringBuilder();
+        string tip = "";
+
+        if (Bank.Instance.IsBanking && Inventory == Bank.Instance.Inventory)
+        {
+            if (Bank.Instance.Amount == int.MaxValue)
+            {
+                builder.Append("Withdraw All ");
+                builder.Append(Item.Name);
+            }
+            else
+            {
+                builder.Append("Withdraw ");
+                builder.Append(Bank.Instance.Amount);
+                builder.Append(" ");
+                builder.Append(Item.Name);
+            }
+        }
+        else
+        {
+            if (Item.IsStackable)
+            {
+                if(Inventory == null)
+                {
+                    builder.Append(Player.Instance.Inventory.GetNumberOfItem(Item));
+                    builder.Append(" ");
+                    builder.Append(Item.Name);
+
+                }
+                else
+                {
+                    builder.Append(Inventory.GetNumberOfItem(Item));
+                    builder.Append(" ");
+                    builder.Append(Item.Name);
+                }
+            }
+            else
+            {
+                builder.Append(Item.Name);
+            }
+        }
+        return builder.ToString();
+    }
+
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        if(Item != null && Item.Rerender == true && TooltipManager.CurrentTip != null && Item.Name == TooltipManager.CurrentTip.Title)
+        {
+            GameState.HideTooltip();
+        }
+
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

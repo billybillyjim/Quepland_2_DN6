@@ -1,0 +1,18 @@
+{
+  "$schema": "npc-schema.json#",
+  "name": "Grumpy the Gnome",
+  "id": 3,
+  "dialogs": [
+    {
+      "buttonText": "Hello",
+      "responseText": "Great. Another adventurer. Don't waste your time!",
+      "newDepthOnTalk": 1
+    },
+    {
+      "buttonText": "Would you like to work for me?",
+      "responseText": "No you don't! Nope! Just turn around and walk away. I've made the mistake of indentured servitude once in my life and I don't plan on making it again! Goodbye!",
+      "depth": 1,
+      "newDepthOnTalk": 2
+    }
+  ]
+}

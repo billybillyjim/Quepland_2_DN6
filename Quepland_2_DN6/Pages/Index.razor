@@ -1,0 +1,75 @@
+﻿@page "/"
+@inject GameState GameState
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+@inject IJSRuntime JSRuntime
+@implements IDisposable
+
+@if (GameState.ShowStartMenu)
+{
+    @if (GameState.InitCompleted == false)
+    {
+        <div>Loading Data... <img src="/data/Images/Loading.gif" style="height:30px;width:30px;background:white;border-radius:0.25rem;"/></div>
+        
+        
+    }
+    <StartMenuComponent></StartMenuComponent>  
+}
+else
+{
+
+}
+
+@code{
+    private int loadProgress = 0;
+
+    protected async override Task OnInitializedAsync()
+    {
+        SaveManager.jSRuntime = JSRuntime;
+        if (GameState.InitCompleted == false)
+        {
+            await GameState.LoadData(Http, UriHelper, JSRuntime);
+            System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+            System.Globalization.CultureInfo.CurrentUICulture = System.Globalization.CultureInfo.InvariantCulture;
+        }
+
+        Player.Instance.CurrentHP = 50;
+        Bank.Instance.Inventory.AddItem("Stone Axe");
+
+        //Player.Instance.Inventory.AddMultipleOfItem("Small Red Library Key", 5);
+        //Player.Instance.Inventory.AddMultipleOfItem("Small Orange Library Key", 5);
+        //Player.Instance.Inventory.AddMultipleOfItem("Small Green Library Key", 5);
+        //Bank.Instance.Inventory.IsLoadingSave = true;
+        //foreach(GameItem i in ItemManager.Instance.Items)
+        //{
+        //    Bank.Instance.Inventory.AddItem(i);
+        //}
+        //Bank.Instance.Inventory.IsLoadingSave = false;
+        GameState.StateChanged += OnGameStateChanged;
+    }
+
+    private void Rates()
+    {
+        UriHelper.NavigateTo("/Rates/");
+    }
+    private void Quests()
+    {
+        UriHelper.NavigateTo("/QuestManagement/");
+    }
+    private void Test()
+    {
+
+        GameState.Location = "Smithy";
+        UriHelper.NavigateTo("World/Smithy/");
+    }
+
+    public void Dispose()
+    {
+
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) {
+        loadProgress++;
+        StateHasChanged();
+    }
+}

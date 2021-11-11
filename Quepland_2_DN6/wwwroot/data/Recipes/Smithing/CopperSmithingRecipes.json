@@ -1,0 +1,122 @@
+[
+  {
+    "outputItemName": "Molten Copper Bar",
+    "ingredients": [
+      {
+        "itemName": "Copper Ore"
+      }
+    ],
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 1
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Copper Bar",
+    "ingredients": [
+      {
+        "itemName": "Copper Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 1
+      }
+    ]
+  },
+  {
+    "outputItemName": "Copper Knife",
+    "ingredients": [
+      {
+        "itemName": "Molten Copper Bar"
+      }
+    ],
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 1
+      }
+    ]
+  },
+  {
+    "outputItemName": "Copper Sword",
+    "ingredients": [
+      {
+        "itemName": "Molten Copper Bar"
+      }
+    ],
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 1
+      }
+    ]
+  },
+  {
+    "outputItemName": "Copper Axe",
+    "ingredients": [
+      {
+        "itemName": "Molten Copper Bar"
+      }
+    ],
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 1
+      }
+    ]
+  },
+  {
+    "outputItemName": "Copper Hammer",
+    "ingredients": [
+      {
+        "itemName": "Molten Copper Bar"
+      }
+    ],
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 1
+      }
+    ]
+  },
+  {
+    "outputItemName": "Copper Bar",
+    "ingredients": [
+      {
+        "itemName": "Molten Copper Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 1
+      }
+    ]
+  },
+  {
+    "outputItemName": "Copper Arrowtips",
+    "ingredients": [
+      {
+        "itemName": "Molten Copper Bar"
+      }
+    ],
+    "outputAmount": 10,
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 1
+      }
+    ]
+  }
+
+]

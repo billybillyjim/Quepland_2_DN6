@@ -1,0 +1,103 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+<div style="display:flex;">
+    <div>
+        @if (Info.Item != null)
+        {
+            <img style="background: linear-gradient(155deg, @Info.Item.SecondaryColor 60%, @Info.Item.PrimaryColor 50%); margin: 2px; height: 70px; width: 70px; box-sizing: border-box; border-radius: 0.5rem;" src="data/Images/@(Info.Image).png" />
+        }
+        else
+        {
+            <img style="
+                height: 70px;
+                width: 70px;
+                box-sizing: border-box;
+                border-radius: 0.5rem;"
+                 src="data/Images/@(Info.Image).png" />
+        }
+
+    </div>
+    <div style="padding-left:10px;">
+        @Info.Description
+    </div>
+</div>
+
+
+<div>
+    @foreach (Requirement r in Info.Requirements)
+    {
+        <p>@r.AllRequirementsString()</p>
+    }
+    @if (Info.Item != null)
+    {
+        <p>Experience:@Info.Item.ExperienceGained</p>
+    }
+</div>
+<div>
+    Found In:
+    @foreach (Area area in Info.Areas)
+    {
+        <p style="cursor: pointer;" @onclick="@(() => GoTo(area))">@area.Name</p>
+    }
+    @foreach (Building building in Info.Buildings)
+    {
+        <p>@building.Name</p>
+    }
+    @foreach (Shop shop in Info.Shops)
+    {
+        <p>@shop.Name</p>
+    }
+</div>
+<div>
+    Drop Tables:
+
+    <table style=" border: 1px solid #172136;background-color:#101126">
+
+        @foreach (WikiMonsterDrop drop in Info.MonsterDrops)
+        {
+            <tr style="border: 1px solid #172136;padding: 10px;">
+                <td style="padding: 10px;cursor:pointer" @onclick="@(() => GoTo(drop.monster))">@drop.monster.Name</td>
+                <td style="padding: 10px;">@drop.drop.Amount</td>
+            </tr>
+        }
+    </table>
+
+</div>
+
+
+@code {
+
+    [Parameter]
+    public WikiInfo Info { get; set; }
+    [Parameter]
+    public Quepland_2_DN6.Pages.WikiComponent MainPage { get; set; }
+
+    public void GoTo(Area area)
+    {
+        MainPage.SetTopic(area);
+    }
+    public void GoTo(GameItem item)
+    {
+        MainPage.SetTopic(item);
+
+    }
+
+    public void GoTo(Monster monster)
+    {
+        MainPage.SetTopic(monster);
+
+    }
+
+
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

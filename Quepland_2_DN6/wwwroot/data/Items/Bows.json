@@ -1,0 +1,352 @@
+[
+  {
+    "name": "White Pine Bow(Unstrung)",
+    "description": "A flimsy bow with no string.",
+    "value": 10,
+    "secondaryColor": "#FFE5C4",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "White Pine Bow",
+    "description": "A flimsy bow.",
+    "value": 20,
+    "secondaryColor": "#FFE5C4",
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "weaponInfo": {
+      "attackSpeed": 12,
+      "damage": 8,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Poplar Bow(Unstrung)",
+    "description": "A less flimsy bow with no string.",
+    "value": 20,
+    "secondaryColor": "#FFDA8A",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Poplar Bow",
+    "description": "A less flimsy bow.",
+    "value": 40,
+    "secondaryColor": "#FFDA8A",
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "weaponInfo": {
+      "attackSpeed": 12,
+      "damage": 12,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 5
+        }
+      ]
+    }
+  },
+  {
+    "name": "Oak Bow(Unstrung)",
+    "description": "A bow for shooting arrows with, if it had a string.",
+    "value": 35,
+    "secondaryColor": "#FFD5B0",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Oak Bow",
+    "description": "A bow for shooting arrows with.",
+    "value": 70,
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "secondaryColor": "#FFD5B0",
+    "weaponInfo": {
+      "attackSpeed": 12,
+      "damage": 15,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 15
+        }
+      ]
+    }
+  },
+  {
+    "name": "Sugar Maple Bow(Unstrung)",
+    "description": "A sweet bow with no string.",
+    "value": 55,
+    "secondaryColor": "#FFBD96",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Sugar Maple Bow",
+    "description": "A sweet bow to shoot things with.",
+    "value": 90,
+    "secondaryColor": "#FFBD96",
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "weaponInfo": {
+      "attackSpeed": 14,
+      "damage": 30,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 25
+        }
+      ]
+    }
+  },
+  {
+    "name": "Birch Bow(Unstrung)",
+    "description": "A lightcolored bow with no string.",
+    "value": 85,
+    "secondaryColor": "#FFF6E0",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Birch Bow",
+    "description": "A light colored bow.",
+    "value": 110,
+    "secondaryColor": "#FFF6E0",
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "weaponInfo": {
+      "attackSpeed": 10,
+      "damage": 17,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 25
+        }
+      ]
+    }
+  },
+  {
+    "name": "Mesquite Bow(Unstrung)",
+    "description": "This would make a sturdy bow if it had a string.",
+    "value": 105,
+    "secondaryColor": "#BD8F57",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Mesquite Bow",
+    "description": "A sturdy bow.",
+    "value": 150,
+    "secondaryColor": "#BD8F57",
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "weaponInfo": {
+      "attackSpeed": 10,
+      "damage": 50,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 40
+        }
+      ]
+    }
+  },
+  {
+    "name": "Mahogany Bow(Unstrung)",
+    "description": "An elegant but unfinished weapon.",
+    "value": 280,
+    "secondaryColor": "#AB5F29",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Mahogany Bow",
+    "description": "An extravagant bow.",
+    "value": 350,
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "secondaryColor": "#AB5F29",
+    "weaponInfo": {
+      "attackSpeed": 12,
+      "damage": 50,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 50
+        }
+      ]
+    }
+  },
+  {
+    "name": "Ironwood Bow(Unstrung)",
+    "description": "A strong bow. If it had a string you could shoot with it.",
+    "value": 205,
+    "secondaryColor": "#9C491F",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Ironwood Bow",
+    "description": "A strong bow made from a very strong wood.",
+    "value": 250,
+    "secondaryColor": "#9C491F",
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "weaponInfo": {
+      "attackSpeed": 12,
+      "damage": 70,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 65
+        }
+      ]
+    }
+  },
+  {
+    "name": "Snakewood Bow(Unstrung)",
+    "description": "A twisted bow without a string.",
+    "value": 280,
+    "secondaryColor": "#824121",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Root Bow",
+    "description": "A bow dropped by a root dweller. It's extremely old, but made with such strong wood it still works just fine.",
+    "value": 1320,
+    "secondaryColor": "#824121",
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "weaponInfo": {
+      "attackSpeed": 10,
+      "damage": 75,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 70
+        }
+      ]
+    }
+  },
+  {
+    "name": "Snakewood Bow",
+    "description": "A twisted bow, it's surprisingly effective.",
+    "value": 320,
+    "secondaryColor": "#824121",
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "weaponInfo": {
+      "attackSpeed": 12,
+      "damage": 90,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 72
+        }
+      ]
+    }
+  },
+  {
+    "name": "Lignum Vitae Bow(Unstrung)",
+    "description": "Essentially a heavy stick. You could add a string to make it into a weapon.",
+    "value": 390,
+    "secondaryColor": "#612901",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Lignum Vitae Bow",
+    "description": "A very heavy bow.",
+    "value": 450,
+    "secondaryColor": "#612901",
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "weaponInfo": {
+      "attackSpeed": 12,
+      "damage": 130,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 85
+        }
+      ]
+    }
+  },
+  {
+    "name": "Buloke Bow(Unstrung)",
+    "description": "A very strong piece of wood carved into a bow. It needs a string to complete it.",
+    "value": 580,
+    "secondaryColor": "#875B24",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Buloke Bow",
+    "description": "A bow made of the strongest wood known to man.",
+    "value": 650,
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "secondaryColor": "#875B24",
+    "weaponInfo": {
+      "attackSpeed": 12,
+      "damage": 170,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 92
+        }
+      ]
+    }
+  },
+  {
+    "name": "Great Tree Bow(Unstrung)",
+    "description": "A bow fashioned from wood from the Great Tree. All it needs now is a string.",
+    "value": 1350,
+    "secondaryColor": "#9F6F4F",
+    "icon": "UnstrungBow"
+  },
+  {
+    "name": "Great Tree Bow",
+    "description": "A bow fashioned from the wood of the Great Tree. It feels magical.",
+    "value": 1650,
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Bow",
+    "secondaryColor": "#9F6F4F",
+    "weaponInfo": {
+      "attackSpeed": 10,
+      "damage": 250,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 99
+        }
+      ]
+    }
+  },
+  {
+    "name": "Spine Shooter",
+    "description": "A section of a cactus that can be used to shoot its spines.",
+    "value": 5000,
+    "secondaryColor": "#45bf2a",
+    "enabledActions": "Archery",
+    "equipSlot": "R Hand",
+    "icon": "Shooter",
+    "weaponInfo": {
+      "attackSpeed": 4,
+      "damage": 30,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 75
+        }
+      ]
+    }
+  }
+]

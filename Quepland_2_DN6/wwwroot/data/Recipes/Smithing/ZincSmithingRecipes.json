@@ -1,0 +1,122 @@
+[
+  {
+    "outputItemName": "Molten Zinc Bar",
+    "ingredients": [
+      {
+        "itemName": "Calamine"
+      }
+    ],
+    "experienceGained": "Smithing:50",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 15
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Zinc Bar",
+    "ingredients": [
+      {
+        "itemName": "Zinc Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 15
+      }
+    ]
+  },
+  {
+    "outputItemName": "Zinc Knife",
+    "ingredients": [
+      {
+        "itemName": "Molten Zinc Bar"
+      }
+    ],
+    "experienceGained": "Smithing:50",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 15
+      }
+    ]
+  },
+  {
+    "outputItemName": "Zinc Sword",
+    "ingredients": [
+      {
+        "itemName": "Molten Zinc Bar"
+      }
+    ],
+    "experienceGained": "Smithing:50",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 15
+      }
+    ]
+  },
+  {
+    "outputItemName": "Zinc Axe",
+    "ingredients": [
+      {
+        "itemName": "Molten Zinc Bar"
+      }
+    ],
+    "experienceGained": "Smithing:50",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 15
+      }
+    ]
+  },
+  {
+    "outputItemName": "Zinc Hammer",
+    "ingredients": [
+      {
+        "itemName": "Molten Zinc Bar"
+      }
+    ],
+    "experienceGained": "Smithing:50",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 15
+      }
+    ]
+  },
+  {
+    "outputItemName": "Zinc Bar",
+    "ingredients": [
+      {
+        "itemName": "Molten Zinc Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 15
+      }
+    ]
+  },
+  {
+    "outputItemName": "Zinc Arrowtips",
+    "ingredients": [
+      {
+        "itemName": "Molten Zinc Bar"
+      }
+    ],
+    "outputAmount": 10,
+    "experienceGained": "Smithing:50",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 15
+      }
+    ]
+  }
+
+]

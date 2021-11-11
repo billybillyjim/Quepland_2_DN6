@@ -1,0 +1,90 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+<div style="display:flex;">
+    <div style="padding-left:10px;">
+        @Info.Description
+    </div>
+</div>
+
+
+<div>
+    @if (Info.Area.Actions.Count > 0)
+    {
+        <div>
+            Actions:
+            @foreach (string action in Info.Area.Actions)
+            {
+                <p>@action.Split(':')[0] @action.Split(':')[1]</p>
+            }
+        </div>
+    }
+
+    @if (Info.Area.NPCs.Count > 0)
+    {
+        <div>
+            NPCs:
+            @foreach (string s in Info.Area.NPCs)
+            {
+                <p>@s</p>
+            }
+        </div>
+    }
+
+    @if (Info.Area.Buildings.Count > 0)
+    {
+        <div>
+            Buildings:
+            @foreach (Building b in Info.Area.Buildings)
+            {
+                <p>@b.Name</p>
+            }
+        </div>
+    }
+
+    @if (Info.Area.Monsters.Count > 0)
+    {
+        <div>
+            Monsters:
+            @foreach (string b in Info.Area.Monsters)
+            {
+                <p style="cursor:pointer" @onclick="@(() => GoTo(BattleManager.Instance.GetMonsterByName(b)))">@b</p>
+            }
+        </div>
+    }
+
+
+
+
+</div>
+
+
+
+@code {
+
+    [Parameter]
+    public WikiInfo Info { get; set; }
+    [Parameter]
+    public Quepland_2_DN6.Pages.WikiComponent MainPage { get; set; }
+
+    public void GoTo(GameItem item)
+    {
+        MainPage.SetTopic(item);
+
+    }
+    public void GoTo(Monster monster)
+    {
+        MainPage.SetTopic(monster);
+
+    }
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

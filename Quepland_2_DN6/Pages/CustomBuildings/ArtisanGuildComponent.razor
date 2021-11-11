@@ -1,0 +1,99 @@
+﻿@page "/World/EastTsuCity/ArtisanGuild"
+@inject GameState GameState
+@inject NavigationManager UriHelper
+
+
+@if (thisBuilding != null)
+{
+
+    <br />
+    @if (GameState.CurrentAFKAction != null)
+    {
+        <button class="btn btn-primary" style="opacity:0.5"
+                @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "You can't leave while training " + GameState.CurrentAFKAction.SkillTrained)))"
+                @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+            Exit
+        </button>
+
+    }
+    else
+    {
+        <button class="btn btn-primary" @onclick="@(() => Exit())">Exit</button>
+
+    }
+    <br />
+    <div>@thisBuilding.Name</div>
+    <div>@thisBuilding.Description</div>
+    @if (thisBuilding.AlchemicalHall != "None")
+    {
+        <AlchemicalHallComponent QueplarMultiplier="@thisBuilding.QueplarMultiplier" HallName="@thisBuilding.AlchemicalHall"></AlchemicalHallComponent>
+    }
+    @foreach (AFKAction afkAction in thisBuilding.AFKActions)
+    {
+        <Quepland_2_DN6.Components.AFKActionComponent AFKAction="@afkAction"></Quepland_2_DN6.Components.AFKActionComponent>
+
+    }
+    @foreach (string npc in thisBuilding.NPCs)
+    {
+        <Quepland_2_DN6.Components.NPCDialogComponent npc="@npc"></Quepland_2_DN6.Components.NPCDialogComponent>
+    }
+    <Quepland_2_DN6.Components.ArtisanShopComponent></Quepland_2_DN6.Components.ArtisanShopComponent>
+
+    @if (thisBuilding.IsGuild)
+    {
+        <Quepland_2_DN6.Components.GuildDepositBoxComponent></Quepland_2_DN6.Components.GuildDepositBoxComponent>
+    }
+    @if(Player.Instance.GetLevel("Artisan") < 10 && Player.Instance.ArtisanPoints < 50 && GameState.CurrentArtisanTask != null)
+    {
+        <button class="btn btn-primary" style="margin-top:10px;" @onclick="@(() => CancelTask())"
+                @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "As a beginner to the guild, you are allowed to cancel your artisan task if you feel it is too difficult. Once you are more skilled, this won't be an option anymore!")))"
+                @onmouseout="@(new Action(() => GameState.HideTooltip()))">Request Special Task Cancellation</button>
+    }
+}
+
+@code {
+    [Parameter]
+    public string areaURL { get; set; }
+    [Parameter]
+    public string buildingURL { get; set; }
+    public Building thisBuilding { get; set; }
+
+    private void Exit()
+    {
+        GameState.GoTo("/World/EastTsuCity/");
+        GameState.UpdateState();
+    }
+    private void Talk(Dialog d)
+    {
+        d.Talk();
+        GameState.UpdateState();
+    }
+    private void CancelTask()
+    {
+        if(Player.Instance.GetLevel("Artisan") < 10 &&
+            Player.Instance.ArtisanPoints < 50)
+        {
+            MessageManager.AddMessage("You successfully cancelled your artisan task. Speak to another artisan to get a new task.");
+            GameState.HideTooltip();
+            GameState.CancelTask();
+        }
+    }
+    protected override void OnParametersSet()
+    {
+        thisBuilding = AreaManager.Instance.GetAreaByURL("EastTsuCity").GetBuildingByURL("ArtisanGuild");
+        GameState.UpdateState();
+    }
+    protected override void OnInitialized()
+    {
+
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e)
+    {
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,824 @@
+[
+  {
+    "areaName": "Hoin River",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Small Caiman",
+          "weight": 50
+        },
+        {
+          "itemName": "Caiman",
+          "weight": 30
+        },
+        {
+          "itemName": "Large Caiman",
+          "weight": 10
+        },
+        {
+          "itemName": "Moose",
+          "weight": 1
+        },
+        {
+          "itemName": "Salmon",
+          "weight": 50
+        },
+        {
+          "itemName": "Giant Clam",
+          "weight": 10
+        },
+        {
+          "itemName": "Shad",
+          "weight": 50
+        },
+        {
+          "itemName": "Sunfish",
+          "weight": 50
+        },
+        {
+          "itemName": "Fisherman Gloves",
+          "weight": 1
+        },
+        {
+          "itemName": "Fisherman Hat",
+          "weight": 1
+        },
+        {
+          "itemName": "Fisherman Shirt",
+          "weight": 1
+        },
+        {
+          "itemName": "Fisherman Pants",
+          "weight": 1
+        },
+        {
+          "itemName": "Carp",
+          "weight": 50
+        }
+      ]
+    }
+  },
+  {
+    "areaName": "Sotu Nran Waterfall",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 7000
+        },
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 10000
+        },
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 25000
+        },
+        {
+          "itemName": "Strong Buloke Arrow",
+          "weight": 50,
+          "amount": 30
+        },
+        {
+          "itemName": "Strong Lignum Vitae Arrow",
+          "weight": 50,
+          "amount": 30
+        },
+        {
+          "itemName": "Cinnabar",
+          "weight": 20,
+          "amount": 10
+        },
+        {
+          "itemName": "Gold Ore",
+          "weight": 20,
+          "amount": 10
+        },
+        {
+          "itemName": "Cut Garnet",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Cut Amethyst",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Cut Emerald",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Cut Topaz",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Cut Aquamarine",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Cut Diamond",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Cut Ruby",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Cut Sapphire",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Queplinium Ore",
+          "weight": 5,
+          "amount": 1
+        },
+        {
+          "itemName": "Shrinking Cloth",
+          "weight": 5,
+          "amount": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaName": "Sawoka Vault Red",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 7000
+        },
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 10000
+        },
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 25000
+        },
+        {
+          "itemName": "Magic Iron Sword",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Iron Knuckles",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Iron Sword",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Iron Knife",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Iron Axe",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Iron Hammer",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Iron Pickaxe",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Lizardite",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Purpurite",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Garnet",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Topaz",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Aquamarine",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Diamond",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Ruby",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Sapphire",
+          "weight": 10,
+          "amount": 2
+        }
+      ]
+    }
+  },
+  {
+    "areaName": "Sawoka Vault Orange",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 7000
+        },
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 1000
+        },
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 25000
+        },
+        {
+          "itemName": "Big Rice Bag",
+          "weight": 30,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Lizardite",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Purpurite",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Garnet",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Topaz",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Aquamarine",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Diamond",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Ruby",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Sapphire",
+          "weight": 10,
+          "amount": 2
+        }
+      ]
+    }
+  },
+  {
+    "areaName": "Sawoka Vault Green",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 7000
+        },
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 3000
+        },
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 5000
+        },
+        {
+          "itemName": "Large Fishing Rod",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Ebisian Fishing Rod",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Lizardite",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Purpurite",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Garnet",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Topaz",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Aquamarine",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Diamond",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Ruby",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Sapphire",
+          "weight": 10,
+          "amount": 2
+        }
+      ]
+    }
+  },
+  {
+    "areaName": "Full Sahota Hunting",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Woolly Mammoth",
+          "weight": 2,
+          "amount": 1
+        },
+        {
+          "itemName": "Mammoth Meat",
+          "weight": 25,
+          "amount": 1
+        },
+        {
+          "itemName": "Mammoth Hide",
+          "weight": 25,
+          "amount": 1
+        },
+        {
+          "itemName": "Polar Bear",
+          "weight": 30,
+          "amount": 1
+        },
+        {
+          "itemName": "Polar Bear Hide",
+          "weight": 30,
+          "amount": 1
+        },
+        {
+          "itemName": "Bear Claws",
+          "weight": 5,
+          "amount": 1
+        },
+        {
+          "itemName": "Mammoth Tusk",
+          "weight": 5,
+          "amount": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaName": "Half Sahota Hunting",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Polar Bear",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Polar Bear Hide",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Bear Claws",
+          "weight": 1,
+          "amount": 1
+        },
+        {
+          "itemName": "Grizzly Bear",
+          "weight": 30,
+          "amount": 1
+        },
+        {
+          "itemName": "Grizzly Bear Hide",
+          "weight": 30,
+          "amount": 1
+        },
+        {
+          "itemName": "Moose",
+          "weight": 30,
+          "amount": 1
+        },
+        {
+          "itemName": "Moose Antlers",
+          "weight": 10,
+          "amount": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaName": "Gem Mine Entrance",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Amberite",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Lizardite",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Purpurite",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Opal",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Garnet",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Amethyst",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Emerald",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Topaz",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Aquamarine",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Diamond",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Ruby",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Sapphire",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Chrysoberyl",
+          "weight": 3,
+          "amount": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaName": "Gem Mine Middle",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Amberite",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Lizardite",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Purpurite",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Opal",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Garnet",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Amethyst",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Emerald",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Topaz",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Aquamarine",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Diamond",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Ruby",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Sapphire",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Chrysoberyl",
+          "weight": 3,
+          "amount": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaName": "Gem Mine Depths",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Amberite",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Lizardite",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Purpurite",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Opal",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Garnet",
+          "weight": 5,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Amethyst",
+          "weight": 5,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Emerald",
+          "weight": 7,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Topaz",
+          "weight": 7,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Aquamarine",
+          "weight": 7,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Diamond",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Ruby",
+          "weight": 5,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Sapphire",
+          "weight": 5,
+          "amount": 1
+        },
+        {
+          "itemName": "Unidentified Gem",
+          "itemParameter": "Rough Chrysoberyl",
+          "weight": 5,
+          "amount": 1
+        }
+      ]
+    }
+  },
+  {
+    "areaName": "Graingilt Castle",
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Bag of Assorted Gems",
+          "weight": 2,
+          "amount": 1
+        },
+        {
+          "itemName": "Gold Bar",
+          "weight": 15,
+          "amount": 1
+        },
+        {
+          "itemName": "Platinum Bar",
+          "weight": 15,
+          "amount": 1
+        },
+        {
+          "itemName": "Gold Bar",
+          "weight": 15,
+          "amount": 3
+        },
+        {
+          "itemName": "Platinum Bar",
+          "weight": 15,
+          "amount": 3
+        },
+        {
+          "itemName": "Iseroite Bar",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Ruby Cabochon",
+          "weight": 15,
+          "amount": 1
+        },
+        {
+          "itemName": "Diamond Cabochon",
+          "weight": 20,
+          "amount": 1
+        },
+        {
+          "itemName": "Emerald Cabochon",
+          "weight": 15,
+          "amount": 1
+        },
+        {
+          "itemName": "Sapphire Cabochon",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Glittering Plume",
+          "weight": 20,
+          "amount": 2
+        },
+        {
+          "itemName": "Silk Fabric",
+          "weight": 5,
+          "amount": 3
+        },
+        {
+          "itemName": "Ancient Pickaxe",
+          "weight": 1,
+          "amount": 1
+        }
+      ]
+    }
+  }
+]

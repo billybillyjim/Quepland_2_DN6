@@ -1,0 +1,142 @@
+[
+  {
+    "outputItemName": "Molten Brass Bar",
+    "ingredients": [
+      {
+        "itemName": "Copper Bar"
+      },
+      {
+        "itemName": "Zinc Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 25
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Brass Bar",
+    "ingredients": [
+      {
+        "itemName": "Copper Ore"
+      },
+      {
+        "itemName": "Calamine"
+      }
+    ],
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 25
+      }
+    ]
+  },
+  {
+    "outputItemName": "Molten Brass Bar",
+    "ingredients": [
+      {
+        "itemName": "Brass Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 25
+      }
+    ]
+  },
+  {
+    "outputItemName": "Brass Bar",
+    "ingredients": [
+      {
+        "itemName": "Molten Brass Bar"
+      }
+    ],
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 25
+      }
+    ]
+  },
+  {
+    "outputItemName": "Brass Knife",
+    "ingredients": [
+      {
+        "itemName": "Molten Brass Bar"
+      }
+    ],
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 25
+      }
+    ]
+  },
+  {
+    "outputItemName": "Brass Sword",
+    "ingredients": [
+      {
+        "itemName": "Molten Brass Bar"
+      }
+    ],
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 25
+      }
+    ]
+  },
+  {
+    "outputItemName": "Brass Axe",
+    "ingredients": [
+      {
+        "itemName": "Molten Brass Bar"
+      }
+    ],
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 25
+      }
+    ]
+  },
+  {
+    "outputItemName": "Brass Hammer",
+    "ingredients": [
+      {
+        "itemName": "Molten Brass Bar"
+      }
+    ],
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 25
+      }
+    ]
+  },
+  {
+    "outputItemName": "Brass Arrowtips",
+    "ingredients": [
+      {
+        "itemName": "Molten Brass Bar"
+      }
+    ],
+    "outputAmount": 10,
+    "experienceGained": "Smithing:25",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 25
+      }
+    ]
+  }
+
+]

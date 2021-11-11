@@ -1,0 +1,109 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+
+    <pre style="        
+        z-index: 1000;
+        white-space: pre-line;
+        max-width: 800px;
+        display: flex;
+        position: absolute !important; 
+        background-color:#282828;
+        color:whitesmoke;
+        padding-left:20px;
+        padding-right:20px;
+        padding-top:10px;
+        padding-bottom:10px;
+        line-height:15px;
+        border-radius:0.5rem;
+        @GetStyle()">       
+             @if(Tip.Title != "")
+            {
+                @Tip.Title
+                <br />
+
+            }
+            @((MarkupString)Tip.Text)
+        </pre>
+
+
+
+
+
+@code {
+
+    [Parameter]
+    public Tooltip Tip { get; set; }
+    [Parameter]
+    public double xPos { get; set; }
+    [Parameter]
+    public double yPos { get; set; }
+
+
+    private int distanceFromMouse = 23;
+
+
+    private bool faceRight;
+
+    protected override void OnParametersSet()
+    {
+        if (xPos >= GameState.GameWindowWidth - 300)
+        {
+            faceRight = true;
+        }
+        else
+        {
+            faceRight = false;
+        }
+    }
+
+    private string GetStyle()
+    {
+        System.Text.StringBuilder builder = new System.Text.StringBuilder();
+        builder.Append("text-align:");
+        builder.Append(Tip.Alignment);
+        builder.Append(";");
+        //string style = "text-align:" + Tip.Alignment + ";";
+        if (Tip.ShowAbove)
+        {
+            builder.Append("top:");
+            builder.Append((yPos - distanceFromMouse - (50)));
+            builder.Append("px;");
+            //style += "top:" + ((yPos - distanceFromMouse - (50))) + "px;";
+        }
+        else
+        {
+            builder.Append("top:");
+            builder.Append((yPos + distanceFromMouse));
+            builder.Append("px;");
+            //style += "top:" + (yPos + distanceFromMouse) + "px;";
+        }
+        if (faceRight)
+        {
+            builder.Append("right:");
+            builder.Append(GameState.GameWindowWidth - xPos);
+            builder.Append("px;");
+            //return style + "right:" + (GameState.GameWindowWidth - xPos) + "px;";
+        }
+        else
+        {
+            builder.Append("left:");
+            builder.Append(xPos);
+            builder.Append("px;");
+            //return style + "left:" + xPos + "px;";
+        }
+        return builder.ToString();
+    }
+
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+
+    }
+
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

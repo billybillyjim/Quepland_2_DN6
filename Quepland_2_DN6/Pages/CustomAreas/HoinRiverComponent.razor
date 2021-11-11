@@ -1,0 +1,74 @@
+﻿@page "/World/HoinRiver"
+@inject GameState GameState
+@inject NavigationManager UriHelper
+@implements IDisposable
+
+
+@if (thisArea != null)
+{
+    <h1>@thisArea.Name</h1>
+    <p>@thisArea.Description</p>
+
+    @foreach (string a in thisArea.Actions ?? Enumerable.Empty<string>())
+    {
+
+        <Quepland_2_DN6.Components.GatherButtonComponent ActionText="@a"></Quepland_2_DN6.Components.GatherButtonComponent>
+        <br />
+
+
+    }
+    <Quepland_2_DN6.Components.BaitFishingComponent areaName="@thisArea.Name"></Quepland_2_DN6.Components.BaitFishingComponent>
+    <br />
+
+    @foreach (AreaUnlock a in thisArea.UnlockableAreas)
+    {
+        if (AreaManager.Instance.GetAreaByURL(a.AreaURL).IsUnlocked == false || a.ConnectsLands)
+        {
+
+            <Quepland_2_DN6.Components.AreaUnlockComponent areaToUnlock="@a"></Quepland_2_DN6.Components.AreaUnlockComponent>
+            <br />
+        }
+    }
+
+
+    @if (thisArea.TrapSlot != null)
+    {
+        <Quepland_2_DN6.Components.HuntingTrapComponent Slot="@thisArea.TrapSlot"></Quepland_2_DN6.Components.HuntingTrapComponent>
+        <br />
+    }
+    @if (thisArea.HuntingTripInfo != null)
+    {
+        <Quepland_2_DN6.Components.HuntingTripComponent TripInfo="@thisArea.HuntingTripInfo" area="@thisArea"></Quepland_2_DN6.Components.HuntingTripComponent>
+        <br />
+    }
+    @if (thisArea.NPCs.Count > 0)
+    {
+        @foreach (string npc in thisArea.NPCs)
+        {
+            <Quepland_2_DN6.Components.NPCDialogComponent npc="@npc"></Quepland_2_DN6.Components.NPCDialogComponent>
+
+        }
+
+    }
+}
+@code {
+
+    public Area thisArea { get; set; }
+
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    protected override void OnParametersSet()
+    {
+        thisArea = AreaManager.Instance.GetAreaByURL("HoinRiver");
+        //GameState.NavMenu.ChangeOpenRegion(AreaManager.Instance.GetRegionForArea(thisArea), false);
+        GameState.UpdateState();
+
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

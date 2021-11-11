@@ -1,0 +1,283 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+<div>
+    @foreach (Skill s in Player.Instance.Skills)
+    {
+        <div>
+            <button @onclick="@(() => LevelSkill(s))">@s.Name</button>
+            <button @onclick="@(() => LevelSkill(s, 5))">5</button>
+            <button @onclick="@(() => LevelSkill(s, 10))">10</button>
+        </div>
+    }
+    <div>
+        <button @onclick="@(() => UnlockWorld())">
+            Unlock World
+        </button>
+    </div>
+    <div>
+        <button @onclick="@(() => UnlockFollowers())">
+            Unlock Followers
+        </button>
+        <button @onclick="@(() => show())">
+            Show
+        </button>
+        @if (showAllFollowers)
+        {
+            @foreach (Follower f in FollowerManager.Instance.Followers)
+            {
+                <button @onclick="@(() => UnlockFollower(f))">
+                    Unlock @f.Name
+                </button>
+            }
+        }
+    </div>
+    <button @onclick="@(() => GetMoney())">
+        Get 1M
+    </button>
+    <button @onclick="@(() => GetWeakWeapons())">
+        Get Weak Weapons
+    </button>
+    <button @onclick="@(() => GetMaxGear())">
+        Get Max Gear
+    </button>
+    <button @onclick="@(() => GetUltimateWeapons())">
+        Get Ultimate Weapons
+    </button>
+    <div>
+        <input @bind-value="itemName" />
+        <button @onclick="@GetItem">Get @itemName</button>
+        <button @onclick="@Get10Items">Get 10</button>
+        <button @onclick="@Get100Items">Get 100</button>
+    </div>
+    <div>
+        <input @bind-value="areaURL" />
+        <button @onclick="@GoToArea">Go to area</button>
+    </div>
+    <div>
+        <button @onclick="@(() => GetOneOfAllItems())">
+            Get One of All Items
+        </button>
+    </div>
+    <div>
+        <button @onclick="@(() => CompleteAllQuests())">
+            Complete Quests
+        </button>
+    </div>
+    <div>
+        <button @onclick="@(() => LockAllAreas())">
+            Lock Areas
+        </button>
+    </div>
+    <div>
+        <button @onclick="@(() => UnlockAllAreas())">
+            Unlock Areas
+        </button>
+    </div>
+    <div>
+        <button @onclick="@(() => LockAllRegions())">
+            Lock Regions
+        </button>
+    </div>
+    <div>
+        <button @onclick="@(() => UnlockAllRegions())">
+            Unlock Regions
+        </button>
+    </div>
+    <div>
+        <button @onclick="@(() => GetArtisanPoints())">
+            Get Artisan Points
+        </button>
+    </div>
+    <div>
+        <button @onclick="@(() => CancelAFK())">
+            Cancel AFK
+        </button>
+    </div>
+    <div>
+        <button @onclick="@(() => CancelHuntingTrip())">
+            Cancel Hunt
+        </button>
+    </div>
+    <div>
+        <button @onclick="@(() => CancelArtisanTask())">
+            Cancel Artisan Task
+        </button>
+    </div>
+</div>
+
+
+
+@code {
+
+    private string itemName = "";
+    private string areaURL = "";
+    private bool showAllFollowers;
+
+
+    public void show()
+    {
+        showAllFollowers = true;
+    }
+    public void UnlockFollower(Follower f)
+    {
+        f.IsUnlocked = true;
+    }
+    public void CancelAFK()
+    {
+        GameState.CurrentAFKAction = null;
+    }
+    public void CancelArtisanTask()
+    {
+        GameState.CancelTask();
+    }
+    public void CancelHuntingTrip()
+    {
+        GameState.IsOnHuntingTrip = false;
+    }
+    public void GoToArea()
+    {
+        GameState.GoTo(areaURL);
+    }
+    public void UnlockAllRegions()
+    {
+        foreach(Region r in AreaManager.Instance.Regions)
+        {
+            r.IsUnlocked = true;
+        }
+    }
+    public void LockAllRegions()
+    {
+        foreach (Region r in AreaManager.Instance.Regions)
+        {
+            r.IsUnlocked = false;
+        }
+    }
+    public void LockAllAreas()
+    {
+        foreach(Area a in AreaManager.Instance.Areas)
+        {
+            a.IsUnlocked = false;
+        }
+
+    }
+    public void UnlockAllAreas()
+    {
+        foreach (Area a in AreaManager.Instance.Areas)
+        {
+            a.Unlock();
+        }
+
+    }
+    public void CompleteAllQuests()
+    {
+        foreach(Quest q in QuestManager.Instance.Quests)
+        {
+            q.IsComplete = true;
+            q.Progress = q.ProgressToComplete;
+        }
+    }
+    public void GetOneOfAllItems()
+    {
+        Bank.Instance.Inventory.IsLoadingSave = true;
+        foreach(GameItem i in ItemManager.Instance.Items)
+        {
+            Bank.Instance.Inventory.AddItem(i);
+        }
+        Bank.Instance.Inventory.IsLoadingSave = false;
+        Bank.Instance.Inventory.UpdateItemCount();
+        //Bank.Instance.Inventory.AddItem("Copper Axe");
+    }
+    public void GetItem()
+    {
+        GameItem i = ItemManager.Instance.GetItemByName(itemName);
+        if(i != null)
+        {
+            Player.Instance.Inventory.AddItem(i);
+            MessageManager.AddMessage("You get 1 " + i.Name);
+        }
+    }
+    public void Get10Items()
+    {
+        GameItem i = ItemManager.Instance.GetItemByName(itemName);
+        Player.Instance.Inventory.AddMultipleOfItem(i, 10);
+    }
+    public void Get100Items()
+    {
+        GameItem i = ItemManager.Instance.GetItemByName(itemName);
+        Player.Instance.Inventory.AddMultipleOfItem(i, 100);
+    }
+    public void GetArtisanPoints()
+    {
+        Player.Instance.ArtisanPoints += 10000;
+    }
+
+    public void GetUltimateWeapons()
+    {
+        Player.Instance.Inventory.AddItem("Ultimate Test Weapon");
+
+    }
+    public void GetMaxGear()
+    {
+        Player.Instance.Inventory.AddItem("Strongtium Knife");
+        Player.Instance.Inventory.AddItem("Strongtium Sword");
+        Player.Instance.Inventory.AddItem("Strongtium Axe");
+        Player.Instance.Inventory.AddItem("Strongtium Hammer");
+        Player.Instance.Inventory.AddItem("Golden Belt");
+        Player.Instance.Inventory.AddItem("Grizzly Bear Gloves");
+        Player.Instance.Inventory.AddItem("Grizzly Bear Hat");
+        Player.Instance.Inventory.AddItem("Grizzly Bear Pants");
+        Player.Instance.Inventory.AddItem("Grizzly Bear Shirt");
+        Player.Instance.Inventory.AddItem("Grizzly Bear Boots");
+    }
+    public void GetWeakWeapons()
+    {
+        Player.Instance.Inventory.AddItem("Copper Knife");
+        Player.Instance.Inventory.AddItem("Copper Sword");
+        Player.Instance.Inventory.AddItem("Copper Axe");
+        Player.Instance.Inventory.AddItem("Copper Hammer");
+    }
+    public void GetMoney()
+    {
+        Player.Instance.Inventory.AddMultipleOfItem(ItemManager.Instance.GetItemByName("Coins"), 1000000);
+    }
+    public void UnlockWorld()
+    {
+        foreach(Region r in AreaManager.Instance.Regions)
+        {
+            r.IsUnlocked = true;
+        }
+        foreach(Area a in AreaManager.Instance.Areas)
+        {
+            a.IsUnlocked = true;
+            a.IsHidden = false;
+        }
+    }
+    public void UnlockFollowers()
+    {
+        foreach(Follower f in FollowerManager.Instance.Followers)
+        {
+            f.IsUnlocked = true;
+        }
+    }
+    public void LevelSkill(Skill s)
+    {
+        Player.Instance.GainExperience(s, (long)Skill.GetExperienceRequired(s.GetSkillLevelUnboosted()) - s.Experience);
+    }
+    public void LevelSkill(Skill s, int amt)
+    {
+        for(int i = 0; i < amt; i++)
+        {
+            LevelSkill(s);
+        }
+    }
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

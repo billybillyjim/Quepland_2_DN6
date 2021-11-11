@@ -1,0 +1,54 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+    <div>
+    @foreach(Skill skill in Player.Instance.Skills)
+    {
+        if (skill.EXPTracker.Show)
+        {
+            <div style="width:250px;height:50px;line-height:16px;left:5px;top:5px;border:solid black 1px">
+                <div style="cursor:pointer;">@skill.Name Exp/Hr:@String.Format("{0:n0}", GetRate(skill))</div>
+                <div>Total Gained:@(String.Format("{0:n0}", skill.Experience - skill.EXPTracker.StartExperience))</div>
+                <div>Time:@skill.EXPTracker.TimeSinceTrackerStarted.ToString(@"dd\:hh\:mm\:ss")</div>
+            </div>
+
+        }
+    }
+    </div>
+
+
+
+
+@code {
+
+    public void ResetAllTrackers()
+    {
+        foreach(Skill s in Player.Instance.Skills)
+        {
+            s.EXPTracker.Show = false;
+        }
+    }
+
+    public double GetRate(ExperienceTracker t)
+    {
+            double growth = t.Skill.Experience - t.StartExperience;
+            return (Math.Round(growth / t.TimeSinceTrackerStarted.TotalHours, 2));
+    }
+    public double GetRate(Skill skill)
+    {
+ 
+            double growth = skill.Experience - skill.EXPTracker.StartExperience;
+            return (Math.Round(growth / skill.EXPTracker.TimeSinceTrackerStarted.TotalHours, 2));
+
+    }
+
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object? sender, EventArgs e) => StateHasChanged();
+}

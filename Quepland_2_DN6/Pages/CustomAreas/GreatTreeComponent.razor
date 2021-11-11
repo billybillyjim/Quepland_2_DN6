@@ -1,0 +1,120 @@
+﻿@page "/World/GreatTree"
+@inject GameState GameState
+@inject NavigationManager UriHelper
+@implements IDisposable
+
+
+@if (thisArea != null)
+{
+    <AreaComponent areaURL="GreatTree"></AreaComponent>
+    @if (false)
+    {
+        @if (Player.Instance.Inventory.HasItem("Rope") && !IsClimbing)
+        {
+            <button class="btn btn-primary" style="margin-top:10px;" @onclick="@(() => StartClimbingTree())">Climb Tree</button>
+        }
+        else if (IsClimbing)
+        {
+            <button class="btn btn-primary" style="margin-top:10px;" @onclick="@(() => StopClimbing())">Stop Climbing Tree</button>
+        }
+        else
+        {
+            <button class="btn btn-primary" style="margin-top:10px;opacity:0.5"
+                    @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e,"You'll need some rope to climb this tree.")))"
+                    @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+                Climb Tree
+            </button>
+        }
+    }
+
+
+}
+
+@code {
+
+    [Parameter]
+    public string areaURL { get; set; }
+    public Area thisArea { get; set; }
+    public long NextClimbTick;
+    public bool IsClimbing;
+
+    private void StartClimbingTree()
+    {
+        NextClimbTick = GameState.CurrentTick + (100 - Math.Min(90, ((Player.Instance.GetLevel("Strength") / 10) + (Player.Instance.GetLevel("Deftness")) / 10)));
+        IsClimbing = true;
+
+    }
+    private void StopClimbing()
+    {
+        IsClimbing = false;
+    }
+
+    private void FindBattles()
+    {
+        GameState.StopNonCombatActions();
+        BattleManager.Instance.StartBattle(thisArea);
+        GameState.Location = "Battle";
+        UriHelper.NavigateTo("World/Battle/");
+    }
+
+    private void EnterBuilding(string buildingURL)
+    {
+        GameState.StopActions();
+        GameState.Location = areaURL + "/" + buildingURL;
+        UriHelper.NavigateTo("World/" + areaURL + "/" + buildingURL);
+    }
+    private void EnterDojo(string dojoURL)
+    {
+        GameState.StopActions();
+        GameState.Location = "Dojo/" + dojoURL;
+        UriHelper.NavigateTo("World/Dojo/" + dojoURL);
+    }
+    private void EnterDungeon(string dungeonURL)
+    {
+        GameState.StopActions();
+        GameState.Location = dungeonURL;
+        UriHelper.NavigateTo("Underworld/" + dungeonURL);
+    }
+    private void EnterSmithy()
+    {
+        GameState.StopActions();
+        GameState.Location = "Smithy/" + areaURL;
+        UriHelper.NavigateTo("World/Smithy/" + areaURL);
+    }
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    protected override void OnParametersSet()
+    {
+        areaURL = "GreatTree";
+        thisArea = AreaManager.Instance.GetAreaByURL(areaURL);
+        //GameState.NavMenu.ChangeOpenRegion(AreaManager.Instance.GetRegionForArea(thisArea), false);
+        GameState.UpdateState();
+
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e)
+    {
+
+        if (NextClimbTick <= GameState.CurrentTick && IsClimbing)
+        {
+            if (Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Rope"), 1) == 1)
+            {
+                MessageManager.AddMessage("You climb further up the tree.");
+                GreatTree.Progress++;
+                StartClimbingTree();
+            }
+            else
+            {
+                MessageManager.AddMessage("You have run out of rope! You'll have to find some more.");
+                IsClimbing = false;
+            }
+        }
+
+        StateHasChanged();
+    }
+}

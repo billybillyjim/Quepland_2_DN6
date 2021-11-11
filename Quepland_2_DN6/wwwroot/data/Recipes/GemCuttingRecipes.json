@@ -1,0 +1,224 @@
+[
+  {
+    "outputItemName": "Cut Amberite",
+    "ingredients": [
+      {
+        "itemName": "Rough Amberite",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:50",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 30
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Lizardite",
+    "ingredients": [
+      {
+        "itemName": "Rough Lizardite",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:75",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 35
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Purpurite",
+    "ingredients": [
+      {
+        "itemName": "Rough Purpurite",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:100",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 41
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Opal",
+    "ingredients": [
+      {
+        "itemName": "Rough Opal",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:125",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 46
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Garnet",
+    "ingredients": [
+      {
+        "itemName": "Rough Garnet",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:150",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 51
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Amethyst",
+    "ingredients": [
+      {
+        "itemName": "Rough Amethyst",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:175",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 56
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Emerald",
+    "ingredients": [
+      {
+        "itemName": "Rough Emerald",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:200",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 61
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Aquamarine",
+    "ingredients": [
+      {
+        "itemName": "Rough Aquamarine",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:250",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 66
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Topaz",
+    "ingredients": [
+      {
+        "itemName": "Rough Topaz",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:275",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 71
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Chrysoberyl",
+    "ingredients": [
+      {
+        "itemName": "Rough Chrysoberyl",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:300",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 76
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Sapphire",
+    "ingredients": [
+      {
+        "itemName": "Rough Sapphire",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:325",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 81
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Ruby",
+    "ingredients": [
+      {
+        "itemName": "Rough Ruby",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:350",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 86
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
+    "outputItemName": "Cut Diamond",
+    "ingredients": [
+      {
+        "itemName": "Rough Diamond",
+        "amount": 1
+      }
+    ],
+    "experienceGained": "Lapidary:400",
+    "requirements": [
+      {
+        "skill": "Lapidary",
+        "skillLevel": 91
+      }
+    ],
+    "maxOutputsPerAction": 1
+  }
+
+]

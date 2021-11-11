@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Quepland",
+    "regionNames": [
+      "Mount Queple",
+      "Queple Cave",
+      "Sawabe Swamp",
+      "Cantila Coast",
+      "Higashi Woods",
+      "Sabbach Waste",
+      "Hojkma Isles",
+      "Togaru Hills",
+      "Hoin River Valley"
+    ]
+  },
+  {
+    "name": "Caligin Commonwealth",
+    "regionNames": [
+      "Sahota Tir",
+      "Koncave Caverns",
+      "Castle Nid"
+    ],
+    "topColor": "#BCE4FF",
+    "bottomColor": "#56788F"
+  },
+  {
+    "name": "Arawasago Archipelago",
+    "regionNames": [
+      "Tackure Islet",
+      "Ufagari Islands",
+      "Sulmenka Kingdom"
+    ],
+    "topColor": "#28daf7",
+    "bottomColor": "#00dbcb"
+  },
+  {
+    "name": "Tendak Territories",
+    "regionNames": [
+      "Kyusa Sands",
+      "Pansoph Plains"
+    ],
+    "topColor": "#c2b280",
+    "bottomColor": "#70483c"
+  },
+  {
+    "name": "Karakni Kingdom",
+    "regionNames": [
+      "Sanbon Wood",
+      "Crossmare Cove"
+    ],
+    "topColor": "#7bde76",
+    "bottomColor": "#0a9103"
+  }
+]
