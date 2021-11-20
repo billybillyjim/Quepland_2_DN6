@@ -143,7 +143,6 @@
             int lowestReq = int.MaxValue;
             foreach(GameItem i in items)
             {
-                Console.WriteLine("Check item:" + i.Name);
                 foreach(Requirement r in i.Requirements)
                 {
                     if(r.Skill != "None")
