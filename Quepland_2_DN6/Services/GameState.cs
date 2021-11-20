@@ -836,7 +836,9 @@ using System.Threading.Tasks;
                 reward = ItemManager.Instance.GetItemByName("Alchemical Dust");
             }
             MessageManager.AddMessage("You withdraw the " + reward.Name + " from the release valve.");
+            Player.Instance.GainExperience("Alchemy", reward.Value);
             Player.Instance.Inventory.AddItem(reward);
+            Player.Instance.KnownAlchemicalFormulae.Add(CurrentAlchemyFormula);
             if(reward.Name == "Alchemical Dust")
             {
                 StopActions();
@@ -983,13 +985,18 @@ using System.Threading.Tasks;
     }
     public void ShowContextMenu(MouseEventArgs args)
     {
-        if(CurrentContextMenu != null && CurrentContextMenu.Buttons.Count > 0)
+        
+        if (CurrentContextMenu != null && CurrentContextMenu.Buttons.Count > 0)
         {
+            Console.WriteLine(CurrentContextMenu.Buttons.Count);
             TooltipManager.xPos = args.ClientX;
             TooltipManager.yPos = args.ClientY;
             TooltipManager.ShowContextMenu(args);
         }
-
+        else
+        {
+            Console.WriteLine("Menu was nulled");
+        }
     }
     public static void ResetGame()
     {
