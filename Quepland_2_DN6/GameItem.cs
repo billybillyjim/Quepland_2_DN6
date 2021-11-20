@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
-[Serializable]
+[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 public class GameItem
 {
 	public string Name { get; set; } = "Unset Name";
@@ -26,7 +27,7 @@ public class GameItem
 	public bool PreventArtisanTask { get; set; }
 	public int Charges { get; set; } = 0;
 	public string Parameter { get; set; } = "";
-
+	[JsonProperty]
 	public string UniqueID { get
         {
 			return Name + Charges + Parameter;

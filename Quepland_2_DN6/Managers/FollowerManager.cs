@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-
+using Newtonsoft.Json;
 
 public class FollowerManager
 {
@@ -32,6 +32,17 @@ public class FollowerManager
     {
         return Followers.FirstOrDefault(x => x.Name == name);
     }
+    public string GetNewSaveData()
+    {
+        string data = "[";
+        foreach (Follower f in Followers)
+        {
+            data += JsonConvert.SerializeObject(f, Formatting.Indented, new InventoryJsonConverter(typeof(Follower))) + ",";
+        }
+        data += "]";
+        Console.WriteLine(data);
+        return data;
+    }
     public string GetSaveData()
     {
         string data = "";
@@ -39,7 +50,12 @@ public class FollowerManager
         {
             data += f.Name + ":" + f.IsUnlocked + ":" + f.Banking.Experience + ":" + SaveManager.GetFollowerItemSave(f.Inventory) + ",";
         }
+
         return data;
+    }
+    public void LoadNewSaveData(string data)
+    {
+
     }
     public void LoadSaveData(string data)
     {
@@ -67,7 +83,8 @@ public class FollowerManager
             }
             if(d.Length > 3)
             {
-                f.Inventory.LoadData(d[3]);
+                Console.WriteLine(d[3]);
+                //f.Inventory.LoadData(d[3]);
             }
         }
     }

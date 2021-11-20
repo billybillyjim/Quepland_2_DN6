@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
+[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 public class Follower
 {
+    [JsonProperty]
     public string Name { get; set; }
+    [JsonProperty]
     public string AutoCollectMessage { get; set; }
+    [JsonProperty]
     public string AutoCollectSkill { get; set; }
-
+    [JsonProperty]
     public int AutoCollectLevel { get; set; }
+    [JsonProperty]
     private int autoCollectSpeed;
+    
     public int AutoCollectSpeed { get 
         {
             return autoCollectSpeed;
@@ -19,16 +26,22 @@ public class Follower
             autoCollectSpeed = value;
         } 
     }
+    [JsonProperty]
     public bool IsUnlocked { get; set; }
     public bool IsBanking { get; set; }
+    [JsonProperty]
     public int InventorySize { get; set; }
+    [JsonProperty]
     public Skill Banking { get; set; } = new Skill()
     {
         Name = "Banking",
         Level = 1,
         Description = "Banking is the ability of your follower to properly manage inventory space and movement to transport goods from you to the bank efficiently."
     };
+    //Todo: make custom json converter for inventories
+    
     private Inventory inv;
+    [JsonProperty]
     public Inventory Inventory
     {
         get
@@ -41,6 +54,8 @@ public class Follower
         }
     }
     public int TicksToNextAction { get; set; }
+    [JsonProperty]
+    public string Mode { get; set; } = "Normal";
 
     public void BankItems()
     {

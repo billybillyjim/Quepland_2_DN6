@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
+[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 public class Skill
 {
     public static long MaxEXP = 9000000000000000000;
+    [JsonProperty]
     public string Name { get; set; }
 
     public bool GainedXPLastTick { get; set; }
@@ -22,7 +25,7 @@ public class Skill
             return expTracker;
         }
     }
-
+    [JsonProperty]
     public int Level { get; set; }
 
     public void ResetExperience()
@@ -45,8 +48,8 @@ public class Skill
         }
         EXPTracker.Show = true;
     }
-    
-    
+
+    [JsonProperty]
     private long _experience;
 
 
@@ -54,6 +57,7 @@ public class Skill
     public long Experience {
         get { return _experience; }     
     }
+    [JsonProperty]
     public string Description { get; set; }
     public int Boost { get; set; }
     public double Progress

@@ -8,7 +8,7 @@ using System.Linq;
 
 public class Inventory
 {
-    private List<KeyValuePair<GameItem, int>> items { get; set; }
+    public List<KeyValuePair<GameItem, int>> items { get; set; }
     private Dictionary<string, int> itemLookupDic { get; set; }
     private int maxSize = 30;
     private readonly int maxValue = int.MaxValue - 1000000;

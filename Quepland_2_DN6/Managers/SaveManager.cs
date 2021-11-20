@@ -415,7 +415,15 @@ public static class SaveManager
         //11
         file += Compress(JsonConvert.SerializeObject(Player.Instance.GetSaveData())) + ",";
         //12
-        file += Compress(FollowerManager.Instance.GetSaveData()) + ",";
+        if (GameState.CheckVersion("1.1.0"))
+        {
+            file += Compress(FollowerManager.Instance.GetNewSaveData()) + ",";
+        }
+        else
+        {
+            file += Compress(FollowerManager.Instance.GetSaveData()) + ",";
+        }
+        
         //13
         file += Compress(GetTanningSave()) + ",";
         //14
