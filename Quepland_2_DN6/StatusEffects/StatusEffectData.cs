@@ -29,7 +29,7 @@ public class StatusEffectData
 	/// <summary>
 	/// The message sent when the effect is first applied.
 	/// </summary>
-	public string Message { get; set; }
+	public string Message { get; set; } = "";
 	public bool SelfInflicted { get; set; }
 }
 

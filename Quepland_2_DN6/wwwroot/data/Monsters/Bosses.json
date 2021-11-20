@@ -25,7 +25,7 @@
     "damage": 29,
     "armor": 14,
     "attackSpeed": 18
-    
+
   },
   {
     "name": "Gashadokuro Spine",
@@ -76,5 +76,34 @@
     "damage": 165,
     "armor": 450,
     "attackSpeed": 1
+  },
+  {
+    "name": "Ruwohane",
+    "hp": 23500,
+    "weaknesses": "Hammermanship",
+    "strengths": "Knifesmanship",
+    "damage": 95,
+    "armor": 500,
+    "attackSpeed": 3,
+    "statusEffectData": [
+      {
+        "name": "Drain",
+        "power": 5,
+        "speed": 3,
+        "duration": 60,
+        "message": "The Ruwohane begins to sing. The corners of your vision begin to darken. You feel weakened.",
+        "procOdds": 1
+      }
+    ],
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 500
+        }
+        
+      ]
+    }
   }
 ]

@@ -1146,5 +1146,33 @@
       "damage": -35
     },
     "secondaryColor": "#3b7a0b"
+  },
+  {
+    "name": "Nmekufian Mask",
+    "value": 1500,
+    "description": "A mask made to protect your soul.",
+    "gatherString": "You make a Nmekufian mask.",
+    "gatherSpeed": 8,
+    "icon": "Mask",
+    "equipSlot": "Head",
+    "armorInfo": {
+      "armorBonus": 15,
+      "damage": 5
+    },
+    "secondaryColor": "#dddddd"
+  },
+  {
+    "name": "Mask of Ruwohane",
+    "value": 12500,
+    "description": "A mask that was once worn by a Ruwohane. It won't be needing it anymore.",
+    "gatherString": "You get a mask.",
+    "gatherSpeed": 8,
+    "icon": "CoolMask",
+    "equipSlot": "Head",
+    "armorInfo": {
+      "armorBonus": 25,
+      "damage": 35
+    },
+    "secondaryColor": "#ddeeaa"
   }
 ]

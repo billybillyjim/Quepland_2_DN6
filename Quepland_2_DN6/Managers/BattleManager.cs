@@ -599,6 +599,10 @@ public class BattleManager
         {
             return new SelfHealEffect(data);
         }
+        else if(data.Name == "Drain")
+        {
+            return new DrainEffect(data);
+        }
         else
         {
             Console.WriteLine("Warning:" + data.Name + " not in list of status effects in Battle Manager.");
