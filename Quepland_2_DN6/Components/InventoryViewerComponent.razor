@@ -16,8 +16,8 @@
             {
 
                 <div oncontextmenu="return false;" draggable="false"
-                        onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))"
-                        onclick="@(new Action<MouseEventArgs>((args) => SelectItem(args, item.Key)))"><ItemBoxComponent Item="@item.Key" ShowAmount="@true" IsSelected="@(SelectedItem == item.Key)" shouldRender="@item.Key.Rerender"></ItemBoxComponent></div>
+                        onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))">
+                            <ItemBoxComponent Item="@item.Key" ShowAmount="@true" IsSelected="@(SelectedItem == item.Key)" shouldRender="@item.Key.Rerender"></ItemBoxComponent></div>
 
             }
         }
@@ -32,14 +32,14 @@
                 if (item.Key.IsStackable)
                 {
                     <div oncontextmenu="return false;" draggable="false"
-                         onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))"
-                         onclick="@(new Action<MouseEventArgs>((args) => SelectItem(args, item.Key)))"><ItemBoxComponent Item="@item.Key" ShowAmount="@true" IsSelected="@(SelectedItem == item.Key)" shouldRender="@item.Key.Rerender"></ItemBoxComponent></div>
+                         onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))">
+                             <ItemBoxComponent Item="@item.Key" ShowAmount="@true" IsSelected="@(SelectedItem == item.Key)" shouldRender="@item.Key.Rerender"></ItemBoxComponent></div>
                 }
                 else
                 {
                     <div oncontextmenu="return false;" draggable="false"
-                         onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))"
-                         onclick="@(new Action<MouseEventArgs>((args) => SelectItem(args, item.Key)))"><ItemBoxComponent Item="@item.Key" ShowAmount="@false" IsSelected="@(SelectedItem == item.Key)" shouldRender="@item.Key.Rerender"></ItemBoxComponent></div>
+                         onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))">
+                             <ItemBoxComponent Item="@item.Key" ShowAmount="@false" IsSelected="@(SelectedItem == item.Key)" shouldRender="@item.Key.Rerender"></ItemBoxComponent></div>
 
                 }
 
@@ -189,9 +189,11 @@
     }
     public void ShowMenu(MouseEventArgs args, GameItem item)
     {
+        
         if (args.Button == 2)
         {
             GameState.CurrentContextMenu = new ContextMenu();
+            
             if (Bank.Instance.IsBanking)
             {
                 if (Bank.Instance.Amount == int.MaxValue)
@@ -222,6 +224,7 @@
                     GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Deposit All " + item, new Action(() => BankItem(item, int.MaxValue))));
 
                 }
+                
             }
             if (item.EquipSlot != "None")
             {
@@ -255,9 +258,12 @@
                 {
                     GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Eat " + item, new Action(() => GameState.Eat(item))));
                 }
-                GameState.ShowContextMenu(args);
+                
             }
+            Console.WriteLine(GameState.CurrentContextMenu.Buttons.Count);
+            GameState.ShowContextMenu(args);
         }
+        else{ SelectItem(args, item); }
     }
     private int GetMaxHeight()
     {
@@ -292,6 +298,10 @@
     }
     public int GetHiddenRows()
     {
+        if(Player.Instance.Inventory.GetUsedSpaces() == 0)
+        {
+            return 0;
+        }
         return inventoryRowWidth - (Player.Instance.Inventory.GetSize() % Player.Instance.Inventory.GetUsedSpaces()); 
     }
 
