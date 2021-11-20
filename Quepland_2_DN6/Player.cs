@@ -23,6 +23,7 @@ public class Player
     public Inventory Inventory = new Inventory(30);
     private List<GameItem> equippedItems = new List<GameItem>();
     public List<Skill> Skills = new List<Skill>();
+    public List<AlchemicalFormula> KnownAlchemicalFormulae = new List<AlchemicalFormula>();
     private Follower currentFollower;
     public Follower CurrentFollower { get { return currentFollower; } }
     public int MaxHP = 50;
@@ -643,7 +644,8 @@ public class Player
             DeathCount = Deaths,
             ArtisanPoints = ArtisanPoints,
             InventorySize = Inventory.GetSize(),
-            EquippedItems = equipped
+            EquippedItems = equipped,
+            KnownAlchemyFormulae = KnownAlchemicalFormulae
         };
     }
     public void LoadSaveData(PlayerSaveData data)
@@ -678,6 +680,13 @@ public class Player
             Console.WriteLine(e.Message);
             Console.WriteLine(e.StackTrace);
 
+        }
+        if (GameState.CheckVersion("1.1.0"))
+        {
+            foreach(AlchemicalFormula l in data.KnownAlchemyFormulae)
+            {
+                KnownAlchemicalFormulae.Add(new AlchemicalFormula(l));
+            }
         }
     }
     private void CalculateMaxHP()

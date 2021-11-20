@@ -435,7 +435,7 @@ public class Inventory
                 }
                 else if (items[i].Key.Name.Contains("Frozen"))
                 {
-                    if (items[i].Key.Name.Contains("Bucket"))
+                    if (items[i].Key.Name.Contains("Mercury"))
                     {
                         GameItem replacement = ItemManager.Instance.GetItemByName("Bucket of Mercury");
                         bars.Add(new KeyValuePair<GameItem, int>(replacement, pair.Value));
