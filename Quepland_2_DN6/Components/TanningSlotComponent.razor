@@ -8,7 +8,7 @@
 
     @if (tanningItem != null && ItemManager.Instance.GetItemByName(tanningItem).TanningInfo.TansInto.HasRequirements())
     {
-        <button class="btn btn-primary" @onclick="@(() => StartTanning())">Confirm Tanning @tanningItem (@GetMax())</button>
+        <button class="btn btn-primary" @onclick="@(() => StartTanning())">Confirm Tanning @tanningItem (@GetMaxTannable())</button>
 
     }
     else if (tanningItem != null)
@@ -64,6 +64,14 @@ else
 
         }
         LoadTannables();
+    }
+    public int GetMaxTannable()
+    {
+        if(tanningItem != null)
+        {
+            return Player.Instance.Inventory.GetNumberOfItem(ItemManager.Instance.GetItemByName(tanningItem));
+        }
+        return 0;
     }
     public int GetMax()
     {
