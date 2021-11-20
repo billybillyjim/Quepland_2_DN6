@@ -198,6 +198,7 @@
 
         }
     }
+
     protected override void OnInitialized()
     {
         GameState.SmithingComponent = this;
@@ -214,6 +215,7 @@
     }
     public void Dispose()
     {
+        Player.Instance.Inventory.CoolBars();
         GameState.SmithingComponent = null;
         GameState.StateChanged -= OnGameStateChanged;
     }

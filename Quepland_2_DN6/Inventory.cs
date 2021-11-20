@@ -413,6 +413,58 @@ public class Inventory
         return AddMultipleOfItem(i, drop.Amount);
     }
     /// <summary>
+    /// Replaces molten bars with cooled bars, returns the number replaced.
+    /// </summary>
+    /// <returns></returns>
+    public int CoolBars()
+    {
+
+        int cooled = 0;
+        var cooledBars = new HashSet<KeyValuePair<GameItem, int>>();
+        var bars = new List<KeyValuePair<GameItem, int>>();
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].Key.Icon == "MoltenBar")
+            {
+
+                KeyValuePair<GameItem, int> pair = items[i];
+                if (items[i].Key.Name.Contains("Molten"))
+                {
+                    GameItem replacement = ItemManager.Instance.GetItemByName(pair.Key.Name.Replace("Molten", "").TrimStart());
+                    bars.Add(new KeyValuePair<GameItem,int>(replacement, pair.Value));
+                }
+                else if (items[i].Key.Name.Contains("Frozen"))
+                {
+                    if (items[i].Key.Name.Contains("Bucket"))
+                    {
+                        GameItem replacement = ItemManager.Instance.GetItemByName("Bucket of Mercury");
+                        bars.Add(new KeyValuePair<GameItem, int>(replacement, pair.Value));
+                    }
+                    else
+                    {
+                        GameItem replacement = ItemManager.Instance.GetItemByName(pair.Key.Name.Replace("Frozen", "").TrimStart());
+                        bars.Add(new KeyValuePair<GameItem, int>(replacement, pair.Value));
+                    }
+                    
+                }
+                
+                int val = items[i].Value;
+                cooledBars.Add(items[i]);
+                cooled += val;
+                itemLookupDic.Remove(items[i].Key.UniqueID);
+    
+            }
+        }
+
+        items.RemoveAll(x => cooledBars.Contains(x));
+        foreach (KeyValuePair<GameItem, int> pair in bars)
+        {
+            AddMultipleOfItem(pair.Key, pair.Value);
+        }
+        UpdateItemCount();
+        return cooled;
+    }
+    /// <summary>
     /// Returns the number of items removed, 0 if none were removed.
     /// </summary>
     /// <param name="item"></param>
