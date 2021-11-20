@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Json;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 //using Pluralize.NET;
@@ -128,7 +129,7 @@ using System.Threading.Tasks;
 
     public void Start()
     {
-        if(GameTimer != null)
+        if (GameTimer != null)
         {
             return;
         }
@@ -1116,6 +1117,103 @@ using System.Threading.Tasks;
             }
         }
 
+    }
+    public static bool CheckVersion(string compareVersion)
+    {
+        string[] compVersions = compareVersion.Split(".");
+        string[] versions = Version.Split(".");
+
+        string bigNum = versions[0];
+        string major = versions[1];
+        string minor = versions[2];
+
+        string compBigNum = compVersions[0];
+        string compMajor = compVersions[1];
+        string compMinor = compVersions[2];
+
+
+        int bn, maj, min = 0;
+        string rev = "";
+
+        int cbn, cmaj, cmin = 0;
+        string cRev = "";
+
+        if(int.TryParse(bigNum, out bn))
+        {
+            if(int.TryParse(major, out maj))
+            {
+                string min1 = Regex.Match(minor, @"\d+").Value;
+                if(int.TryParse(min1, out min))
+                {
+                    rev = Regex.Match(minor, @"[a-zA-Z]").Value;
+                    if (int.TryParse(compBigNum, out cbn))
+                    {
+                        if (int.TryParse(compMajor, out cmaj))
+                        {
+                            string min2 = Regex.Match(compMinor, @"\d+").Value;
+                            if (int.TryParse(min2, out cmin))
+                            {
+                                cRev = Regex.Match(minor, @"[a-zA-Z]").Value;
+
+                            }
+                            else
+                            {
+                                Console.Error.WriteLine("Invalid minor version number:" + compMinor + " in " + compareVersion);
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            Console.Error.WriteLine("Invalid major version number:" + compMajor + " in " + compareVersion);
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        Console.Error.WriteLine("Invalid big version number:" + compBigNum + " in " + compareVersion);
+                        return false;
+                    }
+                }
+                else
+                {
+                    Console.Error.WriteLine("Invalid minor version number:" + minor + " in " + Version);
+                    return false;
+                }
+            }
+            else
+            {
+                Console.Error.WriteLine("Invalid major version number:" + major +" in " + Version);
+                return false;
+            }
+        }
+        else
+        {
+            Console.Error.WriteLine("Invalid big version number:" + bigNum +" in " + Version);
+            return false;
+        }
+        if (cbn > bn)
+        {
+            return true;
+        }
+        else if(cbn == bn)
+        {
+            if(cmaj > maj)
+            {
+                return true;
+            }
+            else if(cmaj == maj)
+            {
+                if(cmin > min)
+                {
+                    return true;
+                }
+                else if(cmin == min)
+                {
+                    return string.Compare(rev, cRev) >= 0;
+                }
+            }
+        }
+        return false;
     }
     private void StateHasChanged()
     {
