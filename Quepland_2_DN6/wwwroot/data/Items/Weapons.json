@@ -19,6 +19,24 @@
     }
   },
   {
+    "name": "Bone Dagger",
+    "description": "A very lightweight dagger you carved from a bone of the Gashadokuro.",
+    "value": 350,
+    "enabledActions": "Knifesmanship",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 4,
+      "damage": 13,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 10
+        }
+      ]
+    }
+  },
+  {
     "name": "Stone Axe",
     "description": "It's an axe made of stone.",
     "value": 25,

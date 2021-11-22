@@ -66,6 +66,28 @@
     "preventArtisanTask": true
   },
   {
+    "outputItemName": "Bone Dagger",
+    "ingredients": [
+      {
+        "itemName": "Bone Shard",
+        "amount": 1
+      },
+      {
+        "itemName": "Wood Carving Knife",
+        "destroyOnUse": false
+      }
+    ],
+    "recipeActionString": "You carve away at the shard to form a simple dagger...",
+    "requirements": [
+      {
+        "skill": "Woodworking",
+        "skillLevel": 25
+      }
+    ],
+    "maxOutputsPerAction": 1,
+    "preventArtisanTask": true
+  },
+  {
     "outputItemName": "Mercurial Sword",
     "ingredients": [
       {
