@@ -103,7 +103,7 @@ public class Dialog
         }
 		
 		DoQuestCheck();
-		MessageManager.AddMessage(ResponseText);
+		MessageManager.AddMessage(ResponseText, "white", "Dialogue");
 	}
 
 	private void DoQuestCheck()
