@@ -20,6 +20,7 @@
         "itemAmount": 1
       }
     ],
+    "Description": "The mayor of Teppas has a request for you.",
     "progressStrings": [
       "You haven't started this quest yet. Talk to the mayor in Teppas to begin.",
       "The mayor has asked you for a favor.",
@@ -42,6 +43,7 @@
         "experienceGain": 50
       }
     ],
+    "Description": "A small bird wants to help you figure things out.",
     "progressStrings": [
       "You haven't started this quest yet. Talk Tuto in Quepland Fields to begin.",
       "You met Tuto the Oriole.",
@@ -63,6 +65,7 @@
         "experienceGain": 1000
       }
     ],
+    "Description": "The owner of the boat shop on the Uragota docks is missing. Where could he be?",
     "progressStrings": [
       "You haven't started this quest yet. Go to Mound's Boats at the Uragota docks to begin.",
       "You spoke to Gordo and he is very suspicious. Maybe someone in town knows what happened.",
@@ -111,6 +114,7 @@
         "experienceGain": 2000
       }
     ],
+    "Description": "The members of the alchemy guild are secretive and difficult to work with. Can you convince them to let you join their guild?",
     "progressStrings": [
       "You haven't started this quest yet. You can begin by talking to the man at the peak of Mt. Queple.",
       "Oikaaz advised you to visit the Alchemist's Guild in Tsu City to learn alchemy from a teacher."
@@ -120,6 +124,7 @@
     "name": "Grand Theft Camel",
     "id": 5,
     "completionText": "Congratulations! You can now purchase camels from Camelpalooza!",
+    "Description": "All the camels at Camelpalooza have been stolen! Help the owner Carl or teach him to help himself.",
     "progressToComplete": 24,
     "progressStrings": [
       "You haven't started this quest yet. Talk Camel Carl at the Desert's Mouth to begin.",
@@ -155,6 +160,7 @@
     "name": "Queple's Sword",
     "id": 6,
     "completionText": "Congratulations! You solved the mystery of Queple's Sword!",
+    "Description": "An ancient sword rests in a tomb. Find it and discover a way to use it, too!",
     "progressToComplete": 10000,
     "progressStrings": [
       "You haven't started this quest yet. You'll need to find Queple's grave to begin.",
