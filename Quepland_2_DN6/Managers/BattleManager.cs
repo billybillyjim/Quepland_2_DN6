@@ -302,6 +302,19 @@ public class BattleManager
             MessageManager.AddMessage("You defeated the " + opponent.Name + ".");
         }
     }
+    public int GetTotalPlayerDamage(Monster m)
+    {
+        int total = (int)Math.Max(1, Player.Instance.GetTotalDamage().ToRandomDamage() * CalculateTypeBonus(Target));
+        if (Target.CurrentStatusEffects.OfType<CleaveEffect>().Any())
+        {
+        }
+        else
+        {
+            total = (int)Math.Max(total * Extensions.CalculateArmorDamageReduction(Target), 1);
+        }
+        
+        return (int)Math.Min(Target.CurrentHP, total); ;
+    }
     public void Attack()
     {
         if(Target == null || Target.IsDefeated)
@@ -313,15 +326,8 @@ public class BattleManager
             Target = GetNextTarget();
         }
         RollForPlayerAttackEffects();
-        int total = (int)Math.Max(1, Player.Instance.GetTotalDamage().ToRandomDamage() * CalculateTypeBonus(Target));
-        if(Target.CurrentStatusEffects.OfType<CleaveEffect>().Any())
-        {
-        }
-        else
-        {
-            total = (int)Math.Max(total * Extensions.CalculateArmorDamageReduction(Target), 1);
-        }
-        total = (int)Math.Min(Target.CurrentHP, total);
+
+        int total = GetTotalPlayerDamage(Target);
         Target.CurrentHP -= total;
 
         GainCombatExperience(total);
@@ -332,7 +338,7 @@ public class BattleManager
         }
     }
 
-    private void GainCombatExperience(int total)
+    public void GainCombatExperience(int total)
     {
         if (Player.Instance.GetWeapon() == null)
         {
@@ -602,6 +608,10 @@ public class BattleManager
         else if(data.Name == "Drain")
         {
             return new DrainEffect(data);
+        }
+        else if (data.Name == "Undulate")
+        {
+            return new UndulateEffect(data);
         }
         else
         {

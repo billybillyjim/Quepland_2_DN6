@@ -1540,5 +1540,34 @@
         }
       ]
     }
+  },
+  {
+    "name": "Chiumina Hammer",
+    "description": "The weight of this hammer seems to undulate through its head.",
+    "value": 9500,
+    "enabledActions": "Hammermanship",
+    "secondaryColor": "#34baeb",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 20,
+      "damage": 900,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 103
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Undulate",
+          "power": 1,
+          "speed": 1,
+          "duration": 1,
+          "message": "The hammer lunges forward effortlessly a second time!",
+          "procOdds": 0.3
+        }
+      ]
+    }
   }
 ]
