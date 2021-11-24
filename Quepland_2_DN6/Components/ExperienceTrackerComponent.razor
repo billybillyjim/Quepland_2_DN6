@@ -1,12 +1,12 @@
 ﻿@inject GameState GameState
 @implements IDisposable
 
-    <div>
+    <div class="row no-gutters mr-2">
     @foreach(Skill skill in Player.Instance.Skills)
     {
         if (skill.EXPTracker.Show)
         {
-            <div style="width:250px;height:50px;line-height:16px;left:5px;top:5px;border:solid black 1px">
+            <div class="col p-2" style="width:250px;height:70px;line-height:20px;left:5px;top:5px;border:solid black 1px">
                 <div style="cursor:pointer;">@skill.Name Exp/Hr:@String.Format("{0:n0}", GetRate(skill))</div>
                 <div>Total Gained:@(String.Format("{0:n0}", skill.Experience - skill.EXPTracker.StartExperience))</div>
                 <div>Time:@skill.EXPTracker.TimeSinceTrackerStarted.ToString(@"dd\:hh\:mm\:ss")</div>

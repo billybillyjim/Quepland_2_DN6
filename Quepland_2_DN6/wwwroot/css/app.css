@@ -51,6 +51,9 @@ app {
     height: 60px;
     padding: 0px;
     min-width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .custom-dropdown {
@@ -107,6 +110,13 @@ app {
 
 .custom-scroll::-webkit-scrollbar {
     width: 18px;
+    background: darkgray;
+    scrollbar-face-color: lightgray;
+    border-radius: 0.25rem;
+}
+
+.custom-scroll-thin::-webkit-scrollbar {
+    height: 5px;
     background: darkgray;
     scrollbar-face-color: lightgray;
     border-radius: 0.25rem;

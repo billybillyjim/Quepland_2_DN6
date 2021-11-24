@@ -5,7 +5,7 @@
 <div class="row v-100" style="background-color:@GameState.BGColor;color:white;">
     @if (GameState.ShowStartMenu == false)
     {
-        <div class="sidebar col-sm-3 col-md-2 v-100 p-0" style="z-index:5; max-width:300px; @GetGradient()">
+        <div class="sidebar col-sm-3 col-md-2 v-100 p-0" style="z-index:5;  min-width:300px; max-width:300px; @GetGradient()">
             <UpdatedNavMenu />
         </div>
     }
@@ -16,8 +16,8 @@
             {
                 <Quepland_2_DN6.Pages.SettingsComponent></Quepland_2_DN6.Pages.SettingsComponent>
             }
-            <div class="row">
-                <div class="@GetMessageWindowClass() col mx-2 ml-0 custom-scroll" style="position:absolute;">
+            <div class="row justify-content-md-center">
+                <div class="@GetMessageWindowClass() col ml-0 custom-scroll" style="position:absolute; width:98%; z-index:10;">
                     <button class="btn btn-outline-light" style=" margin-top: -28px; margin-left: -10px; padding: 0px 5px; border-radius: 0.5rem;"
                         @onclick="@(() => ToggleMessageMenu())">
                         @(showMessages ? "Hide" : "Show")
@@ -53,13 +53,13 @@
                 </div>
             </div>
         }
-        <div class="p-2">
+        <div class="px-2 vh-100 custom-scroll" style="overflow-y:auto;padding-bottom:200px;">
             @Body
         </div>
     </div>
     @if (GameState.ShowStartMenu == false)
     {
-        <div id="side-bar" class="col-3 p-0 ml-3" style="background-color:#4d4d4d;z-index:5;">
+        <div id="side-bar" class="col-3 p-0 mr-3" style="background-color:#4d4d4d;z-index:5;">
             <Quepland_2_DN6.Components.RightSidebarComponent></Quepland_2_DN6.Components.RightSidebarComponent>
         </div>
 
@@ -91,7 +91,7 @@
 @code {
 
     private bool showMessages = true;
-    private List<string> messageFilters = new List<string>() { "All", "Loot" };
+    private List<string> messageFilters = new List<string>() { "All", "Loot", "Dialogue" };
 
     public string GetMessageWindowClass()
     {
