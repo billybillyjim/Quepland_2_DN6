@@ -378,9 +378,9 @@
   },
   {
     "name": "Bandit King",
-    "hp": 5300,
+    "hp": 3300,
     "attackSpeed": 15,
-    "armor": 50,
+    "armor": 30,
     "damage": 45,
     "dropTable": {
       "drops": [

@@ -3,7 +3,13 @@
 
 @foreach(KeyValuePair<string, Inventory> pair in LootTracker.Instance.DataDict)
 {
-     <div style="background:black">@pair.Key @("x" + LootTracker.Instance.KCDict[pair.Key]) - @pair.Value.GetTotalValue() Coins</div>
+     <div style="background:black">@pair.Key @("x" + LootTracker.Instance.KCDict[pair.Key]) - @pair.Value.GetTotalValue() Coins 
+         <button class="btn btn-secondary" style="float: right;
+                                                  height: 24px;
+                                                  line-height: 12px;
+                                                  border-radius: 0;" 
+         @onclick=@(() => ResetInventory(pair.Value))>Reset</button>
+         </div>
     <div style="display:flex;background:#151515;flex-wrap: wrap">
        
         @foreach(KeyValuePair<GameItem, int> itemPair in pair.Value.GetItems())
@@ -16,7 +22,12 @@
 
 
 @code {
-     protected override void OnInitialized()
+
+    public void ResetInventory(Inventory i)
+    {
+        i.Clear();
+    }
+    protected override void OnInitialized()
     {
         GameState.StateChanged += OnGameStateChanged;
     }
