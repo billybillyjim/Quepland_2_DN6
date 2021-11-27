@@ -1,0 +1,179 @@
+﻿@page "/World/UpperBranches"
+@inject GameState GameState
+@inject NavigationManager UriHelper
+@implements IDisposable
+
+
+@if (thisArea != null)
+{
+    @FacingDirection @CurrentBranch
+    <div class="row" style="position:relative;width:100%;height:50%">
+        @foreach(int branch in CurrentBranches)
+        {
+            if(GetFacingDirection(CurrentBranch, branch) == "North")
+            {
+                <button class="btn btn-primary m-3" style="position:absolute;top:10px;left:@RandPos[0]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+            }
+            else if(GetFacingDirection(CurrentBranch, branch) == "East")
+            {
+                <button class="btn btn-primary m-3" style="position:absolute;right:10px;bottom:@RandPos[0]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+            }
+            else if(GetFacingDirection(CurrentBranch, branch) == "South")
+            {
+                <button class="btn btn-primary m-3" style="position:absolute;bottom:10px;right:@RandPos[0]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+            }
+            else if(GetFacingDirection(CurrentBranch, branch) == "West")
+            {
+                <button class="btn btn-primary m-3" style="position:absolute;left:10px;top:@RandPos[0]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+            }
+            else
+            {
+                <button class="btn btn-primary m-3" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+            }
+            
+        }
+    </div>
+    
+
+}
+
+@code {
+
+    [Parameter]
+    public string areaURL { get; set; }
+    public Area thisArea { get; set; }
+    public long NextClimbTick;
+    public bool IsClimbing;
+    public List<int> CurrentBranches = new List<int>();
+    public int CurrentBranch;
+    public string FacingDirection = "South";
+    public List<string> RandPos = new List<string>();
+
+    public Dictionary<int, List<int>> Branches = new Dictionary<int, List<int>>()
+    {
+        {0, new List<int>(){5, 36}},
+        {2,new List<int>(){11, 12, 3} },
+        {3,new List<int>(){2, 4, 13} },
+        {4,new List<int>(){3, 5, 24} },
+        {5,new List<int>(){0, 4, 15} },
+        {11,new List<int>(){2, 12, 30} },
+        {12,new List<int>(){2, 11, 22} },
+        {13,new List<int>(){3, 22, 24} },
+        {15,new List<int>(){5, 34, 36} },
+        {22,new List<int>(){12, 13, 32} },
+        {24,new List<int>(){4, 13, 33} },
+        {30,new List<int>(){11, 31} },
+        {31,new List<int>(){30, 32, 41} },
+        {32,new List<int>(){22, 31, 42} },
+        {33,new List<int>(){24, 34, 43} },
+        {34,new List<int>(){15, 33, 44} },
+        {36,new List<int>(){0, 15, 45} },
+        {41,new List<int>(){31, 42} },
+        {42,new List<int>(){32, 41, 52} },
+        {43,new List<int>(){33, 52} },
+        {44,new List<int>(){34, 54} },
+        {45,new List<int>(){36, 55} },
+        {52,new List<int>(){42, 43, 53} },
+        {53,new List<int>(){52, 54, 63} },
+        {54,new List<int>(){53, 44, 55} },
+        {55,new List<int>(){45, 54, 65} },
+        {63,new List<int>(){53, 65} },
+        {65,new List<int>(){55, 63} },
+    };
+
+    public string GetRandomPos()
+    {
+        int pos = GameState.Random.Next(25, 75);
+        return pos + "%";
+    }
+
+    public string GetRelativeDirection(int branch)
+    {
+        string newDir = GetFacingDirection(CurrentBranch, branch);
+        if(newDir == FacingDirection)
+        {
+            return "Straight Ahead";
+        }
+        else if(newDir == "North" && FacingDirection == "East" ||
+                newDir == "South" && FacingDirection == "West" ||
+                newDir == "East" && FacingDirection == "South" ||
+                newDir == "West" && FacingDirection == "North")
+        {
+            return "Right";
+        }
+        else if(newDir == "North" && FacingDirection == "South" ||
+                newDir == "South" && FacingDirection == "North" ||
+                newDir == "East" && FacingDirection == "West" ||
+                newDir == "West" && FacingDirection == "East")
+        {
+            return "Back";
+        }
+        return "Left";
+
+    }
+    public void GetBranches(int branch)
+    {
+        CurrentBranches = Branches[branch];
+    }
+
+    public void JumpToBranch(int branch)
+    {
+        FacingDirection = GetFacingDirection(CurrentBranch, branch);
+        GetBranches(branch);
+        CurrentBranch = branch;
+        for(int i = 0; i < 4; i ++)
+        {
+            RandPos[i] = GetRandomPos();
+        }
+    }
+    public string GetFacingDirection(int startBranch, int branch)
+    {
+        int diff = Math.Abs(startBranch - branch);
+        //Check N/S
+        int row = startBranch / 10;
+        int compRow = branch / 10;
+        if(compRow > row)
+        {
+            return "South";
+        }
+        else if(compRow < row)
+        {
+
+            return "North";
+        }
+        //Check E/W
+        if(CurrentBranch > branch)
+        {
+            return "West";
+        }
+        else
+        {
+            return "East";
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        for(int i = 0; i < 4; i ++)
+        {
+            RandPos.Add(GetRandomPos());
+        }
+    }
+    protected override void OnParametersSet()
+    {
+        areaURL = "UpperBranches";
+        thisArea = AreaManager.Instance.GetAreaByURL(areaURL);
+        GetBranches(0);
+        GameState.UpdateState();
+
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e)
+    {
+        StateHasChanged();
+    }
+}
