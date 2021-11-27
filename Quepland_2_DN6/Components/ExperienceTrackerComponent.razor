@@ -6,10 +6,30 @@
     {
         if (skill.EXPTracker.Show)
         {
-            <div class="col p-2" style="width:250px;height:70px;line-height:20px;left:5px;top:5px;border:solid black 1px">
+            <div class="col-12 p-2" style="width:250px;min-height:70px;line-height:20px;left:5px;top:5px;border:solid black 1px">
                 <div style="cursor:pointer;">@skill.Name Exp/Hr:@String.Format("{0:n0}", GetRate(skill))</div>
                 <div>Total Gained:@(String.Format("{0:n0}", skill.Experience - skill.EXPTracker.StartExperience))</div>
                 <div>Time:@skill.EXPTracker.TimeSinceTrackerStarted.ToString(@"dd\:hh\:mm\:ss")</div>
+                <div class="progress"  @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, skill.Name, GetTooltip(skill))))"
+                                      @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+                    <div class="progress-bar" style="width:@(skill.EXPTracker.GetProgress())%;color:black;background-color:#51d051">
+
+                    </div>
+                </div>
+                <div style="float:right">
+                    <button class="btn btn-primary" @onclick=@(() => ResetTracker(skill.EXPTracker))>Reset</button>
+                    
+                    @if (skill.EXPTracker.UpdateGoal)
+                    {
+                        <button class="btn btn-primary" @onclick=@(() => SetTrackerGoal(skill.EXPTracker, goalValue))>Set Goal</button>
+                        <input type="number" @bind=goalValue />
+                    }
+                    else
+                    {
+                        <button class="btn btn-primary" @onclick=@(() => EnableSetGoal(skill.EXPTracker))>Set Goal</button>
+                    }
+                    <button class="btn btn-primary" @onclick=@(() => skill.EXPTracker.GoalExperience = 0)>Clear Goal</button>
+                </div>
             </div>
 
         }
@@ -20,7 +40,46 @@
 
 
 @code {
+    public string GetTooltip(Skill s)
+    {
+        string t = s.Experience + " / ";
+        if (s.EXPTracker.GoalExperience == 0)
+        {
+            t += Skill.GetExperienceRequired(s.GetSkillLevelUnboosted() + 1) + "\n";
+        }
+        else
+        {
+            t += s.EXPTracker.GoalExperience + "\n";
+        }
+  
+        t +=  String.Format("{0:n0}", s.EXPTracker.GetProgress()) + "%";
+        return t;
+    }
+    public long goalValue;
 
+    public void EnableSetGoal(ExperienceTracker et)
+    {
+        et.UpdateGoal = true;
+        if(et.GoalExperience == 0)
+        {
+            goalValue = (long)Skill.GetExperienceRequired(et.Skill.GetSkillLevelUnboosted() + 1);
+        }
+        else
+        {
+            goalValue = et.GoalExperience;
+        }
+    }
+
+    public void SetTrackerGoal(ExperienceTracker et, long goal)
+    {
+        et.GoalExperience = goal;
+        et.UpdateGoal = false;
+    }
+    public void ResetTracker(ExperienceTracker et)
+    {
+        et.Show = false;
+
+    }
     public void ResetAllTrackers()
     {
         foreach(Skill s in Player.Instance.Skills)
