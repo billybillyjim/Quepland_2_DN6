@@ -1,0 +1,28 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+@foreach(KeyValuePair<string, Inventory> pair in LootTracker.Instance.DataDict)
+{
+     <div style="background:black">@pair.Key @("x" + LootTracker.Instance.KCDict[pair.Key]) - @pair.Value.GetTotalValue() Coins</div>
+    <div style="display:flex;background:#151515;flex-wrap: wrap">
+       
+        @foreach(KeyValuePair<GameItem, int> itemPair in pair.Value.GetItems())
+        {
+                <ItemBoxComponent Item="@itemPair.Key" ShowAmount="@true" Inventory="@pair.Value"></ItemBoxComponent>
+        }
+    </div>
+}
+
+
+
+@code {
+     protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

@@ -243,9 +243,10 @@ public class BattleManager
                 {
                     foreach (Drop d in opponent.DropTable.AlwaysDrops)
                     {
-                        LootTracker.Instance.Inventory.AddDrop(d);
+                        LootTracker.Instance.AddDrop(opponent, d);
                     }
-                    LootTracker.Instance.Inventory.AddDrop(drop);
+                    LootTracker.Instance.AddDrop(opponent, drop);
+                    LootTracker.Instance.AddKC(opponent, 1);
                 }
                 else
                 {
