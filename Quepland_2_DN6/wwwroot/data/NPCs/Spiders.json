@@ -1,0 +1,12 @@
+{
+  "$schema": "npc-schema.json#",
+  "name": "Spiders",
+  "id": 102,
+  "dialogs": [
+    {
+      "buttonText": "Hello",
+      "responseText": "The man does not respond. He just smirks and pretends he didn't hear you.",
+      "newDepthOnTalk": 1
+    }
+  ]
+}

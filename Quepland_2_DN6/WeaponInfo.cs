@@ -5,6 +5,8 @@ public class WeaponInfo
 {
     public int AttackSpeed { get; set; }
     public int Damage { get; set; }
+    public int RangedDamage { get; set; }
+    public int MagicDamage { get; set; }
     public int ArmorBonus { get; set; }
 
     public bool IsArrow { get; set; }

@@ -230,14 +230,22 @@ public class Player
     {
         int total = 0;
         total += GetSkill("Strength").GetSkillLevel() * 3;
+        GameItem weapon = GetWeapon();
         foreach(GameItem item in equippedItems)
         {
             if(item.WeaponInfo != null)
             {
                 total += item.WeaponInfo.Damage;
-                if (GetWeapon().EnabledActions == "Archery" && Inventory.HasArrows() == false)
+                if (weapon != null && weapon.EnabledActions == "Archery")
                 {
-                    total += GetLevel("Strength");
+                    if (Inventory.HasArrows())
+                    {
+                        total += item.WeaponInfo.RangedDamage;
+                    }
+                    else
+                    {
+                        total += GetLevel("Strength");
+                    }
                 }
                 else
                 {
@@ -246,29 +254,32 @@ public class Player
                     {
                         total += GetLevel("Strength");
                     }
-                    else 
+                    else
                     {
                         total += GetSkill(skill).GetSkillLevel() * 3;
-                    }
-                    
+                    }              
                 }
 
             }
             if(item.ArmorInfo != null)
             {
                 total += item.ArmorInfo.Damage;
-            }
-        }
-        if(GetWeapon() != null)
-        {
-            if(GetWeapon().Name == "Spine Shooter")
-            {
-                if(Inventory.HasItem("Cactus Spines"))
+                if (weapon != null &&
+                    (weapon.EnabledActions == "Archery" && Inventory.HasArrows() ||
+                    (weapon.Name == "Spine Shooter" && Inventory.HasItem("Cactus Spines"))))
                 {
-                    total += 10;
+                    total += item.ArmorInfo.RangedDamage;
                 }
             }
-            else if (GetWeapon().EnabledActions == "Archery" && Inventory.HasArrows())
+        }
+        if(weapon != null)
+        {
+            if(weapon.Name == "Spine Shooter" && Inventory.HasItem("Cactus Spines"))
+            {
+                total += 10;
+                
+            }
+            else if (weapon.EnabledActions == "Archery" && Inventory.HasArrows())
             {
                 total += Inventory.GetStrongestArrow().WeaponInfo.Damage;                        
             }

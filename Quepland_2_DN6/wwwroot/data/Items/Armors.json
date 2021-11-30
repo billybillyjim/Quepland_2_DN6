@@ -1157,7 +1157,7 @@
     "equipSlot": "Head",
     "armorInfo": {
       "armorBonus": 15,
-      "damage": 5
+      "rangedDamage": 5
     },
     "secondaryColor": "#dddddd"
   },
@@ -1171,8 +1171,69 @@
     "equipSlot": "Head",
     "armorInfo": {
       "armorBonus": 25,
-      "damage": 35
+      "rangedDamage": 35
     },
     "secondaryColor": "#ddeeaa"
+  },
+  {
+    "name": "Ruwohane Shirt",
+    "value": 11500,
+    "description": "A powerful shirt looted from a Ruwohane.",
+    "gatherString": "You make a shirt.",
+    "gatherSpeed": 17,
+    "equipSlot": "Chest",
+    "icon": "Shirt",
+    "secondaryColor": "#ddeeaa",
+    "armorInfo": {
+      "armorBonus": 55,
+      "rangedDamage": 45,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 95
+        }
+      ]
+    }
+  },
+  {
+    "name": "Ruwohane Trousers",
+    "value": 10100,
+    "description": "A strong pair of pants looted from a Ruwohane.",
+    "gatherString": "You make a pair of pants.",
+    "gatherSpeed": 16,
+    "icon": "Pants",
+    "equipSlot": "Legs",
+    "secondaryColor": "#ddeeaa",
+    "armorInfo": {
+      "armorBonus": 48,
+      "rangedDamage": 35,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 95
+        }
+      ]
+    }
+
+  },
+  {
+    "name": "Ring of Sight",
+    "value": 3500,
+    "description": "A magic ring found on a Ruwohane. You feel more focused with it on.",
+    "gatherString": "You make a ring.",
+    "gatherSpeed": 17,
+    "equipSlot": "Thumb",
+    "icon": "CabochonRing",
+    "secondaryColor": "#ddeeaa",
+    "armorInfo": {
+      "armorBonus": 3,
+      "rangedDamage": 30,
+      "wearRequirements": [
+        {
+          "skill": "Archery",
+          "skillLevel": 95
+        }
+      ]
+    }
   }
 ]

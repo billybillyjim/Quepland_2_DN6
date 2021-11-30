@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class ArmorInfo
 {
     public int Damage { get; set; }
+    public int RangedDamage { get; set; }
+    public int MagicDamage { get; set; }
     public int ArmorBonus { get; set; }
     public List<Requirement> WearRequirements { get; set; } = new List<Requirement>();
     private List<IStatusEffect> statusEffects;
