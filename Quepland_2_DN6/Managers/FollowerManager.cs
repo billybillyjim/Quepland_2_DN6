@@ -84,7 +84,7 @@ public class FollowerManager
             if(d.Length > 3)
             {
                 Console.WriteLine(d[3]);
-                //f.Inventory.LoadData(d[3]);
+                f.Inventory.LoadData(d[3]);
             }
         }
     }

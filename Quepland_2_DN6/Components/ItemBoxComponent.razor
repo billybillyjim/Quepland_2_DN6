@@ -40,6 +40,8 @@ else
     public bool shouldRender { get; set; }
     [Parameter]
     public bool HideTooltip { get; set; }
+    [Parameter]
+    public int CustomMargin { get; set; } = 2;
 
     protected override bool ShouldRender() => shouldRender;
 
@@ -100,11 +102,11 @@ else
     }
     private string GetMargin()
     {
-        if (IsSelected)
+        if (IsSelected || (Item != null && Item.IsEquipped))
         {
-            return "margin:1px;";
+            return "margin:0px;";
         }
-        return "margin:2px;";
+        return $"margin:{CustomMargin}px;";
     }
     public string GetTooltipTitle()
     {

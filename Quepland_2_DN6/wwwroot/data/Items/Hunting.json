@@ -553,7 +553,7 @@
   },
   {
     "name": "Grizzly Bear Hide",
-    "description": "The carcass of a big bear.",
+    "description": "The hide of a big bear.",
     "value": 30,
     "secondaryColor": "#614417",
     "icon": "Hide",

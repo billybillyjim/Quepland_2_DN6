@@ -1053,6 +1053,126 @@
 
   },
   {
+    "name": "Polar Bear Gloves",
+    "value": 12600,
+    "description": "A pair of gloves made from polar bear leather.",
+    "gatherString": "You make a pair of leather gloves.",
+    "gatherSpeed": 12,
+    "equipSlot": "Hands",
+    "icon": "Glove",
+    "secondaryColor": "#f3e5c2",
+    "armorInfo": {
+      "armorBonus": 20,
+      "damage": 20,
+      "wearRequirements": [
+        {
+          "skill": "Strength",
+          "skillLevel": 105
+        }
+      ]
+    }
+  },
+  {
+    "name": "Polar Bear Gloves(Clawed)",
+    "value": 14600,
+    "description": "A pair of gloves made from polar bear leather with pointy claws attached.",
+    "gatherString": "You make a pair of leather gloves.",
+    "gatherSpeed": 12,
+    "equipSlot": "Hands",
+    "icon": "ClawGlove",
+    "secondaryColor": "#f3e5c2",
+    "armorInfo": {
+      "armorBonus": 20,
+      "damage": 50,
+      "wearRequirements": [
+        {
+          "skill": "Strength",
+          "skillLevel": 105
+        }
+      ]
+    }
+  },
+  {
+    "name": "Polar Bear Hat",
+    "value": 12700,
+    "description": "A sturdy hat made from polar bear leather.",
+    "gatherString": "You make a hat from the bear leather.",
+    "gatherSpeed": 13,
+    "icon": "Hat",
+    "equipSlot": "Head",
+    "secondaryColor": "#f3e5c2",
+    "armorInfo": {
+      "armorBonus": 25,
+      "damage": 25,
+      "wearRequirements": [
+        {
+          "skill": "Strength",
+          "skillLevel": 105
+        }
+      ]
+    }
+  },
+  {
+    "name": "Polar Bear Boots",
+    "value": 12900,
+    "description": "A sturdy pair of leather boots made from polar bear leather.",
+    "gatherString": "You make a pair of leather boots from the bear leather.",
+    "gatherSpeed": 14,
+    "icon": "Boots",
+    "equipSlot": "Feet",
+    "secondaryColor": "#f3e5c2",
+    "armorInfo": {
+      "armorBonus": 35,
+      "damage": 18,
+      "wearRequirements": [
+        {
+          "skill": "Strength",
+          "skillLevel": 105
+        }
+      ]
+    }
+  },
+  {
+    "name": "Polar Bear Pants",
+    "value": 13100,
+    "description": "A sturdy pair of leather pants made from polar bear leather.",
+    "gatherString": "You make a pair of bear leather pants.",
+    "gatherSpeed": 15,
+    "equipSlot": "Legs",
+    "icon": "Pants",
+    "secondaryColor": "#f3e5c2",
+    "armorInfo": {
+      "armorBonus": 35,
+      "damage": 25,
+      "wearRequirements": [
+        {
+          "skill": "Strength",
+          "skillLevel": 105
+        }
+      ]
+    }
+  },
+  {
+    "name": "Polar Bear Shirt",
+    "value": 13300,
+    "description": "A sturdy shirt made of polar bear leather.",
+    "gatherString": "You make a leather shirt.",
+    "gatherSpeed": 16,
+    "equipSlot": "Chest",
+    "icon": "Shirt",
+    "secondaryColor": "#f3e5c2",
+    "armorInfo": {
+      "armorBonus": 45,
+      "damage": 30,
+      "wearRequirements": [
+        {
+          "skill": "Strength",
+          "skillLevel": 105
+        }
+      ]
+    }
+  },
+  {
     "name": "Iseroite Ring",
     "value": 1200,
     "description": "A strange ring. It makes you feel safe, somehow.",
@@ -1154,6 +1274,7 @@
     "gatherString": "You make a Nmekufian mask.",
     "gatherSpeed": 8,
     "icon": "Mask",
+    "enabledActions": "Drain Protection",
     "equipSlot": "Head",
     "armorInfo": {
       "armorBonus": 15,
@@ -1167,6 +1288,7 @@
     "description": "A mask that was once worn by a Ruwohane. It won't be needing it anymore.",
     "gatherString": "You get a mask.",
     "gatherSpeed": 8,
+    "enabledActions": "Drain Protection",
     "icon": "CoolMask",
     "equipSlot": "Head",
     "armorInfo": {

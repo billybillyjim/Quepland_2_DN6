@@ -8,7 +8,7 @@
     <div class="col-4">
         <button class="btn btn-primary" @onclick="@(() => SaveManager.SaveGame())">Manual Save</button>
         <div>
-            The game autosaves once every half hour, but you can manually save here. If it was successful, the save time in the bottom left corner will change.
+            The game autosaves once every @(Extensions.GameTicksToSeconds(GameState.AutoSaveInterval) / 60f) Minutes, but you can manually save here. If it was successful, the save time in the bottom left corner will change.
         </div>
         <div>
             <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => CompactInventory())">Compact Inventory</button>
@@ -16,9 +16,6 @@
         <div>
             <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => HideLockedItems())">Hide Locked Items</button>
         </div>
-
-    </div>
-    <div class="col-4">
         You can export your save to keep a backup somewhere. You can load an exported save from the main menu.
         <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => ExportSave())">Export Save</button>
         @if (exportedSave != "")

@@ -890,6 +890,7 @@
     "value": 7000,
     "secondaryColor": "#FFD700",
     "icon": "Knife",
+    "equipSlot": "R Hand",
     "weaponInfo": {
       "attackSpeed": 5,
       "damage": 15,

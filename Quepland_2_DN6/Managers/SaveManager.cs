@@ -417,8 +417,8 @@ public static class SaveManager
         //12
         if (GameState.CheckVersion("1.1.0"))
         {
-            //file += Compress(FollowerManager.Instance.GetNewSaveData()) + ",";
-            file += Compress(FollowerManager.Instance.GetSaveData()) + ",";
+            file += Compress(FollowerManager.Instance.GetNewSaveData()) + ",";
+            //file += Compress(FollowerManager.Instance.GetSaveData()) + ",";
         }
         else
         {

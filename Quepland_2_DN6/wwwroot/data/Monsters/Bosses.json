@@ -101,8 +101,33 @@
           "itemName": "Coins",
           "weight": 30,
           "amount": 500
+        },
+        {
+          "itemName": "Mask of Ruwohane",
+          "weight": 3,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 5,
+          "amount": 100
+        },
+        {
+          "itemName": "Ruwohane Hair",
+          "weight": 1,
+          "amount": 2
+        },
+        {
+          "itemName": "Ruwohane Hair",
+          "weight": 2,
+          "amount": 1
+        },
+        {
+          "itemName": "Ring of Sight",
+          "weight": 2,
+          "amount": 1
         }
-        
+
       ]
     }
   }

@@ -175,6 +175,16 @@
     "icon": "Rope"
   },
   {
+    "name": "Magic Rope",
+    "description": "A bunch of magical fibers tied together. You could use this to climb things more quickly than with normal rope, probably.",
+    "value": 500,
+    "isStackable": true,
+    "gatherSpeed": 20,
+    "gatherString": "You gather some magic rope.",
+    "secondaryColor": "#abcdef",
+    "icon": "MagicRope"
+  },
+  {
     "name": "Leatherworking Toolkit",
     "description": "A set of tools to work leather into form.",
     "value": 100,
@@ -331,6 +341,21 @@
     "icon": "Seeds",
     "isStackable": true,
     "secondaryColor": "#9F6F4F"
+  },
+  {
+    "name": "Great Tree Fruit",
+    "description": "A fruit from the Great Tree. It's a large, tasty fruit.",
+    "value": 2000,
+    "icon": "Fruit",
+    "isStackable": true,
+    "secondaryColor": "#9F6F4F",
+    "foodInfo": {
+      "healDuration": 1200,
+      "healAmount": 1,
+      "healSpeed": 25,
+      "buffedSkill": "Deftness",
+      "buffAmount": 15
+    }
   },
   {
     "name": "Steelflame Axe Handle",

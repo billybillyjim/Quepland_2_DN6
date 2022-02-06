@@ -166,7 +166,13 @@ public class Inventory
         {
             return false;
         }
-        if(itemLookupDic.TryGetValue(ItemManager.Instance.GetItemByName(itemName).UniqueID, out _))
+        GameItem i = ItemManager.Instance.GetItemByName(itemName);
+        if(i == null)
+        {
+            Console.WriteLine("No item exists with name:" + itemName);
+            return false;
+        }
+        if (itemLookupDic.TryGetValue(i.UniqueID, out _))
         {
             return true;
         }

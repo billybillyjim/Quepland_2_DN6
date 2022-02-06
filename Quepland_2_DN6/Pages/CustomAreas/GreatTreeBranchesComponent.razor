@@ -16,15 +16,15 @@
             }
             else if(GetFacingDirection(CurrentBranch, branch) == "East")
             {
-                <button class="btn btn-primary m-3" style="position:absolute;right:10px;bottom:@RandPos[0]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+                <button class="btn btn-primary m-3" style="position:absolute;right:10px;bottom:@RandPos[1]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
             }
             else if(GetFacingDirection(CurrentBranch, branch) == "South")
             {
-                <button class="btn btn-primary m-3" style="position:absolute;bottom:10px;right:@RandPos[0]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+                <button class="btn btn-primary m-3" style="position:absolute;bottom:10px;right:@RandPos[2]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
             }
             else if(GetFacingDirection(CurrentBranch, branch) == "West")
             {
-                <button class="btn btn-primary m-3" style="position:absolute;left:10px;top:@RandPos[0]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+                <button class="btn btn-primary m-3" style="position:absolute;left:10px;top:@RandPos[3]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
             }
             else
             {
@@ -32,21 +32,29 @@
             }
             
         }
+        @if (hasFruit)
+        {
+            <button class="btn btn-primary m-3" style="position:absolute;left:@FruitLeftPos;top:@FruitTopPos;" @onclick=@(() => GatherFruit())>Harvest Fruit</button>
+
+        }
     </div>
     
 
 }
 
 @code {
-
+    //TODO:Set Branch locations specifically (No random)
     [Parameter]
     public string areaURL { get; set; }
     public Area thisArea { get; set; }
     public long NextClimbTick;
     public bool IsClimbing;
+    public bool hasFruit;
     public List<int> CurrentBranches = new List<int>();
     public int CurrentBranch;
     public string FacingDirection = "South";
+    public string FruitLeftPos = "";
+    public string FruitTopPos = "";
     public List<string> RandPos = new List<string>();
 
     public Dictionary<int, List<int>> Branches = new Dictionary<int, List<int>>()
@@ -111,6 +119,19 @@
         return "Left";
 
     }
+    public void GatherFruit(){
+
+        if(Player.Instance.Inventory.AddItem("Great Tree Fruit"))
+        {
+            MessageManager.AddMessage("You harvest a fruit from the great tree.");
+            hasFruit = false;
+            GameState.UpdateState();
+        }
+        else
+        {
+            MessageManager.AddMessage("Your inventory is full.");
+        }
+    }
     public void GetBranches(int branch)
     {
         CurrentBranches = Branches[branch];
@@ -119,6 +140,13 @@
     public void JumpToBranch(int branch)
     {
         FacingDirection = GetFacingDirection(CurrentBranch, branch);
+        Player.Instance.GainExperience("Deftness", Player.Instance.GetLevel("Deftness") * 5);
+        if(GameState.Random.Next(0, 100) <= 50)
+        {
+            hasFruit = true;
+            FruitLeftPos = GetRandomPos();
+            FruitTopPos = GetRandomPos();
+        }
         GetBranches(branch);
         CurrentBranch = branch;
         for(int i = 0; i < 4; i ++)

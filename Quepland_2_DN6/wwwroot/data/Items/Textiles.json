@@ -66,7 +66,7 @@
     "name": "Ruwohane Hair",
     "value": 150,
     "description": "A tough bundle of hair that feels very light weight.",
-    "icon": "Wool",
+    "icon": "Hair",
     "gatherString": "You harvest some Ruwohane hair.",
     "secondaryColor": "#ddeeaa"
   },

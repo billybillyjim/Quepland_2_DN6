@@ -6,15 +6,35 @@
 
 @if (thisArea != null)
 {
-    <AreaComponent areaURL="GreatTree"></AreaComponent>
-    @if (false)
+     <AreaComponent areaURL="GreatTree"></AreaComponent>
+    @if(AreaManager.Instance.GetAreaByURL("RaabitGate").IsUnlocked == false)
     {
-        @if (Player.Instance.Inventory.HasItem("Rope") && !IsClimbing)
+        @if(GreatTree.Progress < GreatTree.Height)
+        {
+            @if ((Player.Instance.Inventory.HasItem("Rope") || Player.Instance.Inventory.HasItem("Magic Rope")) && !IsClimbing)
         {
             <button class="btn btn-primary" style="margin-top:10px;" @onclick="@(() => StartClimbingTree())">Climb Tree</button>
         }
         else if (IsClimbing)
         {
+            <div class="progress my-2" @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Climbing Progress", String.Format("D", GreatTree.Progress / GreatTree.Height))))"
+                                    @onmouseout="@(new Action(() => GameState.HideTooltip()))" style="border-radius:0;background-color:darkgray">                
+                <div class="progress-bar" style="width:@(GreatTree.Progress / GreatTree.Height * 100)%;color:black;background-color:#51d051">
+
+                </div>
+            </div>
+
+            <div class="progress vertical my-2" style="border-radius:0;background-color:#51d051;width:15px;height:200px;">     
+                @if(NextClimbTick > GameState.CurrentTick)
+                {
+                <div class="progress-bar" style="height:@((((NextClimbTick - GameState.CurrentTick) / (double)TicksPerClimb) * 100))%;width:15px;color:darkgray;background-color:black">
+
+                </div>
+                }
+
+            </div>
+
+
             <button class="btn btn-primary" style="margin-top:10px;" @onclick="@(() => StopClimbing())">Stop Climbing Tree</button>
         }
         else
@@ -24,10 +44,13 @@
                     @onmouseout="@(new Action(() => GameState.HideTooltip()))">
                 Climb Tree
             </button>
+            }
         }
     }
-
-
+    else
+    {
+        <Quepland_2_DN6.Components.AreaUnlockComponent areaToUnlock="@a"></Quepland_2_DN6.Components.AreaUnlockComponent>      
+    }
 }
 
 @code {
@@ -36,13 +59,30 @@
     public string areaURL { get; set; }
     public Area thisArea { get; set; }
     public long NextClimbTick;
+    public long TicksPerClimb;
     public bool IsClimbing;
-
+    public AreaUnlock a;
     private void StartClimbingTree()
     {
-        NextClimbTick = GameState.CurrentTick + (100 - Math.Min(90, ((Player.Instance.GetLevel("Strength") / 10) + (Player.Instance.GetLevel("Deftness")) / 10)));
-        IsClimbing = true;
+        if(Player.Instance.Inventory.HasItem("Magic Rope"))
+        {
+            MessageManager.AddMessage("You grip the side of the tree and pull yourself upwards.");
+            NextClimbTick = GameState.CurrentTick + (50 - Math.Min(45, (((Player.Instance.GetLevel("Strength") / 3) + (Player.Instance.GetLevel("Deftness")) / 3))));
 
+            IsClimbing = true;
+        }
+        else if (Player.Instance.Inventory.HasItem("Rope"))
+        {
+            MessageManager.AddMessage("You grip the side of the tree and pull yourself upwards.");
+            NextClimbTick = GameState.CurrentTick + (50 - Math.Min(45, (((Player.Instance.GetLevel("Strength") / 5) + (Player.Instance.GetLevel("Deftness")) / 5))));
+            IsClimbing = true;
+        }
+        else
+        {
+            MessageManager.AddMessage("You have run out of rope! You'll have to find some more.");
+            IsClimbing = false;
+        }
+        TicksPerClimb = NextClimbTick - GameState.CurrentTick;
     }
     private void StopClimbing()
     {
@@ -84,11 +124,17 @@
     protected override void OnInitialized()
     {
         GameState.StateChanged += OnGameStateChanged;
+
     }
     protected override void OnParametersSet()
     {
         areaURL = "GreatTree";
         thisArea = AreaManager.Instance.GetAreaByURL(areaURL);
+        a = new AreaUnlock()
+            {
+                ButtonText = "Climb Inside Tree",
+                AreaURL = "RaabitGate"
+            };
         //GameState.NavMenu.ChangeOpenRegion(AreaManager.Instance.GetRegionForArea(thisArea), false);
         GameState.UpdateState();
 
@@ -102,7 +148,14 @@
 
         if (NextClimbTick <= GameState.CurrentTick && IsClimbing)
         {
-            if (Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Rope"), 1) == 1)
+            if (Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Magic Rope"), 1) == 1)
+            {
+                MessageManager.AddMessage("The rope magically pulls you up the tree faster.");
+                GreatTree.Progress += 2;
+                StartClimbingTree();
+                
+            }
+            else if (Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Rope"), 1) == 1)
             {
                 MessageManager.AddMessage("You climb further up the tree.");
                 GreatTree.Progress++;

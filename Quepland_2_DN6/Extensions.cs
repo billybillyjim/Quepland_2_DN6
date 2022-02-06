@@ -75,15 +75,15 @@ public static class Extensions
         {
             if (item.Key.IsEquipped)
             {
-                if(item.Key.ArmorInfo != null)
+                if (item.Key.ArmorInfo != null)
                 {
                     armorTotal += item.Key.ArmorInfo.ArmorBonus;
                 }
-                if(item.Key.WeaponInfo != null)
+                if (item.Key.WeaponInfo != null)
                 {
                     armorTotal += item.Key.WeaponInfo.ArmorBonus;
                 }
-                
+
             }
 
         }
@@ -186,7 +186,7 @@ public static class Extensions
         else if (digits < 25)
         {
             letter = "s";
-        }      
+        }
         else
         {
             return num.ToString("0.00E+0");
@@ -205,6 +205,13 @@ public static class Extensions
             return num.ToString("00.000000E+0").Substring(0, 4) + letter;
         }
 
+    }
+
+    public static float GameTicksToSeconds(int input)
+    {
+        float time = GameState.GameSpeed / 1000f;
+        float total = time * input;
+        return total;
     }
 
 }

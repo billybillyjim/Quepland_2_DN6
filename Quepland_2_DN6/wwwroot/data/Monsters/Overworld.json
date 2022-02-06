@@ -2489,6 +2489,11 @@
           "itemName": "Transit Branch",
           "weight": 3,
           "amount": 1
+        },
+        {
+          "itemName": "Magic Rope",
+          "weight": 8,
+          "amount": 1
         }
       ]
     },
