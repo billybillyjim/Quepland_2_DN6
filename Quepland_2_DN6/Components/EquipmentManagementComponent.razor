@@ -9,6 +9,16 @@
              @onmouseout="@(new Action(() => GameState.HideTooltip()))">
             <img src="data/Images/Attack.png" style="height:26px;width:26px;margin-top:-3px;" /> @GetAttack()
         </div>
+                <div style="margin-right:10px;line-height:28px;flex:1;"
+             @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Ranged Damage", "This is a measure of how much all your equipped items boost your ranged damage. Higher numbers are better!")))"
+             @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+            <img src="data/Images/Archery.png" style="height:26px;width:26px;margin-top:-3px;" /> @GetRangedAttack()
+        </div>
+                <div style="margin-right:10px;line-height:28px;flex:1;"
+             @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Magic Damage", "This is a measure of how much all your equipped items boost your magic damage. Higher numbers are better!")))"
+             @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+            <img src="data/Images/Stun.png" style="height:26px;width:26px;margin-top:-3px;" /> @GetMagicAttack()
+        </div>
         <div style="margin-right:10px;line-height:28px;flex:1;"
              @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Armor", "This is a measure of how much all your equipped items boost your armor. Higher numbers are better!")))"
              @onmouseout="@(new Action(() => GameState.HideTooltip()))">
@@ -28,7 +38,7 @@
             @slot
 
             <div @onclick="@(() => Unequip(GetItemAtSlot(slot)))">
-                <Quepland_2_DN6.Components.ItemBoxComponent Item="@GetItemAtSlot(slot)" shouldRender="@ShouldRerender(slot)"></Quepland_2_DN6.Components.ItemBoxComponent>
+                <Quepland_2_DN6.Components.ItemBoxComponent Item="@GetItemAtSlot(slot)" shouldRender="@ShouldRerender(slot)" CustomMargin=0></Quepland_2_DN6.Components.ItemBoxComponent>
             </div>
         </div>
     }
@@ -41,14 +51,32 @@
 
 @code {
 
-    public int GetAttack()
+    public string GetAttack()
     {
         int total = 0;
         foreach (GameItem i in Player.Instance.GetEquippedItems())
         {
             total += i.WeaponInfo?.Damage ?? 0 + i.ArmorInfo?.Damage ?? 0;
         }
-        return total;
+        return total.ToString("D");
+    }
+    public string GetRangedAttack()
+    {
+        int total = 0;
+        foreach (GameItem i in Player.Instance.GetEquippedItems())
+        {
+            total += i.WeaponInfo?.RangedDamage ?? 0 + i.ArmorInfo?.RangedDamage ?? 0;
+        }
+        return total.ToString("D");
+    }
+    public string GetMagicAttack()
+    {
+        int total = 0;
+        foreach (GameItem i in Player.Instance.GetEquippedItems())
+        {
+            total += i.WeaponInfo?.MagicDamage ?? 0 + i.ArmorInfo?.MagicDamage ?? 0;
+        }
+        return total.ToString("D");
     }
     public int GetArmor()
     {
