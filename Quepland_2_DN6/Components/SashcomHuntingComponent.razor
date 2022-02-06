@@ -193,12 +193,13 @@ else
             if (LastGameTick % 3 == 0)
             {
                 air--;
+                if (air == 25)
+                {
+                    MessageManager.AddMessage("You are running out of air!", "red");
+                }
             }
 
-            if (air == 25)
-            {
-                MessageManager.AddMessage("You are running out of air!", "red");
-            }
+
             if (air <= 0)
             {
                 MessageManager.AddMessage("You run out of air, suffocate, and die.", "red");
