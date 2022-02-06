@@ -23,7 +23,7 @@ public class QuestManager
 
     public async Task LoadQuests(HttpClient Http)
     {
-
+        Quests.Add(await Http.GetFromJsonAsync<Quest>("data/Quests/Mayor'sAssistant.json"));
         Quests.AddRange(await Http.GetFromJsonAsync<Quest[]>("data/Quests.json"));
         Quests.Add(await Http.GetFromJsonAsync<Quest>("data/Quests/CaseOfTheDeadPirate.json"));
     }

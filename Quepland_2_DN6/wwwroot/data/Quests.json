@@ -1,38 +1,5 @@
 [
   {
-    "name": "Mayor's Assistant",
-    "id": 0,
-    "completionText": "Congratulations! You completed Mayor's Assistant! The mayor has rewarded you with a copper axe and you learned a thing or two about cutting wood along the way.",
-    "progressToComplete": 6,
-    "requirements": [
-      {
-        "skill": "Woodcutting",
-        "skillLevel": 3
-      }
-    ],
-    "rewards": [
-      {
-        "skill": "Woodcutting",
-        "experienceGain": 500
-      },
-      {
-        "item": "Copper Axe",
-        "itemAmount": 1
-      }
-    ],
-    "Description": "The mayor of Teppas has a request for you.",
-    "progressStrings": [
-      "You haven't started this quest yet. Talk to the mayor in Teppas to begin.",
-      "The mayor has asked you for a favor.",
-      "The mayor has asked you to make a no soliciting sign for him. ",
-      "You've agreed to help the mayor make a sign.",
-      "The sign man has told you what you need to make a sign: 3 white pine logs and some shuniku berries.",
-      "The sign man has given you the sign you asked for. It's not very good.",
-      "You gave the sign man's awful sign to the mayor. You completed the quest! The mayor doesn't seem too pleased, though.",
-      "You made the sign yourself and gave it to the mayor! He was quite pleased. You've completed the quest!"
-    ]
-  },
-  {
     "name": "Oriole Ornithology",
     "id": 1,
     "completionText": "Congratulations! You completed the tutorial! You now know everything you need to know to set out on an adventure! Good luck out there!",
