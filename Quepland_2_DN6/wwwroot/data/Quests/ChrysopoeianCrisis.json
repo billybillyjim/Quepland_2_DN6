@@ -1,0 +1,27 @@
+{
+  "name": "Chrysopoeian Crisis",
+  "id": 4,
+  "completionText": "Congratulations! You solved the crisis!",
+  "progressToComplete": 1000,
+  "rewards": [
+    {
+      "skill": "Alchemy",
+      "experienceGain": 3000
+    },
+    {
+      "skill": "Knifesmanship",
+      "experienceGain": 2000
+    }
+  ],
+  "Description": "The members of the alchemy guild are secretive and difficult to work with. Can you convince them to let you join their guild?",
+  "progressStrings": [
+    "You haven't started this quest yet. You can begin by talking to the man at the peak of Mt. Queple.",
+    "Oikaaz advised you to visit the Alchemist's Guild in Tsu City to learn alchemy from a teacher."
+  ],
+  "flags": [
+    {
+      "name": "Quest Start",
+      "description": "Carl has revealed to you that his camels were stolen."
+    }
+  ]
+}

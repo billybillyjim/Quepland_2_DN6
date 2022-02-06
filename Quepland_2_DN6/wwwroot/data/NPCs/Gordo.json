@@ -11,6 +11,7 @@
       "buttonText": "Why's this called Mound's Boats if you're named Gordo?",
       "responseText": "O-o-o-h-h that's a fu-funny question, haha! We-well Mound isn't he-here right now so-so so I'm taking ov-over.",
       "newQuestprogressValue": 1,
+      "setFlag": "Quest Start",
       "quest": "Mound Is Missing",
       "requirements": [
         {

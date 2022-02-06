@@ -7,6 +7,7 @@
       "buttonText": "Do you know anything about a guy name Mound?",
       "responseText": "Never heard of him, sorry. But I have heard there's a fortune teller here who might be able to help you. That's actually why I'm here.",
       "newQuestprogressValue": 3,
+      "setFlag": "A Traveller's Hint",
       "quest": "Mound Is Missing",
       "requirements": [
         {
@@ -20,6 +21,7 @@
       "buttonText": "Fortune telling? That's stupid.",
       "responseText": "Wow, rude. Guess you'll have to find his house on your own, beak-nose.",
       "newQuestprogressValue": 4,
+      "setFlag": "A Traveller's Rude Reply",
       "quest": "Mound Is Missing",
       "requirements": [
         {
