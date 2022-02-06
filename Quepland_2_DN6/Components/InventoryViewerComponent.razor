@@ -260,7 +260,7 @@
                 }
                 
             }
-            Console.WriteLine(GameState.CurrentContextMenu.Buttons.Count);
+            GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Examine " + item, new Action(() => MessageManager.AddMessage(item.Description))));
             GameState.ShowContextMenu(args);
         }
         else{ SelectItem(args, item); }
