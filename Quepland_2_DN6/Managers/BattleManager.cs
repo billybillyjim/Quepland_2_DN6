@@ -305,7 +305,10 @@ public class BattleManager
     }
     public int GetTotalPlayerDamage(Monster m)
     {
-        int total = (int)Math.Max(1, Player.Instance.GetTotalDamage().ToRandomDamage() * CalculateTypeBonus(Target));
+        double minHit = (((Player.Instance.GetWeaponAttackSpeed() / 5d) - 1d) / 12d);
+ 
+        var baseDmg = Player.Instance.GetTotalDamage();
+        int total = (int)Math.Max(minHit * baseDmg * CalculateTypeBonus(Target), baseDmg.ToRandomDamage() * CalculateTypeBonus(Target));
         if (Target.CurrentStatusEffects.OfType<CleaveEffect>().Any())
         {
         }
