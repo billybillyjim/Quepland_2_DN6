@@ -25,8 +25,13 @@ public class QuestManager
     {
         Quests.Add(await Http.GetFromJsonAsync<Quest>("data/Quests/OrioleOrnithology.json"));
         Quests.Add(await Http.GetFromJsonAsync<Quest>("data/Quests/Mayor'sAssistant.json"));
-        Quests.AddRange(await Http.GetFromJsonAsync<Quest[]>("data/Quests.json"));
+        Quests.Add(await Http.GetFromJsonAsync<Quest>("data/Quests/ArborealConundrum.json"));
         Quests.Add(await Http.GetFromJsonAsync<Quest>("data/Quests/CaseOfTheDeadPirate.json"));
+        Quests.Add(await Http.GetFromJsonAsync<Quest>("data/Quests/GrandTheftCamel.json"));
+        Quests.Add(await Http.GetFromJsonAsync<Quest>("data/Quests/MoundIsMissing.json"));
+        Quests.Add(await Http.GetFromJsonAsync<Quest>("data/Quests/Queple'sSword.json"));
+        Quests.Add(await Http.GetFromJsonAsync<Quest>("data/Quests/ChrysopoeianCrisis.json"));
+
     }
 
     public Quest GetQuestByName(string name)
