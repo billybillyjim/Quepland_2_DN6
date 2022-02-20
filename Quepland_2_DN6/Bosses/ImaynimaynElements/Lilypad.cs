@@ -32,7 +32,11 @@ namespace Quepland_2_DN6.Bosses.ImaynimaynElements
             {
                 if (Fall)
                 {
-                    CurrentTick--;
+                    if(Player.Instance.GetItemInSlot("Neck") == null || Player.Instance.GetItemInSlot("Neck").Name != "Potaki's Tear")
+                    {
+                        CurrentTick--;
+                    }
+                    
                     if(CurrentTick <= 0)
                     {
                         MessageManager.AddMessage("The " + Position + " lilypad falls under the water!", "red");
