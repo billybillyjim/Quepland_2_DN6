@@ -174,15 +174,15 @@
         }
         private string GetPlayerHPPercent()
         {
-            return (((double)Player.Instance.CurrentHP / Player.Instance.MaxHP) * 100d) + "%";
+            return (((double)Player.Instance.CurrentHP / Player.Instance.MaxHP) * 100d).ToSafeRenderString() + "%";
         }
         private string GetOpponentAttackProgress(Monster opponent)
         {
-            return (100 - (((double)opponent.TicksToNextAttack / opponent.AttackSpeed) * 100d)) + "%";
+            return (100 - (((double)opponent.TicksToNextAttack / opponent.AttackSpeed) * 100d)).ToSafeRenderString() + "%";
         }
         private string GetPlayerAttackProgress()
         {
-            return (100 - (((double)Player.Instance.TicksToNextAttack / Player.Instance.GetWeaponAttackSpeed()) * 100d)) + "%";
+            return (100 - (((double)Player.Instance.TicksToNextAttack / Player.Instance.GetWeaponAttackSpeed()) * 100d)).ToSafeRenderString() + "%";
         }
         private void Return()
         {
