@@ -147,7 +147,7 @@
             "buttonText": "Train with Guards",
             "expPerHour": 10000,
             "skillTrained": "Archery",
-            "bonusExp": 3000
+            "bonusExp": 30000
           }
         ]
       },
