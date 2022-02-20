@@ -90,10 +90,14 @@
     {
         if(GameState.CurrentBook != null)
         {
-            return "width:" + (100 - ((double)GameState.TicksToNextAction / Math.Max(100, ((1 + GameState.CurrentBook.Difficulty * 5d) / (Player.Instance.GetLevel(GameState.CurrentBook.Skill.Name)) * 100))) * 100d) + "%";
+            var progress = (100 -
+                ((double)GameState.TicksToNextAction / Math.Max(100, (
+                    (1 + GameState.CurrentBook.Difficulty * 5d) / (Player.Instance.GetLevel(GameState.CurrentBook.Skill.Name)) * 100)))
+                    * 100d).ToSafeRenderString();
+            return "width:" + progress + "%";
             
         }
-        return "width:" + (100 - ((double)GameState.TicksToNextAction / 60d) * 100d) + "%";
+        return "width:" + (100 - ((double)GameState.TicksToNextAction / 60d) * 100d).ToSafeRenderString() + "%";
     }
     protected override void OnInitialized()
     {
