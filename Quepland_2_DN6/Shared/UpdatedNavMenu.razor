@@ -8,7 +8,7 @@
     </button>
 </div>
 
-<div class="@NavMenuCssClass " @onclick="ToggleNavMenu">
+<div>
     @if (GameState.IsOnHuntingTrip == false && GameState.CurrentAFKAction == null)
     {
         <ul class="nav flex-column">
@@ -99,7 +99,7 @@
     }
     <ul style="margin-bottom:50px;">
     </ul>
-    <ul style="position:absolute;padding:0;bottom:10px;left:10px;">
+    <ul style="position:absolute;padding:0;bottom:10px;left:20px;">
         <li>
             @if (GameState.SaveGame)
             {<div>
@@ -314,12 +314,7 @@
         }
         return "color:black;cursor:pointer;font-size:large;padding:5px;margin-left:-5px;white-space:nowrap;";
     }
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
     protected override void OnInitialized()
     {
         //GameState.NavMenu = this;

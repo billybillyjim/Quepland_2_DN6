@@ -43,7 +43,15 @@
                     </div>
                     @if (showMessages)
                     {
-                        <Quepland_2_DN6.Components.MessagesMenuComponent NumToShow="100"></Quepland_2_DN6.Components.MessagesMenuComponent>
+                        if (MessageManager.ShowChat)
+                        {
+                            <Quepland_2_DN6.Components.MessagesMenuComponent NumToShow="1"></Quepland_2_DN6.Components.MessagesMenuComponent>
+                        }
+                        else
+                        {
+                            <Quepland_2_DN6.Components.MessagesMenuComponent NumToShow="100"></Quepland_2_DN6.Components.MessagesMenuComponent>
+                        }
+                        
                     }
                     else
                     {
@@ -113,6 +121,10 @@
     private void FilterMessages(string tag)
     {
         MessageManager.CurrentTag = tag;
+        if(tag == "Chat")
+        {
+            MessageManager.ShowChat = true;
+        }
         GameState.UpdateState();
     }
     private string GetGradient()
