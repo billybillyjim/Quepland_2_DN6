@@ -4,22 +4,38 @@
   "completionText": "Congratulations! You solved the mystery of Queple's Sword!",
   "Description": "An ancient sword rests in a tomb. Find it and discover a way to use it, too!",
   "progressToComplete": 10000,
-  "progressStrings": [
-    "You haven't started this quest yet. You'll need to find Queple's grave to begin.",
-    "You found a strange sword in an old tomb.",
-    "Ken told you the sword you found is probably from Tackure.",
-    "Ken told you to talk to Kumuhana in the village to learn more about the sword.",
-    "Kumuhana has revealed that the sword is a weapon from Imaynimayn.",
-    "You admitted to stealing the sword from a tomb.",
-    "",
-    "You told Kumuhana you found the sword near Mt. Queple.",
-    "Kumuhana suggests returning the sword to the great Imaynimayn. Maybe he has something that can make it useable...",
-    "You returned the cleaned sword to Queple's Tomb and activated the sword!"
-  ],
   "flags": [
     {
       "name": "Quest Start",
       "description": "You found a strange sword in an old tomb."
+    },
+    {
+      "name": "Sword's Origins",
+      "description": "Ken told you the sword you found is probably from Tackure."
+    },
+    {
+      "name": "A New Lead",
+      "description": "Ken told you to talk to Kumuhana in the village to learn more about the sword."
+    },
+    {
+      "name": "The Sword Boss",
+      "description": "Kumuhana has revealed that the sword is a weapon from Imaynimayn."
+    },
+    {
+      "name": "Told Kumuhana Mt. Queple",
+      "description": "You told Kumuhana you found the sword near Mt. Queple."
+    },
+    {
+      "name": "Told Kumuhana Grave Robber",
+      "description": "You admitted to stealing the sword from a tomb."
+    },
+    {
+      "name": "Kumuhana's Advice",
+      "description": "Kumuhana suggests returning the sword to the great Imaynimayn. Maybe he has something that can make it useable..."
+    },
+    {
+      "name": "Sword Completed",
+      "description": "You returned the cleaned sword to Queple's Tomb and activated the sword!"
     }
   ]
 }

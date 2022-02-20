@@ -61,11 +61,13 @@ else if(activeWindow == "EXP")
 {
     //Fix this
     <ExperienceTrackerComponent></ExperienceTrackerComponent>
-        }
-        else if(activeWindow == "Loot")
-        {
-            <LootTrackerComponent></LootTrackerComponent>
-        }
+}
+else if(activeWindow == "Loot")
+{
+    <LootTrackerComponent></LootTrackerComponent>
+}
+
+
     </div>
     <div style="display:flex;flex-direction:column;position:absolute;right:0px;">
         <button class="sidebar-buttons" style="@GetBGColor("Inventory")" onclick="@(new Action(() => ChangeView("Inventory")))"><img src="/data/Images/WhiteInventory.png" style="height:42px;width:42px;">Inv</button>
@@ -79,17 +81,19 @@ else if(activeWindow == "EXP")
 
         @if (IsTesting())
         {
-            <button class="sidebar-buttons" style="@GetBGColor("Map")" onclick="@(new Action(() => OpenMap()))"><img src="/data/Images/Map.png" style="height:42px;width:42px;">Map</button>
-            <button class="sidebar-buttons" style="@GetBGColor("Debug")" onclick="@(new Action(() => ChangeView("Debug")))"><img src="/data/Images/Bug.png" style="height:45px;width:45px;border:solid black 4px;">Debug</button>
+            <!-- <button class="sidebar-buttons" style="@GetBGColor("Map")" onclick="@(new Action(() => OpenMap()))"><img src="/data/Images/Map.png" style="height:42px;width:42px;">Map</button> -->
+            <button class="sidebar-buttons" style="@GetBGColor("Debug")" onclick="@(new Action(() => ChangeView("Debug")))"><img src="/data/Images/Alchemy.png" style="height:45px;width:45px;border:solid black 4px;">Debug</button>
 
         }
     </div>
     </div>
-@code {
 
+
+@code {
 
     private string activeWindow = "Inventory";
 
+   
     private string GetPlayerHPPercent()
     {
         return (((double)Player.Instance.CurrentHP / Player.Instance.MaxHP) * 100d) + "%";

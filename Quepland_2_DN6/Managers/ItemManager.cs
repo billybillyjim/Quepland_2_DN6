@@ -100,7 +100,7 @@ public class ItemManager
             }
             else
             {
-                //Console.WriteLine(file + " has " + count + " items.");
+                Console.WriteLine(file + " has " + count + " items.");
 
             }
             Items.AddRange(addedItems);

@@ -3,8 +3,15 @@
 
 
 <div class="modal-footer col-12" style="display:contents;">
+@if(false){
+     <iframe id="twitch-chat-embed"
+        src="https://www.twitch.tv/embed/billybillyjim/chat?darkpopout&parent=localhost"
+        style="flex-grow:1;border:none;margin:0;padding:0;width:100%;min-height:400px;">
+    </iframe>
 
-        <table style="margin-top: -10px;">
+}
+else{
+    <table style="margin-top: -10px;">
             @foreach (Message message in MessageManager.GetReversedMessages().Take(NumToShow))
             {
                 <tr>
@@ -37,7 +44,7 @@
             }
 
        </table>
-    
+}    
 
 </div>
 

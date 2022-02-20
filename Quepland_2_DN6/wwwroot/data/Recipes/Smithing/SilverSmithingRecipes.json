@@ -40,6 +40,10 @@
       {
         "skill": "Smithing",
         "skillLevel": 40
+      },
+      {
+        "skill": "Artisan",
+        "skillLevel": 40
       }
     ]
   },

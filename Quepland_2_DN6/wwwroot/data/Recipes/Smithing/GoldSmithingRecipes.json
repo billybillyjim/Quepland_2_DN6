@@ -114,6 +114,10 @@
       {
         "skill": "Smithing",
         "skillLevel": 85
+      },
+      {
+        "skill": "Artisan",
+        "skillLevel": 60
       }
     ]
   },

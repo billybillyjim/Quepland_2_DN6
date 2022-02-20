@@ -11,7 +11,11 @@ public static class MessageManager
     private static string lastMessage;
     private static int repeatMessageCount = 1;
     public static string CurrentTag = "All";
-
+    public static bool ShowChat;
+    public static void Clear(string tag)
+    {
+        Messages.RemoveAll(m => m.Tag == tag);
+    }
     public static void Clear()
     {
         Messages.Clear();

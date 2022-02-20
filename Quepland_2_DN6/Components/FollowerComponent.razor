@@ -20,7 +20,7 @@
 
     }
 <div class="progress" style="border-radius:0;background-color:darkgray;position:relative;">
-    <div class="progress-bar" style="width:@(follower.Banking.Progress)%;color:black;background-color:#51d051"
+    <div class="progress-bar" style="width:@(follower.Banking.Progress.ToSafeRenderString())%;color:black;background-color:#51d051"
          @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Banking", "Experience:" + follower.Banking.Experience + "/" + String.Format("{0:n0}", Skill.GetExperienceRequired(follower.Banking.GetSkillLevelUnboosted())))))"
          @onmouseout="@(new Action(() => GameState.HideTooltip()))">
 

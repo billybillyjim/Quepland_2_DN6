@@ -5,16 +5,16 @@
         {
             @foreach (Skill s in Player.Instance.Skills)
             {
-        <div style="position:relative">
-            <div style="cursor:pointer" @onclick="@(() => SetMenu(s.Name))">@s.Name</div>
+        <div class="row" style="position:relative">
+            <div class="col" style="cursor:pointer" @onclick="@(() => SetMenu(s.Name))">@s.Name</div>
             @if (s.GetSkillLevel() == s.GetSkillLevelUnboosted())
             {
-                <div style="position:absolute;right:10px;top:2px;">Level:@s.GetSkillLevelUnboosted()</div>
+                <div class="col">Level:@s.GetSkillLevelUnboosted()</div>
 
             }
             else if (GameState.CurrentFood != null)
             {
-                <div style="position:absolute;right:10px;top:2px;">
+                <div class="col">
                     Level:@s.GetSkillLevelUnboosted()
                     (<span style="color:limegreen"
                            @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "This stat is being boosted by " + s.Boost + " levels for the next " + (GameState.CurrentFood.FoodInfo.HealDuration - GameState.HealingTicks) + " game ticks.")))"
@@ -26,12 +26,12 @@
             }
             else
             {
-                <div style="position:absolute;right:10px;top:2px;">Level:@s.GetSkillLevelUnboosted()</div>
+                <div class="col">Level:@s.GetSkillLevelUnboosted()</div>
             }
         </div>
                 <div class="progress" @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, s.Name, GetSkillTooltip(s))))"
                                       @onmouseout="@(new Action(() => GameState.HideTooltip()))" style="border-radius:0;background-color:darkgray">                
-                    <div class="progress-bar" style="width:@(s.Progress)%;color:black;background-color:#51d051">
+                    <div class="progress-bar" style="width:@(s.Progress.ToSafeRenderString())%;color:black;background-color:#51d051">
 
                     </div>
                 </div>
