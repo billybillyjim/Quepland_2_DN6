@@ -55,6 +55,31 @@ public class FollowerManager
     }
     public void LoadNewSaveData(string data)
     {
+        try
+        {
+            Console.WriteLine("Loading new save data...");
+            List<Follower> followers = JsonConvert.DeserializeObject<List<Follower>>(data);
+            if (followers == null)
+            {
+                throw new NullReferenceException();
+            }
+            foreach(Follower f in followers)
+            {
+                Follower f2 = Followers.FirstOrDefault(x => x.Name == f.Name);
+                if(f2 == null)
+                {
+                    Console.WriteLine("Failed to find follower with name:" + f.Name);
+                }
+                f2.IsUnlocked = f.IsUnlocked;
+                f2.Banking = f.Banking;
+                f2.Inventory.LoadData(SaveManager.GetFollowerItemSave(f.Inventory));
+            }
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+        
 
     }
     public void LoadSaveData(string data)

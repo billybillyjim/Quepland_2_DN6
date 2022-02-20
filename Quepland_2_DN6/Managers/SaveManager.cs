@@ -42,7 +42,7 @@ public static class SaveManager
             await SetItemAsync("Quests:" + mode, Compress(GetQuestSave()));
             await SetItemAsync("GameState:" + mode, GetSaveString(GameState.GetSaveData()));
             await SetItemAsync("Player:" + mode, GetSaveString(Player.Instance.GetSaveData()));
-            await SetItemAsync("Followers:" + mode, Compress(FollowerManager.Instance.GetSaveData()));
+            await SetItemAsync("Followers:" + mode, Compress(FollowerManager.Instance.GetNewSaveData()));
             await SetItemAsync("TanningInfo:" + mode, Compress(GetTanningSave()));
             await SetItemAsync("Dojos:" + mode, GetSaveString(AreaManager.Instance.GetDojoSaveData()));
             await SetItemAsync("AFKAction:" + mode, GetSaveString(GameState.CurrentAFKAction));
@@ -267,8 +267,17 @@ public static class SaveManager
         {
             if (await ContainsKeyAsync("Followers:" + mode))
             {
-                FollowerManager.Instance.LoadSaveData(Decompress2(await GetItemAsync<string>("Followers:" + mode)));
-            } }
+                if (GameState.CheckVersion(Decompress(await GetItemAsync<string>("Version:" + mode)), "1.1.0"))
+                {
+                    FollowerManager.Instance.LoadNewSaveData(Decompress2(await GetItemAsync<string>("Followers:" + mode)));
+                }
+                else
+                {
+                    FollowerManager.Instance.LoadSaveData(Decompress2(await GetItemAsync<string>("Followers:" + mode)));
+                }
+                
+            } 
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -363,24 +372,24 @@ public static class SaveManager
         if (error)
         {
             string buggedSave = "";
-            buggedSave += await GetItemAsync<string>("Version:" + mode);
-            buggedSave += await GetItemAsync<string>("Playtime:" + mode);
-            buggedSave += await GetItemAsync<string>("LastSave:" + mode);
-            buggedSave += await GetItemAsync<string>("Skills:" + mode);
-            buggedSave += await GetItemAsync<string>("Inventory:" + mode);
-            buggedSave += await GetItemAsync<string>("Bank:" + mode);
-            buggedSave += await GetItemAsync<string>("BankTabs:" + mode);
-            buggedSave += await GetItemAsync<string>("Areas:" + mode);
-            buggedSave += await GetItemAsync<string>("Regions:" + mode);
-            buggedSave += await GetItemAsync<string>("Dungeons:" + mode);
-            buggedSave += await GetItemAsync<string>("Quests:" + mode);
-            buggedSave += await GetItemAsync<string>("GameState:" + mode);
-            buggedSave += await GetItemAsync<string>("Player:" + mode);
-            buggedSave += await GetItemAsync<string>("Followers:" + mode);
-            buggedSave += await GetItemAsync<string>("TanningInfo:" + mode);
-            buggedSave += await GetItemAsync<string>("Dojos:" + mode);
-            buggedSave += await GetItemAsync<string>("AFKAction:" + mode);
-            buggedSave += await GetItemAsync<string>("Tomes:" + mode);
+            buggedSave += await GetItemAsync<string>("Version:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Playtime:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("LastSave:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Skills:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Inventory:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Bank:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("BankTabs:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Areas:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Regions:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Dungeons:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Quests:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("GameState:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Player:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Followers:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("TanningInfo:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Dojos:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("AFKAction:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Tomes:" + mode) + ",";
             buggedSave += await GetItemAsync<string>("KC:" + mode);
 
             await SetItemAsync("SaveError", buggedSave);
@@ -416,7 +425,7 @@ public static class SaveManager
         file += Compress(JsonConvert.SerializeObject(Player.Instance.GetSaveData())) + ",";
         //12
         if (GameState.CheckVersion("1.1.0"))
-        {
+            {
             file += Compress(FollowerManager.Instance.GetNewSaveData()) + ",";
             //file += Compress(FollowerManager.Instance.GetSaveData()) + ",";
         }
@@ -461,7 +470,17 @@ public static class SaveManager
         }
         if (data.Length > 2)
         {
-            GameState.CurrentTick = int.Parse(Decompress(data[2]));
+            try
+            {
+                GameState.CurrentTick = int.Parse(Decompress(data[2]));
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+                MessageManager.AddMessage("Failed to load game's current tick. This may mean your save file has been corrupted.");
+            }
+            
         }
         if (data.Length > 3)
         {
@@ -479,78 +498,210 @@ public static class SaveManager
         }
         if (data.Length > 4)
         {
-            string[] skillData = (Decompress(data[4])).Split(',');
-            foreach (string d in skillData)
+            try
             {
-                if (d.Length > 1)
+                string[] skillData = (Decompress(data[4])).Split(',');
+                foreach (string d in skillData)
                 {
-                    Player.Instance.Skills.Find(x => x.Name == d.Split(':')[0]).LoadExperience(long.Parse(d.Split(':')[1]));
+                    if (d.Length > 1)
+                    {
+                        Player.Instance.Skills.Find(x => x.Name == d.Split(':')[0]).LoadExperience(long.Parse(d.Split(':')[1]));
 
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
             }
         }
         if (data.Length > 5)
         {
-            Player.Instance.Inventory.Clear();
-            Player.Instance.Inventory.LoadData(Decompress(data[5]));
+            try
+            {
+                Player.Instance.Inventory.Clear();
+                Player.Instance.Inventory.LoadData(Decompress(data[5]));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            
         }
         if (data.Length > 6)
         {
-            //Console.WriteLine(Decompress(data[6]));
-            Bank.Instance.Inventory.Clear();
-            Bank.Instance.Inventory.FixItems = true;
-            Bank.Instance.Inventory.LoadData(Decompress(data[6]));
+            try
+            {
+                Bank.Instance.Inventory.Clear();
+                Bank.Instance.Inventory.FixItems = true;
+                Bank.Instance.Inventory.LoadData(Decompress(data[6]));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+
         }
         if (data.Length > 7)
         {
-            AreaManager.Instance.LoadAreaSave(JsonConvert.DeserializeObject<List<AreaSaveData>>(Decompress(data[7])));
+            try
+            {
+                AreaManager.Instance.LoadAreaSave(JsonConvert.DeserializeObject<List<AreaSaveData>>(Decompress(data[7])));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
         if (data.Length > 8)
         {
-            AreaManager.Instance.LoadRegionSave(JsonConvert.DeserializeObject<List<RegionSaveData>>(Decompress(data[8])));
+            try
+            {
+                AreaManager.Instance.LoadRegionSave(JsonConvert.DeserializeObject<List<RegionSaveData>>(Decompress(data[8])));
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
         if (data.Length > 9)
         {
-            QuestManager.Instance.LoadQuestSave(JsonConvert.DeserializeObject<List<QuestSaveData>>(Decompress(data[9])));
+            try
+            {
+                QuestManager.Instance.LoadQuestSave(JsonConvert.DeserializeObject<List<QuestSaveData>>(Decompress(data[9])));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
         if (data.Length > 10)
         {
-            GameState.LoadSaveData(JsonConvert.DeserializeObject<GameStateSaveData>(Decompress(data[10])));
+            try
+            {
+                GameState.LoadSaveData(JsonConvert.DeserializeObject<GameStateSaveData>(Decompress(data[10])));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
         if (data.Length > 11)
         {
-            Player.Instance.LoadSaveData(JsonConvert.DeserializeObject<PlayerSaveData>(Decompress(data[11])));           
+            try
+            {
+                Player.Instance.LoadSaveData(JsonConvert.DeserializeObject<PlayerSaveData>(Decompress(data[11])));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
         if (data.Length > 12)
         {
-            
-            FollowerManager.Instance.LoadSaveData(Decompress(data[12]));
+            try
+            {
+                if (GameState.CheckVersion("1.1.0"))
+                {
+                    FollowerManager.Instance.LoadNewSaveData(Decompress(data[12]));
+                }
+                else
+                {
+                    FollowerManager.Instance.LoadSaveData(Decompress(data[12]));
+                }
+                    
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
         if (data.Length > 13)
         {
-            AreaManager.Instance.LoadTanningSave(JsonConvert.DeserializeObject<List<TanningSaveData>>(Decompress(data[13])));
+            try
+            {
+                AreaManager.Instance.LoadTanningSave(JsonConvert.DeserializeObject<List<TanningSaveData>>(Decompress(data[13])));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
         if (data.Length > 14)
         {
-            AreaManager.Instance.LoadDojoSaveData(JsonConvert.DeserializeObject<List<DojoSaveData>>(Decompress(data[14])));
+            try
+            {
+                AreaManager.Instance.LoadDojoSaveData(JsonConvert.DeserializeObject<List<DojoSaveData>>(Decompress(data[14])));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
         if (data.Length > 15)
         {
-            Bank.Instance.LoadTabs(DeserializeToList(Decompress(data[15])));
+            try
+            {
+                Bank.Instance.LoadTabs(DeserializeToList(Decompress(data[15])));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
         if(data.Length > 16)
         {
-            AreaManager.Instance.LoadDungeonSaveData(JsonConvert.DeserializeObject<List<DungeonSaveData>>(Decompress(data[16])));
+            try
+            {
+                AreaManager.Instance.LoadDungeonSaveData(JsonConvert.DeserializeObject<List<DungeonSaveData>>(Decompress(data[16])));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
         if(data.Length > 17)
         {
-            ItemManager.Instance.Tomes = JsonConvert.DeserializeObject<List<TomeData>>(Decompress(data[17]));
+            try
+            {
+                ItemManager.Instance.Tomes = JsonConvert.DeserializeObject<List<TomeData>>(Decompress(data[17]));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+            
         }
         if(data.Length > 18)
         {
-            BattleManager.Instance.LoadKillCounts(JsonConvert.DeserializeObject<string>(Decompress(data[18])));
+            try
+            {
+                BattleManager.Instance.LoadKillCounts(JsonConvert.DeserializeObject<string>(Decompress(data[18])));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
+           
         }
     }
+ 
     public static string GetItemSave(Inventory i)
     { 
         string data = "";
@@ -640,7 +791,16 @@ public static class SaveManager
     }
     public static string Decompress2(string s)
     {
-        return Ionic.Zlib.GZipStream.UncompressString(Convert.FromBase64String(s));
+        try
+        {
+            return Ionic.Zlib.GZipStream.UncompressString(Convert.FromBase64String(s));
+        }
+        catch (Exception e)
+        {
+            MessageManager.AddMessage("Failed to Decompress save data. This usually means the save is incomplete or has been altered in some way.");
+            Console.WriteLine(e.ToString());
+        }
+        return "";
     }
     public static string Decompress(string s)
     {
@@ -659,9 +819,6 @@ public static class SaveManager
             {
                 if (Convert.TryFromBase64String(s.PadRight(s.Length / 4 * 4 + (s.Length % 4 == 0 ? 0 : 4), '='), new Span<byte>(new byte[s.Length]), out int pad))
                 {
-                    Console.WriteLine("String Length:" + s.Length);
-                    Console.WriteLine("Bytes parsed:" + pad);
-                    Console.WriteLine("End padding:" + s.Substring(s.Length - 10));
                     using (var source = new MemoryStream(Convert.FromBase64String(s)))
                     {
                         byte[] len = new byte[4];
@@ -682,9 +839,7 @@ public static class SaveManager
                     Console.WriteLine("String Length:" + s.Length);
                     Console.WriteLine("Bytes parsed:" + b);
                     Console.WriteLine("End padding:" + s.Substring(s.Length - 10));
-
                 }
-
             }
             using (var source = new MemoryStream(Convert.FromBase64String(s)))
             {
