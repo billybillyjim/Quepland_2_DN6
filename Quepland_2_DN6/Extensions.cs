@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Globalization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,23 @@ using System.Threading.Tasks;
 
 public static class Extensions
 {
+    private static NumberFormatInfo NFI = new NumberFormatInfo() { NumberDecimalSeparator = ".", PercentDecimalSeparator = "." };
+    public static string ToSafeRenderString(this double value)
+    {
+        return value.ToString(NFI);
+    }
+    public static string ToSafeRenderString(this float value)
+    {
+        return value.ToString(NFI);
+    }
+    public static string ToSafeRenderString(this int value)
+    {
+        return value.ToString(NFI);
+    }
+    public static string ToSafeRenderString(this long value)
+    {
+        return value.ToString(NFI);
+    }
 
     private static Random rand = new Random();
 
