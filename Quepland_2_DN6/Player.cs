@@ -180,20 +180,15 @@ public class Player
     }
     public void Equip(GameItem item)
     {
-        GameItem e = null;
         foreach (GameItem i in equippedItems)
         {
             if(i.EquipSlot == item.EquipSlot)
             {
-                e = i;
+                Unequip(i);
                 continue;
             }
         }
 
-        if(e != null)
-        {
-            Unequip(e);
-        }
         equippedItems.Add(item);
         if(item.WeaponInfo != null)
         {
@@ -661,17 +656,20 @@ public class Player
     }
     public void LoadSaveData(PlayerSaveData data)
     {
-        if(data.ActiveFollowerName != "None")
-        {
-           SetFollower(FollowerManager.Instance.GetFollowerByName(data.ActiveFollowerName));
-        }
-        CurrentHP = data.CurrentHP;
-        CalculateMaxHP();
-        Deaths = data.DeathCount;
-        ArtisanPoints = data.ArtisanPoints;
-        CalculateInventorySpaces();
+        string error = "";
         try
         {
+            if (data.ActiveFollowerName != "None")
+            {
+              error = "Failed to load active follower data for:" + data.ActiveFollowerName;
+               SetFollower(FollowerManager.Instance.GetFollowerByName(data.ActiveFollowerName));
+            }
+            CurrentHP = data.CurrentHP;
+            CalculateMaxHP();
+            Deaths = data.DeathCount;
+            ArtisanPoints = data.ArtisanPoints;
+            CalculateInventorySpaces();
+        
             if(data.EquippedItems.Count == 0)
             {
                 return;
@@ -681,24 +679,28 @@ public class Player
                 Console.WriteLine("Trying to equip:" + s);
                 if (s != null && s.Length > 1)
                 {
+                    error = "Failed to equip item:" + s;
                     Equip(Inventory.GetItems().FirstOrDefault(x => x.Key.Name == s).Key);
                     
+                }
+            }
+            if (GameState.CheckVersion("1.1.0"))
+            {
+                foreach (AlchemicalFormula l in data.KnownAlchemyFormulae)
+                {
+                    KnownAlchemicalFormulae.Add(new AlchemicalFormula(l));
                 }
             }
         }
         catch(Exception e)
         {
+            MessageManager.AddMessage(error, "red");
+
             Console.WriteLine(e.Message);
             Console.WriteLine(e.StackTrace);
 
         }
-        if (GameState.CheckVersion("1.1.0"))
-        {
-            foreach(AlchemicalFormula l in data.KnownAlchemyFormulae)
-            {
-                KnownAlchemicalFormulae.Add(new AlchemicalFormula(l));
-            }
-        }
+
     }
     private void CalculateMaxHP()
     {
