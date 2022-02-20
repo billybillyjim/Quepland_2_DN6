@@ -129,6 +129,14 @@ using System.Threading.Tasks;
 
     public void Start()
     {
+        Console.WriteLine(CheckVersion("1.1.0") == true);
+        Console.WriteLine(CheckVersion("1.0.1") == true);
+        Console.WriteLine(CheckVersion("1.2.0") == false);
+        Console.WriteLine(CheckVersion("0.1.0") == true);
+        Console.WriteLine(CheckVersion("2.1.0") == false);
+        Console.WriteLine(CheckVersion("1.1.2") == false);
+        Console.WriteLine(CheckVersion("1.1.0", "1.0.2") == false);
+        Console.WriteLine(CheckVersion("1.1.0", "1.1.0") == true);
         if (GameTimer != null)
         {
             return;
@@ -1125,10 +1133,10 @@ using System.Threading.Tasks;
         }
 
     }
-    public static bool CheckVersion(string compareVersion)
+    public static bool CheckVersion(string minimumVersion, string versionToCheck)
     {
-        string[] compVersions = compareVersion.Split(".");
-        string[] versions = Version.Split(".");
+        string[] compVersions = versionToCheck.Split(".");
+        string[] versions = minimumVersion.Split(".");
 
         string bigNum = versions[0];
         string major = versions[1];
@@ -1138,19 +1146,18 @@ using System.Threading.Tasks;
         string compMajor = compVersions[1];
         string compMinor = compVersions[2];
 
-
         int bn, maj, min = 0;
         string rev = "";
 
         int cbn, cmaj, cmin = 0;
         string cRev = "";
 
-        if(int.TryParse(bigNum, out bn))
+        if (int.TryParse(bigNum, out bn))
         {
-            if(int.TryParse(major, out maj))
+            if (int.TryParse(major, out maj))
             {
                 string min1 = Regex.Match(minor, @"\d+").Value;
-                if(int.TryParse(min1, out min))
+                if (int.TryParse(min1, out min))
                 {
                     rev = Regex.Match(minor, @"[a-zA-Z]").Value;
                     if (int.TryParse(compBigNum, out cbn))
@@ -1165,62 +1172,66 @@ using System.Threading.Tasks;
                             }
                             else
                             {
-                                Console.Error.WriteLine("Invalid minor version number:" + compMinor + " in " + compareVersion);
+                                Console.Error.WriteLine("Invalid minor version number:" + compMinor + " in " + versionToCheck);
                                 return false;
                             }
                         }
                         else
                         {
-                            Console.Error.WriteLine("Invalid major version number:" + compMajor + " in " + compareVersion);
+                            Console.Error.WriteLine("Invalid major version number:" + compMajor + " in " + versionToCheck);
                             return false;
                         }
                     }
                     else
                     {
-                        Console.Error.WriteLine("Invalid big version number:" + compBigNum + " in " + compareVersion);
+                        Console.Error.WriteLine("Invalid big version number:" + compBigNum + " in " + versionToCheck);
                         return false;
                     }
                 }
                 else
                 {
-                    Console.Error.WriteLine("Invalid minor version number:" + minor + " in " + Version);
+                    Console.Error.WriteLine("Invalid minor version number:" + minor + " in " + minimumVersion);
                     return false;
                 }
             }
             else
             {
-                Console.Error.WriteLine("Invalid major version number:" + major +" in " + Version);
+                Console.Error.WriteLine("Invalid major version number:" + major + " in " + minimumVersion);
                 return false;
             }
         }
         else
         {
-            Console.Error.WriteLine("Invalid big version number:" + bigNum +" in " + Version);
+            Console.Error.WriteLine("Invalid big version number:" + bigNum + " in " + minimumVersion);
             return false;
         }
         if (cbn > bn)
         {
             return true;
         }
-        else if(cbn == bn)
+        else if (cbn == bn)
         {
-            if(cmaj > maj)
+            if (cmaj > maj)
             {
                 return true;
             }
-            else if(cmaj == maj)
+            else if (cmaj == maj)
             {
-                if(cmin > min)
+                if (cmin > min)
                 {
                     return true;
                 }
-                else if(cmin == min)
+                else if (cmin == min)
                 {
                     return string.Compare(rev, cRev) >= 0;
                 }
             }
         }
         return false;
+    }
+    public static bool CheckVersion(string compareVersion)
+    {
+        return CheckVersion(compareVersion, Version);
     }
     private void StateHasChanged()
     {
