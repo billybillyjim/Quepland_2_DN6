@@ -94,6 +94,10 @@
         int pos = GameState.Random.Next(25, 75);
         return pos + "%";
     }
+    public string GetPos(int pos)
+    {
+        return Math.Clamp(pos % 7 * 7, 25, 75) + "%";
+    }
 
     public string GetRelativeDirection(int branch)
     {
@@ -151,7 +155,7 @@
         CurrentBranch = branch;
         for(int i = 0; i < 4; i ++)
         {
-            RandPos[i] = GetRandomPos();
+            RandPos[i] = GetPos(branch);
         }
     }
     public string GetFacingDirection(int startBranch, int branch)
@@ -185,7 +189,7 @@
         GameState.StateChanged += OnGameStateChanged;
         for(int i = 0; i < 4; i ++)
         {
-            RandPos.Add(GetRandomPos());
+            RandPos.Add(GetPos(i));
         }
     }
     protected override void OnParametersSet()
