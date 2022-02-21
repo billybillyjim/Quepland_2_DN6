@@ -180,15 +180,19 @@ public class Player
     }
     public void Equip(GameItem item)
     {
+        GameItem unequip = null;
         foreach (GameItem i in equippedItems)
         {
             if(i.EquipSlot == item.EquipSlot)
             {
-                Unequip(i);
-                continue;
+                unequip = i;            
+                break;
             }
         }
-
+        if(unequip != null)
+        {
+            Unequip(unequip);
+        }
         equippedItems.Add(item);
         if(item.WeaponInfo != null)
         {
