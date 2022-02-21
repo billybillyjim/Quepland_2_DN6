@@ -3,9 +3,9 @@
 
 @if (GameState.CurrentRecipe != null)
 {
-    <div style="height:60px;margin:10px;"><button class="btn btn-primary" @onclick="@(() => Stop())">Stop Crafting @GameState.CurrentRecipe.OutputItemName</button></div>
+    <div style="margin:10px;"><button class="btn btn-primary" @onclick="@(() => Stop())">Stop Crafting @GameState.CurrentRecipe.OutputItemName</button></div>
     <div>
-        <div class="progress" style="width:340px;margin:-23px 10px 10px 10px;">
+        <div class="progress" style="width:90%;margin:5px 10px 10px 10px;">
             <div class="progress-bar" style="@GetProgress()"></div>
         </div>
     </div>
@@ -14,7 +14,7 @@ else
 {
     <div style="height:63px;margin:10px;">Select an item to craft.</div>
 }
-<div style="display:flex;flex-wrap:wrap;width:340px;border:solid black 1px;border-radius:0.25rem;background-color:dimgray;min-height:50px;margin-left:10px;">
+<div class="crafting-menu custom-scroll" style="">
     @foreach (Recipe recipe in Recipes)
     {
         if (recipe.CanCreate())
