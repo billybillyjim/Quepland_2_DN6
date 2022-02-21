@@ -1,12 +1,12 @@
 ﻿@inject GameState GameState
 @implements IDisposable
 
-    <div class="row no-gutters mr-2">
+    <div class="row no-gutters mx-1">
     @foreach(Skill skill in Player.Instance.Skills)
     {
         if (skill.EXPTracker.Show)
         {
-            <div class="col-12 p-2" style="width:250px;min-height:70px;line-height:20px;left:5px;top:5px;border:solid black 1px; overflow:hidden;">
+            <div class="col-12 p-1 my-1" style="min-height:70px;line-height:20px;border:solid black 1px; overflow:hidden;">
                 <div style="cursor:pointer;">@skill.Name Exp/Hr:@String.Format("{0:n0}", GetRate(skill))</div>
                 <div>Total Gained:@(String.Format("{0:n0}", skill.Experience - skill.EXPTracker.StartExperience))</div>
                 <div>Time:@skill.EXPTracker.TimeSinceTrackerStarted.ToString(@"dd\:hh\:mm\:ss")</div>
@@ -16,7 +16,7 @@
 
                     </div>
                 </div>
-                <div class="row justify-content-around">
+                <div class="row justify-content-around px-2">
                     <button class="btn btn-primary col mt-2 mx-2" @onclick=@(() => ResetTracker(skill.EXPTracker))>Reset</button>
                     
                     @if (skill.EXPTracker.UpdateGoal)
@@ -24,8 +24,8 @@
 
                         <button class="btn btn-primary col mt-2 mx-2" @onclick=@(() => skill.EXPTracker.UpdateGoal = false)>Cancel</button>
                         <button class="btn btn-primary col mt-2 mx-2" @onclick=@(() => skill.EXPTracker.GoalExperience = 0)>Clear Goal</button>
-                        <input class="col-8 mt-2" type="number" @bind=goalValue />
-                        <button class="btn btn-primary col-3 mt-2 mx-2" @onclick=@(() => SetTrackerGoal(skill.EXPTracker, goalValue))>Confirm</button>
+                        <input class="col-11 my-2 px-2" type="number" @bind=goalValue />
+                        <button class="btn btn-primary col mt-2 mx-2" @onclick=@(() => SetTrackerGoal(skill.EXPTracker, goalValue))>Confirm</button>
                     }
                     else
                     {
