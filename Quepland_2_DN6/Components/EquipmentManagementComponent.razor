@@ -3,35 +3,35 @@
 @implements IDisposable
 
 <div>
-    <div style="width:360px;height:28px;border:solid black 1px;position:relative;background-color:gray;display:flex;">
-        <div style="margin-right:10px;line-height:28px;flex:1;"
+    <div class="row item-stat-box">
+        <div class="col item-stat-info" 
              @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Damage", "This is a measure of how much all your equipped items boost your damage. Higher numbers are better!")))"
              @onmouseout="@(new Action(() => GameState.HideTooltip()))">
             <img src="data/Images/Attack.png" style="height:26px;width:26px;margin-top:-3px;" /> @GetAttack()
         </div>
-                <div style="margin-right:10px;line-height:28px;flex:1;"
+                <div class="col item-stat-info" 
              @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Ranged Damage", "This is a measure of how much all your equipped items boost your ranged damage. Higher numbers are better!")))"
              @onmouseout="@(new Action(() => GameState.HideTooltip()))">
             <img src="data/Images/Archery.png" style="height:26px;width:26px;margin-top:-3px;" /> @GetRangedAttack()
         </div>
-                <div style="margin-right:10px;line-height:28px;flex:1;"
+                <div class="col item-stat-info" 
              @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Magic Damage", "This is a measure of how much all your equipped items boost your magic damage. Higher numbers are better!")))"
              @onmouseout="@(new Action(() => GameState.HideTooltip()))">
             <img src="data/Images/Stun.png" style="height:26px;width:26px;margin-top:-3px;" /> @GetMagicAttack()
         </div>
-        <div style="margin-right:10px;line-height:28px;flex:1;"
+        <div class="col item-stat-info" 
              @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Armor", "This is a measure of how much all your equipped items boost your armor. Higher numbers are better!")))"
              @onmouseout="@(new Action(() => GameState.HideTooltip()))">
             <img src="data/Images/Armor.png" style="height:26px;width:26px;margin-top:-3px;" /> @GetArmor()
         </div>
-        <div style="margin-right:10px;line-height:28px;flex:1;"
+        <div class="col item-stat-info" 
              @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Speed", "This is a measure of how many game ticks this weapon (Or your fists!) attacks at. Lower is faster!")))"
              @onmouseout="@(new Action(() => GameState.HideTooltip()))">
             <img src="data/Images/Speed.png" style="height:26px;width:26px;margin-top:-3px;" /> @GetSpeed()
         </div>
     </div>
 </div>
-<div style="display:flex;flex-direction:column;flex-flow:wrap;">
+<div style="display:flex;flex-direction:column;flex-flow:wrap;border-bottom:solid 1px black;">
     @foreach (string slot in ItemManager.Instance.EquipmentSlots)
     {
         <div style="width:60px;margin:5px;">
