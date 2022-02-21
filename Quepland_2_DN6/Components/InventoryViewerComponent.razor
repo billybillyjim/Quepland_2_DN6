@@ -16,7 +16,7 @@
             {
 
                 <div oncontextmenu="return false;" draggable="false"
-                        onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))">
+                        onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key, item.Value)))">
                             <ItemBoxComponent Item="@item.Key" ShowAmount="@true" IsSelected="@(SelectedItem == item.Key)" shouldRender="@item.Key.Rerender"></ItemBoxComponent></div>
 
             }
@@ -32,13 +32,13 @@
                 if (item.Key.IsStackable)
                 {
                     <div oncontextmenu="return false;" draggable="false"
-                         onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))">
+                         onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key, item.Value)))">
                              <ItemBoxComponent Item="@item.Key" ShowAmount="@true" IsSelected="@(SelectedItem == item.Key)" shouldRender="@item.Key.Rerender"></ItemBoxComponent></div>
                 }
                 else
                 {
                     <div oncontextmenu="return false;" draggable="false"
-                         onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))">
+                         onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key, item.Value)))">
                              <ItemBoxComponent Item="@item.Key" ShowAmount="@false" IsSelected="@(SelectedItem == item.Key)" shouldRender="@item.Key.Rerender"></ItemBoxComponent></div>
 
                 }
@@ -187,7 +187,7 @@
         SelectedItem = null;
         GameState.UpdateState();
     }
-    public void ShowMenu(MouseEventArgs args, GameItem item)
+    public void ShowMenu(MouseEventArgs args, GameItem item, int amount)
     {
         
         if (args.Button == 2)
@@ -202,7 +202,7 @@
                 }
                 else
                 {
-                    GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Deposit " + Bank.Instance.Amount + " " + item, new Action(() => BankItem(item, Bank.Instance.Amount))));
+                    GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Deposit " + Math.Min(amount, Bank.Instance.Amount) + " " + item, new Action(() => BankItem(item, Bank.Instance.Amount))));
                 }
                 if (Bank.Instance.Amount != 1)
                 {
@@ -260,7 +260,7 @@
                 }
                 
             }
-            GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Examine " + item, new Action(() => MessageManager.AddMessage(item.Description))));
+            GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Examine " + item, new Action(() => MessageManager.AddMessage(item.Description + "(Value: " + (item.Value * amount) + ")"))));
             GameState.ShowContextMenu(args);
         }
         else{ SelectItem(args, item); }
