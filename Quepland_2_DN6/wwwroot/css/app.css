@@ -177,6 +177,7 @@ app {
     .sidebar .nav-item {
         font-size: 0.9rem;
         padding-bottom: 0.5rem;
+        max-width:100%;
     }
 
         .sidebar .nav-item:first-of-type {
@@ -225,7 +226,33 @@ app {
 .validation-message {
     color: red;
 }
-
+.crafting-menu {
+    display: flex;
+    flex-wrap: wrap;
+    border: solid black 1px;
+    background-color: dimgray;
+    min-height: 50px;
+    overflow-y:scroll;
+    height:calc(50vh - 110px);
+}
+.item-stat-box {
+    border-bottom: solid black 1px;
+    position: relative;
+    background-color: gray;
+    overflow-x: visible;
+    font-size: 16px;
+}
+.item-stat-info {
+    margin-right:5px;
+    line-height:28px;
+    flex-grow:1;
+    white-space:nowrap;
+}
+.item-stat-image {
+    height: 26px;
+    width: 26px;
+    margin-top: -3px;
+}
 .settings-button {
     background-color: white;
     border: solid black 1px;
