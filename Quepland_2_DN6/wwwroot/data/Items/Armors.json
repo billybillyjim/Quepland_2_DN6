@@ -1293,7 +1293,17 @@
     "equipSlot": "Head",
     "armorInfo": {
       "armorBonus": 25,
-      "rangedDamage": 35
+      "rangedDamage": 35,
+      "statusEffectData": [
+        {
+          "name": "Drain",
+          "power": 25,
+          "speed": 5,
+          "duration": 20,
+          "message": "You drain your opponent's strength!",
+          "procOdds": 0.05
+        }
+      ]
     },
     "secondaryColor": "#ddeeaa"
   },
@@ -1354,6 +1364,16 @@
         {
           "skill": "Archery",
           "skillLevel": 95
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Quick Strike",
+          "power": 1,
+          "speed": 1,
+          "duration": 0,
+          "message": "You counter with a quick attack!",
+          "procOdds": 0.05
         }
       ]
     }

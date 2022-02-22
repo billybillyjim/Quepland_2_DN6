@@ -1379,6 +1379,83 @@
     }
   },
   {
+    "name": "Plastinium Knife",
+    "description": "An extremely lightweight knife. It almost feels like air in your hand.",
+    "value": 350,
+    "enabledActions": "Knifesmanship",
+    "secondaryColor": "#718A94",
+    "equipSlot": "R Hand",
+    "icon": "Dagger",
+    "weaponInfo": {
+      "attackSpeed": 4,
+      "damage": 159,
+      "wearRequirements": [
+        {
+          "skill": "Knifesmanship",
+          "skillLevel": 115
+        }
+      ]
+    }
+  },
+  {
+    "name": "Plastinium Sword",
+    "description": "An extremely lightweight sword. You can swing it really fast! Be careful, though.",
+    "value": 350,
+    "enabledActions": "Swordsmanship",
+    "secondaryColor": "#718A94",
+    "equipSlot": "R Hand",
+    "icon": "Sword",
+    "weaponInfo": {
+      "attackSpeed": 8,
+      "damage": 320,
+      "wearRequirements": [
+        {
+          "skill": "Swordsmanship",
+          "skillLevel": 115
+        }
+      ]
+    }
+  },
+  {
+    "name": "Plastinium Axe",
+    "description": "An extremely lightweight axe. You can really chop some trees with this baby.",
+    "value": 350,
+    "enabledActions": "Axemanship Woodcutting",
+    "secondaryColor": "#718A94",
+    "equipSlot": "R Hand",
+    "gatherSpeedBonus": 0.45,
+    "icon": "Axe",
+    "weaponInfo": {
+      "attackSpeed": 12,
+      "damage": 650,
+      "wearRequirements": [
+        {
+          "skill": "Axemanship",
+          "skillLevel": 115
+        }
+      ]
+    }
+  },
+  {
+    "name": "Plastinium Hammer",
+    "description": "An extremely lightweight hammer. Good for smashing things quickly.",
+    "value": 350,
+    "enabledActions": "Hammermanship",
+    "secondaryColor": "#718A94",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 15,
+      "damage": 845,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 115
+        }
+      ]
+    }
+  },
+  {
     "name": "Cactus Club",
     "description": "A club made from a special living cactus, covered in its spines.",
     "value": 5000,
@@ -1430,6 +1507,16 @@
         {
           "skill": "Swordsmanship",
           "skillLevel": 90
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Drain",
+          "power": 25,
+          "speed": 5,
+          "duration": 20,
+          "message": "You drain your opponent's strength!",
+          "procOdds": 0.25
         }
       ]
     }
@@ -1542,7 +1629,7 @@
     }
   },
   {
-    "name": "Chiumina Hammer",
+    "name": "Chimunic Hammer",
     "description": "The weight of this hammer seems to undulate through its head.",
     "value": 9500,
     "enabledActions": "Hammermanship",
@@ -1551,7 +1638,7 @@
     "icon": "Hammer",
     "weaponInfo": {
       "attackSpeed": 20,
-      "damage": 900,
+      "damage": 950,
       "wearRequirements": [
         {
           "skill": "Hammermanship",
@@ -1566,6 +1653,35 @@
           "duration": 1,
           "message": "The hammer lunges forward effortlessly a second time!",
           "procOdds": 0.3
+        }
+      ]
+    }
+  },
+  {
+    "name": "Auric Tumbler",
+    "description": "There is a slot on the back of the hammer, which seems to be the perfect size to stuff coins into.",
+    "value": 32500,
+    "enabledActions": "Hammermanship",
+    "secondaryColor": "#FFD700",
+    "equipSlot": "R Hand",
+    "icon": "Hammer",
+    "weaponInfo": {
+      "attackSpeed": 20,
+      "damage": 900,
+      "wearRequirements": [
+        {
+          "skill": "Hammermanship",
+          "skillLevel": 115
+        }
+      ],
+      "statusEffectData": [
+        {
+          "name": "Quick Strike Gold",
+          "power": 250,
+          "speed": 1,
+          "duration": 0,
+          "message": "A clear 'ka-ching' fills the air as your hammer counters the enemy's attack!",
+          "procOdds": 0.5
         }
       ]
     }

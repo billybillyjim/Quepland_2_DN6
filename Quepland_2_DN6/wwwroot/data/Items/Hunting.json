@@ -480,6 +480,14 @@
     "experienceGained": "Leatherworking:120"
   },
   {
+    "name": "Akabeko Leather",
+    "description": "Beautiful red leather. It seems to resist normal crafting.",
+    "value": 2500,
+    "secondaryColor": "#962220",
+    "icon": "Leather",
+    "experienceGained": "Leatherworking:180"
+  },
+  {
     "name": "Bear Claws",
     "description": "Terrifying claws from a giant polar bear.",
     "secondaryColor": "#f3e5c2",
@@ -599,6 +607,16 @@
     "secondaryColor": "#9e9589",
     "tanningInfo": {
       "tansIntoString": "Mammoth Leather"
+    }
+  },
+  {
+    "name": "Akabeko Hide",
+    "description": "The hide of a magical red cow.",
+    "value": 300,
+    "secondaryColor": "#962220",
+    "icon": "Hide",
+    "tanningInfo": {
+      "tansIntoString": "Akabeko Leather"
     }
   },
   {
