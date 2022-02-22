@@ -428,5 +428,86 @@
         }
       ]
     }
+  },
+  {
+    "name": "Akabeko",
+    "weaknesses": "Archery",
+    "strengths": "Knifesmanship",
+    "hp": 11500,
+    "attackSpeed": 12,
+    "armor": 95,
+    "damage": 200,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Alimental Seed",
+          "weight": 15
+        },
+        {
+          "itemName": "Ethereal Seed",
+          "weight": 15
+        },
+        {
+          "itemName": "Akabeko Hide",
+          "weight": 15
+        }
+      ]
+    }
+  },
+  {
+    "name": "Avedoh-gen",
+    "weaknesses": "Knifesmanship",
+    "strengths": "Swordsmanship",
+    "hp": 11900,
+    "attackSpeed": 17,
+    "armor": 115,
+    "damage": 230,
+    "dropTable": {
+      "drops": [
+
+      ]
+    }
+  },
+  {
+    "name": "Tremmler",
+    "weaknesses": "Hammermanship",
+    "strengths": "Swordsmanship",
+    "hp": 13500,
+    "attackSpeed": 13,
+    "armor": 195,
+    "damage": 130,
+    "dropTable": {
+      "drops": [
+
+      ]
+    }
+  },
+  {
+    "name": "Toriin Grot",
+    "weaknesses": "Axemanship",
+    "strengths": "Swordsmanship",
+    "hp": 14200,
+    "attackSpeed": 20,
+    "armor": 215,
+    "damage": 400,
+    "dropTable": {
+      "drops": [
+
+      ]
+    }
+  },
+  {
+    "name": "Nesiad Oujnes",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Knifesmanship",
+    "hp": 13200,
+    "attackSpeed": 10,
+    "armor": 215,
+    "damage": 150,
+    "dropTable": {
+      "drops": [
+
+      ]
+    }
   }
 ]

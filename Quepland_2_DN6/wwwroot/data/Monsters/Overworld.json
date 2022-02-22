@@ -2294,6 +2294,10 @@
         {
           "itemName": "Durum",
           "weight": 50
+        },
+        {
+          "itemName": "Medium Fishing Rod",
+          "weight": 5
         }
       ]
     }
@@ -2471,7 +2475,7 @@
           "amount": 5
         },
         {
-          "itemName": "Etheral Seed",
+          "itemName": "Ethereal Seed",
           "weight": 5,
           "amount": 5
         },
@@ -2703,6 +2707,63 @@
           "weight": 5,
           "amount": 1
         }
+      ]
+    }
+  },
+  {
+    "name": "Branch Bunker",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 13300,
+    "attackSpeed": 10,
+    "armor": 215,
+    "damage": 150,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Root Bow",
+          "weight": 5,
+          "amount": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Biding Branch Bunker",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 17300,
+    "attackSpeed": 80,
+    "armor": 715,
+    "damage": 500,
+    "dropTable": {
+      "drops": [
+      ]
+    }
+  },
+  {
+    "name": "Watchful Branch Bunker",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 12300,
+    "attackSpeed": 12,
+    "armor": 315,
+    "damage": 90,
+    "dropTable": {
+      "drops": [
+      ]
+    }
+  },
+  {
+    "name": "Great Horned Aur",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 15300,
+    "attackSpeed": 15,
+    "armor": 265,
+    "damage": 130,
+    "dropTable": {
+      "drops": [
       ]
     }
   }
