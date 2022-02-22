@@ -58,13 +58,13 @@
     "name": "Upper Branches",
     "id": 203,
     "image": "Branches",
-    "description": "You emerge from the stairs to an open view of the world below. Branches and leaves block all the light from above. A dozen Nmekufians are gathering nuts from the outer branches.",
+    "description": "You emerge from the stairs to an open view of the world below. Branches and leaves block all the light from above. Here and there Nmekufians are gathering fruit from the outer branches.",
     "areaURL": "UpperBranches",
     "actions": [
-      "Gather Nuts:Great Tree Nuts"
+      "Gather Fruit:Great Tree Fruit"
     ],
     "monsters": [
-
+      "Ruwohane"
     ]
   },
   {
@@ -75,6 +75,9 @@
     "areaURL": "RiimataPool",
     "unlockableAreas": [
 
+    ],
+    "npcs": [
+      "Ruto"
     ]
   }
 ]
