@@ -162,6 +162,7 @@ public class BattleManager
             }
             foreach (Monster opponent in CurrentOpponents)
             {
+                
                 if (opponent.CurrentHP <= 0 && opponent.IsDefeated == false)
                 {
                     opponent.CurrentHP = 0;
@@ -190,6 +191,20 @@ public class BattleManager
                         
                     }
                     opponent.TicksToNextAttack = opponent.AttackSpeed;
+                }
+                else if(opponent.TicksToNextAttack == 1)
+                {
+                    if (CheckForQuickStrike())
+                    {
+                        Attack();
+                        if (CurrentBoss != null)
+                        {
+                            CurrentBoss.OnBeAttacked(Target);
+                        }
+                        Player.Instance.TicksToNextAttack = Player.Instance.GetWeaponAttackSpeed();
+                        opponent.TicksToNextAttack = opponent.AttackSpeed;
+                    }
+                    
                 }
             }
             if (AllOpponentsDefeated())
@@ -248,54 +263,30 @@ public class BattleManager
                     LootTracker.Instance.AddDrop(opponent, drop);
                     LootTracker.Instance.AddKC(opponent, 1);
                 }
+
+
+                if (drop.Item != null && 
+                    drop.Item.Category == "QuestItems" && 
+                    (Player.Instance.Inventory.HasItem(drop.Item) || Bank.Instance.Inventory.HasItem(drop.Item)))
+                {
+
+                }
                 else
                 {
-                    if (drop.Amount > 1)
-                    {
-                        MessageManager.AddMessage("You defeated the " + opponent.Name + ". It dropped " + drop.Amount + " " + drop.Item.GetPlural() + ".", "white", "Loot");
-
-                    }
-                    else
-                    {
-                        MessageManager.AddMessage("You defeated the " + opponent.Name + ". It dropped 1 " + drop.ToString() + ".", "white", "Loot");
-
-                    }
-                    if (drop.Item != null && drop.Item.Category == "QuestItems" && (Player.Instance.Inventory.HasItem(drop.Item) || Bank.Instance.Inventory.HasItem(drop.Item)))
-                    {
-
-                    }
-                    else
-                    {
-                        Player.Instance.Inventory.AddDrop(drop);
-                    }
+                    MessageManager.AddMessage("You defeated the " + opponent.Name + ". It dropped " + 
+                        drop.Amount + " " + (drop.Amount > 1 ? drop.Item.GetPlural() : drop.ToString()) + ".", "white", "Loot");
+                    AddDrop(drop);
+                        
                 }
+                
 
             }
             foreach (Drop d in opponent.DropTable.AlwaysDrops)
             {
-                if (d.Amount > 1)
-                {
-                    if (drop != null)
-                    {
-                        MessageManager.AddMessage("You also got " + d.Amount + " " + d.Item.GetPlural() + ".", "white", "Loot");
-                    }
-                    else
-                    {
-                        MessageManager.AddMessage("You got " + d.Amount + " " + d.Item.GetPlural() + ".", "white", "Loot");
-                    }                   
-                }
-                else
-                {
-                    if (drop != null)
-                    {
-                        MessageManager.AddMessage("You also got 1 " + d.ToString() + ".", "white", "Loot");
-                    }
-                    else
-                    {
-                        MessageManager.AddMessage("You got 1 " + d.ToString() + ".", "white", "Loot");
-                    }                   
-                }
-                Player.Instance.Inventory.AddDrop(d);
+
+                MessageManager.AddMessage("You " + (drop != null ? "also" : "") + " got " + 
+                    d.Amount + " " + (d.Amount > 1 ? d.Item.GetPlural() : d.ToString()) + ".", "white", "Loot");
+                AddDrop(d);
             }
         }
         else
@@ -303,6 +294,24 @@ public class BattleManager
             MessageManager.AddMessage("You defeated the " + opponent.Name + ".");
         }
     }
+
+    public void AddDrop(Drop drop)
+    {
+        if (Player.Instance.CurrentFollower != null && Player.Instance.CurrentFollower.AutoCollectSkill == "Gathering Scout")
+        {
+            Player.Instance.CurrentFollower.Inventory.AddDrop(drop);
+
+            if (Player.Instance.CurrentFollower.Inventory.GetAvailableSpaces() == 0)
+            {
+                Player.Instance.CurrentFollower.BankItems();
+            }
+        }
+        else
+        {
+            Player.Instance.Inventory.AddDrop(drop);
+        }
+    }
+
     public int GetTotalPlayerDamage(Monster m)
     {
         double minHit = (((Player.Instance.GetWeaponAttackSpeed() / 5d) - 1d) / 12d);
@@ -525,6 +534,54 @@ public class BattleManager
             }
         }
     }
+    public bool CheckForQuickStrike()
+    {
+        foreach (GameItem item in Player.Instance.GetEquippedItems())
+        {
+            double roll = random.NextDouble();
+
+            if (item.WeaponInfo != null)
+            {
+                foreach (IStatusEffect e in item.WeaponInfo.StatusEffects)
+                {
+                    if (e.Name.Contains("Quick Strike"))
+                    {
+                        if (roll <= e.ProcOdds)
+                        {
+                            e.RemainingTime = 1;
+                            e.DoEffect(Player.Instance);
+                            if(Player.Instance.TicksToNextAttack == 0)
+                            {
+                                e.RemainingTime = -1;
+                                return true;
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            if (item.ArmorInfo != null)
+            {
+                foreach (IStatusEffect e in item.ArmorInfo.StatusEffects)
+                {
+                    if (e.Name.Contains("Quick Strike"))
+                    {
+                        if (roll <= e.ProcOdds)
+                        {
+                            e.RemainingTime = 1;
+                            e.DoEffect(Player.Instance);
+                            if (Player.Instance.TicksToNextAttack == 0)
+                            {
+                                e.RemainingTime = -1;
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
     public void RollForPlayerAttackEffects()
     {
         foreach (GameItem item in Player.Instance.GetEquippedItems())
@@ -617,9 +674,19 @@ public class BattleManager
         {
             return new UndulateEffect(data);
         }
+        else if (data.Name == "Quick Strike")
+        {
+            return new QuickStrikeEffect(data);
+        }
+        else if (data.Name == "Quick Strike Gold")
+        {
+            return new QuickStrikeGoldEffect(data);
+        }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Warning:" + data.Name + " not in list of status effects in Battle Manager.");
+            Console.BackgroundColor = ConsoleColor.Black;
         }
         return null;
     }
