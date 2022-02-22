@@ -32,8 +32,9 @@ public class DrainEffect : IStatusEffect
         if(RemainingTime % Speed == 0 && RemainingTime > 0)
         {
             MessageManager.AddMessage(Message);
-            m.CurrentHP -= m.HP / Power;
-
+            int drain = m.HP / Power;
+            m.CurrentHP -= drain;
+            Player.Instance.CurrentHP += drain;
         }
     }
 	public void DoEffect(Player p)
@@ -60,7 +61,7 @@ public class DrainEffect : IStatusEffect
     }
     public IStatusEffect Copy()
     {
-        return new PoisonEffect(d);
+        return new DrainEffect(d);
     }
 }
 

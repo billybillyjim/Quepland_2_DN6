@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-public class UndulateEffect : IStatusEffect
+public class QuickStrikeEffect : IStatusEffect
 {
-    public string Name { get; set; } = "Undulate";
+    public string Name { get; set; } = "Quick Strike";
     public int Duration { get; set; }
     public int Speed { get; set; }
     public int Power { get; set; }
@@ -16,7 +16,7 @@ public class UndulateEffect : IStatusEffect
 
     public string Message { get; set; }
     private StatusEffectData d;
-    public UndulateEffect(StatusEffectData data)
+    public QuickStrikeEffect(StatusEffectData data)
     {
         Name = data.Name;
         Duration = data.Duration;
@@ -32,19 +32,21 @@ public class UndulateEffect : IStatusEffect
     {
         if (RemainingTime % Speed == 0 && RemainingTime > 0)
         {
-            MessageManager.AddMessage(Message, "#34baeb");
-            int total = BattleManager.Instance.GetTotalPlayerDamage(m);
-            m.CurrentHP -= total;
-            BattleManager.Instance.GainCombatExperience(total);
+            m.TicksToNextAttack = 0;
+            MessageManager.AddMessage(m.Name + " strikes with a second quick attack!");
         }
     }
     public void DoEffect(Player p)
     {
-
+        if (RemainingTime % Speed == 0 && RemainingTime > 0)
+        {
+            p.TicksToNextAttack = 0;
+            MessageManager.AddMessage("You strike with a second quick attack!");
+        }
     }
     public IStatusEffect Copy()
     {
-        return new UndulateEffect(d);
+        return new QuickStrikeEffect(d);
     }
 }
 
