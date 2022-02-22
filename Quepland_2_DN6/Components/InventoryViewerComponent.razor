@@ -1,13 +1,14 @@
 ﻿@inject GameState GameState
 @implements IDisposable
 
+<!--Inventory Viewer Component-->
 @if (HideItemViewer == false)
 {
     <ItemViewerComponent Item="@SelectedItem"></ItemViewerComponent>
 
 }
 <div style="margin-left:2px;">Space:@(Player.Instance.Inventory.GetUsedSpaces())/@(Player.Instance.Inventory.GetSize())</div>
-<div style="display:flex;flex-wrap:wrap;border:solid black 1px;padding:3px;margin:2px;border-radius:0.25rem;max-height:@(GetMaxHeight())px;overflow-y:auto" class="custom-scroll">
+<div class="main-inventory custom-scroll">
     @if (GameState.CompactInventoryView)
     {
         @foreach (KeyValuePair<GameItem, int> item in Player.Instance.Inventory.GetUniqueItems().OrderBy(x => x.Key.ID))
@@ -109,7 +110,7 @@
     }
 
 </div>
-    <div style="display:flex;flex-wrap:wrap;border:solid black 1px;padding:8px;margin:5px;border-radius:0.25rem">
+    <div class="custom-scroll follower-inventory">
 
         @foreach (KeyValuePair<GameItem, int> item in GetFollowerInventory())
         {
