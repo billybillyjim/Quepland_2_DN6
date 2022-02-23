@@ -10,7 +10,7 @@ public class HypnotizeEffect : IStatusEffect
     public int Speed { get; set; }
     public int Power { get; set; }
     public int RemainingTime { get; set; }
-
+    public string CustomData { get; set; }
     public double ProcOdds { get; set; }
 
     public string Message { get; set; }
@@ -23,6 +23,7 @@ public class HypnotizeEffect : IStatusEffect
         Speed = data.Speed;
         ProcOdds = data.ProcOdds;
         Power = data.Power;
+        CustomData = data.CustomData;
         Message = data.Message;
         RemainingTime = data.Duration;
         SelfInflicted = data.SelfInflicted;

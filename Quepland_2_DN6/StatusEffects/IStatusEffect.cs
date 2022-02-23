@@ -30,6 +30,7 @@ public interface IStatusEffect
 	/// <summary>
 	/// For special effects that affect the user, not the opponent.
 	/// </summary>
+	public string CustomData { get; set; }
 	public bool SelfInflicted { get; set; }
 	public void DoEffect(Monster m);
 	public void DoEffect(Player p);

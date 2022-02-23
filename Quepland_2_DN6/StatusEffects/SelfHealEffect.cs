@@ -10,7 +10,7 @@ public class SelfHealEffect : IStatusEffect
     public int Speed { get; set; }
     public int Power { get; set; }
     public int RemainingTime { get; set; }
-
+    public string CustomData { get; set; }
     public double ProcOdds { get; set; }
     private StatusEffectData d;
     public string Message { get; set; }
@@ -21,6 +21,7 @@ public class SelfHealEffect : IStatusEffect
         Duration = data.Duration;
         Speed = data.Speed;
         ProcOdds = data.ProcOdds;
+        CustomData = data.CustomData;
         Power = data.Power;
         Message = data.Message;
         RemainingTime = data.Duration;

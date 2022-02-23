@@ -10,6 +10,7 @@ public class BurnEffect : IStatusEffect
     public int Speed { get; set; }
     public int Power { get; set; }
     public int RemainingTime { get; set; }
+    public string CustomData { get; set; }
 
     public double ProcOdds { get; set; }
     public bool SelfInflicted { get; set; }
@@ -24,6 +25,7 @@ public class BurnEffect : IStatusEffect
         ProcOdds = data.ProcOdds;
         Power = data.Power;
         Message = data.Message;
+        CustomData = data.CustomData;
         RemainingTime = data.Duration;
         SelfInflicted = data.SelfInflicted;
         d = data;

@@ -30,6 +30,10 @@ public class StatusEffectData
 	/// The message sent when the effect is first applied.
 	/// </summary>
 	public string Message { get; set; } = "";
+	/// <summary>
+	/// Any custom text for use in the effect.
+	/// </summary>
+	public string CustomData { get; set; } = "";
 	public bool SelfInflicted { get; set; }
 }
 
