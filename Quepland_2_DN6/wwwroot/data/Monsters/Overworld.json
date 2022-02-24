@@ -2766,5 +2766,194 @@
       "drops": [
       ]
     }
+  },
+  {
+    "name": "Learing Aur Egg",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 500,
+    "attackSpeed": 60,
+    "armor": 100,
+    "damage": 10,
+    "dropTable": {
+      "drops": [
+      ]
+    },
+    "statusEffectData": [
+      {
+        "name": "Hatch",
+        "power": 20,
+        "speed": 60,
+        "duration": 65,
+        "message": "A Learing Aur has hatched from it's egg!",
+        "procOdds": 1,
+        "customData": "Learing Aur Egg:Learing Aur Hatchling",
+        "selfInflicted": true
+      }
+    ]
+  },
+  {
+    "name": "Learing Aur Hatchling",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 1400,
+    "attackSpeed": 45,
+    "armor": 50,
+    "damage": 30,
+    "dropTable": {
+      "drops": [
+      ]
+    },
+    "statusEffectData": [
+      {
+        "name": "Hatch",
+        "power": 20,
+        "speed": 40,
+        "duration": 45,
+        "message": "The Learing Aur has grown!",
+        "procOdds": 1,
+        "customData": "Learing Aur Hatchling:Learing Aur",
+        "selfInflicted": true
+      }
+    ]
+  },
+  {
+    "name": "Learing Aur",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 4000,
+    "attackSpeed": 15,
+    "armor": 265,
+    "damage": 130,
+    "dropTable": {
+      "drops": [
+      ]
+    }
+  },
+  {
+    "name": "Screeching Aur Egg",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 500,
+    "attackSpeed": 90,
+    "armor": 100,
+    "damage": 10,
+    "dropTable": {
+      "drops": [
+      ]
+    },
+    "statusEffectData": [
+      {
+        "name": "Hatch",
+        "power": 20,
+        "speed": 60,
+        "duration": 65,
+        "message": "A Screeching Aur has hatched from it's egg!",
+        "procOdds": 1,
+        "customData": "Screeching Aur Egg:Screeching Aur Hatchling",
+        "selfInflicted": true
+      }
+    ]
+  },
+  {
+    "name": "Screeching Aur Hatchling",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 2000,
+    "attackSpeed": 40,
+    "armor": 50,
+    "damage": 30,
+    "dropTable": {
+      "drops": [
+      ]
+    },
+    "statusEffectData": [
+      {
+        "name": "Hatch",
+        "power": 20,
+        "speed": 40,
+        "duration": 45,
+        "message": "The Screeching Aur has grown!",
+        "procOdds": 1,
+        "customData": "Screeching Aur Hatchling:Screeching Aur",
+        "selfInflicted": true
+      }
+    ]
+  },
+  {
+    "name": "Screeching Aur",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 5300,
+    "attackSpeed": 15,
+    "armor": 265,
+    "damage": 130,
+    "dropTable": {
+      "drops": [
+      ]
+    }
+  },
+  {
+    "name": "Flammulated Aur Egg",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 600,
+    "attackSpeed": 60,
+    "armor": 120,
+    "damage": 10,
+    "dropTable": {
+      "drops": [
+      ]
+    },
+    "statusEffectData": [
+      {
+        "name": "Hatch",
+        "power": 20,
+        "speed": 60,
+        "duration": 65,
+        "message": "A Flammulated Aur has hatched from it's egg!",
+        "procOdds": 1,
+        "customData": "Flammulated Aur Egg:Flammulated Aur Hatchling",
+        "selfInflicted": true
+      }
+    ]
+  },
+  {
+    "name": "Flammulated Aur Hatchling",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 2500,
+    "attackSpeed": 40,
+    "armor": 60,
+    "damage": 30,
+    "dropTable": {
+      "drops": [
+      ]
+    },
+    "statusEffectData": [
+      {
+        "name": "Hatch",
+        "power": 20,
+        "speed": 40,
+        "duration": 45,
+        "message": "The Flammulated Aur has grown!",
+        "procOdds": 1,
+        "customData": "Flammulated Aur Hatchling:Flammulated Aur",
+        "selfInflicted": true
+      }
+    ]
+  },
+  {
+    "name": "Flammulated Aur",
+    "weaknesses": "Swordsmanship",
+    "strengths": "Archery",
+    "hp": 5300,
+    "attackSpeed": 15,
+    "armor": 300,
+    "damage": 130,
+    "dropTable": {
+      "drops": [
+      ]
+    }
   }
 ]

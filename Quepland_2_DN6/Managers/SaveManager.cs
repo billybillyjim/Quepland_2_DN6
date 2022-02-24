@@ -466,7 +466,7 @@ public static class SaveManager
         }
         if(data.Length > 1)
         {
-            Console.WriteLine(Decompress(data[1]));
+           
         }
         if (data.Length > 2)
         {
@@ -478,7 +478,7 @@ public static class SaveManager
             {
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
-                MessageManager.AddMessage("Failed to load game's current tick. This may mean your save file has been corrupted.");
+                MessageManager.AddMessage("Failed to load game's current tick. This may mean your save file has been corrupted.", "red");
             }
             
         }

@@ -1677,7 +1677,7 @@
       "statusEffectData": [
         {
           "name": "Quick Strike Gold",
-          "power": 250,
+          "power": 1250,
           "speed": 1,
           "duration": 0,
           "message": "A clear 'ka-ching' fills the air as your hammer counters the enemy's attack!",

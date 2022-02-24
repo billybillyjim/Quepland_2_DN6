@@ -15,6 +15,8 @@ public class BattleManager
     public static BattleManager Instance { get { return instance; } }
     public List<Monster> Monsters = new List<Monster>();
     public List<Monster> CurrentOpponents { get; set; } = new List<Monster>();
+    public List<Monster> SpawnOpponents { get; set; } = new List<Monster>();
+    public List<Monster> RemoveOpponents { get; set; } = new List<Monster>();
     public IBoss CurrentBoss { get; set; }
     public Monster Target { get; set; }
     public Area CurrentArea { get; set; }
@@ -106,14 +108,7 @@ public class BattleManager
         {
             Console.WriteLine("No monsters found for area.");
         }
-        else
-        {
-            foreach(Monster m in CurrentOpponents)
-            {
-                m.IsDefeated = false;
-            }
-           
-        }
+
         StartBattle();
         
     }
@@ -138,6 +133,25 @@ public class BattleManager
     {
         if(BattleHasEnded == false)
         {
+            if(SpawnOpponents.Count > 0)
+            {
+                foreach(Monster o in SpawnOpponents)
+                {
+                    Console.WriteLine("Adding Opponent:" + o.Name);
+                    ResetOpponent(o);
+                    CurrentOpponents.Add(o);
+                }
+                SpawnOpponents.Clear();
+            }
+            if(RemoveOpponents.Count > 0)
+            {
+                foreach (Monster o in RemoveOpponents)
+                {
+                    Console.WriteLine("Removing Opponent:" + o.Name);
+                    CurrentOpponents.Remove(o);
+                }
+                RemoveOpponents.Clear();
+            }
             foreach(Monster opponent in CurrentOpponents)
             {
                 if(opponent.IsDefeated)
@@ -294,7 +308,21 @@ public class BattleManager
             MessageManager.AddMessage("You defeated the " + opponent.Name + ".");
         }
     }
-
+    public void SpawnOpponentMidBattle(Monster m)
+    {
+        if(CurrentOpponents.Contains(m) == false && SpawnOpponents.Contains(m) == false)
+        {
+            SpawnOpponents.Add(m);
+        }
+        
+    }
+    public void RemoveOpponentMidBattle(Monster m)
+    {
+        if (CurrentOpponents.Contains(m))
+        {
+            RemoveOpponents.Add(m);
+        }
+    }
     public void AddDrop(Drop drop)
     {
         if (Player.Instance.CurrentFollower != null && Player.Instance.CurrentFollower.AutoCollectSkill == "Gathering Scout")
@@ -316,14 +344,14 @@ public class BattleManager
     {
         double minHit = (((Player.Instance.GetWeaponAttackSpeed() / 5d) - 1d) / 12d);
  
-        var baseDmg = Player.Instance.GetTotalDamage();
-        int total = (int)Math.Max(minHit * baseDmg * CalculateTypeBonus(Target), baseDmg.ToRandomDamage() * CalculateTypeBonus(Target));
-        if (Target.CurrentStatusEffects.OfType<CleaveEffect>().Any())
+        var baseDmg = (int)(Player.Instance.GetTotalDamage() * CalculateTypeBonus(m));
+        int total = (int)Math.Max(minHit * baseDmg, baseDmg.ToRandomDamage() );
+        if (m.CurrentStatusEffects.OfType<CleaveEffect>().Any())
         {
         }
         else
         {
-            total = (int)Math.Max(total * Extensions.CalculateArmorDamageReduction(Target), 1);
+            total = (int)Math.Max(total * Extensions.CalculateArmorDamageReduction(m), 1);
         }
         
         return (int)Math.Min(Target.CurrentHP, total); ;
@@ -437,11 +465,13 @@ public class BattleManager
                 {
                     MessageManager.AddMessage("Your opponent seems weak to your weapon!");
                     bonus += 0.4;
+                    break;
                 }
                 else if (m.Strengths.Contains(s))
                 {
                     MessageManager.AddMessage("Your opponent seems to be resistant to your weapon...");
                     bonus -= 0.4;
+                    break;
                 }
             }
         }
@@ -466,6 +496,7 @@ public class BattleManager
     public void ResetOpponent(Monster monster)
     {
         monster.CurrentHP = monster.HP;
+        monster.CurrentArmor = monster.Armor;
         monster.TicksToNextAttack = monster.AttackSpeed;
         monster.IsDefeated = false;
         monster.CurrentStatusEffects.Clear();
@@ -527,7 +558,23 @@ public class BattleManager
                 }
                 else
                 {
-                    Player.Instance.AddStatusEffect(e);                  
+                    bool activate = true;
+                    if(e.Name == "Drain")
+                    {
+                        foreach (GameItem item in Player.Instance.GetEquippedItems())
+                        {
+                            if (item.EnabledActions.Contains("Drain Protection"))
+                            {
+                                activate = false;
+                            }
+                        }
+                    }
+                    if (activate)
+                    {
+                        Player.Instance.AddStatusEffect(e);
+
+                    }
+                                    
                 }
                 MessageManager.AddMessage(e.Message);
 
@@ -592,6 +639,10 @@ public class BattleManager
             {
                 foreach(IStatusEffect e in item.WeaponInfo.StatusEffects)
                 {
+                    if(e.Name.Contains("Quick Strike"))
+                    {
+                        continue;
+                    }
                     if (roll <= e.ProcOdds)
                     {
                         if (e.SelfInflicted)
@@ -611,7 +662,10 @@ public class BattleManager
             {
                 foreach (IStatusEffect e in item.ArmorInfo.StatusEffects)
                 {
-                    
+                    if (e.Name.Contains("Quick Strike"))
+                    {
+                        continue;
+                    }
                     if (roll <= e.ProcOdds)
                     {
                         if (e.SelfInflicted)
@@ -681,6 +735,10 @@ public class BattleManager
         else if (data.Name == "Quick Strike Gold")
         {
             return new QuickStrikeGoldEffect(data);
+        }
+        else if (data.Name == "Hatch")
+        {
+            return new HatchEffect(data);
         }
         else
         {

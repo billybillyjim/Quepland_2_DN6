@@ -123,6 +123,8 @@ using System.Threading.Tasks;
     public static Random Random = new Random();
 
     public bool SaveGame = false;
+    public static bool DieNextTick = false;
+    public static string DieNextTickMessage = "";
     public static bool IsSaving = false;
     private Stopwatch stopwatch = new Stopwatch();
     public static HCDeathInfo HCDeathInfo;
@@ -170,6 +172,12 @@ using System.Threading.Tasks;
             CurrentTick++;
             StateHasChanged();
             return;
+        }
+        if (DieNextTick)
+        {
+            Player.Instance.Die(DieNextTickMessage);
+            DieNextTick = false;
+            DieNextTickMessage = "Unknown";
         }
         if (stopActions)
         {
@@ -790,10 +798,16 @@ using System.Threading.Tasks;
         {
             if (Player.Instance.Inventory.HasItem(CurrentAlchemyFormula.InputMetal))
             {
-                Player.Instance.Inventory.RemoveItems(CurrentAlchemyFormula.InputMetal, 1);
-                AlchemyStage = 1;
-                TicksToNextAction = 10;
-                MessageManager.AddMessage("You place the " + CurrentAlchemyFormula.InputMetal.Name + " into the pool.");
+                if(Player.Instance.Inventory.RemoveItems(CurrentAlchemyFormula.InputMetal, 1) == 1)
+                {
+                    AlchemyStage = 1;
+                    TicksToNextAction = 10;
+                    MessageManager.AddMessage("You place the " + CurrentAlchemyFormula.InputMetal.Name + " into the pool.");
+                }
+                else
+                {
+                    MessageManager.AddMessage("You need to unlock the ingredients to use them.");
+                }
             }
             else
             {
@@ -810,10 +824,16 @@ using System.Threading.Tasks;
         {
             if (Player.Instance.Inventory.HasItem(CurrentAlchemyFormula.Element))
             {
-                Player.Instance.Inventory.RemoveItems(CurrentAlchemyFormula.Element, 1);
-                AlchemyStage = 2;
-                TicksToNextAction = 10;
-                MessageManager.AddMessage("You apply the " + CurrentAlchemyFormula.Element.Name + " to the metal mixture in the pool.");
+                if(Player.Instance.Inventory.RemoveItems(CurrentAlchemyFormula.Element, 1) == 1)
+                {
+                    AlchemyStage = 2;
+                    TicksToNextAction = 10;
+                    MessageManager.AddMessage("You apply the " + CurrentAlchemyFormula.Element.Name + " to the metal mixture in the pool.");
+                }
+                else
+                {
+                    MessageManager.AddMessage("You need to unlock the ingredients to use them.");
+                }
             }
             else
             {

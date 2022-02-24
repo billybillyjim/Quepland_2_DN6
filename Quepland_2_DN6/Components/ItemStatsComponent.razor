@@ -9,7 +9,7 @@
          @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Damage", "This is a measure of how much this item boosts your damage. Higher numbers are better!")))"
          @onmouseout="@(new Action(() => GameState.HideTooltip()))">
                 <img src="data/Images/Attack.png" class="item-stat-image" /> @GetAttack()
-                @if(GetAttackDifference() > 0)
+                @if(GetAttackDifference() != 0)
                 {
                     <span style="@GetColor(GetAttackDifference(), false)">(@GetAttackDifference())</span>
                 }
@@ -23,7 +23,7 @@
          @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Ranged Damage", "This is a measure of how much this item boosts your damage with ranged weapons. Higher numbers are better!")))"
          @onmouseout="@(new Action(() => GameState.HideTooltip()))">
                 <img src="data/Images/Archery.png" class="item-stat-image" /> @GetRangedAttack() 
-                    @if (GetRangedAttackDifference() > 0)
+                    @if (GetRangedAttackDifference() != 0)
                     {
                         <span style="@GetColor(GetRangedAttackDifference(), false)">(@GetRangedAttackDifference())</span>
                     }
@@ -34,7 +34,7 @@
          @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Magic Damage", "This is a measure of how much this item boosts your magic damage. Higher numbers are better!")))"
          @onmouseout="@(new Action(() => GameState.HideTooltip()))">
                 <img src="data/Images/Stun.png" class="item-stat-image" /> @GetMagicAttack() 
-                    @if(GetMagicAttackDifference() > 0)
+                    @if(GetMagicAttackDifference() != 0)
                     {
                         <span style="@GetColor(GetMagicAttackDifference(), false)">(@GetMagicAttackDifference())</span>
                     }
@@ -44,7 +44,7 @@
  
             @if (Item.EquipSlot != "None")
             {
-                @if(GetArmorDifference() > 0)
+                @if(GetArmor() != 0)
                 {
                                 <div class="col item-stat-info"
              @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Armor", "This is a measure of how much this item boosts your armor. Higher numbers are better!")))"
@@ -53,7 +53,7 @@
                     </div>
                 }
 
-                @if(Item.WeaponInfo?.AttackSpeed > 0 && GetSpeedDifference() > 0)
+                @if(Item.WeaponInfo?.AttackSpeed > 0 && GetSpeedDifference() != 0)
                 {
                     <div  class="col item-stat-info"
          @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Speed", "This is a measure of how many game ticks this weapon attacks at. Lower is faster!")))"
@@ -71,11 +71,11 @@
                     <img src="data/Images/Bonus.png" class="item-stat-image" /> @((GetGatherBonus() * 100d))%
                 </div>
             }
-        </div>
+        
     
-    if (Item.FoodInfo != null)
+    @if (Item.FoodInfo != null)
     {
-        <div style="height:28px;border:solid black 1px;position:relative;background-color:gray;display:flex;">
+
             <div  class="col item-stat-info"
          @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Heal Amount", "This is a measure of how much this item heals you per heal.")))"
          @onmouseout="@(new Action(() => GameState.HideTooltip()))">
@@ -100,8 +100,8 @@
                 </div>
             }
 
-        </div>
     }
+    </div>
 }
 
 

@@ -19,7 +19,7 @@
     "name": "Nmekufu Village",
     "id": 201,
     "image": "Village",
-    "description": "The passage opens up to a large cavity inside the tree. The walls glow with a warm, magical light. A few masked villagers sit around a central plaza. The tallest of them is wearing a much larger, darker mask. A carved staircase on the far side of the village leads up to a hole in the ceiling.",
+    "description": "The passage opens up to a large cavity inside the tree. The walls glow with a warm, magical light. A few masked villagers sit around a central plaza. The tallest of them is wearing a much larger, darker mask. A carved staircase on the far side of the village leads up to a hole in the ceiling and down to a hole in the floor.",
     "areaURL": "NmekufuVillage",
     "conversionActions": [
       "Spin Baobhan Hair:Baobhan Thread:Baobhan Hair:You begin spinning the hair into thread.",
@@ -43,8 +43,8 @@
   {
     "name": "Lower Village",
     "id": 202,
-    "image": "Loom",
-    "description": "The lower part of the village is home to a few expertly crafted looms. The magic glow of the walls makes it easy to see what you are doing. A strange man stands in the corner, not dressed like the people of the village.",
+    "image": "Fence",
+    "description": "The lower village is bright as day. The walls emit a clear light that is very pleasant to look at. There are a few expertly crafted looms lined up near the side of the tree. A strange man stands in the corner, not dressed like the people of the village. The staircase continues along the outside wall of the tree, even further downward.",
     "areaURL": "LowerNmekufuVillage",
     "conversionActions": [
       "Weave Baobhan Fabric:Baobhan Fabric:Baobhan Thread:You begin weaving the thread into fabric.",
@@ -52,26 +52,30 @@
     ],
     "npcs": [
       "Spiders"
+    ],
+    "unlockableAreas": [
+      {
+        "areaURL": "RiimataPool",
+        "buttonText": "Continue downward"
+      }
+
     ]
   },
   {
     "name": "Upper Branches",
     "id": 203,
-    "image": "Branches",
+    "image": "Willow",
     "description": "You emerge from the stairs to an open view of the world below. Branches and leaves block all the light from above. Here and there Nmekufians are gathering fruit from the outer branches.",
     "areaURL": "UpperBranches",
     "actions": [
       "Gather Fruit:Great Tree Fruit"
-    ],
-    "monsters": [
-      "Ruwohane"
     ]
   },
   {
     "name": "Riimata Pool",
     "id": 204,
     "image": "Water",
-    "description": "The water here doesn't seem to have a source, but when one draws from it, it bubbles and returns to full. A few Nmekufians are filling large jugs to bring back down to the village.",
+    "description": "The water here doesn't seem to have a source, but when one draws from it, it bubbles and returns to full. A few Nmekufians are filling large jugs to bring back up to the village.",
     "areaURL": "RiimataPool",
     "unlockableAreas": [
 

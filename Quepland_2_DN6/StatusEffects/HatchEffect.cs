@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 public class HatchEffect : IStatusEffect
 {
-    public string Name { get; set; } = "Chicken";
+    public string Name { get; set; } = "Hatch";
     public int Duration { get; set; }
     public int Speed { get; set; }
     public int Power { get; set; }
@@ -31,16 +31,15 @@ public class HatchEffect : IStatusEffect
     public void DoEffect(Monster m)
     {
         MessageManager.AddMessage(Message);
-        BattleManager.Instance.ResetOpponent(BattleManager.Instance.GetMonsterByName(CustomData));
-        BattleManager.Instance.CurrentOpponents.Add(BattleManager.Instance.GetMonsterByName(CustomData));
+        BattleManager.Instance.RemoveOpponentMidBattle(BattleManager.Instance.GetMonsterByName(CustomData.Split(":")[0]));
+        BattleManager.Instance.SpawnOpponentMidBattle(BattleManager.Instance.GetMonsterByName(CustomData.Split(":")[1]));
         RemainingTime = 0;
     }
     public void DoEffect(Player p)
     {
 
         MessageManager.AddMessage(Message);
-        BattleManager.Instance.ResetOpponent(BattleManager.Instance.GetMonsterByName(CustomData));
-        BattleManager.Instance.CurrentOpponents.Add(BattleManager.Instance.GetMonsterByName(CustomData));
+        BattleManager.Instance.SpawnOpponentMidBattle(BattleManager.Instance.GetMonsterByName(CustomData));
         RemainingTime = 0;
 
     }

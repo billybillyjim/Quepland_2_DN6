@@ -80,21 +80,11 @@
   {
     "name": "Ruwohane",
     "hp": 23500,
-    "weaknesses": "Hammermanship",
+    "weaknesses": "Archery",
     "strengths": "Knifesmanship",
     "damage": 95,
     "armor": 500,
     "attackSpeed": 3,
-    "statusEffectData": [
-      {
-        "name": "Drain",
-        "power": 5,
-        "speed": 3,
-        "duration": 60,
-        "message": "The Ruwohane begins to sing. The corners of your vision begin to darken. You feel weakened.",
-        "procOdds": 1
-      }
-    ],
     "dropTable": {
       "drops": [
         {

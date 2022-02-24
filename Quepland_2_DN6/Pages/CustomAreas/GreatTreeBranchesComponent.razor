@@ -6,24 +6,37 @@
 
 @if (thisArea != null)
 {
-    <div class="row" style="position:relative;width:100%;height:50%">
+    @if (BattleBegun == true)
+    {
+        <CombatComponent></CombatComponent>
+
+        @if (BattleManager.Instance.BattleHasEnded)
+        {
+            <div>
+                    <button class="btn btn-primary" @onclick="@(() => FightRuwohane())">Fight Again</button>
+                </div>
+        }
+    }
+    else
+    {
+        <div class="row" style="position:relative;width:100%;height:50%">
         @foreach(int branch in CurrentBranches)
         {
             if(GetFacingDirection(CurrentBranch, branch) == "North")
             {
-                <button class="btn btn-primary m-3" style="position:absolute;top:10px;left:@RandPos[0]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+                <button class="btn btn-primary m-3" style="position:absolute;top:10px;left:@(positionDict[branch])%" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
             }
             else if(GetFacingDirection(CurrentBranch, branch) == "East")
             {
-                <button class="btn btn-primary m-3" style="position:absolute;right:10px;bottom:@RandPos[1]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+                <button class="btn btn-primary m-3" style="position:absolute;right:10px;bottom:@(positionDict[branch])%" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
             }
             else if(GetFacingDirection(CurrentBranch, branch) == "South")
             {
-                <button class="btn btn-primary m-3" style="position:absolute;bottom:10px;right:@RandPos[2]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+                <button class="btn btn-primary m-3" style="position:absolute;bottom:10px;right:@(positionDict[branch])%" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
             }
             else if(GetFacingDirection(CurrentBranch, branch) == "West")
             {
-                <button class="btn btn-primary m-3" style="position:absolute;left:10px;top:@RandPos[3]" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
+                <button class="btn btn-primary m-3" style="position:absolute;left:10px;top:@(positionDict[branch])%" @onclick=@(() => JumpToBranch(branch))>Jump @GetRelativeDirection(branch)</button>
             }
             else
             {
@@ -31,12 +44,18 @@
             }
             
         }
-        @if (hasFruit)
+
+        @if (CurrentBranch == 32 )
+        {
+            <button class="btn btn-primary m-3" style="position:absolute;left:50%;top:50%;" @onclick=@(() => FightRuwohane())>Lure Ruwohane</button>
+        }
+        else if (hasFruit)
         {
             <button class="btn btn-primary m-3" style="position:absolute;left:@FruitLeftPos;top:@FruitTopPos;" @onclick=@(() => GatherFruit())>Harvest Fruit</button>
-
         }
     </div>
+    }
+    
     
 
 }
@@ -46,16 +65,70 @@
     [Parameter]
     public string areaURL { get; set; }
     public Area thisArea { get; set; }
+    //N S E W
+    public int[] sameSideOffsets = new int[] { 0, 0, 0, 0 };
+
     public long NextClimbTick;
     public bool IsClimbing;
     public bool hasFruit;
     public List<int> CurrentBranches = new List<int>();
-    public int CurrentBranch;
+    public int CurrentBranch = 0;
+    public int PreviousBranch = 0;
     public string FacingDirection = "South";
     public string FruitLeftPos = "";
     public string FruitTopPos = "";
+    public bool BattleBegun;
+    public List<string> positions = new List<string>() { "North", "South", "East", "West" };
     public List<string> RandPos = new List<string>();
+    public Dictionary<int, int> positionDict = new Dictionary<int, int>();
+    public List<string> JumpingMessages = new List<string>()
+        {
+            "You leap to the next branch.",
+            "You run along the branch and carefully step across.",
+            "You vault yourself quickly to the nearby branch.",
+            "You bounce from branch to branch along the way.",
+            "You dive to the next branch, deftly righting yourself on landing.",
+            "You hurdle over an opposing branch and find your footing.",
+            "You bound forward to the branch and expertly land, ready to jump again.",
+            "You jolt forward along the branch.",
+            "You spring from small branch to small branch, never slowing down.",
+            "You clear the gap and swiftly continue on your way.",
+            "You hop along a pair of branches that have twisted together.",
+            "The branches bend under your feet, but you keep your balance.",
+            "A gust of wind propels you across as you jump.",
+            "There's a satisfying 'thud' as you land on the branch."
 
+        };
+    public List<string> JumpFailMessages = new List<string>()
+        {
+            "You critically fail at jumping, hurting yourself in the process.",
+            "You greatly underestimate the gap and smash into a branch below.",
+            "You smash your face into a branch as you land.",
+            "You twist both your ankles on the landing.",
+            "You bend the branch on landing and tumble off it, crashing into several others before catching yourself.",
+            "Your target branch was a terrible choice, it shatters with a loud snap and you scrape past the splintery stub.",
+            "The branch almost gives under your weight, giving you just enough time to slip and hit your head on a nearby branch before snapping.",
+            "The branch easily buckles under your weight, sending you flying off.",
+            "You trip before jumping and stumble your way across a number of hard branches.",
+            "You twist your ankle on the landing.",
+            "You bend the branch on landing and tumble off it.",
+            "Your target branch was a poor choice, it snaps and you scrape past the shattered stub.",
+            "The branch buckles under your weight, sending you tumbling off.",
+            "You trip before jumping and stumble your way across.",
+            "You trip and fall, barely catching yourself before it's too late.",
+            "An unexpected wind blows you off course, and you crash into the wrong branch.",
+            "The branch gives far more than you expect and you slip off.",
+            "You slip and hurt yourself upon jumping.",
+            "You slip and fall, barely catching yourself.",
+            "An unexpected wind knocks you off course, crashing you into a nearby branch.",
+            "The branch moves unexpectedly and you slip off.",
+            "You slip and hurt yourself upon landing.",
+            "You slip as you land and hurt yourself trying to regain your balance.",
+            "You overestimate the distance and have to catch the branch with your hands as you fly past.",
+            "You almost land properly, but slip at the last second, hurting yourself."
+
+
+        };
     public Dictionary<int, List<int>> Branches = new Dictionary<int, List<int>>()
     {
         {0, new List<int>(){5, 36}},
@@ -93,7 +166,8 @@
         int pos = GameState.Random.Next(25, 75);
         return pos + "%";
     }
-    public string GetPos(int pos)
+
+    public int GetPos(int pos)
     {
         int x = (pos + 1) % 8 * 9;
         if(x < 10)
@@ -106,11 +180,25 @@
             x += 1;
             x *= 3;
         }
-        return Math.Clamp(x, 25, 75) + "%";
+        return Math.Clamp(x, 25, 75);
+    }
+    public void FightRuwohane()
+    {
+        var Ruwohane = BattleManager.Instance.GetMonsterByName("Ruwohane");
+        BattleManager.Instance.CurrentOpponents.Clear();
+        BattleManager.Instance.CurrentOpponents.Add(Ruwohane);
+        BattleManager.Instance.SetBoss(new Quepland_2_DN6.Bosses.Ruwohane());
+        BattleManager.Instance.StartBattle();
+        BattleBegun = true;
+
     }
 
     public string GetRelativeDirection(int branch)
     {
+        if(branch == PreviousBranch)
+        {
+            return "Directly Back";
+        }
         string newDir = GetFacingDirection(CurrentBranch, branch);
         if(newDir == FacingDirection)
         {
@@ -121,7 +209,7 @@
                 newDir == "East" && FacingDirection == "South" ||
                 newDir == "West" && FacingDirection == "North")
         {
-            return "Right";
+            return "Left";
         }
         else if(newDir == "North" && FacingDirection == "South" ||
                 newDir == "South" && FacingDirection == "North" ||
@@ -130,7 +218,7 @@
         {
             return "Back";
         }
-        return "Left";
+        return "Right";
 
     }
     public void GatherFruit(){
@@ -153,20 +241,48 @@
 
     public void JumpToBranch(int branch)
     {
+        int roll = GameState.Random.Next(Player.Instance.GetLevel("Deftness") / 4, Player.Instance.GetLevel("Deftness"));
+        if(roll < 25)
+        {
+            Player.Instance.CurrentHP -= 40;
+            MessageManager.AddMessage(JumpFailMessages[roll]);
+        }
+        else
+        {
+            MessageManager.AddMessage(JumpingMessages[GameState.Random.Next(JumpingMessages.Count)]);
+        }
         FacingDirection = GetFacingDirection(CurrentBranch, branch);
         Player.Instance.GainExperience("Deftness", Player.Instance.GetLevel("Deftness") * 5);
-        if(GameState.Random.Next(0, 100) <= 50)
+        if(GameState.Random.Next(0, 100) >= 60)
         {
             hasFruit = true;
+
+        }
+        else{
+            hasFruit = false;
+        }
+        if (hasFruit)
+        {
             FruitLeftPos = GetRandomPos();
             FruitTopPos = GetRandomPos();
         }
         GetBranches(branch);
+        sameSideOffsets = new int[] { 0, 0, 0, 0 };
+
+        PreviousBranch = CurrentBranch;
         CurrentBranch = branch;
-        for(int i = 0; i < 4; i ++)
+
+        int iterator = 0;
+        positionDict.Clear();
+        foreach(int b in Branches[branch])
         {
-            RandPos[i] = GetPos(branch);
+            int pos = GetPos(b);
+            int offset = positions.IndexOf(GetFacingDirection(branch, b));
+            positionDict.Add(b, pos + sameSideOffsets[offset]);
+            sameSideOffsets[offset] = pos > 50 ? -25 : 25;
+            iterator++;
         }
+       
     }
     public string GetFacingDirection(int startBranch, int branch)
     {
@@ -197,16 +313,12 @@
     protected override void OnInitialized()
     {
         GameState.StateChanged += OnGameStateChanged;
-        for(int i = 0; i < 4; i ++)
-        {
-            RandPos.Add(GetPos(i));
-        }
     }
     protected override void OnParametersSet()
     {
         areaURL = "UpperBranches";
         thisArea = AreaManager.Instance.GetAreaByURL(areaURL);
-        GetBranches(0);
+        JumpToBranch(0);
         GameState.UpdateState();
 
     }

@@ -35,7 +35,7 @@ public class DrainEffect : IStatusEffect
             MessageManager.AddMessage(Message);
             int drain = m.HP / Power;
             m.CurrentHP -= drain;
-            Player.Instance.CurrentHP += drain;
+            Player.Instance.CurrentHP = Math.Min(Player.Instance.MaxHP, Player.Instance.CurrentHP + drain);
         }
     }
 	public void DoEffect(Player p)
@@ -56,7 +56,9 @@ public class DrainEffect : IStatusEffect
             p.CurrentHP -= p.MaxHP / Power;
             if (Player.Instance.CurrentHP <= 0)
             {
-                Player.Instance.Die("A Ruwohane swallowed your soul.");
+                GameState.DieNextTick = true;
+                GameState.DieNextTickMessage = "A Ruwohane swallowed your soul.";
+                
             }
         }
     }
