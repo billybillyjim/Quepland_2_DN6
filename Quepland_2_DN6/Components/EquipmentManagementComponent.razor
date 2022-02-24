@@ -2,7 +2,7 @@
 @inject NavigationManager UriHelper
 @implements IDisposable
 
-<div>
+<div class="col">
     <div class="row item-stat-box">
         <div class="col item-stat-info" 
              @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Damage", "This is a measure of how much all your equipped items boost your damage. Higher numbers are better!")))"
