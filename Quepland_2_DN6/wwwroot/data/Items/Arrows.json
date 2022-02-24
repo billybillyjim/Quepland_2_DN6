@@ -303,6 +303,15 @@
         "skillLevel": 96
       }
     ],
+    "statusEffectData": [
+      {
+        "name": "Freeze",
+        "speed": 2,
+        "duration": 20,
+        "message": "The arrow freezes your opponent!",
+        "procOdds": 0.15
+      }
+    ],
     "secondaryColor": "#D2FFF5"
   },
   {
