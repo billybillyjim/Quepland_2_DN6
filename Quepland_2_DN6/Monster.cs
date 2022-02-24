@@ -8,6 +8,7 @@ public class Monster
 	public int HP { get; set; }
 	public int CurrentHP { get; set; }
 	public int Armor { get; set; }
+    public int CurrentArmor { get; set; }
 	public int Damage { get; set; }
 	public int AttackSpeed { get; set; }
 	public int TicksToNextAttack { get; set; }

@@ -13,9 +13,8 @@ namespace Quepland_2_DN6.Bosses
             {
                 if(m.Name == "Gashadokuro Spine" && monster.Name != "Gashadokuro Spine")
                 {
-                    m.Armor -= 46;
+                    m.CurrentArmor -= 46;
                     MessageManager.AddMessage("A bit of the creature's ribcage crumbles away, exposing more of the spine!");
-                    Console.WriteLine("New Armor:" + m.Armor);
                 }
             }
         }
@@ -30,7 +29,7 @@ namespace Quepland_2_DN6.Bosses
         {
             if(monster.Name == "Gashadokuro Spine")
             {
-                if(monster.Armor == 140)
+                if(monster.CurrentArmor == 140)
                 {
                     MessageManager.AddMessage("You try to attack the spine, but the ribcage blocks most of the damage!", "red");
                 }               
