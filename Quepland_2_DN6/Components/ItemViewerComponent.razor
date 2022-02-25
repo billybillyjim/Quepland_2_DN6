@@ -14,13 +14,32 @@
   
     @if (Item != null && !HideValue)
     {
-        <div class="row" style="font-weight:bold;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;" onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, Item.Name, Item.GetRequirementTooltip(true))))"
-             onmouseout="@(new Action(() => GameState.HideTooltip()))">
+        <div class="row" style="font-weight:bold;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;" 
+             >
             <img src="data/Images/@(GetLock())" style="height:20px;width:20px;cursor:pointer;margin:2px 2px -3px 3px;border-radius:0.25rem;@GetLockStyle()"
                  @onclick="@(() => ToggleLock())" />
-            <span style="margin-left:3px;-moz-text-size-adjust:large">@Item.Name</span>
+            <span style="margin-left:3px;-moz-text-size-adjust:large" onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, Item.Name, Item.GetRequirementTooltip(true))))"
+             onmouseout="@(new Action(() => GameState.HideTooltip()))">@Item.Name</span>
+            @if(Item.WeaponInfo != null)
+            {
+                foreach(IStatusEffect effect in Item.WeaponInfo.StatusEffects)
+                {
+                    <img src="data/Images/@(effect.Name).png" style="height:20px;width:20px;margin:2px 2px -3px 3px;border-radius:0.25rem;background:white;"
+                    onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, effect.Name, effect.GetDescription())))"
+                    onmouseout="@(new Action(() => GameState.HideTooltip()))"/>
+                }
+            }
+            @if(Item.ArmorInfo != null)
+            {
+                foreach(IStatusEffect effect in Item.ArmorInfo.StatusEffects)
+                {
+                    <img src="data/Images/@(effect.Name).png" style="height:20px;width:20px;margin:2px 2px -3px 3px;border-radius:0.25rem;background:white;"
+                    onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, effect.Name, effect.GetDescription())))"
+                    onmouseout="@(new Action(() => GameState.HideTooltip()))"/>
+                }
+            }
         </div>
-        <div style="position:relative;line-height:18px;margin-right:80px;padding-left:13px;">@Item.Description</div>
+        <div style="position:relative;line-height:18px;margin-right:80px;padding-left:13px;padding-bottom:50px;">@Item.Description</div>
         @if ((Item.WeaponInfo != null || Item.ArmorInfo != null) && Item.EquipSlot != "None")
         {
             if (Item.IsEquipped)
