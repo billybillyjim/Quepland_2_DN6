@@ -28,6 +28,10 @@ public class PoisonEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted;
         d = data;
     }
+    public string GetDescription()
+    {
+        return "Poisons an enemy for " + Power + " damage every " + Speed + " game ticks, for " + Duration + " total ticks.";
+    }
     public void DoEffect(Monster m)
     {
         if(RemainingTime % Speed == 0 && RemainingTime > 0)

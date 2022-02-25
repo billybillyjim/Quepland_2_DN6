@@ -40,7 +40,6 @@ public class FollowerManager
             data += JsonConvert.SerializeObject(f, Formatting.Indented, new InventoryJsonConverter(typeof(Follower))) + ",";
         }
         data += "]";
-        Console.WriteLine(data);
         return data;
     }
     public string GetSaveData()
@@ -85,9 +84,11 @@ public class FollowerManager
     public void LoadSaveData(string data)
     {
         string[] lines = data.Split(',');
+        int iterator = 0;
+        Console.WriteLine(data);
         foreach(string line in lines)
         {
-            if(line.Length < 2)
+            if(line.Length < 2 || line.StartsWith('"'))
             {
                 continue;
             }
@@ -108,9 +109,25 @@ public class FollowerManager
             }
             if(d.Length > 3)
             {
-                Console.WriteLine(d[3]);
-                f.Inventory.LoadData(d[3]);
+                string remainder = d[3];
+                int pos = iterator;
+                if (remainder.EndsWith('"') && lines.Length > pos + 1)
+                {
+                    remainder += ",";
+                    while(pos < lines.Length && lines[pos + 1].StartsWith('"'))
+                    {
+                        remainder += lines[pos + 1];
+                        if (remainder.EndsWith('"'))
+                        {
+                            remainder += ",";
+                        }
+                        pos++;
+                    }
+                    
+                }
+                f.Inventory.LoadData(remainder);
             }
+            iterator++;
         }
     }
 }

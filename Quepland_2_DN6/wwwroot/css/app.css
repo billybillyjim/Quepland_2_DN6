@@ -255,6 +255,7 @@ app {
     min-height: 50px;
     overflow-y:scroll;
     height:calc(50vh - 110px);
+    max-height:30vh;
 }
 .item-stat-box {
     border-bottom: solid black 1px;

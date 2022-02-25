@@ -18,7 +18,7 @@
     "isStackable": true
   },
   {
-    "name": "Ethereal Seed",
+    "name": "Etheral Seed",
     "description": "The essence of the ether, extracted from something. Now it's all that remains.",
     "gatherString": "You get an ethereal seed.",
     "value": 35,

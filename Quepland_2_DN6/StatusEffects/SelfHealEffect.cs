@@ -28,6 +28,10 @@ public class SelfHealEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted; 
         d = data;
     }
+    public string GetDescription()
+    {
+        return "Has a " + (ProcOdds * 100) + "% chance to heal you every attack for " + Power + ".";
+    }
     public void DoEffect(Monster m)
     {
         if (RemainingTime % Speed == 0 && RemainingTime > 0)

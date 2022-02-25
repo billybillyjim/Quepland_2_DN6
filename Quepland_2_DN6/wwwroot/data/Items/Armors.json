@@ -1377,5 +1377,96 @@
         }
       ]
     }
+  },
+  {
+    "name": "Dormant Gloves",
+    "value": 15000,
+    "description": "A pair of pale, gray gloves.",
+    "gatherString": "You make a pair of gloves.",
+    "gatherSpeed": 12,
+    "equipSlot": "Hands",
+    "icon": "Glove",
+    "secondaryColor": "#AAAAAA",
+    "armorInfo": {
+      "armorBonus": 10,
+      "damage": 10,
+      "rangedDamage": 10
+    }
+  },
+  {
+    "name": "Hokibo Gloves",
+    "value": 25000,
+    "description": "A pair of white gloves.",
+    "gatherString": "You make a pair of gloves.",
+    "gatherSpeed": 12,
+    "equipSlot": "Hands",
+    "icon": "Glove",
+    "secondaryColor": "#FFFFFF",
+    "armorInfo": {
+      "armorBonus": 30,
+      "damage": 15,
+      "rangedDamage": 25,
+      "statusEffectData": [
+        {
+          "name": "SelfHeal",
+          "power": 450,
+          "speed": 1,
+          "duration": 1,
+          "message": "Your gloves glow and you feel refreshed.",
+          "procOdds": 0.1,
+          "selfInflicted": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Daranibo Gloves",
+    "value": 25000,
+    "description": "A pair of orange gloves.",
+    "gatherString": "You make a pair of gloves.",
+    "gatherSpeed": 12,
+    "equipSlot": "Hands",
+    "icon": "Glove",
+    "secondaryColor": "#FFA500",
+    "armorInfo": {
+      "armorBonus": 35,
+      "damage": 10,
+      "rangedDamage": 20,
+      "statusEffectData": [
+        {
+          "name": "Cleave",
+          "power": 1,
+          "speed": 1,
+          "duration": 1,
+          "message": "",
+          "procOdds": 0.1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Kotenbo Gloves",
+    "value": 25000,
+    "description": "A pair of green gloves.",
+    "gatherString": "You make a pair of gloves.",
+    "gatherSpeed": 12,
+    "equipSlot": "Hands",
+    "icon": "Glove",
+    "secondaryColor": "#00FF00",
+    "armorInfo": {
+      "armorBonus": 3,
+      "damage": 35,
+      "rangedDamage": 35,
+      "statusEffectData": [
+        {
+          "name": "Poison",
+          "power": 350,
+          "speed": 5,
+          "duration": 35,
+          "message": "Your gloves impart a poison on your enemy!",
+          "procOdds": 0.1
+        }
+      ]
+    }
   }
 ]

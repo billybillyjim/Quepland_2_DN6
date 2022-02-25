@@ -29,6 +29,10 @@ public class FreezeEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted;
         d = data;
     }
+    public string GetDescription()
+    {
+        return "Has a " + (ProcOdds * 100) + "% chance to freeze an enemy for " + Duration + " total ticks.";
+    }
     public void DoEffect(Monster m)
     {
         if (RemainingTime % Speed == 0 && RemainingTime > 0)

@@ -28,6 +28,10 @@ public class HatchEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted; 
         d = data;
     }
+    public string GetDescription()
+    {
+        return "Hatches an enemy monster from " + CustomData;
+    }
     public void DoEffect(Monster m)
     {
         MessageManager.AddMessage(Message);

@@ -1157,7 +1157,11 @@ using System.Threading.Tasks;
     {
         string[] compVersions = versionToCheck.Split(".");
         string[] versions = minimumVersion.Split(".");
-
+        if(compVersions.Length < 3 || versions.Length < 3)
+        {
+            
+            return false;
+        }
         string bigNum = versions[0];
         string major = versions[1];
         string minor = versions[2];

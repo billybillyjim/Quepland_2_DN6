@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 public class GameItem
 {
+	[JsonProperty]
 	public string Name { get; set; } = "Unset Name";
 	public string Description { get; set; } = "Unset Description";
 	public string GatherString { get; set; } = "You get an item";

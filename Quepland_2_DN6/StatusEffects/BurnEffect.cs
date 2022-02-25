@@ -30,6 +30,10 @@ public class BurnEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted;
         d = data;
     }
+    public string GetDescription()
+    {
+        return "Burns an enemy for " + Power + " damage every " + Speed + " game ticks, for " + Duration + " total ticks.";
+    }
     public void DoEffect(Monster m)
     {
         if (RemainingTime % Speed == 0 && RemainingTime > 0)

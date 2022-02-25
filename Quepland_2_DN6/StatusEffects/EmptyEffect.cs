@@ -29,6 +29,11 @@ public class EmptyEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted;
         d = data;
     }
+
+    public string GetDescription()
+    {
+        return "Disables the regenerative power of enemies.";
+    }
     public void DoEffect(Monster m)
     {
         if (RemainingTime % Speed == 0 && RemainingTime > 0)

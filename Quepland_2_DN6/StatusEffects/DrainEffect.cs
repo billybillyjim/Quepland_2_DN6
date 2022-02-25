@@ -28,6 +28,10 @@ public class DrainEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted;
         d = data;
     }
+    public string GetDescription()
+    {
+        return "Drains an enemy for their HP / " + Power + " damage every " + Speed + " game ticks, for " + Duration + " total ticks, healing you in the process.";
+    }
     public void DoEffect(Monster m)
     {
         if(RemainingTime % Speed == 0 && RemainingTime > 0)

@@ -29,6 +29,10 @@ public class QuickStrikeGoldEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted;
         d = data;
     }
+    public string GetDescription()
+    {
+        return "Has a " + (ProcOdds * 100) + "% chance to counter-strike the enemy... For a price.";
+    }
     public void DoEffect(Monster m)
     {
         if (RemainingTime % Speed == 0 && RemainingTime > 0)

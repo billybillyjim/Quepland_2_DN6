@@ -29,6 +29,10 @@ public class UndulateEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted;
         d = data;
     }
+    public string GetDescription()
+    {
+        return "Has a " + (ProcOdds * 100) + "% chance to strike the enemy an extra time.";
+    }
     public void DoEffect(Monster m)
     {
         if (RemainingTime % Speed == 0 && RemainingTime > 0)

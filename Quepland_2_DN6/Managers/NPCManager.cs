@@ -154,7 +154,7 @@ public class NPCManager
     }
     public void GetPlaytime()
     {
-        TimeSpan time = TimeSpan.FromMilliseconds(GameState.CurrentTick * GameState.GameSpeed);
+        TimeSpan time = TimeSpan.FromMilliseconds(GameState.CurrentTick * (double)GameState.GameSpeed);
         if(time.TotalHours > 1)
         {
             MessageManager.AddMessage("You've been in this world for " + Math.Round(time.TotalHours, 2) + " hours.");

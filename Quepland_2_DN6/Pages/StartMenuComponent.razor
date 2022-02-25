@@ -208,12 +208,14 @@
         GameState.UseNewSaveCompression = true;
     }
 
-    public void ImportSave()
+    public async Task ImportSave()
     {
         SaveManager.ImportSave(exportedSave);
-        SaveManager.SaveGame();
+        await SaveManager.SaveGame(true);
         importedSaveComplete = true;
         hasSave = true;
+        GameState.ShowStartMenu = false;
+        GameState.GoTo("/World/" + GameState.Location);
     }
     public List<string> GetGameModes()
     {
@@ -295,7 +297,7 @@
         hasUltimate = await SaveManager.HasSaveFile("Ultimate");
 
         GameState.StateChanged += OnGameStateChanged;
-
+        SaveManager.DebugMode = IsTesting();
     }
     public void Dispose()
     {

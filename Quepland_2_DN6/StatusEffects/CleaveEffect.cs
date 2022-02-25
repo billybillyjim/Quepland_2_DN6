@@ -29,6 +29,10 @@ public class CleaveEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted;
         d = data;
     }
+    public string GetDescription()
+    {
+        return "Ignores enemy armor " + (100 * ProcOdds) + "% of the time.";
+    }
     public void DoEffect(Monster m)
     {
         if (RemainingTime % Speed == 0 && RemainingTime > 0)

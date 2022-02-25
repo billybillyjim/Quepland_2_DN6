@@ -658,7 +658,7 @@ public class Player
             KnownAlchemyFormulae = KnownAlchemicalFormulae
         };
     }
-    public void LoadSaveData(PlayerSaveData data)
+    public void LoadSaveData(PlayerSaveData data, string version)
     {
         string error = "";
         try
@@ -688,7 +688,7 @@ public class Player
                     
                 }
             }
-            if (GameState.CheckVersion("1.1.0"))
+            if (GameState.CheckVersion("1.1.0", version))
             {
                 foreach (AlchemicalFormula l in data.KnownAlchemyFormulae)
                 {

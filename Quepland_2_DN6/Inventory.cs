@@ -719,6 +719,11 @@ public class Inventory
             }
             string id = s[0];
             GameItem it = ItemManager.Instance.LoadItemByUniqueID(id);
+            if(it == null)
+            {
+                Console.WriteLine("Failed to find item with id:" + id);
+                Console.WriteLine(line);
+            }
             if (s.Length >= 3)
             {
                 List<string> tabs = JsonConvert.DeserializeObject<List<string>>(s[2]);
@@ -731,7 +736,9 @@ public class Inventory
             {
                 if (bool.TryParse(s[3], out bool res))
                 {
+
                     it.IsLocked = res;
+
                 }
             }
             if (int.TryParse(s[1], out int amt))

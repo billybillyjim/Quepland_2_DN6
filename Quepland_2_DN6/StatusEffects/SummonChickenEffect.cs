@@ -28,6 +28,10 @@ public class SummonChickenEffect : IStatusEffect
         SelfInflicted = data.SelfInflicted; 
         d = data;
     }
+    public string GetDescription()
+    {
+        return "Summons an enemy Chicken";
+    }
     public void DoEffect(Monster m)
     {
         MessageManager.AddMessage("An enemy Chill Chicken has come to protect its egg!");
