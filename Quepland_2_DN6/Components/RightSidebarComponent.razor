@@ -62,6 +62,11 @@ else if(activeWindow == "EXP")
     //Fix this
     <ExperienceTrackerComponent></ExperienceTrackerComponent>
 }
+else if(activeWindow == "Log")
+{
+    //Fix this
+    <LogComponent></LogComponent>
+}
 else if(activeWindow == "Loot")
 {
     <LootTrackerComponent></LootTrackerComponent>
@@ -78,6 +83,7 @@ else if(activeWindow == "Loot")
         <button class="sidebar-buttons" style="@GetBGColor("Followers")" onclick="@(new Action(() => ChangeView("Followers")))"><img src="/data/Images/WhiteFollowers.png" style="height:42px;width:42px;">Team</button>
         <button class="sidebar-buttons" style="@GetBGColor("EXP")" onclick="@(new Action(() => ChangeView("EXP")))"><img src="/data/Images/EXP.png" style="height:42px;width:42px;">EXP</button>
         <button class="sidebar-buttons" style="@GetBGColor("Loot")" onclick="@(new Action(() => ChangeView("Loot")))"><img src="/data/Images/Loot.png" style="height:42px;width:42px;">Loot</button>
+        <button class="sidebar-buttons" style="@GetBGColor("Log")" onclick="@(new Action(() => ChangeView("Log")))"><img src="/data/Images/WhiteLog.png" style="height:42px;width:42px;">Log</button>
 
         @if (IsTesting())
         {

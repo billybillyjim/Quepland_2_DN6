@@ -1,0 +1,46 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+<div class="col custom-scroll" style="max-height:90vh;overflow-y: scroll;padding-left:5px;">
+    @if(activeMenu == "Monsters")
+    {
+        <h2 class="row" style="margin-left:0px;">
+            Beastiary
+        </h2>
+        <div style="display:none">@(iterator = 0)</div>
+        @foreach(Monster m in BattleManager.Instance.Monsters.OrderBy(x => x.Name))
+        {
+            <div class="row" style="@GetFormat()">
+                <div class="col">@m.Name</div> <div class="col">@m.KillCount</div>
+            </div>
+        }
+    }
+</div>
+
+
+@code {
+    private string activeMenu = "Monsters";
+    public int iterator = 0;
+    public void SetMenu(string menu){
+        activeMenu = menu;
+        iterator = 0;
+    }
+    public string GetFormat()
+    {
+        iterator++;
+        if (iterator % 2 == 0)
+        {
+            return "background:dimgray;";
+        }
+        return "";
+    }
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
