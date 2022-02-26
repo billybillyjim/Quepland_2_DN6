@@ -464,9 +464,19 @@
     "enabledActions": "Shearing"
   },
   {
+    "name": "On the Sublimation of Various Minerals",
+    "value": 1500,
+    "description": "A book of notes about alchemy. Someone very skilled at the craft wrote this.",
+    "gatherString": "You get an alchemy book.",
+    "gatherSpeed": 15,
+    "icon": "Book",
+    "isSellable": false,
+    "secondaryColor": "#defabc"
+  },
+  {
     "name": "Potaki's Tear",
     "value": 1500,
-    "description": "A shiny necklace roped around a glistening tear-shaped stone. it feels warm to the touch.",
+    "description": "A shiny necklace roped around a glistening tear-shaped stone. It feels warm to the touch.",
     "gatherString": "You get a strange necklace.",
     "gatherSpeed": 15,
     "icon": "TearDropNecklace",
@@ -474,13 +484,14 @@
     "armorInfo": {
       "armorBonus": 15
     },
+    "isSellable": false,
     "secondaryColor": "#2DF5E9"
   },
   {
     "name": "Intricate Necklace",
     "value": 1,
-    "description": "A shiny necklace roped around a glistening tear-shaped stone. it feels warm to the touch.",
-    "gatherString": "You get a strange necklace.",
+    "description": "A worn necklace with a beautiful pattern etched into the back side of it.",
+    "gatherString": "You get a necklace.",
     "gatherSpeed": 15,
     "icon": "TearDropNecklace",
     "equipSlot": "Neck",
@@ -489,5 +500,50 @@
     },
     "isSellable": false,
     "secondaryColor": "#abcdef"
+  },
+  {
+    "name": "Hokibo's Feather",
+    "value": 10000,
+    "description": "A mystical white feather. Perhaps it goes with something?",
+    "gatherString": "You get a magical feather.",
+    "gatherSpeed": 15,
+    "icon": "Quill",
+    "secondaryColor": "#ffffff"
+  },
+  {
+    "name": "Daranibo's Coin",
+    "value": 10000,
+    "description": "An exceptionally shiny orange coin. Perhaps it goes with something?",
+    "gatherString": "You get a shiny coin.",
+    "gatherSpeed": 15,
+    "icon": "BigCoin",
+    "secondaryColor": "#FFA500"
+  },
+  {
+    "name": "Kotenbo's Thread",
+    "value": 10000,
+    "description": "An beautiful strand of green thread. Perhaps it goes with something?",
+    "gatherString": "You get some thread.",
+    "gatherSpeed": 15,
+    "icon": "String",
+    "secondaryColor": "#00FF00"
+  },
+  {
+    "name": "Auric Tumbler Handle",
+    "value": 4500,
+    "description": "A golden handle for a golden hammer",
+    "gatherString": "You get a hammer handle.",
+    "gatherSpeed": 15,
+    "icon": "HammerHandle",
+    "secondaryColor": "#FFD700"
+  },
+  {
+    "name": "Auric Tumbler Head",
+    "value": 4500,
+    "description": "A golden head for a golden hammer",
+    "gatherString": "You get a hammer head.",
+    "gatherSpeed": 15,
+    "icon": "HammerHead",
+    "secondaryColor": "#FFD700"
   }
 ]

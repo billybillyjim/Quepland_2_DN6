@@ -852,6 +852,7 @@
     "enabledActions": "Knifesmanship",
     "equipSlot": "R Hand",
     "icon": "Dagger",
+    "preventArtisanTask": true,
     "weaponInfo": {
       "attackSpeed": 5,
       "damage": 95,
@@ -879,6 +880,7 @@
     "value": 880,
     "enabledActions": "Swordsmanship",
     "equipSlot": "R Hand",
+    "preventArtisanTask": true,
     "icon": "Sword",
     "weaponInfo": {
       "attackSpeed": 10,
@@ -908,6 +910,7 @@
     "enabledActions": "Axemanship Woodcutting",
     "equipSlot": "R Hand",
     "gatherSpeedBonus": 0.59,
+    "preventArtisanTask": true,
     "icon": "Axe",
     "weaponInfo": {
       "attackSpeed": 15,
@@ -937,6 +940,7 @@
     "enabledActions": "Hammermanship",
     "equipSlot": "R Hand",
     "icon": "Hammer",
+    "preventArtisanTask": true,
     "weaponInfo": {
       "attackSpeed": 20,
       "damage": 458,
@@ -1459,6 +1463,7 @@
     "name": "Cactus Club",
     "description": "A club made from a special living cactus, covered in its spines.",
     "value": 5000,
+    "preventArtisanTask": true,
     "enabledActions": "Axemanship",
     "equipSlot": "R Hand",
     "secondaryColor": "#45bf2a",
@@ -1481,6 +1486,7 @@
     "enabledActions": "Swordsmanship",
     "equipSlot": "R Hand",
     "icon": "Sword",
+    "preventArtisanTask": true,
     "weaponInfo": {
       "attackSpeed": 11,
       "damage": 230,
@@ -1499,6 +1505,7 @@
     "enabledActions": "Swordsmanship",
     "secondaryColor": "#999999",
     "equipSlot": "R Hand",
+    "preventArtisanTask": true,
     "icon": "Sword",
     "weaponInfo": {
       "attackSpeed": 18,
@@ -1525,6 +1532,7 @@
     "name": "Steelflame Axe",
     "description": "A flaming axe. You can use it to chop down trees or enemies very quickly.",
     "value": 32800,
+    "preventArtisanTask": true,
     "enabledActions": "Axemanship Woodcutting",
     "secondaryColor": "#a51414",
     "equipSlot": "R Hand",
@@ -1664,7 +1672,7 @@
     "enabledActions": "Hammermanship",
     "secondaryColor": "#FFD700",
     "equipSlot": "R Hand",
-    "icon": "Hammer",
+    "icon": "BigHammer",
     "weaponInfo": {
       "attackSpeed": 20,
       "damage": 900,
