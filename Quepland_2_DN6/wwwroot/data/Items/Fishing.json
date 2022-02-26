@@ -882,7 +882,8 @@
     "gatherSpeed": 3,
     "secondaryColor": "#FFD700",
     "experienceGained": "Fishing:48",
-    "icon": "Scales"
+    "icon": "Scales",
+    "isSellable": false
   },
   {
     "name": "Fish Knife",
