@@ -10,7 +10,11 @@
         @if (QuestToShow != null)
         {
             <div>
-                <div>@QuestToShow.Description</div>
+                @if(QuestToShow.Progress == 0)
+                {
+                    <div>@QuestToShow.Description</div>
+                }
+                
                 @foreach(QuestFlag flag in QuestToShow.Flags)
                 {
                     if (flag.Completed)

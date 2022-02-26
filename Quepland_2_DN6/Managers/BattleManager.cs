@@ -395,9 +395,12 @@ public class BattleManager
             {
                 if (Player.Instance.Inventory.HasItem("Cactus Spines"))
                 {
-                    Player.Instance.GainExperienceFromWeapon(Player.Instance.GetWeapon(), total);
-                    MessageManager.AddMessage("You shoot the " + Target.Name + " for " + total + " damage!");
-                    Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Cactus Spines"), 1);
+
+                    if(Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Cactus Spines"), 1) == 1)
+                    {
+                        Player.Instance.GainExperienceFromWeapon(Player.Instance.GetWeapon(), total);
+                        MessageManager.AddMessage("You shoot the " + Target.Name + " for " + total + " damage!");
+                    }
                 }
                 else
                 {
@@ -409,9 +412,17 @@ public class BattleManager
             {
                 if (Player.Instance.Inventory.HasArrows())
                 {
-                    Player.Instance.GainExperienceFromWeapon(Player.Instance.GetWeapon(), total);
-                    MessageManager.AddMessage("You hit the " + Target.Name + " for " + total + " damage!");
-                    Player.Instance.Inventory.RemoveItems(Player.Instance.Inventory.GetStrongestArrow(), 1);
+                    
+                    if(Player.Instance.Inventory.RemoveItems(Player.Instance.Inventory.GetStrongestArrow(), 1) == 1)
+                    {
+                        Player.Instance.GainExperienceFromWeapon(Player.Instance.GetWeapon(), total);
+                        MessageManager.AddMessage("You hit the " + Target.Name + " for " + total + " damage!");
+                    }
+                    else
+                    {
+                        Player.Instance.GainExperience("Strength", total);
+                        MessageManager.AddMessage("You whack the " + Target.Name + " with your bow for " + total + " damage!");
+                    }
                 }
                 else
                 {
