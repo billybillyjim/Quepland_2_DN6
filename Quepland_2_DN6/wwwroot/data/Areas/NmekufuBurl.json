@@ -13,6 +13,12 @@
     ],
     "npcs": [
       "Jumoku"
+    ],
+    "monsters": [
+      "Branch Bunker",
+      "Biding Branch Bunker",
+      "Watchful Branch Bunker",
+      "Great Horned Aur"
     ]
   },
   {
