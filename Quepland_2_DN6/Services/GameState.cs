@@ -76,7 +76,7 @@ using System.Threading.Tasks;
     public Recipe NewSmithingRecipe;
     public Book NewBook;
 
-    public GameItem CurrentGatherItem;
+    public GameItem? CurrentGatherItem;
     public GameItem RequiredForGatherItem;
     public List<GameItem> PossibleGatherItems = new List<GameItem>();
     public Recipe CurrentSmeltingRecipe;
@@ -85,18 +85,18 @@ using System.Threading.Tasks;
 
     public AlchemicalFormula CurrentAlchemyFormula;
     
-    public GameItem CurrentFood;
+    public GameItem? CurrentFood { get; set; }
     public static bool CancelEating;
-    public Recipe CurrentRecipe;
+    public Recipe? CurrentRecipe;
     public static Land CurrentLand;
-    public ItemViewerComponent itemViewer;
-    public InventoryViewerComponent inventoryViewer;
-    public SmithyComponent SmithingComponent;
-    public OvenComponent OvenComponent;
-    public CraftingComponent CraftingComponent;
-    public AlchemicalHallComponent AlchemicalHallComponent;
-    public ContextMenu CurrentContextMenu;
-    public RightSidebarComponent RightSidebarComponent;
+    public ItemViewerComponent itemViewer { get; set; }
+    public InventoryViewerComponent inventoryViewer { get; set; }
+    public SmithyComponent SmithingComponent { get; set; }
+    public OvenComponent OvenComponent { get; set; }
+    public CraftingComponent CraftingComponent { get; set; }
+    public AlchemicalHallComponent AlchemicalHallComponent { get; set; }
+    public ContextMenu CurrentContextMenu { get; set; }
+    public RightSidebarComponent RightSidebarComponent { get; set; }
     public static NavigationManager UriHelper;
     public static ArtisanTask CurrentArtisanTask;
     public static int TicksToNextAction;
@@ -131,14 +131,6 @@ using System.Threading.Tasks;
 
     public void Start()
     {
-        Console.WriteLine(CheckVersion("1.1.0") == true);
-        Console.WriteLine(CheckVersion("1.0.1") == true);
-        Console.WriteLine(CheckVersion("1.2.0") == false);
-        Console.WriteLine(CheckVersion("0.1.0") == true);
-        Console.WriteLine(CheckVersion("2.1.0") == false);
-        Console.WriteLine(CheckVersion("1.1.2") == false);
-        Console.WriteLine(CheckVersion("1.1.0", "1.0.2") == false);
-        Console.WriteLine(CheckVersion("1.1.0", "1.1.0") == true);
         if (GameTimer != null)
         {
             return;
@@ -459,7 +451,21 @@ using System.Threading.Tasks;
     {
         if(CurrentBook != null)
         {
-            Player.Instance.GainExperience(CurrentBook.Skill, (long)((Player.Instance.GetLevel(CurrentBook.Skill.Name) / 80d) * 500));
+            float multiplier = 500;
+            if(Player.Instance.GetLevel(CurrentBook.Skill.Name) > 50)
+            {
+                multiplier *= 0.9f;
+                if (Player.Instance.GetLevel(CurrentBook.Skill.Name) > 80)
+                {
+                    multiplier *= 0.8f;
+                    if (Player.Instance.GetLevel(CurrentBook.Skill.Name) > 100)
+                    {
+                        multiplier *= 0.75f;
+                    }
+                }
+            }
+
+            Player.Instance.GainExperience(CurrentBook.Skill, (long)((Player.Instance.GetLevel(CurrentBook.Skill.Name) / 90d) * multiplier));
             MessageManager.AddMessage("You read another page of the book. You feel more knowledgable about " + CurrentBook.Skill.Name + ".");
             CurrentBook.Progress++;
             TicksToNextAction = (int)Math.Max(100, ((2 + CurrentBook.Difficulty * 5d) / (Player.Instance.GetLevel(CurrentBook.Skill.Name))) * 100);
@@ -568,20 +574,34 @@ using System.Threading.Tasks;
     {
         if (item.FoodInfo != null)
         {
-            CurrentFood = item;
-            HealingTicks = CurrentFood.FoodInfo.HealDuration;
-            Player.Instance.Inventory.RemoveItems(item, 1);
-            if (CurrentFood.FoodInfo.BuffedSkill != null)
+            
+            if(Player.Instance.Inventory.RemoveItems(item, 1) == 1)
             {
-                Player.Instance.Skills.Find(x => x.Name == item.FoodInfo.BuffedSkill).Boost = CurrentFood.FoodInfo.BuffAmount;
-                MessageManager.AddMessage("You eat a " + CurrentFood + "." + " It somehow makes you feel better at " + CurrentFood.FoodInfo.BuffedSkill + ".");
+                CurrentFood = item;
+                HealingTicks = CurrentFood.FoodInfo.HealDuration;
+                if (CurrentFood.FoodInfo.BuffedSkill != null)
+                {
+                    var s = Player.Instance.GetSkill(item.FoodInfo.BuffedSkill);
+                    if(s == null)
+                    {
+                        Console.WriteLine("Failed to find food buff for " + item.Name);
+                        return;
+                    }
+                    s.Boost = CurrentFood.FoodInfo.BuffAmount;
+                    MessageManager.AddMessage("You eat a " + CurrentFood + "." + " It somehow makes you feel better at " + CurrentFood.FoodInfo.BuffedSkill + ".");
 
+                }
+                else
+                {
+                    MessageManager.AddMessage("You eat a " + CurrentFood + ".");
+
+                }
             }
             else
             {
-                MessageManager.AddMessage("You eat a " + CurrentFood + ".");
-
+                MessageManager.AddMessage("Please unlock " + CurrentFood + " before eating it.");
             }
+            
         }
         else
         {
