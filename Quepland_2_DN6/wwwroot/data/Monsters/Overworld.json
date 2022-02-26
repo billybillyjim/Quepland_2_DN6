@@ -2205,17 +2205,7 @@
           "weight": 20
         }
       ]
-    },
-    "statusEffectData": [
-      {
-        "name": "Hypnotize",
-        "power": 5,
-        "speed": 3,
-        "duration": 15,
-        "message": "The squirrel's tail begins to move in a strange way... You're completely mesmerized.",
-        "procOdds": 0.1
-      }
-    ]
+    }
   },
   {
     "name": "Fighter Frog",
@@ -2724,9 +2714,24 @@
           "itemName": "Root Bow",
           "weight": 5,
           "amount": 1
+        },
+        {
+          "itemName": "Plastinium Ore",
+          "weight": 5,
+          "amount": 1
         }
       ]
-    }
+    },
+    "statusEffectData": [
+      {
+        "name": "Cleave",
+        "power": 5,
+        "speed": 3,
+        "duration": 15,
+        "message": "The creature stabs with an intense force! It was as if you weren't wearing any armor for that hit.",
+        "procOdds": 0.5
+      }
+    ]
   },
   {
     "name": "Biding Branch Bunker",
@@ -2738,8 +2743,36 @@
     "damage": 500,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Root Bow",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Plastinium Ore",
+          "weight": 5,
+          "amount": 1
+        }
       ]
-    }
+    },
+    "statusEffectData": [
+      {
+        "name": "Poison",
+        "power": 55,
+        "speed": 2,
+        "duration": 100,
+        "message": "You've been poisoned!",
+        "procOdds": 0.9
+      },
+      {
+        "name": "Cleave",
+        "power": 5,
+        "speed": 3,
+        "duration": 15,
+        "message": "The creature stabs with an intense force! It was as if you weren't wearing any armor for that hit.",
+        "procOdds": 0.3
+      }
+    ]
   },
   {
     "name": "Watchful Branch Bunker",
@@ -2751,8 +2784,38 @@
     "damage": 90,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Root Bow",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Plastinium Ore",
+          "weight": 5,
+          "amount": 1
+        }
       ]
-    }
+    },
+
+    "statusEffectData": [
+      {
+        "name": "Hypnotize",
+        "power": 5,
+        "speed": 3,
+        "duration": 15,
+        "message": "The creature watches you... And you lock eyes. You freeze in place for a moment.",
+        "procOdds": 0.15
+      },
+      {
+        "name": "Cleave",
+        "power": 5,
+        "speed": 3,
+        "duration": 15,
+        "message": "The creature stabs with an intense force! It was as if you weren't wearing any armor for that hit.",
+        "procOdds": 0.3
+      }
+      
+    ]
   },
   {
     "name": "Great Horned Aur",
@@ -2764,6 +2827,11 @@
     "damage": 130,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Hokibo's Feather",
+          "weight": 5,
+          "amount": 1
+        }
       ]
     }
   },
@@ -2777,6 +2845,21 @@
     "damage": 10,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Intricate Necklace",
+          "weight": 1,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 80,
+          "amount": 100
+        }
       ]
     },
     "statusEffectData": [
@@ -2802,6 +2885,21 @@
     "damage": 30,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Intricate Necklace",
+          "weight": 1,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 80,
+          "amount": 100
+        }
       ]
     },
     "statusEffectData": [
@@ -2827,6 +2925,21 @@
     "damage": 130,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Intricate Necklace",
+          "weight": 1,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 80,
+          "amount": 100
+        }
       ]
     }
   },
@@ -2840,6 +2953,21 @@
     "damage": 10,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Intricate Necklace",
+          "weight": 1,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 80,
+          "amount": 100
+        }
       ]
     },
     "statusEffectData": [
@@ -2865,6 +2993,21 @@
     "damage": 30,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Intricate Necklace",
+          "weight": 1,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 80,
+          "amount": 100
+        }
       ]
     },
     "statusEffectData": [
@@ -2890,6 +3033,21 @@
     "damage": 130,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Intricate Necklace",
+          "weight": 1,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 80,
+          "amount": 100
+        }
       ]
     }
   },
@@ -2903,6 +3061,21 @@
     "damage": 10,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Intricate Necklace",
+          "weight": 1,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 80,
+          "amount": 100
+        }
       ]
     },
     "statusEffectData": [
@@ -2928,6 +3101,21 @@
     "damage": 30,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Intricate Necklace",
+          "weight": 1,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 80,
+          "amount": 100
+        }
       ]
     },
     "statusEffectData": [
@@ -2953,6 +3141,22 @@
     "damage": 130,
     "dropTable": {
       "drops": [
+        {
+          "itemName": "Intricate Necklace",
+          "weight": 1,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 80,
+          "amount": 100
+        }
+        
       ]
     }
   }

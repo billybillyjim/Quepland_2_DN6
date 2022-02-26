@@ -464,7 +464,10 @@
     "damage": 230,
     "dropTable": {
       "drops": [
-
+        {
+          "itemName": "Daranibo's Coin",
+          "weight": 5
+        }
       ]
     }
   },
@@ -478,7 +481,10 @@
     "damage": 130,
     "dropTable": {
       "drops": [
-
+        {
+          "itemName": "Kotenbo's Thread",
+          "weight": 5
+        }
       ]
     }
   },
@@ -492,7 +498,10 @@
     "damage": 400,
     "dropTable": {
       "drops": [
-
+        {
+          "itemName": "Auric Tumbler Handle",
+          "weight": 5
+        }
       ]
     }
   },
@@ -506,7 +515,10 @@
     "damage": 150,
     "dropTable": {
       "drops": [
-
+        {
+          "itemName": "Auric Tumbler Head",
+          "weight": 5
+        }
       ]
     }
   }
