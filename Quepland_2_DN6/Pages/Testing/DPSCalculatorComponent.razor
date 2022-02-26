@@ -24,7 +24,7 @@
 </div>
 
 <div>
-    <Quepland_2_DN6.Components.CustomDropdownComponent @bind="@SelectedMonsterName" DropdownItems="@BattleManager.Instance.Monsters.Select(x=> x.Name).ToList()"></Quepland_2_DN6.Components.CustomDropdownComponent>
+    <Quepland_2_DN6.Components.CustomDropdownComponent @bind-value="SelectedMonsterName" DropdownItems="@BattleManager.Instance.Monsters.Select(x=> x.Name).ToList()"></Quepland_2_DN6.Components.CustomDropdownComponent>
 </div>
 <div>
     @SelectedMonsterName
@@ -46,8 +46,11 @@
     {
         <button @onclick="@(() => SetWindow("Loot"))">Loot</button>
         <button @onclick="@(() => SetWindow("Equipment"))">Equipment</button>
+        <button @onclick="@(() => SetWindow("Equipped"))">Equipped</button>
+        <button @onclick="@(() => SetWindow("Skills"))">Skills</button>
+        <button @onclick="@(() => SetWindow("Food"))">Food</button>
         <br />
-        <div style="position:relative;width:400px;height:200px">
+        <div style="position:relative;width:500px;height:200px">
             <div>
                 HP:<input @bind-value="@Player.Instance.Skills.Find(x => x.Name == "HP").Level" />
             </div>
@@ -74,23 +77,30 @@
     else if (window == "Equipment")
     {
         <button @onclick="@(() => SetWindow("Loot"))">Loot</button>
+        <button @onclick="@(() => SetWindow("Equipment"))">Equipment</button>
+        <button @onclick="@(() => SetWindow("Equipped"))">Equipped</button>
         <button @onclick="@(() => SetWindow("Skills"))">Skills</button>
-        <br />
+        <button @onclick="@(() => SetWindow("Food"))">Food</button>
+        <div style="overflow-y:scroll;width:500px;display:flex;flex-wrap:wrap;height:50vh;">
         @foreach (GameItem item in ItemManager.Instance.Items)
         {
             @if (item.ArmorInfo != null || item.WeaponInfo != null)
             {
-                <div @onclick="@(() => Player.Instance.Equip(item))">
+                <div @onclick="@(() => Player.Instance.Inventory.AddItem(item))">
                     <Quepland_2_DN6.Components.ItemBoxComponent Item="@item"></Quepland_2_DN6.Components.ItemBoxComponent>
 
                 </div>
             }
         }
+        </div>
     }
     else if (window == "Loot")
     {
+        <button @onclick="@(() => SetWindow("Loot"))">Loot</button>
         <button @onclick="@(() => SetWindow("Equipment"))">Equipment</button>
+        <button @onclick="@(() => SetWindow("Equipped"))">Equipped</button>
         <button @onclick="@(() => SetWindow("Skills"))">Skills</button>
+        <button @onclick="@(() => SetWindow("Food"))">Food</button>
         <br />
         <div>Total Value:@LootTracker.Instance.Inventory.GetTotalValue()</div>
         <div>
@@ -106,17 +116,46 @@
 
         }
     }
+    else if (window == "Equipped")
+    {
+                <button @onclick="@(() => SetWindow("Loot"))">Loot</button>
+        <button @onclick="@(() => SetWindow("Equipment"))">Equipment</button>
+        <button @onclick="@(() => SetWindow("Equipped"))">Equipped</button>
+        <button @onclick="@(() => SetWindow("Skills"))">Skills</button>
+        <button @onclick="@(() => SetWindow("Food"))">Food</button>
+        <Quepland_2_DN6.Components.EquipmentManagementComponent></Quepland_2_DN6.Components.EquipmentManagementComponent>
+    }
+    else if (window == "Food")
+    {
+                <button @onclick="@(() => SetWindow("Loot"))">Loot</button>
+        <button @onclick="@(() => SetWindow("Equipment"))">Equipment</button>
+        <button @onclick="@(() => SetWindow("Equipped"))">Equipped</button>
+        <button @onclick="@(() => SetWindow("Skills"))">Skills</button>
+        <button @onclick="@(() => SetWindow("Food"))">Food</button>
+        @foreach (GameItem item in ItemManager.Instance.Items)
+        {
+            @if (item.FoodInfo != null)
+            {
+                <div @onclick="@(() => CurrentFood = item)">
+                    <Quepland_2_DN6.Components.ItemBoxComponent Item="@item"></Quepland_2_DN6.Components.ItemBoxComponent>
+
+                </div>
+            }
+        }
+    }
 
 </div>
 
 @code {
 
-    public string SelectedMonsterName = "Select a Monster";
+    private string SelectedMonsterName = "Select a Monster";
     public DPSCalc Calculator = new DPSCalc();
     private string window = "Equipment";
+    public GameItem? CurrentFood;
 
     public void CalculateDPS()
     {
+        Calculator.CurrentFood = CurrentFood;
         Calculator.CalculateDPS();
         GameState.UpdateState();
     }

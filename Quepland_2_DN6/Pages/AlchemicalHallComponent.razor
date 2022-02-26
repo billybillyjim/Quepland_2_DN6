@@ -7,16 +7,16 @@
     @if (GameState.AlchemyStage == 0)
     {
         <div>
-            <Quepland_2_DN6.Components.CustomDropdownComponent EmptyText="You have no metal bars" BoxText="Select Metal" DropdownItems="@Metals" @bind="metal"></Quepland_2_DN6.Components.CustomDropdownComponent>
+            <Quepland_2_DN6.Components.CustomDropdownComponent EmptyText="You have no metal bars" BoxText="Select Metal" DropdownItems="@Metals" @bind-value="metal"></Quepland_2_DN6.Components.CustomDropdownComponent>
         </div>
 
         <div>
-            <Quepland_2_DN6.Components.CustomDropdownComponent EmptyText="You have no base elements" BoxText="Select Element" DropdownItems="@Elements" @bind="element"></Quepland_2_DN6.Components.CustomDropdownComponent>
+            <Quepland_2_DN6.Components.CustomDropdownComponent EmptyText="You have no base elements" BoxText="Select Element" DropdownItems="@Elements" @bind-value="element"></Quepland_2_DN6.Components.CustomDropdownComponent>
 
         </div>
 
         <div>
-            <Quepland_2_DN6.Components.CustomDropdownComponent EmptyText="Select Action" BoxText="Select Action" DropdownItems="@Actions" @bind="action"></Quepland_2_DN6.Components.CustomDropdownComponent>
+            <Quepland_2_DN6.Components.CustomDropdownComponent EmptyText="Select Action" BoxText="Select Action" DropdownItems="@Actions" @bind-value="action"></Quepland_2_DN6.Components.CustomDropdownComponent>
 
         </div>
         @if (metal != null && element != null && action != null)

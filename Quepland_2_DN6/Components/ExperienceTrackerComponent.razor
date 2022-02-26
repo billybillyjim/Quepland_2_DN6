@@ -24,7 +24,7 @@
 
                         <button class="btn btn-primary col mt-2 mx-2" @onclick=@(() => skill.EXPTracker.UpdateGoal = false)>Cancel</button>
                         <button class="btn btn-primary col mt-2 mx-2" @onclick=@(() => skill.EXPTracker.GoalExperience = 0)>Clear Goal</button>
-                        <input class="col-11 my-2 px-2" type="number" @bind=goalValue />
+                        <input class="col-11 my-2 px-2" type="number" @bind-value=goalValue />
                         <button class="btn btn-primary col mt-2 mx-2" @onclick=@(() => SetTrackerGoal(skill.EXPTracker, goalValue))>Confirm</button>
                     }
                     else

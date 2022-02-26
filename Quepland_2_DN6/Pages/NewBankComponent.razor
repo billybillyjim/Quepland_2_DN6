@@ -34,7 +34,7 @@
                     {
                         <input style="width:150px;margin-left:40px;" 
                                type="text" 
-                               @bind="searchString"
+                               @bind-value="searchString"
                                @bind:event="oninput"/>
                         <div style="margin-top:-30px;">
                             <button class="btn btn-primary" style="width:30px;height:30px;padding:0px;" @onclick="@(() => ClearSearch())">X</button>
@@ -74,7 +74,7 @@
                     @if (showTabInput)
                     {
                         <button class="btn btn-primary" style="width:30px;height:30px;padding:0px;margin:3px;" @onclick="@(() => ToggleTabInput())">X</button>
-                        <input style="width:150px;margin:3px;" type="text" @bind="newTabString" />
+                        <input style="width:150px;margin:3px;" type="text" @bind-value="newTabString" />
                         <button style="margin: 3px;" class="btn btn-primary" @onclick="@(() => AddTab(newTabString))">Confirm</button>
 
                     }

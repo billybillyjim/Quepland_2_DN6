@@ -15,6 +15,7 @@ public class DPSCalc
     public double AverageKillTimeSeconds = 0;
     public int TotalKillsSecond;
     public int TotalDeathsSecond;
+    public GameItem? CurrentFood;
 	public void CalculateDPS()
     {
         TotalTicksTaken = 0;
@@ -31,6 +32,13 @@ public class DPSCalc
             while (BattleManager.Instance.BattleHasEnded == false)
             {
                 BattleManager.Instance.DoBattle();
+                if(CurrentFood != null)
+                {
+                    if (CurrentFood.FoodInfo.HealSpeed % TotalTicksTaken == 0)
+                    {
+                        Player.Instance.CurrentHP += CurrentFood.FoodInfo.HealAmount;
+                    }
+                }
                 TotalTicksTaken++;
             }
             if (BattleManager.Instance.AllOpponentsDefeated())
@@ -41,6 +49,11 @@ public class DPSCalc
             {
                 TotalDeaths++;
             }
+        }
+        if(NumOfBattles == 0)
+        {
+            AverageKillTime = 0;
+            return;
         }
         AverageKillTime = (double)TotalTicksTaken / NumOfBattles;
     }

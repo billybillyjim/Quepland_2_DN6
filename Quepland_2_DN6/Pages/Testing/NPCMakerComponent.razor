@@ -66,7 +66,7 @@
             </div>
             <div>
                 Quest:
-                <Quepland_2_DN6.Components.CustomDropdownComponent DropdownItems="@QuestManager.Instance.Quests.Select(x => x.Name).ToList()" @bind="@openDialogue.Quest"></Quepland_2_DN6.Components.CustomDropdownComponent>
+                <Quepland_2_DN6.Components.CustomDropdownComponent DropdownItems="@QuestManager.Instance.Quests.Select(x => x.Name).ToList()" @bind-value="@openDialogue.Quest"></Quepland_2_DN6.Components.CustomDropdownComponent>
             </div>
             <div>
                 New Quest Progress:
@@ -89,7 +89,7 @@
             {
                 <div>
                     Skill:
-                    <Quepland_2_DN6.Components.CustomDropdownComponent DropdownItems="@Player.Instance.Skills.Select(x => x.Name).ToList()" @bind="@openRequirement.Skill"></Quepland_2_DN6.Components.CustomDropdownComponent>
+                    <Quepland_2_DN6.Components.CustomDropdownComponent DropdownItems="@Player.Instance.Skills.Select(x => x.Name).ToList()" @bind-value="@openRequirement.Skill"></Quepland_2_DN6.Components.CustomDropdownComponent>
                 </div>
                 @if (openRequirement.Skill != "None")
                 {
@@ -131,7 +131,7 @@
                 }
                 <div>
                     Quest:
-                    <Quepland_2_DN6.Components.CustomDropdownComponent DropdownItems="@QuestManager.Instance.Quests.Select(x => x.Name).ToList()" @bind="@openRequirement.Quest"></Quepland_2_DN6.Components.CustomDropdownComponent>
+                    <Quepland_2_DN6.Components.CustomDropdownComponent DropdownItems="@QuestManager.Instance.Quests.Select(x => x.Name).ToList()" @bind-value="@openRequirement.Quest"></Quepland_2_DN6.Components.CustomDropdownComponent>
                 </div>
                 @if (openRequirement.Quest != "None")
                 {
