@@ -356,7 +356,9 @@ public class Player
                 multi += i.ExperienceGainBonus;
             }
         }
-        skill.GainExperience((long)(amount * multi));
+        amount = (long)(amount * multi);
+
+        skill.GainExperience(amount);
         
 
         if (skill.Experience >= (long)Skill.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
@@ -416,6 +418,10 @@ public class Player
     }
     public void LevelUp(Skill skill)
     {
+        if(skill.Level == Skill.MaxLevel)
+        {
+            return;
+        }
         skill.SetSkillLevel(skill.GetSkillLevelUnboosted() + 1);
         MessageManager.AddMessage("You leveled up! Your " + skill.Name + " level is now " + skill.GetSkillLevelUnboosted() + ".");
         if (skill.Name == "Strength")
@@ -448,7 +454,11 @@ public class Player
 
         if (skill.Experience >= Skill.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
         {
-            LevelUp(skill);
+            if(skill.Level < Skill.MaxLevel)
+            {
+                LevelUp(skill);
+            }
+            
 
         }
     }

@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 public class Skill
 {
     public static long MaxEXP = 9000000000000000000;
+    public static int MaxLevel = 350;
     [JsonProperty]
     public string Name { get; set; }
 
@@ -41,10 +42,12 @@ public class Skill
         }
         if(amount > 0)
         {
+
             if(amount + _experience > _experience && amount + _experience < MaxEXP)
             {
                 _experience += amount;
             }
+            _experience = Math.Min(_experience, MaxEXP);
         }
         EXPTracker.Show = true;
     }
@@ -64,6 +67,10 @@ public class Skill
     {
         get
         {
+            if(Level >= MaxLevel)
+            {
+                return 100;
+            }
             double expLastLevel = GetExperienceRequired(Level - 1);
             double expToLevel = GetExperienceRequired(Level) - expLastLevel;
             double expProgress = _experience - expLastLevel;
@@ -79,6 +86,10 @@ public class Skill
         for (int i = 0; i < level; i++)
         {
             exp += (100.0d * Math.Pow(1.1, i));
+        }
+        if(exp < 0)
+        {
+            exp = 0;
         }
         return exp;
     }
@@ -96,6 +107,10 @@ public class Skill
     }
     public void SetSkillLevel(int level)
     {
+        if(level > 350)
+        {
+            level = 350;
+        }
         Level = level;
     }
     public override string ToString()
@@ -116,7 +131,7 @@ public class Skill
         while(Experience >= (long)Skill.GetExperienceRequired(GetSkillLevelUnboosted()))
         {
 
-            if(Level > 350)
+            if(Level >= MaxLevel)
             {
                 break;
             }
