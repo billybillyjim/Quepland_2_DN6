@@ -550,27 +550,26 @@ using System.Threading.Tasks;
     {
         if (item.FoodInfo != null)
         {
-            CurrentFood = item;
-            HealingTicks = CurrentFood.FoodInfo.HealDuration;
-            Player.Instance.Inventory.RemoveItems(item, 1);
-            if (CurrentFood.FoodInfo.BuffedSkill != null)
+            
+            if(Player.Instance.Inventory.RemoveItems(item, 1) == 1)
             {
-                Player.Instance.Skills.Find(x => x.Name == item.FoodInfo.BuffedSkill).Boost = CurrentFood.FoodInfo.BuffAmount;
-                MessageManager.AddMessage("You eat a " + CurrentFood + "." + " It somehow makes you feel better at " + CurrentFood.FoodInfo.BuffedSkill + ".");
-
-            }
-            else
-            {
-                MessageManager.AddMessage("You eat a " + CurrentFood + ".");
-
+                CurrentFood = item;
+                HealingTicks = CurrentFood.FoodInfo.HealDuration;
+                if (CurrentFood.FoodInfo.BuffedSkill != null)
+                {
+                    Player.Instance.Skills.Find(x => x.Name == item.FoodInfo.BuffedSkill).Boost = CurrentFood.FoodInfo.BuffAmount;
+                    MessageManager.AddMessage("You eat a " + CurrentFood + "." + " It somehow makes you feel better at " + CurrentFood.FoodInfo.BuffedSkill + ".");
+                }
+                else
+                {
+                    MessageManager.AddMessage("You eat a " + CurrentFood + ".");
+                }
             }
         }
         else
         {
             Console.WriteLine("Item has no food info:" + item.Name);
         }
-
-
     }
     private void HealPlayer()
     {
@@ -1028,6 +1027,7 @@ using System.Threading.Tasks;
     {
         GameWindowWidth = await JSRuntime.InvokeAsync<int>("getWidth");
         GameWindowHeight = await JSRuntime.InvokeAsync<int>("getHeight");
+        MinWindowWidth = await JSRuntime.InvokeAsync<int>("getBankWidth");
     }
 
     public void HideTooltip()
