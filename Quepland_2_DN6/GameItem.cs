@@ -60,6 +60,11 @@ public class GameItem
 
 	public string GetPlural()
     {
+        if (Name.Contains('('))
+        {
+			string[] s = Name.Split('(');
+			return GameState.Pluralizer.Pluralize(s[0].TrimEnd()) + "(" + s[1];
+        }
 		return GameState.Pluralizer.Pluralize(Name);
     }
 	public string GetStats()
