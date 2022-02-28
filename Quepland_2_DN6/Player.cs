@@ -280,7 +280,7 @@ public class Player
             }
             else if (weapon.EnabledActions == "Archery" && Inventory.HasArrows())
             {
-                total += Inventory.GetStrongestArrow().WeaponInfo.Damage;                        
+                total += Inventory.GetStrongestArrow().WeaponInfo.RangedDamage;                        
             }
 
         }
