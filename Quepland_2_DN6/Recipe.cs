@@ -134,6 +134,20 @@ public class Recipe
         }
         return true;
     }
+    public bool HasSkillRequirements()
+    {
+        foreach(Requirement r in Requirements)
+        {
+            if(r.Skill != "None")
+            {
+                if(r.IsMet() == false)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     public List<string> GetRequiredSkills()
     {
         List<string> reqSkills = new List<string>();
