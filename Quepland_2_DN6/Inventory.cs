@@ -234,7 +234,7 @@ public class Inventory
             {
                 if (item.Key.WeaponInfo.IsArrow)
                 {
-                    if(strongest == null || strongest.WeaponInfo.Damage < item.Key.WeaponInfo.Damage)
+                    if(strongest == null || strongest.WeaponInfo.RangedDamage < item.Key.WeaponInfo.RangedDamage)
                     {
                         strongest = item.Key;
                     }
