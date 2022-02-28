@@ -245,7 +245,7 @@ app {
     border-radius: 0.25rem;
     overflow-y: auto;
     min-height:65px;
-    height: calc(40vh - 125px);
+    max-height: calc(40vh - 125px);
 }
 .crafting-menu {
     display: flex;
