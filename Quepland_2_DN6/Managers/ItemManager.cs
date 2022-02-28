@@ -425,7 +425,8 @@ public class ItemManager
             }
             if (r.GetRequiredSkills().Contains(skill))
             {
-                if(Player.Instance.GetLevel(skill) >= r.GetRequiredLevel(skill))
+                
+                if(Player.Instance.GetLevel(skill) >= r.GetRequiredLevel(skill) && r.HasSkillRequirements())
                 {
                     possibleRecipes.Add(r);
                 }
