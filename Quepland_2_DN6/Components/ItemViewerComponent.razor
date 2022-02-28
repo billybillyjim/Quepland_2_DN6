@@ -276,25 +276,31 @@
             ItemManager.Instance.Items.Add(i);
         }
 
-        Player.Instance.Inventory.RemoveItems(Item, 1);
-        Player.Instance.Inventory.AddItem(i);
-        if (Player.Instance.Inventory.HasItem(Item) == false)
+        if(Player.Instance.Inventory.RemoveItems(Item, 1) == 1)
         {
-            ClearItem();
+            Player.Instance.Inventory.AddItem(i);
+            if (Player.Instance.Inventory.HasItem(Item) == false)
+            {
+                ClearItem();
+            }
         }
+
     }
     public void Teleport()
     {
         Area a = AreaManager.Instance.GetAreaByURL(Item.Parameter);
         if (a != null && a.HasRequirements())
         {
-            Player.Instance.Inventory.RemoveItems(Item, 1);
-            MessageManager.AddMessage("You snap the branch and are teleported away.");
-            GameState.GoToArea(Item.Parameter);
-            if (Player.Instance.Inventory.HasItem(Item) == false)
+            if(Player.Instance.Inventory.RemoveItems(Item, 1) == 1)
             {
-                ClearItem();
+                MessageManager.AddMessage("You snap the branch and are teleported away.");
+                GameState.GoToArea(Item.Parameter);
+                if (Player.Instance.Inventory.HasItem(Item) == false)
+                {
+                    ClearItem();
+                }
             }
+
         }
         else
         {
