@@ -6,7 +6,7 @@
 @if (GameState.CurrentGameMode != GameState.GameType.Ultimate)
 {
     <div style="overflow-y:hidden;height:100%;">
-
+        
         <div style="margin-bottom:35px;">
             Quantity:
             <div>
@@ -34,7 +34,7 @@
                     {
                         <input style="width:150px;margin-left:40px;" 
                                type="text" 
-                               @bind-value="searchString"
+                               @bind="searchString"
                                @bind:event="oninput"/>
                         <div style="margin-top:-30px;">
                             <button class="btn btn-primary" style="width:30px;height:30px;padding:0px;" @onclick="@(() => ClearSearch())">X</button>
@@ -108,7 +108,7 @@
                 </div>
             }
         </div>
-        <div @ref="@bankViewReference" style="height:540px;overflow-y:scroll;" class="bank-scroll" @onscroll="@(() => UpdateVisibleItems())">
+        <div @ref="@bankViewReference" style="height:540px;overflow-y:scroll;" class="bank-scroll" id="bank-window" @onscroll="@(() => UpdateVisibleItems())">
             @if (!addingTags)
             {
                 <div style="display: flex; flex-wrap: wrap;align-content: flex-start;padding-top:@(top)px;height:@(windowHeight)px">
@@ -189,7 +189,7 @@ else
     private int take = 100;
     private int lastTake = 100;
     private int skip = 0;
-    
+
     ElementReference bankViewReference;
     float top = 0;
     float windowHeight = 0;
@@ -425,6 +425,12 @@ else
             MessageManager.AddMessage("Invalid character used in tab name. Please avoid using Non-alphnumerical characters.");
             return;
         }
+        if(tab == "" || tab == " ")
+        {
+            MessageManager.AddMessage("Invalid tab name. Please use some kind of letter or character.");
+            return;
+
+        }
         if (Bank.Instance.Tabs.Contains(tab) == false)
         {
             Bank.Instance.Tabs.Add(tab);
@@ -524,8 +530,9 @@ else
     }
     void OnGameStateChanged(object sender, EventArgs e)
     {
+        GameState.GetDimensions();
         //Subtract the left and right padding; 16.5 pixels.
-        itemsPerRow = (int)((GameState.MainWindowWidth + 20) / 54d);
+        itemsPerRow = (int)((GameState.MinWindowWidth) / 54d);
         take = itemsPerRow * 10;
         if(lastTake != take)
         {
