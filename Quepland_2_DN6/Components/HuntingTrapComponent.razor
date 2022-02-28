@@ -70,8 +70,14 @@
     private void SetTrap(string size)
     {
         GameItem i = ItemManager.Instance.GetItemByName(size + " Trap");
-        Player.Instance.Inventory.RemoveItems(i, 1);
-        Slot.SetTrap(i);
+        if(Player.Instance.Inventory.RemoveItems(i, 1) == 1)
+        {
+            Slot.SetTrap(i);
+        }
+        else
+        {
+            MessageManager.AddMessage("You need to unlock your trap first.");
+        }
         GameState.UpdateState();
     }
     private void Collect()
