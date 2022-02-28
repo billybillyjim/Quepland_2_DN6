@@ -166,6 +166,11 @@
     protected override void OnInitialized()
     {
         GameState.StateChanged += OnGameStateChanged;
+        if(BattleManager.Instance.BattleHasEnded == false)
+        {
+            GameState.StopActions();
+        }
+        
     }
     protected override void OnParametersSet()
     {
