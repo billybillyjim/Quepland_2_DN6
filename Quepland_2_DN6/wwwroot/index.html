@@ -44,6 +44,13 @@
         window.getMainWindowWidth = function () {
             return document.getElementById('main-window').offsetWidth;
         }
+        window.getBankWidth = function () {
+            let bw = document.getElementById('bank-window');
+            if (bw) {
+                return bw.innerWidth;
+            }
+            return 100;
+        }
         window.getRightSidebarWidth = function () {
             el = document.getElementById('side-bar');
             if (el) {
