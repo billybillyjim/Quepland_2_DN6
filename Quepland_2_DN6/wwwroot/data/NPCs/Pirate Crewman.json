@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "Pirate Crewman",
+  "description": "A cello player but not important enough to have a name, apparently.",
   "id": 16,
   "dialogs": [
     {

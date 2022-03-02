@@ -27,6 +27,7 @@
 
     <script type="text/javascript">
         window.getWidth = function () {
+        console.log(window.innerWidth);
             return window.innerWidth;
         };
         window.getHeight = function () {
@@ -47,7 +48,9 @@
         window.getBankWidth = function () {
             let bw = document.getElementById('bank-window');
             if (bw) {
-                return bw.innerWidth;
+                if(bw.offsetWidth){
+                    return bw.offsetWidth;
+                }
             }
             return 100;
         }

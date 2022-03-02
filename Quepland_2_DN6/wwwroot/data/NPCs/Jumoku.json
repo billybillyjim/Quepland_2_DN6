@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "Jumoku",
+  "description": "A guard at the entrance to Nmekufu Burl.",
   "id": 100,
   "dialogs": [
     {

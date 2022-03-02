@@ -23,208 +23,218 @@ public static class SaveManager
     public static async Task SaveGame(bool manual)
     {
 
-            if (!manual && (GameState.ShowStartMenu || GameState.InitCompleted == false))
-            {
-                return;
-            }
-            GameState.UseNewSaveCompression = true;
-            string mode = GameState.CurrentGameMode.ToString();
-            try
-            {
-                await SetItemAsync("Version:" + mode, Compress(GameState.Version));
-            }
-            catch(Exception e)
-            {
+        if (!manual && (GameState.ShowStartMenu || GameState.InitCompleted == false))
+        {
+            return;
+        }
+        GameState.UseNewSaveCompression = true;
+        string mode = GameState.CurrentGameMode.ToString();
+        try
+        {
+            await SetItemAsync("Version:" + mode, Compress(GameState.Version));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save game version, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Playtime:" + mode, GetSaveString(GameState.CurrentTick));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Playtime:" + mode, GetSaveString(GameState.CurrentTick));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save playtime, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("LastSave:" + mode, DateTime.UtcNow.ToString(System.Globalization.CultureInfo.InvariantCulture));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("LastSave:" + mode, DateTime.UtcNow.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save last save time, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Skills:" + mode, Compress(GetSkillsSave()));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Skills:" + mode, Compress(GetSkillsSave()));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save skill data, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Inventory:" + mode, Compress(GetItemSave(Player.Instance.Inventory)));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Inventory:" + mode, Compress(GetItemSave(Player.Instance.Inventory)));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save inventory data, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Bank:" + mode, Compress(GetItemSave(Bank.Instance.Inventory)));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Bank:" + mode, Compress(GetItemSave(Bank.Instance.Inventory)));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save bank data, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("BankTabs:" + mode, GetSaveString(Bank.Instance.Tabs));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("BankTabs:" + mode, GetSaveString(Bank.Instance.Tabs));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save bank tabs, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Areas:" + mode, Compress(GetAreaSave()));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Areas:" + mode, Compress(GetAreaSave()));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save areas, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Regions:" + mode, Compress(GetRegionSave()));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Regions:" + mode, Compress(GetRegionSave()));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save regions, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Dungeons:" + mode, GetSaveString(AreaManager.Instance.GetDungeonSaveData()));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Dungeons:" + mode, GetSaveString(AreaManager.Instance.GetDungeonSaveData()));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save dungeon progress, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Quests:" + mode, Compress(GetQuestSave()));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Quests:" + mode, Compress(GetQuestSave()));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save quest progress, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("GameState:" + mode, GetSaveString(GameState.GetSaveData()));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("GameState:" + mode, GetSaveString(GameState.GetSaveData()));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save game state, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Player:" + mode, GetSaveString(Player.Instance.GetSaveData()));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Player:" + mode, GetSaveString(Player.Instance.GetSaveData()));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save player info, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Followers:" + mode, Compress(FollowerManager.Instance.GetNewSaveData()));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Followers:" + mode, Compress(FollowerManager.Instance.GetNewSaveData()));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save followers, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("TanningInfo:" + mode, Compress(GetTanningSave()));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("TanningInfo:" + mode, Compress(GetTanningSave()));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save tanning information, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Dojos:" + mode, GetSaveString(AreaManager.Instance.GetDojoSaveData()));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Dojos:" + mode, GetSaveString(AreaManager.Instance.GetDojoSaveData()));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save dojo information, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("AFKAction:" + mode, GetSaveString(GameState.CurrentAFKAction));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("AFKAction:" + mode, GetSaveString(GameState.CurrentAFKAction));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save current AFK action, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("Tomes:" + mode, GetSaveString(ItemManager.Instance.Tomes));
-            }
-            catch (Exception e)
-            {
+        try
+        {
+            await SetItemAsync("Tomes:" + mode, GetSaveString(ItemManager.Instance.Tomes));
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save tome travel data, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
-            try
-            {
-                await SetItemAsync("KC:" + mode, GetSaveString(BattleManager.Instance.GetKillCounts()));
+        try
+        {
+            await SetItemAsync("KC:" + mode, GetSaveString(BattleManager.Instance.GetKillCounts()));
 
-            }
-            catch (Exception e)
-            {
+        }
+        catch (Exception e)
+        {
             MessageManager.AddMessage("Failed to save monster kill counts, please contact the developer.", "red");
             Console.WriteLine("Failed to save.");
             Console.WriteLine(e.Message);
         }
+        try
+        {
+            await SetItemAsync("Flags:" + mode, GetSaveString(GameState.ProgressFlags));
 
+        }
+        catch (Exception e)
+        {
+            MessageManager.AddMessage("Failed to save progress flags, please contact the developer.", "red");
+            Console.WriteLine("Failed to save.");
+            Console.WriteLine(e.Message);
+        }
         await SetItemAsync("NewSaveCompression", "true");
         LastSave = DateTime.UtcNow;
-            GameState.IsSaving = false;
-        
+        GameState.IsSaving = false;
+
     }
     public static async Task SaveGame()
     {
@@ -253,6 +263,7 @@ public static class SaveManager
         await RemoveItemAsync("AFKAction:" + mode);
         await RemoveItemAsync("Tomes:" + mode);
         await RemoveItemAsync("KC:" + mode);
+        await RemoveItemAsync("Flags:" + mode);
     }
     public static async Task LoadSaveGame(string mode)
     {
@@ -297,7 +308,8 @@ public static class SaveManager
             MessageManager.AddMessage("Failed to load save. Error code:" + errorcode);
             error = true;
         }
-        try {
+        try
+        {
             errorcode++; //2
             if (await ContainsKeyAsync("Skills:" + mode))
             {
@@ -320,7 +332,8 @@ public static class SaveManager
             error = true;
         }
         errorcode++; //3
-        try {
+        try
+        {
             if (await ContainsKeyAsync("Inventory:" + mode))
             {
                 Player.Instance.Inventory.Clear();
@@ -335,7 +348,8 @@ public static class SaveManager
             error = true;
         }
         errorcode++; //4
-        try {
+        try
+        {
             if (await ContainsKeyAsync("Bank:" + mode))
             {
                 Bank.Instance.Inventory.Clear();
@@ -370,7 +384,8 @@ public static class SaveManager
             if (await ContainsKeyAsync("Areas:" + mode))
             {
                 AreaManager.Instance.LoadAreaSave(JsonConvert.DeserializeObject<List<AreaSaveData>>(Decompress(await GetItemAsync<string>("Areas:" + mode))));
-            } }
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -380,11 +395,13 @@ public static class SaveManager
         }
 
         errorcode++; //7
-        try {
+        try
+        {
             if (await ContainsKeyAsync("Regions:" + mode))
             {
                 AreaManager.Instance.LoadRegionSave(JsonConvert.DeserializeObject<List<RegionSaveData>>(Decompress(await GetItemAsync<string>("Regions:" + mode))));
-            } }
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -398,7 +415,8 @@ public static class SaveManager
             if (await ContainsKeyAsync("Dungeons:" + mode))
             {
                 AreaManager.Instance.LoadDungeonSaveData(JsonConvert.DeserializeObject<List<DungeonSaveData>>(Decompress(await GetItemAsync<string>("Dungeons:" + mode))));
-            } }
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -412,7 +430,8 @@ public static class SaveManager
             if (await ContainsKeyAsync("Quests:" + mode))
             {
                 QuestManager.Instance.LoadQuestSave(JsonConvert.DeserializeObject<List<QuestSaveData>>(Decompress(await GetItemAsync<string>("Quests:" + mode))));
-            } }
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -426,7 +445,8 @@ public static class SaveManager
             if (await ContainsKeyAsync("GameState:" + mode))
             {
                 GameState.LoadSaveData(JsonConvert.DeserializeObject<GameStateSaveData>(Decompress(await GetItemAsync<string>("GameState:" + mode))));
-            } }
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -447,8 +467,8 @@ public static class SaveManager
                 {
                     FollowerManager.Instance.LoadSaveData(Decompress2(await GetItemAsync<string>("Followers:" + mode)));
                 }
-                
-            } 
+
+            }
         }
         catch (Exception e)
         {
@@ -463,7 +483,7 @@ public static class SaveManager
             if (await ContainsKeyAsync("Player:" + mode))
             {
                 Player.Instance.LoadSaveData(JsonConvert.DeserializeObject<PlayerSaveData>(Decompress(await GetItemAsync<string>("Player:" + mode))), version);
-            } 
+            }
         }
         catch (Exception e)
         {
@@ -478,7 +498,8 @@ public static class SaveManager
             if (await ContainsKeyAsync("TanningInfo:" + mode))
             {
                 AreaManager.Instance.LoadTanningSave(JsonConvert.DeserializeObject<List<TanningSaveData>>(Decompress(await GetItemAsync<string>("TanningInfo:" + mode))));
-            } }
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -492,7 +513,8 @@ public static class SaveManager
             if (await ContainsKeyAsync("Dojos:" + mode))
             {
                 AreaManager.Instance.LoadDojoSaveData(JsonConvert.DeserializeObject<List<DojoSaveData>>(Decompress(await GetItemAsync<string>("Dojos:" + mode))));
-            } }
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -506,7 +528,8 @@ public static class SaveManager
             if (await ContainsKeyAsync("AFKAction:" + mode))
             {
                 GameState.LoadAFKActionData(JsonConvert.DeserializeObject<AFKAction>(Decompress(await GetItemAsync<string>("AFKAction:" + mode))));
-            } }
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -520,7 +543,8 @@ public static class SaveManager
             if (await ContainsKeyAsync("Tomes:" + mode))
             {
                 ItemManager.Instance.Tomes = JsonConvert.DeserializeObject<List<TomeData>>(Decompress(await GetItemAsync<string>("Tomes:" + mode)));
-            } }
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -534,7 +558,23 @@ public static class SaveManager
             if (await ContainsKeyAsync("KC:" + mode))
             {
                 BattleManager.Instance.LoadKillCounts(JsonConvert.DeserializeObject<string>(Decompress(await GetItemAsync<string>("KC:" + mode))));
-            } }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
+            MessageManager.AddMessage("Failed to load save. Error code:" + errorcode);
+            error = true;
+        }
+        errorcode++; //18
+        try
+        {
+            if (await ContainsKeyAsync("Flags:" + mode))
+            {
+                GameState.ProgressFlags = JsonConvert.DeserializeObject<List<ProgressFlag>>(Decompress(await GetItemAsync<string>("Flags:" + mode)));
+            }
+        }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
@@ -563,11 +603,11 @@ public static class SaveManager
             buggedSave += await GetItemAsync<string>("Dojos:" + mode) + ",";
             buggedSave += await GetItemAsync<string>("AFKAction:" + mode) + ",";
             buggedSave += await GetItemAsync<string>("Tomes:" + mode) + ",";
-            buggedSave += await GetItemAsync<string>("KC:" + mode);
-
+            buggedSave += await GetItemAsync<string>("KC:" + mode) + ",";
+            buggedSave += await GetItemAsync<string>("Flags:" + mode);
             await SetItemAsync("SaveError", buggedSave);
         }
-    }     
+    }
 
     public static string GetSaveExport()
     {
@@ -598,7 +638,7 @@ public static class SaveManager
         file += Compress(JsonConvert.SerializeObject(Player.Instance.GetSaveData())) + ",";
         //12
         if (GameState.CheckVersion("1.1.0"))
-            {
+        {
             file += Compress(FollowerManager.Instance.GetNewSaveData()) + ",";
             //file += Compress(FollowerManager.Instance.GetSaveData()) + ",";
         }
@@ -606,7 +646,7 @@ public static class SaveManager
         {
             file += Compress(FollowerManager.Instance.GetSaveData()) + ",";
         }
-        
+
         //13
         file += Compress(GetTanningSave()) + ",";
         //14
@@ -618,7 +658,9 @@ public static class SaveManager
         //17
         file += GetSaveString(ItemManager.Instance.Tomes) + ",";
         //18
-        file += GetSaveString(BattleManager.Instance.GetKillCounts());
+        file += GetSaveString(BattleManager.Instance.GetKillCounts()) + ",";
+        //19
+        file += GetSaveString(GameState.ProgressFlags);
         return file;
     }
     public static void ImportSave(string file)
@@ -627,7 +669,7 @@ public static class SaveManager
         string version = "";
         if (DebugMode)
         {
-            foreach(string line in data)
+            foreach (string line in data)
             {
                 string dc = Decompress(line);
                 if (dc != null)
@@ -648,9 +690,9 @@ public static class SaveManager
         {
             GameState.CurrentGameMode = GameState.GameType.Ultimate;
         }
-        if(data.Length > 1)
+        if (data.Length > 1)
         {
-           version = Decompress(data[1]);
+            version = Decompress(data[1]);
             Console.WriteLine(version);
         }
         if (data.Length > 2)
@@ -659,13 +701,13 @@ public static class SaveManager
             {
                 GameState.CurrentTick = int.Parse(Decompress(data[2]));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
                 MessageManager.AddMessage("Failed to load game's current tick. This may mean your save file has been corrupted.", "red");
             }
-            
+
         }
         if (data.Length > 3)
         {
@@ -673,13 +715,13 @@ public static class SaveManager
             {
                 LastSave = DateTime.Parse(Decompress(data[3]));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
                 LastSave = DateTime.MinValue;
             }
-            
+
         }
         if (data.Length > 4)
         {
@@ -713,7 +755,7 @@ public static class SaveManager
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
             }
-            
+
         }
         if (data.Length > 6)
         {
@@ -803,7 +845,7 @@ public static class SaveManager
                 {
                     FollowerManager.Instance.LoadSaveData(Decompress(data[12]));
                 }
-                    
+
             }
             catch (Exception e)
             {
@@ -847,7 +889,7 @@ public static class SaveManager
                 Console.WriteLine(e.StackTrace);
             }
         }
-        if(data.Length > 16)
+        if (data.Length > 16)
         {
             try
             {
@@ -859,7 +901,7 @@ public static class SaveManager
                 Console.WriteLine(e.StackTrace);
             }
         }
-        if(data.Length > 17)
+        if (data.Length > 17)
         {
             try
             {
@@ -870,9 +912,9 @@ public static class SaveManager
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
             }
-            
+
         }
-        if(data.Length > 18)
+        if (data.Length > 18)
         {
             try
             {
@@ -883,16 +925,28 @@ public static class SaveManager
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
             }
-           
+
+        }
+        if(data.Length > 19)
+        {
+            try
+            {
+                GameState.ProgressFlags = JsonConvert.DeserializeObject<List<ProgressFlag>>(Decompress(data[19]));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
+            }
         }
     }
- 
+
     public static string GetItemSave(Inventory i)
-    { 
+    {
         string data = "";
-        foreach(KeyValuePair<GameItem, int> pair in i.GetItems())
+        foreach (KeyValuePair<GameItem, int> pair in i.GetItems())
         {
-            data += pair.Key.UniqueID + "_" + pair.Value + "_" + JsonConvert.SerializeObject(pair.Key.Tabs) +  "_" + pair.Key.IsLocked + "/";
+            data += pair.Key.UniqueID + "_" + pair.Value + "_" + JsonConvert.SerializeObject(pair.Key.Tabs) + "_" + pair.Key.IsLocked + "/";
         }
         return data;
     }
@@ -919,7 +973,7 @@ public static class SaveManager
     public static string GetSkillsSave()
     {
         string s = "";
-        foreach(Skill skill in Player.Instance.Skills)
+        foreach (Skill skill in Player.Instance.Skills)
         {
             s += skill.Name + ":" + skill.Experience + ",";
         }
@@ -964,7 +1018,7 @@ public static class SaveManager
             var len = BitConverter.GetBytes(bytes.Length);
             stream.Write(len, 0, 4);
             using (var compressionStream = new System.IO.Compression.GZipStream(stream, System.IO.Compression.CompressionMode.Compress))
-            {               
+            {
                 compressionStream.Write(bytes, 0, bytes.Length);
             }
             return Convert.ToBase64String(stream.ToArray());
@@ -1039,8 +1093,9 @@ public static class SaveManager
                 }
             }
         }
-        
-    catch{
+
+        catch
+        {
             return Decompress2(s);
         }
 
@@ -1084,7 +1139,7 @@ public static class SaveManager
             throw new ArgumentNullException(nameof(key));
         }
         await jSRuntime.InvokeVoidAsync("localStorage.removeItem", key);
-        
+
     }
 }
 

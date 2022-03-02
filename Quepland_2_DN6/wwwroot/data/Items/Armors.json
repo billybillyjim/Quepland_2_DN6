@@ -1381,7 +1381,7 @@
   {
     "name": "Dormant Gloves",
     "value": 15000,
-    "description": "A pair of pale, gray gloves.",
+    "description": "A pair of pale, gray gloves. The magician said they can be imbued with magical items.",
     "gatherString": "You make a pair of gloves.",
     "gatherSpeed": 12,
     "equipSlot": "Hands",
@@ -1396,7 +1396,7 @@
   {
     "name": "Hokibo Gloves",
     "value": 25000,
-    "description": "A pair of white gloves.",
+    "description": "A magical pair of white gloves. A refreshing aura surrounds you while you wear them.",
     "gatherString": "You make a pair of gloves.",
     "gatherSpeed": 12,
     "equipSlot": "Hands",
@@ -1422,7 +1422,7 @@
   {
     "name": "Daranibo Gloves",
     "value": 25000,
-    "description": "A pair of orange gloves.",
+    "description": "A pair of orange gloves. They make your fingers tingle.",
     "gatherString": "You make a pair of gloves.",
     "gatherSpeed": 12,
     "equipSlot": "Hands",
@@ -1447,7 +1447,7 @@
   {
     "name": "Kotenbo Gloves",
     "value": 25000,
-    "description": "A pair of green gloves.",
+    "description": "A pair of green gloves. They smell awful.",
     "gatherString": "You make a pair of gloves.",
     "gatherSpeed": 12,
     "equipSlot": "Hands",

@@ -2,6 +2,7 @@
   "$schema": "npc-schema.json#",
   "name": "Gym Keeper",
   "id": 200,
+  "description": "An old woman who seems at peace with the world.",
   "dialogs": [
     {
       "buttonText": "Can I use the gym?",

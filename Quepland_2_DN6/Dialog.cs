@@ -27,6 +27,8 @@ public class Dialog
 	public int NewDepthOnTalk { get; set; }
 	public string SetFlag { get; set; } = "None";
 	public bool SetFlagValue { get; set; } = true;
+	public string SetProgressFlag { get; set; } = "None";
+	public bool SetProgressFlagValue { get; set; } = true;
 
 	public bool HasRequirements()
 	{
@@ -101,7 +103,10 @@ public class Dialog
         {
 			FollowerManager.Instance.GetFollowerByName(UnlockedFollower).IsUnlocked = true;
         }
-		
+		if(SetProgressFlag != "None")
+        {
+			GameState.GetFlagByName(SetProgressFlag).Completed = SetProgressFlagValue;
+        }
 		DoQuestCheck();
 		MessageManager.AddMessage(ResponseText, "white", "Dialogue");
 	}
@@ -123,6 +128,7 @@ public class Dialog
 			}
 			if (SetFlag != "None")
 			{
+				
 				QuestManager.Instance.GetQuestByName(Quest).SetFlag(SetFlag, SetFlagValue);
 			}
 		}

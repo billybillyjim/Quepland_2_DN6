@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "Kazkagrin",
+  "description": "It's not clear if Kazkagrin is an actual magician or a fraud, but he seems to know more than he should.",
   "id": 8,
   "dialogs": [
     {

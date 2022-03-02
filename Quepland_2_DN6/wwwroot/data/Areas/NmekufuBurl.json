@@ -65,6 +65,17 @@
         "buttonText": "Continue downward"
       }
 
+    ],
+    "buildings": [
+      {
+        "name": "Strange Hut",
+        "buttonText": "Approach Hut",
+        "url": "StrangeHutNmekufu",
+        "description": "The door to the strange hut has a large \"Do Not Disturb\" sign written on it. Unlike the rest of the wood in the village, the hut does not glow, leaving a dark impression around the corner it sits in.",
+        "npcs": [
+          "Strange Hut Door"
+        ]
+      }
     ]
   },
   {

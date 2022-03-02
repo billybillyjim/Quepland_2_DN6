@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "Ken",
+  "description": "The owner of the sword shop on Tackure.",
   "id": 26,
   "dialogs": [
     {

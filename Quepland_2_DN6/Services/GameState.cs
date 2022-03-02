@@ -84,6 +84,7 @@ using System.Threading.Tasks;
     public Book CurrentBook;
 
     public AlchemicalFormula CurrentAlchemyFormula;
+    public static List<ProgressFlag> ProgressFlags = new List<ProgressFlag>();
     
     public GameItem? CurrentFood { get; set; }
     public static bool CancelEating;
@@ -115,6 +116,7 @@ using System.Threading.Tasks;
     public static bool ShowTome { get; set; }
     public static string CurrentTome { get; set; } = "None";
     public int MinWindowWidth { get; set; } = 600;
+    public double BankWindowWidth { get; set; } = 550;
     public int AlchemyStage;
     public int AutoSmithedItemCount { get; set; } = 0;
 
@@ -925,6 +927,20 @@ using System.Threading.Tasks;
         MessageManager.AddMessage(recipe.RecipeActionString);
         UpdateState();
     }
+    public static ProgressFlag GetFlagByName(string name)
+    {
+        ProgressFlag flag = ProgressFlags.FirstOrDefault(x => x.Name == name);
+        if(flag == null)
+        {
+            Console.WriteLine("Failed to find flag with name:" + name);
+        }
+        return flag;
+    }
+    public static bool FlagIsMet(string name)
+    {
+        ProgressFlag f = GetFlagByName(name);
+        return f.Completed;
+    }
     public int GetTicksToNextGather()
     {
         if(CurrentGatherItem != null)
@@ -997,10 +1013,16 @@ using System.Threading.Tasks;
         await QuestManager.Instance.LoadQuests(Http);
         await BattleManager.Instance.LoadMonsters(Http);
         await FollowerManager.Instance.LoadFollowers(Http);
+        await LoadProgressFlags(Http);
         JSRuntime = Jsruntime;
         await GetDimensions();
         Start();
         InitCompleted = true;
+    }
+
+    public async Task LoadProgressFlags(HttpClient Http)
+    {
+        ProgressFlags = await Http.GetFromJsonAsync<List<ProgressFlag>>("data/ProgressFlags.json");
     }
     public async Task<int> GetLoadingProgress()
     {
@@ -1114,14 +1136,17 @@ using System.Threading.Tasks;
     {
         GameWindowWidth = await JSRuntime.InvokeAsync<int>("getWidth");
         GameWindowHeight = await JSRuntime.InvokeAsync<int>("getHeight");
+        BankWindowWidth = await JSRuntime.InvokeAsync<double>("getBankWidth");
         MainWindowWidth = await JSRuntime.InvokeAsync<double>("getMainWindowWidth");
         RightSidebarWidth = await JSRuntime.InvokeAsync<double>("getRightSidebarWidth");
+        
     }
 
     public void HideTooltip()
     {
         TooltipManager.HideTip();
     }
+
     public static GameStateSaveData GetSaveData()
     {
         return new GameStateSaveData { IsHunting = IsOnHuntingTrip, 

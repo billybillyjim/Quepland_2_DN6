@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "Linehart Wichperger",
+  "description": "A jealous man. One of the most powerful in the alchemist's guild.",
   "id": 63,
   "dialogs": [
     {

@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "Ruto",
+  "description": "A Nmekufian citizen who can join you on your adventures.",
   "id": 103,
   "dialogs": [
     {

@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "Kumuhana",
+  "description": "A history buff on Tackure. He can talk your ear off about lore.",
   "id": 27,
   "dialogs": [
     {

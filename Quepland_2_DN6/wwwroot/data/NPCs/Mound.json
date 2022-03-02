@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "Mound",
+  "description": "A man in hiding. Why did he run away?",
   "id": 9,
   "dialogs": [
     {

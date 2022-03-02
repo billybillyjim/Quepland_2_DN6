@@ -9,6 +9,8 @@ public class Requirement
 	public string Quest { get; set; } = "None";
 	public string AreaUnlocked { get; set; } = "None";
 	public string LockedFollower { get; set; } = "None";
+	public string ProgressFlag { get; set; } = "None";
+	public bool ProgressFlagValue { get; set; } = true;
 	public bool RequireAreaLocked { get; set; } = false;
 	/// <summary>
 	/// The inclusive minimum step the quest must be at to fulfill the requirement.
@@ -19,6 +21,7 @@ public class Requirement
 	/// </summary>
 	public int MaximumQuestProgress { get; set; } = int.MaxValue;
 	public int ItemAmount { get; set; }
+	public int ItemLimit { get; set; } = int.MaxValue - 10;
 	public int SkillLevel { get; set; }
 	/// <summary>
 	/// The maximum level a skill can be at to fulfill the requirement. Inclusive.
@@ -49,9 +52,14 @@ public class Requirement
 			{
 				return false;
 			}
-			if (Item != "None" && Player.Instance.Inventory.GetNumberOfItem(ItemManager.Instance.GetItemByName(Item)) < ItemAmount)
-			{			
-				return false;
+			if (Item != "None")
+			{
+				int amt = Player.Instance.Inventory.GetNumberOfItem(ItemManager.Instance.GetItemByName(Item));
+				if(amt < ItemAmount || amt > ItemLimit)
+                {
+					return false;
+				}
+				
 			}
 			if (LockedFollower != "None" && FollowerManager.Instance.GetFollowerByName(LockedFollower).IsUnlocked)
 			{
@@ -82,6 +90,13 @@ public class Requirement
 					return false;
 				}
 			}
+			if(ProgressFlag != "None")
+            {
+				if(GameState.FlagIsMet(ProgressFlag) != ProgressFlagValue)
+                {
+					return false;
+                }
+            }
 
 			return true;
 		}

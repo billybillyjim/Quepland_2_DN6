@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "Quartermaster Argon",
+  "description": "The quartermaster of the pirate's ship. Probably the only reliable one on deck.",
   "id": 13,
   "dialogs": [
     {

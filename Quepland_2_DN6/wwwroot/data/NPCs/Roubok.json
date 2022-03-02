@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "Roubok",
+  "description": "The leader of the Nmekufian people. ",
   "id": 101,
   "dialogs": [
     {
@@ -28,7 +29,7 @@
     },
     {
       "buttonText": "Why do you all have masks?",
-      "responseText": "Our masks serve two purposes. Protection and freedom.",
+      "responseText": "Our people have made masks for countless generations. They serve two purposes. Protection and freedom.",
       "depth": 4,
       "newDepthOnTalk": 5
     },

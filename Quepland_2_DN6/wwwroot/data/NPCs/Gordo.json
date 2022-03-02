@@ -2,6 +2,7 @@
   "$schema": "npc-schema.json#",
   "name": "Gordo",
   "id": 4,
+  "description": "A frightened boat shop employee.",
   "dialogs": [
     {
       "buttonText": "Hello",

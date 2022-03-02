@@ -6,7 +6,6 @@
 @if (GameState.CurrentGameMode != GameState.GameType.Ultimate)
 {
     <div style="overflow-y:hidden;height:100%;">
-        
         <div style="margin-bottom:35px;">
             Quantity:
             <div>
@@ -205,7 +204,7 @@ else
 
     public async Task UpdateVisibleItems()
     {
-
+        itemsPerRow = (int)((GameState.BankWindowWidth) / 54d) + 1;
         top = await GameState.JSRuntime.InvokeAsync<float>("getTop", bankViewReference);
         windowHeight = (Bank.Instance.Inventory.GetUsedSpaces() * itemBoxSize) / itemsPerRow;
         skip = (int)(Math.Ceiling(top / itemBoxSize * 10) / 10) * itemsPerRow;
@@ -532,7 +531,7 @@ else
     {
         GameState.GetDimensions();
         //Subtract the left and right padding; 16.5 pixels.
-        itemsPerRow = (int)((GameState.MinWindowWidth) / 54d);
+        itemsPerRow = (int)((GameState.BankWindowWidth) / 54d) + 1;
         take = itemsPerRow * 10;
         if(lastTake != take)
         {

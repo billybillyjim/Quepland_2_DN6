@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "The Sign Man",
+  "description": "Clearly in the wrong profession.",
   "id": 1,
   "dialogs": [
     {

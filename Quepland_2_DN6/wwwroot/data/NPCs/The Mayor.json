@@ -1,6 +1,7 @@
 {
   "$schema": "npc-schema.json#",
   "name": "The Mayor",
+  "description": "The mayor of a small village. How does he have so much money?",
   "id": 0,
   "dialogs": [
     {
