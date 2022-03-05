@@ -58,9 +58,7 @@ public class AreaManager
         var query = Areas.GroupBy(x => x.ID).Where(g => g.Count() > 1).Select(y => y.Key).ToList();
         foreach(int val in query)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Areas contain duplicate ID:" + val);
-            Console.ForegroundColor = ConsoleColor.Black;
         }
         
         Lands.AddRange(await Http.GetFromJsonAsync<Land[]>("data/Lands.json"));
