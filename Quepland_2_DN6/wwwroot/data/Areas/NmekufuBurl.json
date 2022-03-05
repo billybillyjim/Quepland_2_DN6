@@ -42,9 +42,38 @@
       }
 
     ],
-    "npcs": [
-      "Roubok"
-    ]
+    "buildings": [
+      {
+        "name": "Nmekufu General Store",
+        "buttonText": "General Store",
+        "url": "NmekufuGeneralStore",
+        "description": "The store is well stocked and full of the various items required for daily life here. You notice the far wall stores a number of beautiful, intricately carved masks.",
+        "shops": [
+          {
+            "name": "Nmekufu Goods",
+            "limitBoughtItemsToSoldItems": false,
+            "itemNames": [
+              "Bucket of Water",
+              "Yeast",
+              "Sugar",
+              "Wood Carving Knife",
+              "Oil",
+              "Honey",
+              "Rope",
+              "Needle",
+              "Spindle",
+              "Artisanal Gauntlet",
+              "Nmekufian Mask"
+            ]
+
+          }
+        ]
+      }
+    ],
+      "npcs":
+      [
+        "Roubok"
+      ]
   },
   {
     "name": "Lower Village",
