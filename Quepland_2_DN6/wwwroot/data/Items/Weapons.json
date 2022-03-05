@@ -1509,11 +1509,11 @@
     "icon": "Sword",
     "weaponInfo": {
       "attackSpeed": 18,
-      "damage": 250,
+      "damage": 320,
       "wearRequirements": [
         {
           "skill": "Swordsmanship",
-          "skillLevel": 90
+          "skillLevel": 85
         }
       ],
       "statusEffectData": [
