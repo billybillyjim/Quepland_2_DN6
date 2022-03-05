@@ -1269,7 +1269,7 @@
   },
   {
     "name": "Nmekufian Mask",
-    "value": 1500,
+    "value": 2500,
     "description": "A mask made to protect your soul.",
     "gatherString": "You make a Nmekufian mask.",
     "gatherSpeed": 8,
@@ -1408,10 +1408,10 @@
       "rangedDamage": 25,
       "statusEffectData": [
         {
-          "name": "SelfHeal",
-          "power": 450,
+          "name": "Self Heal",
+          "power": 150,
           "speed": 1,
-          "duration": 1,
+          "duration": 2,
           "message": "Your gloves glow and you feel refreshed.",
           "procOdds": 0.1,
           "selfInflicted": true
@@ -1437,8 +1437,8 @@
           "name": "Cleave",
           "power": 1,
           "speed": 1,
-          "duration": 1,
-          "message": "",
+          "duration": 5,
+          "message": "Your hands burn with a magical force as you swing, completely ignoring the enemy armor!",
           "procOdds": 0.1
         }
       ]
@@ -1463,7 +1463,7 @@
           "power": 350,
           "speed": 5,
           "duration": 35,
-          "message": "Your gloves impart a poison on your enemy!",
+          "message": "Your enemy is hurt by the poison!",
           "procOdds": 0.1
         }
       ]

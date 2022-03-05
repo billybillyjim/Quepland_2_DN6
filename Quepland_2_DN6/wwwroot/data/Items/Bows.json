@@ -216,7 +216,7 @@
   },
   {
     "name": "Root Bow",
-    "description": "A bow dropped by a root dweller. It's extremely old, but made with such strong wood it still works just fine.",
+    "description": "A bow dropped by a branch bunker. It's extremely old, but made with such strong wood it still works just fine.",
     "value": 1320,
     "secondaryColor": "#824121",
     "enabledActions": "Archery",
@@ -224,11 +224,11 @@
     "icon": "Bow",
     "weaponInfo": {
       "attackSpeed": 10,
-      "rangedDamage": 75,
+      "rangedDamage": 275,
       "wearRequirements": [
         {
           "skill": "Archery",
-          "skillLevel": 70
+          "skillLevel": 105
         }
       ]
     }

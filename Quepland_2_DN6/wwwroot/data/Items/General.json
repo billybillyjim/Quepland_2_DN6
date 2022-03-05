@@ -474,20 +474,6 @@
     "secondaryColor": "#defabc"
   },
   {
-    "name": "Potaki's Tear",
-    "value": 1500,
-    "description": "A shiny necklace roped around a glistening tear-shaped stone. It feels warm to the touch.",
-    "gatherString": "You get a strange necklace.",
-    "gatherSpeed": 15,
-    "icon": "TearDropNecklace",
-    "equipSlot": "Neck",
-    "armorInfo": {
-      "armorBonus": 15
-    },
-    "isSellable": false,
-    "secondaryColor": "#2DF5E9"
-  },
-  {
     "name": "Intricate Necklace",
     "value": 1,
     "description": "A worn necklace with a beautiful pattern etched into the back side of it.",
@@ -500,6 +486,19 @@
     },
     "isSellable": false,
     "secondaryColor": "#abcdef"
+  },
+  {
+    "name": "Artisanal Gauntlet",
+    "value": 150000,
+    "description": "By making it harder to work with your hands, you can learn more, faster!",
+    "secondaryColor": "#defabc",
+    "icon": "Gauntlet",
+    "equipSlot": "Hands",
+    "armorInfo": {
+      "armorBonus": 2
+    },
+    "experienceBonusSkill": "Artisan",
+    "experienceGainBonus": 0.15
   },
   {
     "name": "Hokibo's Feather",
