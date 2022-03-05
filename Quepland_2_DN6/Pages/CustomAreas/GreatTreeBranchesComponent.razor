@@ -19,6 +19,18 @@
     }
     else
     {
+        
+        @if(CurrentBranch == 32)
+        {
+            <h1>@RuwohaneLureArea</h1>
+            <p>@RuwohaneLureDescription</p>
+        }
+        else
+        {
+            <h1>@thisArea.Name</h1>
+            <p>@thisArea.Description</p>
+        }
+        
         <div class="row" style="position:relative;width:100%;height:50%">
         @foreach(int branch in CurrentBranches)
         {
@@ -78,6 +90,8 @@
     public string FruitLeftPos = "";
     public string FruitTopPos = "";
     public bool BattleBegun;
+    public string RuwohaneLureArea = "The Dark Branch";
+    public string RuwohaneLureDescription = "It's much darker here. Below you can hear a soft voice singing in the darkness, you feel the urge to respond...";
     public List<string> positions = new List<string>() { "North", "South", "East", "West" };
     public List<string> RandPos = new List<string>();
     public Dictionary<int, int> positionDict = new Dictionary<int, int>();
@@ -244,7 +258,7 @@
         int roll = GameState.Random.Next(Player.Instance.GetLevel("Deftness") / 4, Player.Instance.GetLevel("Deftness"));
         if(roll < 25)
         {
-            Player.Instance.CurrentHP -= 40;
+            Player.Instance.CurrentHP -= 20;
             MessageManager.AddMessage(JumpFailMessages[roll]);
         }
         else

@@ -120,7 +120,7 @@ namespace Quepland_2_DN6.Bosses
         }
         public void OnBeAttacked(Monster monster) 
         {
-            if(Player.Instance.GetWeapon() == null || Player.Instance.GetWeapon().GetSkillForWeaponExp() != "Archery")
+            if(Player.Instance.GetWeapon() == null || Player.Instance.GetWeapon().GetSkillForWeaponExp() != "Archery" || (Player.Instance.GetWeapon().GetSkillForWeaponExp() == "Archery" && Player.Instance.Inventory.HasArrows() == false))
             {
                 bool activate = true;
                 foreach (GameItem item in Player.Instance.GetEquippedItems())
