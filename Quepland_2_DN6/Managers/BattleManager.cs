@@ -266,27 +266,21 @@ public class BattleManager
         if (opponent.DropTable != null && (opponent.DropTable.Drops.Count > 0 || opponent.DropTable.AlwaysDrops.Count > 0))
         {
             Drop drop = opponent.DropTable.GetDrop();
-            if (drop != null)
+            if (drop != null && drop.Item != null)
             {
-                if (LootTracker.Instance.TrackLoot)
-                {
-                    foreach (Drop d in opponent.DropTable.AlwaysDrops)
-                    {
-                        LootTracker.Instance.AddDrop(opponent, d);
-                    }
-                    LootTracker.Instance.AddDrop(opponent, drop);
-                    LootTracker.Instance.AddKC(opponent, 1);
-                }
-
-
-                if (drop.Item != null && 
-                    drop.Item.Category == "QuestItems" && 
-                    (Player.Instance.Inventory.HasItem(drop.Item) || Bank.Instance.Inventory.HasItem(drop.Item)))
+                if (drop.Item.Category == "QuestItems" && 
+                    (Player.Instance.Inventory.HasItem(drop.Item) || 
+                     Bank.Instance.Inventory.HasItem(drop.Item)))
                 {
 
                 }
                 else
                 {
+                    if (LootTracker.Instance.TrackLoot)
+                    {
+                        LootTracker.Instance.AddDrop(opponent, drop);
+                        LootTracker.Instance.AddKC(opponent, 1);
+                    }
                     MessageManager.AddMessage("You defeated the " + opponent.Name + ". It dropped " + 
                         drop.Amount + " " + (drop.Amount > 1 ? drop.Item.GetPlural() : drop.ToString()) + ".", "white", "Loot");
                     AddDrop(drop);
@@ -297,9 +291,12 @@ public class BattleManager
             }
             foreach (Drop d in opponent.DropTable.AlwaysDrops)
             {
-
+                if (LootTracker.Instance.TrackLoot)
+                {
+                    LootTracker.Instance.AddDrop(opponent, d);
+                }
                 MessageManager.AddMessage("You " + (drop != null ? "also" : "") + " got " + 
-                    d.Amount + " " + (d.Amount > 1 ? d.Item.GetPlural() : d.ToString()) + ".", "white", "Loot");
+                                          d.Amount + " " + (d.Amount > 1 ? d.Item.GetPlural() : d.ToString()) + ".", "white", "Loot");
                 AddDrop(d);
             }
         }
@@ -727,7 +724,7 @@ public class BattleManager
         {
             return new HypnotizeEffect(data);
         }
-        else if(data.Name == "SelfHeal")
+        else if(data.Name == "Self Heal")
         {
             return new SelfHealEffect(data);
         }
@@ -753,9 +750,8 @@ public class BattleManager
         }
         else
         {
-            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Warning:" + data.Name + " not in list of status effects in Battle Manager.");
-            Console.BackgroundColor = ConsoleColor.Black;
+
         }
         return null;
     }
