@@ -137,6 +137,21 @@
         "skillLevel": 30
       }
     ]
+  },
+  {
+    "outputItemName": "Bronze Pickaxe",
+    "ingredients": [
+      {
+        "itemName": "Molten Bronze Bar"
+      }
+    ],
+    "experienceGained": "Smithing:45",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 30
+      }
+    ]
   }
 
 ]

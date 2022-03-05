@@ -619,7 +619,9 @@ using System.Threading.Tasks;
     private void HealPlayer()
     {
 
-        Player.Instance.CurrentHP = Math.Min(Player.Instance.MaxHP, Player.Instance.CurrentHP + CurrentFood.FoodInfo.HealAmount);
+        int healAmount = Math.Min(Player.Instance.MaxHP - Player.Instance.CurrentHP, CurrentFood.FoodInfo.HealAmount);
+        Player.Instance.CurrentHP += healAmount;
+        Player.Instance.GainExperience("HP", healAmount * 3);
         if (Player.Instance.CurrentHP <= 0)
         {
             Player.Instance.Die("Food Poisoning");
