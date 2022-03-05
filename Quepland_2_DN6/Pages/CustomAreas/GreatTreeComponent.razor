@@ -17,9 +17,10 @@
         }
         else if (IsClimbing)
         {
-            <div class="progress my-2" @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Climbing Progress", String.Format("D", GreatTree.Progress / GreatTree.Height))))"
-                                    @onmouseout="@(new Action(() => GameState.HideTooltip()))" style="border-radius:0;background-color:darkgray">                
-                <div class="progress-bar" style="width:@(GreatTree.Progress / GreatTree.Height * 100)%;color:black;background-color:#51d051">
+            <div class="progress my-2" 
+                @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Climbing Progress", Math.Round((double)GreatTree.Progress / GreatTree.Height * 100) + "%")))"
+                        @onmouseout="@(new Action(() => GameState.HideTooltip()))" style="border-radius:0;background-color:darkgray">                
+                <div class="progress-bar" style="width:@((double)GreatTree.Progress / GreatTree.Height * 100)%;color:black;background-color:#51d051">
 
                 </div>
             </div>
@@ -47,10 +48,6 @@
             }
         }
     }
-    else
-    {
-        <Quepland_2_DN6.Components.AreaUnlockComponent areaToUnlock="@a"></Quepland_2_DN6.Components.AreaUnlockComponent>      
-    }
 }
 
 @code {
@@ -62,27 +59,54 @@
     public long TicksPerClimb;
     public bool IsClimbing;
     public AreaUnlock a;
+    public List<string> RegularClimbMessages = new List<string>()
+    {
+        "You grip the side of the tree and pull yourself upwards.",
+        "You attach another length of rope to the tree and continue up.",
+        "You climb another rope-length.",
+        "You pull yourself up the side of the tree.",
+        "You climb up again."
+    };
+
+    public List<string> MagicalClimbMessages = new List<string>()
+    {
+        "You grip the side of the tree and pull yourself upwards easily.",
+        "You attach another length of rope to the tree and quickly continue up.",
+        "You climb another rope-length with ease.",
+        "You quickly pull yourself up the side of the tree.",
+        "You climb up again, the magical rope doing most of the work."
+    };
+
     private void StartClimbingTree()
     {
+        if(GreatTree.Progress >= GreatTree.Height)
+        {
+            IsClimbing = false;
+            MessageManager.AddMessage("You reach an opening near the top of the tree and pull yourself up.");
+            AreaManager.Instance.GetAreaByURL("RaabitGate").IsUnlocked = true;
+            GameState.GoToArea("RaabitGate");
+            return;
+        }
         if(Player.Instance.Inventory.HasItem("Magic Rope"))
         {
-            MessageManager.AddMessage("You grip the side of the tree and pull yourself upwards.");
+            MessageManager.AddMessage(MagicalClimbMessages[GameState.Random.Next(MagicalClimbMessages.Count)]);
             NextClimbTick = GameState.CurrentTick + (50 - Math.Min(45, (((Player.Instance.GetLevel("Strength") / 3) + (Player.Instance.GetLevel("Deftness")) / 3))));
-
+            TicksPerClimb = NextClimbTick - GameState.CurrentTick;
             IsClimbing = true;
         }
         else if (Player.Instance.Inventory.HasItem("Rope"))
         {
-            MessageManager.AddMessage("You grip the side of the tree and pull yourself upwards.");
+            MessageManager.AddMessage(RegularClimbMessages[GameState.Random.Next(RegularClimbMessages.Count)]);
             NextClimbTick = GameState.CurrentTick + (50 - Math.Min(45, (((Player.Instance.GetLevel("Strength") / 5) + (Player.Instance.GetLevel("Deftness")) / 5))));
             IsClimbing = true;
+            TicksPerClimb = NextClimbTick - GameState.CurrentTick;
         }
         else
         {
             MessageManager.AddMessage("You have run out of rope! You'll have to find some more.");
             IsClimbing = false;
         }
-        TicksPerClimb = NextClimbTick - GameState.CurrentTick;
+
     }
     private void StopClimbing()
     {
@@ -124,6 +148,7 @@
     protected override void OnInitialized()
     {
         GameState.StateChanged += OnGameStateChanged;
+        GreatTree.Initialize();
 
     }
     protected override void OnParametersSet()
@@ -148,25 +173,35 @@
 
         if (NextClimbTick <= GameState.CurrentTick && IsClimbing)
         {
-            if (Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Magic Rope"), 1) == 1)
+            if (GreatTree.Progress < GreatTree.Height)
             {
-                MessageManager.AddMessage("The rope magically pulls you up the tree faster.");
-                GreatTree.Progress += 2;
-                StartClimbingTree();
-                
+                if (Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Magic Rope"), 1) == 1)
+                {
+                    GreatTree.Climb(2);
+                    StartClimbingTree();
+
+                }
+                else if (Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Rope"), 1) == 1)
+                {
+
+                    GreatTree.Climb(1);
+                    StartClimbingTree();
+                }
+                else
+                {
+                    MessageManager.AddMessage("You have run out of rope! You'll have to find some more.");
+                    IsClimbing = false;
+                }
             }
-            else if (Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Rope"), 1) == 1)
+            else if(GreatTree.Progress >= GreatTree.Height)
             {
-                MessageManager.AddMessage("You climb further up the tree.");
-                GreatTree.Progress++;
-                StartClimbingTree();
-            }
-            else
-            {
-                MessageManager.AddMessage("You have run out of rope! You'll have to find some more.");
                 IsClimbing = false;
+                MessageManager.AddMessage("You reach an opening near the top of the tree and pull yourself up.");
+                AreaManager.Instance.GetAreaByURL("RaabitGate").IsUnlocked = true;
+                GameState.GoToArea("Raabit Gate");
             }
         }
+        
 
         StateHasChanged();
     }
