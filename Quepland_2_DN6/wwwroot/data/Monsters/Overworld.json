@@ -2429,7 +2429,7 @@
     },
     "statusEffectData": [
       {
-        "name": "SelfHeal",
+        "name": "Self Heal",
         "power": 450,
         "speed": 1,
         "duration": 1,
@@ -2493,7 +2493,7 @@
     },
     "statusEffectData": [
       {
-        "name": "SelfHeal",
+        "name": "Self Heal",
         "power": 450,
         "speed": 1,
         "duration": 1,
@@ -2719,6 +2719,26 @@
           "itemName": "Plastinium Ore",
           "weight": 5,
           "amount": 1
+        },
+        {
+          "itemName": "Great Tree Logs",
+          "weight": 120
+        },
+        {
+          "itemName": "Bariquem",
+          "weight": 20
+        },
+        {
+          "itemName": "Uraniquep",
+          "weight": 20
+        },
+        {
+          "itemName": "Queplonium",
+          "weight": 20
+        },
+        {
+          "itemName": "Great Tree Fruit",
+          "weight": 20
         }
       ]
     },
@@ -2752,6 +2772,26 @@
           "itemName": "Plastinium Ore",
           "weight": 5,
           "amount": 1
+        },
+        {
+          "itemName": "Great Tree Logs",
+          "weight": 120
+        },
+        {
+          "itemName": "Bariquem",
+          "weight": 20
+        },
+        {
+          "itemName": "Uraniquep",
+          "weight": 20
+        },
+        {
+          "itemName": "Queplonium",
+          "weight": 20
+        },
+        {
+          "itemName": "Great Tree Fruit",
+          "weight": 20
         }
       ]
     },
@@ -2781,7 +2821,7 @@
     "hp": 12300,
     "attackSpeed": 12,
     "armor": 315,
-    "damage": 90,
+    "damage": 110,
     "dropTable": {
       "drops": [
         {
@@ -2793,6 +2833,26 @@
           "itemName": "Plastinium Ore",
           "weight": 5,
           "amount": 1
+        },
+        {
+          "itemName": "Great Tree Logs",
+          "weight": 120
+        },
+        {
+          "itemName": "Bariquem",
+          "weight": 20
+        },
+        {
+          "itemName": "Uraniquep",
+          "weight": 20
+        },
+        {
+          "itemName": "Queplonium",
+          "weight": 20
+        },
+        {
+          "itemName": "Great Tree Fruit",
+          "weight": 20
         }
       ]
     },
@@ -2824,13 +2884,63 @@
     "hp": 15300,
     "attackSpeed": 15,
     "armor": 265,
-    "damage": 130,
+    "damage": 170,
     "dropTable": {
       "drops": [
         {
           "itemName": "Hokibo's Feather",
           "weight": 5,
           "amount": 1
+        },
+        {
+          "itemName": "Feather",
+          "weight": 10,
+          "amount": 235
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 137
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 121
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 96
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 82
+        },
+        {
+          "itemName": "Plastinium Ore",
+          "weight": 5,
+          "amount": 1
+        },
+        {
+          "itemName": "Great Tree Logs",
+          "weight": 120
+        },
+        {
+          "itemName": "Bariquem",
+          "weight": 20
+        },
+        {
+          "itemName": "Uraniquep",
+          "weight": 20
+        },
+        {
+          "itemName": "Queplonium",
+          "weight": 20
+        },
+        {
+          "itemName": "Great Tree Fruit",
+          "weight": 20
         }
       ]
     }
@@ -2853,12 +2963,27 @@
         {
           "itemName": "Feather",
           "weight": 10,
-          "amount": 1
+          "amount": 61
         },
         {
           "itemName": "Feather",
-          "weight": 80,
-          "amount": 100
+          "weight": 20,
+          "amount": 35
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 24
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 13
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 11
         }
       ]
     },
@@ -2893,12 +3018,27 @@
         {
           "itemName": "Feather",
           "weight": 10,
-          "amount": 1
+          "amount": 122
         },
         {
           "itemName": "Feather",
-          "weight": 80,
-          "amount": 100
+          "weight": 20,
+          "amount": 71
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 60
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 48
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 41
         }
       ]
     },
@@ -2922,7 +3062,7 @@
     "hp": 4000,
     "attackSpeed": 15,
     "armor": 265,
-    "damage": 130,
+    "damage": 150,
     "dropTable": {
       "drops": [
         {
@@ -2933,12 +3073,27 @@
         {
           "itemName": "Feather",
           "weight": 10,
-          "amount": 1
+          "amount": 235
         },
         {
           "itemName": "Feather",
-          "weight": 80,
-          "amount": 100
+          "weight": 20,
+          "amount": 137
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 121
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 96
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 82
         }
       ]
     }
@@ -2961,12 +3116,27 @@
         {
           "itemName": "Feather",
           "weight": 10,
-          "amount": 1
+          "amount": 61
         },
         {
           "itemName": "Feather",
-          "weight": 80,
-          "amount": 100
+          "weight": 20,
+          "amount": 35
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 24
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 13
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 11
         }
       ]
     },
@@ -3001,12 +3171,27 @@
         {
           "itemName": "Feather",
           "weight": 10,
-          "amount": 1
+          "amount": 122
         },
         {
           "itemName": "Feather",
-          "weight": 80,
-          "amount": 100
+          "weight": 20,
+          "amount": 71
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 60
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 48
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 41
         }
       ]
     },
@@ -3030,7 +3215,7 @@
     "hp": 5300,
     "attackSpeed": 15,
     "armor": 265,
-    "damage": 130,
+    "damage": 140,
     "dropTable": {
       "drops": [
         {
@@ -3041,12 +3226,27 @@
         {
           "itemName": "Feather",
           "weight": 10,
-          "amount": 1
+          "amount": 235
         },
         {
           "itemName": "Feather",
-          "weight": 80,
-          "amount": 100
+          "weight": 20,
+          "amount": 137
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 121
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 96
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 82
         }
       ]
     }
@@ -3069,12 +3269,27 @@
         {
           "itemName": "Feather",
           "weight": 10,
-          "amount": 1
+          "amount": 61
         },
         {
           "itemName": "Feather",
-          "weight": 80,
-          "amount": 100
+          "weight": 20,
+          "amount": 35
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 24
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 13
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 11
         }
       ]
     },
@@ -3109,12 +3324,27 @@
         {
           "itemName": "Feather",
           "weight": 10,
-          "amount": 1
+          "amount": 122
         },
         {
           "itemName": "Feather",
-          "weight": 80,
-          "amount": 100
+          "weight": 20,
+          "amount": 71
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 60
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 48
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 41
         }
       ]
     },
@@ -3138,7 +3368,7 @@
     "hp": 5300,
     "attackSpeed": 15,
     "armor": 300,
-    "damage": 130,
+    "damage": 160,
     "dropTable": {
       "drops": [
         {
@@ -3149,15 +3379,40 @@
         {
           "itemName": "Feather",
           "weight": 10,
-          "amount": 1
+          "amount": 235
         },
         {
           "itemName": "Feather",
-          "weight": 80,
-          "amount": 100
+          "weight": 20,
+          "amount": 137
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 121
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 96
+        },
+        {
+          "itemName": "Feather",
+          "weight": 20,
+          "amount": 82
         }
-        
+
       ]
-    }
+    },
+    "statusEffectData": [
+      {
+        "name": "Burn",
+        "power": 30,
+        "speed": 3,
+        "duration": 45,
+        "message": "You've been burned!",
+        "procOdds": 0.3
+      }
+    ]
   }
 ]
