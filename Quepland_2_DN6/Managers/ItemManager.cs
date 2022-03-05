@@ -334,14 +334,14 @@ public class ItemManager
             {
                 if(i.AlchemyInfo.QueplarValue == totalValue)
                 {
-                    return i;
+                    return i.Copy();
                 }
             }
             else if(i.AlchemyInfo != null)
             {
                 if (i.AlchemyInfo.QueplarValue == totalValue)
                 {
-                    return i;
+                    return i.Copy();
                 }
             }
         }
