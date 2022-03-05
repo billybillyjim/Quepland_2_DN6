@@ -572,7 +572,7 @@ public static class SaveManager
         {
             if (await ContainsKeyAsync("Flags:" + mode))
             {
-                GameState.ProgressFlags = JsonConvert.DeserializeObject<List<ProgressFlag>>(Decompress(await GetItemAsync<string>("Flags:" + mode)));
+                GameState.LoadProgressFlagSave(JsonConvert.DeserializeObject<List<ProgressFlag>>(Decompress(await GetItemAsync<string>("Flags:" + mode))));
             }
         }
         catch (Exception e)
@@ -931,7 +931,7 @@ public static class SaveManager
         {
             try
             {
-                GameState.ProgressFlags = JsonConvert.DeserializeObject<List<ProgressFlag>>(Decompress(data[19]));
+                GameState.LoadProgressFlagSave(JsonConvert.DeserializeObject<List<ProgressFlag>>(Decompress(data[19])));
             }
             catch (Exception e)
             {
