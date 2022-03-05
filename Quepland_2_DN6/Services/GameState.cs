@@ -228,7 +228,11 @@ using System.Threading.Tasks;
                 Player.Instance.CurrentFollower.BankItems();
             }
         }
-        Player.Instance.TickStatusEffects();
+        if (!Player.Instance.JustDied)
+        {
+            Player.Instance.TickStatusEffects();
+        }
+        
         if (CurrentFood != null && CurrentTick % CurrentFood.FoodInfo.HealSpeed == 0)
         {
             if (CancelEating)
