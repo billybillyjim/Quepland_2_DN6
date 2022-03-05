@@ -693,7 +693,6 @@ public static class SaveManager
         if (data.Length > 1)
         {
             version = Decompress(data[1]);
-            Console.WriteLine(version);
         }
         if (data.Length > 2)
         {
