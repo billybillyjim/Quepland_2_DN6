@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 public class SelfHealEffect : IStatusEffect
 {
-    public string Name { get; set; } = "SelfHeal";
+    public string Name { get; set; } = "Self Heal";
     public int Duration { get; set; }
     public int Speed { get; set; }
     public int Power { get; set; }
@@ -30,13 +30,14 @@ public class SelfHealEffect : IStatusEffect
     }
     public string GetDescription()
     {
-        return "Has a " + (ProcOdds * 100) + "% chance to heal you every attack for " + Power + ".";
+        return "Has a " + (ProcOdds * 100) + "% chance to heal you every attack for " + Power + " HP.";
     }
     public void DoEffect(Monster m)
     {
         if (RemainingTime % Speed == 0 && RemainingTime > 0)
         {
-            m.CurrentHP += Power;
+            int heal = Math.Min(Power, m.HP - m.CurrentHP);
+            m.CurrentHP += heal;
             MessageManager.AddMessage(Message);
         }
     }
@@ -44,8 +45,10 @@ public class SelfHealEffect : IStatusEffect
     {
         if (RemainingTime % Speed == 0 && RemainingTime > 0)
         {
-            p.CurrentHP += Power;
-            MessageManager.AddMessage("You recover " + Power + " HP!");
+            int heal = Math.Min(Power, p.MaxHP - p.CurrentHP);
+            p.CurrentHP += heal;
+
+            MessageManager.AddMessage("You recover " + heal + " HP!");
         }
     }
     public IStatusEffect Copy()
