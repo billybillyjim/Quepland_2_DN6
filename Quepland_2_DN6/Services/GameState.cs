@@ -84,7 +84,7 @@ using System.Threading.Tasks;
     public Book CurrentBook;
 
     public AlchemicalFormula CurrentAlchemyFormula;
-    public static List<ProgressFlag> ProgressFlags = new List<ProgressFlag>();
+    public static List<ProgressFlag> ProgressFlags { get; set; } = new List<ProgressFlag>();
     
     public GameItem? CurrentFood { get; set; }
     public static bool CancelEating;
@@ -1023,6 +1023,11 @@ using System.Threading.Tasks;
     public async Task LoadProgressFlags(HttpClient Http)
     {
         ProgressFlags = await Http.GetFromJsonAsync<List<ProgressFlag>>("data/ProgressFlags.json");
+        foreach(ProgressFlag pf in ProgressFlags)
+        {
+            Console.WriteLine(pf.Name);
+        }
+        
     }
     public async Task<int> GetLoadingProgress()
     {
@@ -1104,21 +1109,21 @@ using System.Threading.Tasks;
         UriHelper.NavigateTo(url);
     }
 
-    public void GoToArea(string name)
+    public void GoToArea(string url)
     {
-        if (name == "Nowhere")
+        if (url == "Nowhere")
         {
             return;
         }
-        if (Location != name)
+        if (Location != url)
         {
             StopActions();
-            Location = name;
-            if (name != "Bank")
+            Location = url;
+            if (url != "Bank")
             {
                 try
                 {
-                    CurrentLand = AreaManager.Instance.GetLandForArea(AreaManager.Instance.GetAreaByURL(name));
+                    CurrentLand = AreaManager.Instance.GetLandForArea(AreaManager.Instance.GetAreaByURL(url));
 
                 }
                 catch (Exception e)
@@ -1127,7 +1132,7 @@ using System.Threading.Tasks;
                     Console.WriteLine(e.StackTrace);
                 }
             }
-            UriHelper.NavigateTo("World/" + name + "/");
+            UriHelper.NavigateTo("World/" + url + "/");
             UpdateState();
         }
 
@@ -1174,9 +1179,21 @@ using System.Threading.Tasks;
             Location = data.Location;
             CurrentLand = AreaManager.Instance.GetLandByName(data.CurrentLand);
         }
-
-        
-
+    }
+    public static void LoadProgressFlagSave(List<ProgressFlag> flags)
+    {
+        foreach(ProgressFlag f in ProgressFlags)
+        {
+            foreach(ProgressFlag f2 in flags)
+            {
+                if(f.Name == f2.Name)
+                {
+                    f.ProgressValue = f2.ProgressValue;
+                    f.ProgressData = f2.ProgressData;
+                    f.Completed = f2.Completed;
+                }
+            }
+        }
     }
     public static void LoadAFKActionData(AFKAction action)
     {       
