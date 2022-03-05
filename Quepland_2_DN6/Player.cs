@@ -693,8 +693,27 @@ public class Player
                 Console.WriteLine("Trying to equip:" + s);
                 if (s != null && s.Length > 1)
                 {
-                    error = "Failed to equip item:" + s;
-                    Equip(Inventory.GetItems().FirstOrDefault(x => x.Key.Name == s).Key);
+                    try
+                    {
+                        error = "Failed to equip item:" + s;
+                        var g = Inventory.GetItems().FirstOrDefault(x => x.Key.Name == s).Key;
+                        if(g != null)
+                        {
+                            Equip(g);
+                        }
+                        else
+                        {
+                            MessageManager.AddMessage(error, "red");
+                        }
+                        
+                    }
+                    catch (Exception e)
+                    {
+
+                        MessageManager.AddMessage(error, "red");
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine(e.StackTrace);
+                    }
                     
                 }
             }
