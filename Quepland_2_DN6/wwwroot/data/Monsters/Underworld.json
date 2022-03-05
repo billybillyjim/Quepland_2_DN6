@@ -449,7 +449,31 @@
         },
         {
           "itemName": "Akabeko Hide",
-          "weight": 15
+          "weight": 10
+        },
+        {
+          "itemName": "Rough Amberite",
+          "weight": 25
+        },
+        {
+          "itemName": "Quelfur",
+          "weight": 25,
+          "amount": 10
+        },
+        {
+          "itemName": "Rice Roll",
+          "weight": 30,
+          "amount": 3
+        },
+        {
+          "itemName": "Gian Clam Roll",
+          "weight": 30,
+          "amount": 1
+        },
+        {
+          "itemName": "Magic Rope",
+          "weight": 12,
+          "amount": 1
         }
       ]
     }
@@ -467,6 +491,36 @@
         {
           "itemName": "Daranibo's Coin",
           "weight": 5
+        },
+        {
+          "itemName": "Great Tree Logs",
+          "weight": 5,
+          "amount": 2
+        },
+        {
+          "itemName": "Mammoth Jerky",
+          "weight": 10,
+          "amount": 1
+        },
+        {
+          "itemName": "Silk",
+          "weight": 15,
+          "amount": 2
+        },
+        {
+          "itemName": "Coins",
+          "weight": 30,
+          "amount": 2500
+        },
+        {
+          "itemName": "Coins",
+          "weight": 25,
+          "amount": 3500
+        },
+        {
+          "itemName": "Coins",
+          "weight": 20,
+          "amount": 5500
         }
       ]
     }
@@ -484,6 +538,41 @@
         {
           "itemName": "Kotenbo's Thread",
           "weight": 5
+        },
+        {
+          "itemName": "Rough Purpurite",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Rough Opal",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Rough Garnet",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Rough Amethyst",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Rough Emerald",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Rough Aquamarine",
+          "weight": 10,
+          "amount": 2
+        },
+        {
+          "itemName": "Gold Necklace",
+          "weight": 10,
+          "amount": 1
         }
       ]
     }
@@ -501,6 +590,26 @@
         {
           "itemName": "Auric Tumbler Handle",
           "weight": 5
+        },
+        {
+          "itemName": "Silver Ore",
+          "weight": 55
+        },
+        {
+          "itemName": "Galena",
+          "weight": 45
+        },
+        {
+          "itemName": "Gold Ore",
+          "weight": 35
+        },
+        {
+          "itemName": "Platinum Ore",
+          "weight": 25
+        },
+        {
+          "itemName": "Thought Seed",
+          "weight": 15
         }
       ]
     }
@@ -518,6 +627,22 @@
         {
           "itemName": "Auric Tumbler Head",
           "weight": 5
+        },
+        {
+          "itemName": "Bauxite",
+          "weight": 55
+        },
+        {
+          "itemName": "Cinnabar",
+          "weight": 45
+        },
+        {
+          "itemName": "Coal",
+          "weight": 35
+        },
+        {
+          "itemName": "Strongtium Ore",
+          "weight": 15
         }
       ]
     }
