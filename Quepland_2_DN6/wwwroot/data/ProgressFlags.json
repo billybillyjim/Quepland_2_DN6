@@ -5,5 +5,12 @@
     "progressValue": 0,
     "progressData": "",
     "completed": false
+  },
+  {
+    "name": "Great Tree Climb",
+    "description": "How far up the great tree you are.",
+    "progressValue": 0,
+    "progressData": "",
+    "completed": false
   }
 ]
