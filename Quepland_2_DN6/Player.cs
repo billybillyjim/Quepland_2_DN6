@@ -616,17 +616,27 @@ public class Player
     public void TickStatusEffects()
     {
         List<IStatusEffect> endedEffects = new List<IStatusEffect>();
-        foreach(IStatusEffect effect in CurrentStatusEffects)
+        try
         {
-            effect.RemainingTime--;
-            if(effect.RemainingTime <= 0)
+            
+            foreach (IStatusEffect effect in CurrentStatusEffects)
             {
-                endedEffects.Add(effect);
+                effect.RemainingTime--;
+                if (effect.RemainingTime <= 0)
+                {
+                    endedEffects.Add(effect);
+                }
+                else
+                {
+                    effect.DoEffect(this);
+                }
             }
-            else
-            {
-                effect.DoEffect(this);
-            }
+            
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
         }
         CurrentStatusEffects.RemoveAll(x => endedEffects.Contains(x));
     }

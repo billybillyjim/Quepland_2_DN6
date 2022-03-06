@@ -28,7 +28,7 @@ using System.Threading.Tasks;
     public event EventHandler StateChanged;
     public IJSRuntime JSRuntime { get; set; }
 
-    public static string Version { get; set; } = "1.1.0";
+    public static string Version { get; set; } = "1.1.1";
     public static List<Update> Updates { get; set; } = new List<Update>();
     public static Pluralizer Pluralizer = new Pluralizer();
 
@@ -117,6 +117,7 @@ using System.Threading.Tasks;
     public static string CurrentTome { get; set; } = "None";
     public int MinWindowWidth { get; set; } = 600;
     public double BankWindowWidth { get; set; } = 550;
+    public double BankWindowHeight { get; set; } = 540;
     public int AlchemyStage;
     public int AutoSmithedItemCount { get; set; } = 0;
 
@@ -455,34 +456,37 @@ using System.Threading.Tasks;
     }
     private void ReadBook()
     {
-        if(CurrentBook != null)
+
+        float multiplier = 500;
+        string skill = CurrentBook.Skill.Name;
+        int lvl = Math.Max(1, Player.Instance.GetLevel(skill));
+        if (lvl > 50)
         {
-            float multiplier = 500;
-            if(Player.Instance.GetLevel(CurrentBook.Skill.Name) > 50)
+            multiplier *= 0.9f;
+            if (lvl > 80)
             {
-                multiplier *= 0.9f;
-                if (Player.Instance.GetLevel(CurrentBook.Skill.Name) > 80)
+                multiplier *= 0.8f;
+                if (lvl > 100)
                 {
-                    multiplier *= 0.8f;
-                    if (Player.Instance.GetLevel(CurrentBook.Skill.Name) > 100)
-                    {
-                        multiplier *= 0.75f;
-                    }
+                    multiplier *= 0.75f;
                 }
             }
-
-            Player.Instance.GainExperience(CurrentBook.Skill, (long)((Player.Instance.GetLevel(CurrentBook.Skill.Name) / 90d) * multiplier));
-            MessageManager.AddMessage("You read another page of the book. You feel more knowledgable about " + CurrentBook.Skill.Name + ".");
+        }
+        try
+        {
+            Player.Instance.GainExperience(skill, (long)((lvl / 90d) * multiplier));
+            MessageManager.AddMessage("You read another page of the book. You feel more knowledgable about " + skill + ".");
             CurrentBook.Progress++;
-            TicksToNextAction = (int)Math.Max(100, ((2 + CurrentBook.Difficulty * 5d) / (Player.Instance.GetLevel(CurrentBook.Skill.Name))) * 100);
+
+            TicksToNextAction = (int)Math.Max(100, ((2 + CurrentBook.Difficulty * 5d) / lvl) * 100);
             if (Random.Next(0, CurrentBook.Length) == CurrentBook.Progress)
             {
                 MessageManager.AddMessage("A small key falls out of the book as you turn the page.");
-                if(BGColor == "#2e1b1b")
+                if (BGColor == "#2e1b1b")
                 {
                     Player.Instance.Inventory.AddItem("Small Red Library Key");
                 }
-                else if(BGColor == "#463513")
+                else if (BGColor == "#463513")
                 {
                     Player.Instance.Inventory.AddItem("Small Orange Library Key");
                 }
@@ -490,15 +494,21 @@ using System.Threading.Tasks;
                 {
                     Player.Instance.Inventory.AddItem("Small Green Library Key");
                 }
-                
+
             }
-            if(CurrentBook.Progress >= CurrentBook.Length)
+            if (CurrentBook.Progress >= CurrentBook.Length)
             {
                 MessageManager.AddMessage("You finish reading the book and return it to the shelf.");
                 CurrentBook = null;
 
             }
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.StackTrace);
+        }
+        
     }
     private void CraftItem()
     {
@@ -1148,6 +1158,7 @@ using System.Threading.Tasks;
         GameWindowWidth = await JSRuntime.InvokeAsync<int>("getWidth");
         GameWindowHeight = await JSRuntime.InvokeAsync<int>("getHeight");
         BankWindowWidth = await JSRuntime.InvokeAsync<double>("getBankWidth");
+        BankWindowHeight = await JSRuntime.InvokeAsync<double>("getBankHeight");
         MainWindowWidth = await JSRuntime.InvokeAsync<double>("getMainWindowWidth");
         RightSidebarWidth = await JSRuntime.InvokeAsync<double>("getRightSidebarWidth");
         
