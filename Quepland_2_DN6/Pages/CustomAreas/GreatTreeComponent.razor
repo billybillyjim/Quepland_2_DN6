@@ -9,6 +9,13 @@
      <AreaComponent areaURL="GreatTree"></AreaComponent>
     @if(AreaManager.Instance.GetAreaByURL("RaabitGate").IsUnlocked == false)
     {
+        <div class="progress my-2" 
+                @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Climbing Progress", Math.Round((double)GreatTree.Progress / GreatTree.Height * 100) + "%")))"
+                        @onmouseout="@(new Action(() => GameState.HideTooltip()))" style="border-radius:0;background-color:darkgray">                
+                <div class="progress-bar" style="width:@((double)GreatTree.Progress / GreatTree.Height * 100)%;color:black;background-color:#51d051">
+
+                </div>
+         </div>
         @if(GreatTree.Progress < GreatTree.Height)
         {
             @if ((Player.Instance.Inventory.HasItem("Rope") || Player.Instance.Inventory.HasItem("Magic Rope")) && !IsClimbing)
@@ -16,15 +23,7 @@
             <button class="btn btn-primary" style="margin-top:10px;" @onclick="@(() => StartClimbingTree())">Climb Tree</button>
         }
         else if (IsClimbing)
-        {
-            <div class="progress my-2" 
-                @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Climbing Progress", Math.Round((double)GreatTree.Progress / GreatTree.Height * 100) + "%")))"
-                        @onmouseout="@(new Action(() => GameState.HideTooltip()))" style="border-radius:0;background-color:darkgray">                
-                <div class="progress-bar" style="width:@((double)GreatTree.Progress / GreatTree.Height * 100)%;color:black;background-color:#51d051">
-
-                </div>
-            </div>
-
+        {        
             <div class="progress vertical my-2" style="border-radius:0;background-color:#51d051;width:15px;height:200px;">     
                 @if(NextClimbTick > GameState.CurrentTick)
                 {
