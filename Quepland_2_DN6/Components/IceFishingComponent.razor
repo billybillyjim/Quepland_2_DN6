@@ -115,7 +115,7 @@
             MessageManager.AddMessage(beginText);
         }
         GameState.CurrentGatherItem = i;
-        GameState.TicksToNextAction = GameState.CurrentGatherItem.GatherSpeed.ToGaussianRandom();
+        GameState.TicksToNextAction = GameState.GetTicksToNextGather();
         GameState.UpdateState();
     }
     private GameItem GetRandomItem()
