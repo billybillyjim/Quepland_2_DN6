@@ -107,7 +107,7 @@
                 </div>
             }
         </div>
-        <div @ref="@bankViewReference" style="height:540px;overflow-y:scroll;" class="bank-scroll" id="bank-window" @onscroll="@(() => UpdateVisibleItems())">
+        <div @ref="@bankViewReference" style="overflow-y:scroll;" class="bank-scroll" id="bank-window" @onscroll="@(() => UpdateVisibleItems())">
             @if (!addingTags)
             {
                 <div style="display: flex; flex-wrap: wrap;align-content: flex-start;padding-top:@(top)px;height:@(windowHeight)px">
@@ -206,9 +206,9 @@ else
     {
         itemsPerRow = (int)((GameState.BankWindowWidth) / 54d) + 1;
         top = await GameState.JSRuntime.InvokeAsync<float>("getTop", bankViewReference);
-        windowHeight = (Bank.Instance.Inventory.GetUsedSpaces() * itemBoxSize) / itemsPerRow;
+        windowHeight = (Bank.Instance.Inventory.GetUsedSpaces() * (itemBoxSize + 4)) / itemsPerRow;
         skip = (int)(Math.Ceiling(top / itemBoxSize * 10) / 10) * itemsPerRow;
-        take = itemsPerRow * 10;
+        take = itemsPerRow * (int)(((GameState.BankWindowHeight) / 58d) + 1);
         Bank.Instance.HasChanged = true;
         GetBankItems();
     }
