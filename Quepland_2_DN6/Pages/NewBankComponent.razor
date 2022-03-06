@@ -5,6 +5,7 @@
 
 @if (GameState.CurrentGameMode != GameState.GameType.Ultimate)
 {
+   
     <div style="overflow-y:hidden;height:100%;">
         <div style="margin-bottom:35px;">
             Quantity:
@@ -124,11 +125,6 @@
                     }
                     @for (int i = 0; i < GetEmptyItemsToFillRow(); i++)
                     {
-                        int temp = i;
-                        if (temp % itemsPerRow == 0)
-                        {
-                            <br />
-                        }
                         <div style="margin-left:-3px;">
                             <Quepland_2_DN6.Components.ItemBoxComponent></Quepland_2_DN6.Components.ItemBoxComponent>
 
@@ -154,10 +150,6 @@
                     @for (int i = 0; i < GetEmptyItemsToFillRow(); i++)
                     {
                         int temp = i;
-                        if (temp % itemsPerRow == 0)
-                        {
-                            <br />
-                        }
                         <div style="margin-left:-3px;">
                             <Quepland_2_DN6.Components.ItemBoxComponent></Quepland_2_DN6.Components.ItemBoxComponent>
 
@@ -182,6 +174,8 @@ else
     private bool addingTags;
     int itemsPerRow = 10;
     int itemBoxSize = 54;
+    int itemBoxWidth = 51;
+    int itemBoxHeight = 58;
     private string searchString { get; set; } = "";
     private string prevSearch = "";
     private string newTabString = "";
@@ -201,15 +195,19 @@ else
         Bank.Instance.HasChanged = true;
         GameState.UpdateState();
     }
+    public async Task UpdateWindow()
+    {
+        itemsPerRow = (int)((GameState.BankWindowWidth - 18) / itemBoxWidth);
+        top = await GameState.JSRuntime.InvokeAsync<float>("getTop", bankViewReference);
 
+        windowHeight = (Bank.Instance.Inventory.GetUsedSpaces() * (itemBoxHeight)) / (float)itemsPerRow + itemBoxHeight;
+        skip = (int)(Math.Ceiling(top / itemBoxHeight * 10) / 10) * itemsPerRow;
+        take = itemsPerRow * (int)(((GameState.BankWindowHeight) / (float)itemBoxHeight));
+        Bank.Instance.HasChanged = true;
+    }
     public async Task UpdateVisibleItems()
     {
-        itemsPerRow = (int)((GameState.BankWindowWidth) / 54d) + 1;
-        top = await GameState.JSRuntime.InvokeAsync<float>("getTop", bankViewReference);
-        windowHeight = (Bank.Instance.Inventory.GetUsedSpaces() * (itemBoxSize + 4)) / itemsPerRow;
-        skip = (int)(Math.Ceiling(top / itemBoxSize * 10) / 10) * itemsPerRow;
-        take = itemsPerRow * (int)(((GameState.BankWindowHeight) / 58d) + 1);
-        Bank.Instance.HasChanged = true;
+        UpdateWindow();
         GetBankItems();
     }
     public List<KeyValuePair<GameItem, int>> GetBankItems()
@@ -318,7 +316,7 @@ else
     }
     private int GetEmptyItemsToFillRow()
     {
-        return itemsPerRow - (BankItems.Count % itemsPerRow);
+        return BankItems.Count % itemsPerRow;
     }
     private void Withdraw(GameItem item)
     {
@@ -519,7 +517,7 @@ else
         Bank.Instance.Inventory.UpdateItemCount();
         //BankItems = Bank.Instance.Inventory.GetItems();
         UpdateVisibleItems();
-
+        windowHeight = (Bank.Instance.Inventory.GetUsedSpaces() * (itemBoxHeight)) / (float)itemsPerRow;
         GameState.StateChanged += OnGameStateChanged;
     }
     public void Dispose()
@@ -530,9 +528,7 @@ else
     void OnGameStateChanged(object sender, EventArgs e)
     {
         GameState.GetDimensions();
-        //Subtract the left and right padding; 16.5 pixels.
-        itemsPerRow = (int)((GameState.BankWindowWidth) / 54d) + 1;
-        take = itemsPerRow * 10;
+        UpdateWindow();
         if(lastTake != take)
         {
             lastTake = take;
