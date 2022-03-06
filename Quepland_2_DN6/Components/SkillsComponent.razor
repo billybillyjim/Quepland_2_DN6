@@ -1,6 +1,6 @@
 ﻿@inject GameState GameState
 @implements IDisposable 
-    <div>
+    <div class="custom-scroll" style="overflow-y:auto;max-height:100vh;">
         @if (activeMenu == "None")
         {
             @foreach (Skill s in Player.Instance.Skills)

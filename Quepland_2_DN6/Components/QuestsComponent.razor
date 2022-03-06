@@ -9,7 +9,7 @@
 
         @if (QuestToShow != null)
         {
-            <div>
+            <div class="custom-scroll" style="overflow-y:auto;max-height:90vh;">
                 @if(QuestToShow.Progress == 0)
                 {
                     <div>@QuestToShow.Description</div>
@@ -21,6 +21,10 @@
                     {
                         <div>@flag.Description</div>
                     }
+                }
+                @if (QuestToShow.Progress >= QuestToShow.ProgressToComplete)
+                {
+                    <div>@QuestToShow.CompletionText</div>
                 }
             </div>
         }

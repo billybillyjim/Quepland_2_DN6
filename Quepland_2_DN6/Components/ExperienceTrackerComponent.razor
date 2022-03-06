@@ -1,7 +1,7 @@
 ﻿@inject GameState GameState
 @implements IDisposable
 
-    <div class="row no-gutters mx-1">
+    <div class="row no-gutters mx-1 custom-scroll" style="overflow-y:auto;max-height:100vh;">
     @foreach(Skill skill in Player.Instance.Skills)
     {
         if (skill.EXPTracker.Show)

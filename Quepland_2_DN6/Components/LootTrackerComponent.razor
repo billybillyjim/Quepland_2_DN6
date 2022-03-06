@@ -1,6 +1,7 @@
 ﻿@inject GameState GameState
 @implements IDisposable
 
+<div class="custom-scroll" style="max-height:100vh;overflow-y:auto;">
 @foreach(KeyValuePair<string, Inventory> pair in LootTracker.Instance.DataDict)
 {
      <div style="background:black">@pair.Key @("x" + LootTracker.Instance.KCDict[pair.Key]) - @pair.Value.GetTotalValue() Coins 
@@ -18,7 +19,7 @@
         }
     </div>
 }
-
+</div>
 
 
 @code {

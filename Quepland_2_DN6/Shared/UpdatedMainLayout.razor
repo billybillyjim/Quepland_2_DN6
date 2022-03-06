@@ -9,7 +9,7 @@
             <UpdatedNavMenu />
         </div>
     }
-    <div class="col" style="position:relative" id="main-window">
+    <div class="col custom-scroll" style="position:relative;max-height:100vh;overflow-y:auto;" id="main-window">
         @if (GameState.ShowStartMenu == false)
         {
             @if (GameState.ShowSettings)
@@ -61,7 +61,7 @@
                 </div>
             </div>
         }
-        <div class="px-2 vh-100 custom-scroll mt-2" style="overflow-y:auto;padding-bottom:200px;">
+        <div class="px-2 vh-100 custom-scroll mt-2" style="overflow-y:auto;padding-bottom:200px;max-height:calc(100vh - 0.5rem);">
             @Body
         </div>
     </div>

@@ -93,6 +93,7 @@ app {
 
 .bank-scroll {
     height: calc(100vh - 411px);
+    max-height:592px;
 }
 
     .bank-scroll::-webkit-scrollbar {

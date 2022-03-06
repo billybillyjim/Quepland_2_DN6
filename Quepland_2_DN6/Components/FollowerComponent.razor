@@ -1,6 +1,7 @@
 ﻿@inject GameState GameState
 @implements IDisposable
 
+<div class="custom-scroll" style="max-height:100vh;overflow-y:auto;">
 @foreach (Follower follower in FollowerManager.Instance.GetUnlockedFollowers())
 {
 
@@ -40,7 +41,7 @@
 {
     <div style="margin:10px;color:white;">Explore the world and maybe you'll find some others who would join you on your adventure. They might not do it for free, though.</div>
 }
-
+</div>
 @code {
 
     public bool HasUnlockedAnyFollower()
