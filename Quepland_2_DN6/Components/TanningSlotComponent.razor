@@ -83,24 +83,38 @@ else
     }
     public void Collect()
     {
-        if(Player.Instance.Inventory.GetAvailableSpaces() >= Slot.Amount)
+        try
         {
-            Player.Instance.Inventory.AddMultipleOfItem(Slot.TannedItem.TanningInfo.TansInto, Slot.Amount);
-            MessageManager.AddMessage("You withdraw " + Slot.Amount + " " + Slot.TannedItem.TanningInfo.TansInto.Name + ".");
-            Player.Instance.GainExperienceMultipleTimes(Slot.TannedItem.TanningInfo.TansInto.ExperienceGained, Slot.Amount);
-            Slot.TannedItem = null;
-            Slot.Amount = 0;
-            tanningItem = null;
+            if(Player.Instance.Inventory.GetAvailableSpaces() >= Slot.Amount || 
+            (Slot.TannedItem.TanningInfo.TansInto.IsStackable && 
+            (Player.Instance.Inventory.GetAvailableSpaces() > 0 || 
+             Player.Instance.Inventory.HasItem(Slot.TannedItem.TanningInfo.TansInto))))
+            {
+                Player.Instance.Inventory.AddMultipleOfItem(Slot.TannedItem.TanningInfo.TansInto, Slot.Amount);
+                MessageManager.AddMessage("You withdraw " + Slot.Amount + " " + Slot.TannedItem.TanningInfo.TansInto.Name + ".");
+                Player.Instance.GainExperienceMultipleTimes(Slot.TannedItem.TanningInfo.TansInto.ExperienceGained, Slot.Amount);
+                Slot.TannedItem = null;
+                Slot.Amount = 0;
+                tanningItem = null;
+            }
+            else
+            {
+                int amt = Player.Instance.Inventory.GetAvailableSpaces();
+                Player.Instance.Inventory.AddMultipleOfItem(Slot.TannedItem.TanningInfo.TansInto, amt);
+                Player.Instance.GainExperienceMultipleTimes(Slot.TannedItem.TanningInfo.TansInto.ExperienceGained, amt);
+                Slot.Amount -= amt;
+                MessageManager.AddMessage("You withdraw " + amt + " " + Slot.TannedItem.Name + ". There are still " + Slot.Amount + " remaining in the tanning slot.");
+            }
+            LoadTannables();
         }
-        else
+        catch(Exception e)
         {
-            int amt = Player.Instance.Inventory.GetAvailableSpaces();
-            Player.Instance.Inventory.AddMultipleOfItem(Slot.TannedItem.TanningInfo.TansInto, amt);
-            Player.Instance.GainExperienceMultipleTimes(Slot.TannedItem.TanningInfo.TansInto.ExperienceGained, amt);
-            Slot.Amount -= amt;
-            MessageManager.AddMessage("You withdraw " + amt + " " + Slot.TannedItem.Name + ". There are still " + Slot.Amount + " remaining in the tanning slot.");
+            Console.WriteLine(e);
+            Console.WriteLine(e.StackTrace);
+            MessageManager.AddMessage("Something seems to have gone wrong...");
+
         }
-        LoadTannables();
+        
     }
     public void LoadTannables()
     {
