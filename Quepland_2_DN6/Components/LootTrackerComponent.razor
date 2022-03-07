@@ -4,8 +4,8 @@
 <div class="custom-scroll" style="max-height:100vh;overflow-y:auto;">
 @foreach(KeyValuePair<string, Inventory> pair in LootTracker.Instance.DataDict)
 {
-     <div style="background:black">@pair.Key @("x" + LootTracker.Instance.KCDict[pair.Key]) - @pair.Value.GetTotalValue() Coins 
-         <button class="btn btn-secondary" style="float: right;
+     <div style="background:black;display: flex;justify-content: space-between;">@pair.Key @("x" + LootTracker.Instance.KCDict[pair.Key]) - @pair.Value.GetTotalValue() Coins 
+         <button class="btn btn-secondary" style="
                                                   height: 24px;
                                                   line-height: 12px;
                                                   border-radius: 0;" 

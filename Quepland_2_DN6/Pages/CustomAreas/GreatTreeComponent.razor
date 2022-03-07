@@ -47,6 +47,10 @@
             }
         }
     }
+    else if (AreaManager.Instance.GetRegionByName("Nmekufu Burl").IsUnlocked == false && AreaManager.Instance.GetAreaByURL("RaabitGate").IsUnlocked)
+    {
+        <button class="btn btn-warning"  @onclick="@(new Action(() => UnlockAndGoto()))">Climb Inside</button>
+    }
 }
 
 @code {
@@ -75,6 +79,11 @@
         "You quickly pull yourself up the side of the tree.",
         "You climb up again, the magical rope doing most of the work."
     };
+    private void UnlockAndGoto()
+    {
+        AreaManager.Instance.GetAreaByURL("RaabitGate").Unlock();
+            GameState.GoToArea("RaabitGate");
+    }
 
     private void StartClimbingTree()
     {
@@ -82,7 +91,7 @@
         {
             IsClimbing = false;
             MessageManager.AddMessage("You reach an opening near the top of the tree and pull yourself up.");
-            AreaManager.Instance.GetAreaByURL("RaabitGate").IsUnlocked = true;
+            AreaManager.Instance.GetAreaByURL("RaabitGate").Unlock();
             GameState.GoToArea("RaabitGate");
             return;
         }
@@ -196,7 +205,7 @@
             {
                 IsClimbing = false;
                 MessageManager.AddMessage("You reach an opening near the top of the tree and pull yourself up.");
-                AreaManager.Instance.GetAreaByURL("RaabitGate").IsUnlocked = true;
+                AreaManager.Instance.GetAreaByURL("RaabitGate").Unlock();
                 GameState.GoToArea("Raabit Gate");
             }
         }
