@@ -146,7 +146,7 @@ public class ItemManager
         ArtisanRecipes.AddRange(SmithingRecipes);
     }
 
-
+    [Obsolete("GetItemByName is deprecated, please use unique id instead.")]
     public GameItem GetItemByName(string name)
     {
         try

@@ -336,6 +336,7 @@ public class GameItem
 
 		copy.GatherSpeed = GatherSpeed;
 		copy.ID = ID;
+		copy.UniqueID = UniqueID;
 		copy.GatherSpeedBonus = GatherSpeedBonus;
 		copy.ExperienceGainBonus = ExperienceGainBonus;
 		copy.ExperienceBonusSkill = ExperienceBonusSkill;
