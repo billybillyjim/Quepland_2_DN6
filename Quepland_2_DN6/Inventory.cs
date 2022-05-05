@@ -369,9 +369,10 @@ public class Inventory
                 KeyValuePair<GameItem, int> pair = new KeyValuePair<GameItem, int>();
                 foreach (KeyValuePair<GameItem, int> p in items)
                 {
-                    if (p.Key.Name == item.Name)
+                    if (p.Key.UniqueID == item.UniqueID)
                     {
                         pair = p;
+                        continue;
                     }
                 }
                 int oldAmt = pair.Value;
