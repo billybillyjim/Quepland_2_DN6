@@ -51,6 +51,7 @@
     public void SwitchFollowers(Follower f)
     {
         Player.Instance.SetFollower(f);
+        BattleManager.Instance.EndBattle();
         GameState.UpdateState();
     }
 

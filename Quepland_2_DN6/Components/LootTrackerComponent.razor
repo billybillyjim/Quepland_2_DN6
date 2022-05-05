@@ -4,7 +4,7 @@
 <div class="custom-scroll" style="max-height:100vh;overflow-y:auto;">
 @foreach(KeyValuePair<string, Inventory> pair in LootTracker.Instance.DataDict)
 {
-     <div style="background:black">@pair.Key @("x" + LootTracker.Instance.KCDict[pair.Key]) - @pair.Value.GetTotalValue() Coins 
+     <div style="background:black"> @getValueString(pair)
          <button class="btn btn-secondary" style="float: right;
                                                   height: 24px;
                                                   line-height: 12px;
@@ -23,6 +23,25 @@
 
 
 @code {
+
+    public string getValueString(KeyValuePair<string, Inventory> pair)
+    {
+        try
+        {
+            double val = pair.Value.GetTotalValue();
+            int kc = LootTracker.Instance.KCDict[pair.Key];
+            if(val == 1)
+            {
+                return pair.Key + " x" + kc + " - 1 Coin"; 
+            }
+            return "" + pair.Key + " x" + kc + " - " + val + " Coins"; 
+        }
+        catch
+        {
+            return pair.Key;
+        }
+
+    }
 
     public void ResetInventory(Inventory i)
     {
