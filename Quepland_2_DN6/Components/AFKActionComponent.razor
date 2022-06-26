@@ -87,7 +87,7 @@
         AFKAction.StartTime = DateTime.UtcNow;
         AFKAction.ReturnTime = DateTime.UtcNow.AddHours(hours);
         GameState.CurrentAFKAction = AFKAction;
-        SaveManager.SaveGame();
+        GameState.SaveGame = true;
     }
     public void CompleteAFKing()
     {
