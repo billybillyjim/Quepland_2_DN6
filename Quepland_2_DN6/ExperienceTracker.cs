@@ -8,6 +8,7 @@ public class ExperienceTracker
 	public long StartExperience;
 	public long GoalExperience;
 	public bool Show;
+	public bool DisplayOnSidebar;
 	public bool UpdateGoal = false;
 	public double GetProgress()
     {
