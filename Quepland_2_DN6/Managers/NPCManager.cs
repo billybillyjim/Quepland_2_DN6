@@ -124,7 +124,8 @@ public class NPCManager
         MessageManager.AddMessage("The hunters take you along on a " + hours + " hour hunt.");
         GameState.GoTo("World/SahotaClearing/");
         HuntingManager.StartHuntingTrip(info, hours);
-        
+        GameState.SaveGame = true;
+
     }
     public void ChangeWorldColor(string color)
     {
@@ -295,7 +296,7 @@ public class NPCManager
             }
 
         }
-        Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Coins"), coinsToPay);
+        int amtToRemove = Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Coins"), coinsToPay) / 300;
         foreach (KeyValuePair<GameItem, int> pair in itemsToRemove)
         {
             if (Player.Instance.Inventory.RemoveItems(pair.Key, 1) == 1)
@@ -303,7 +304,11 @@ public class NPCManager
                 GameItem i = ItemManager.Instance.GetCopyOfItem(pair.Key.Parameter);
                 Player.Instance.Inventory.AddItem(i);
                 amt++;
-
+                amtToRemove--;
+                if(amtToRemove == 0)
+                {
+                    break;
+                }
             }
         }
         if(amt == 0)
