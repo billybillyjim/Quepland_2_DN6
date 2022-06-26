@@ -68,7 +68,7 @@
                 <div  class="col item-stat-info"
          @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Gather Speed Bonus", "This is how much this item improves gathering speed when equipped.")))"
          @onmouseout="@(new Action(() => GameState.HideTooltip()))">
-                    <img src="data/Images/Bonus.png" class="item-stat-image" /> @((GetGatherBonus() * 100d))%
+                    <img src="data/Images/Bonus.png" class="item-stat-image" /> @((GetGatherBonus() * 100d).ToString("0.##"))%
                 </div>
             }
         
