@@ -118,11 +118,11 @@ public class Follower
     }
     public void LevelUp(bool writeToMessageLog = true)
     {
-        if(Banking.GetSkillLevelUnboosted() >= AutoCollectLevel)
+        if (Banking.GetSkillLevelUnboosted() >= AutoCollectLevel)
         {
             return;
         }
-        if(Banking.GetSkillLevelUnboosted() % 2 == 0)
+        if (Banking.GetSkillLevelUnboosted() % 2 == 0)
         {
             if (writeToMessageLog)
             {
@@ -138,16 +138,21 @@ public class Follower
             {
                 MessageManager.AddMessage(Name + " leveled up! Their banking level is now " + Banking.GetSkillLevelUnboosted() + ".");
             }
-            
+
         }
 
         Banking.SetSkillLevel(Banking.GetSkillLevelUnboosted() + 1);
-        
+
         if (Banking.Experience >= Skill.GetExperienceRequired(Banking.GetSkillLevelUnboosted()))
         {
             LevelUp(writeToMessageLog);
 
         }
+    }
+
+    public void LoadInventorySize()
+    {
+        InventorySize += Banking.GetSkillLevelUnboosted() / 2;
     }
 
     public void SendToBank()
