@@ -60,35 +60,40 @@ public class Dialog
 			DoQuestCheck();
 			return;
 		}
-		if (ItemOnTalk != "None")
-		{
-			if (Player.Instance.Inventory.AddItem(ItemManager.Instance.GetItemByName(ItemOnTalk).Copy()) == false)
-			{
-				MessageManager.AddMessage("Your inventory is full! Come back after you store something in your bank.", "red");
-				return;
-			}
-
-		}
         if (ConsumeRequiredItems)
         {
 			foreach(Requirement r in Requirements)
             {
 				if(r.Item != "None")
                 {
-					if(Player.Instance.Inventory.GetNumberOfItem(ItemManager.Instance.GetItemByName(r.Item)) < r.ItemAmount)
+					GameItem i = ItemManager.Instance.GetItemByName(r.Item);
+					if (Player.Instance.Inventory.GetNumberOfItem(i) < r.ItemAmount)
 					{
 						if(r.ItemAmount == 1)
                         {
-							MessageManager.AddMessage("You need a " + r.Item + ".", "red");
+							MessageManager.AddMessage("You need a " + i.Name + ".", "red");
 						}
                         else
                         {
-							MessageManager.AddMessage("You don't have enough " + r.Item + ".(" + r.ItemAmount + ")", "red");
+							MessageManager.AddMessage("You don't have enough " + i.GetPlural() + ".(Need " + r.ItemAmount + ")", "red");
 						}
 						
 						return;
                     }
-                }
+					if (Player.Instance.Inventory.GetNumberOfUnlockedItem(i) < r.ItemAmount)
+					{
+						if (r.ItemAmount == 1)
+						{
+							MessageManager.AddMessage("Your " + i.Name + " is locked.", "red");
+						}
+						else
+						{
+							MessageManager.AddMessage("You don't have enough unlocked" + i.GetPlural() + ".(Need " + r.ItemAmount + ")", "red");
+						}
+
+						return;
+					}
+				}
             }
 			foreach (Requirement r in Requirements)
 			{
@@ -99,7 +104,16 @@ public class Dialog
 				}
 			}
 		}
-		if(UnlockedFollower != "None")
+		if (ItemOnTalk != "None")
+		{
+			if (Player.Instance.Inventory.AddItem(ItemManager.Instance.GetItemByName(ItemOnTalk).Copy()) == false)
+			{
+				MessageManager.AddMessage("Your inventory is full! Come back after you store something in your bank.", "red");
+				return;
+			}
+
+		}
+		if (UnlockedFollower != "None")
         {
 			FollowerManager.Instance.GetFollowerByName(UnlockedFollower).IsUnlocked = true;
         }
