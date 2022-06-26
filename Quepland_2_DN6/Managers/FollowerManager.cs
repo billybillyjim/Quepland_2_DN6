@@ -69,9 +69,13 @@ public class FollowerManager
                 {
                     Console.WriteLine("Failed to find follower with name:" + f.Name);
                 }
+
                 f2.IsUnlocked = f.IsUnlocked;
                 f2.Banking = f.Banking;
                 f2.Inventory.LoadData(SaveManager.GetFollowerItemSave(f.Inventory));
+                f2.LoadInventorySize();
+
+                
             }
         }
         catch(Exception ex)
