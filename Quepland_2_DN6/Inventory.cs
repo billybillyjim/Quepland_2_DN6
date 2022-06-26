@@ -97,7 +97,7 @@ public class Inventory
             return itemLookupDic[item.UniqueID];
             // items.FirstOrDefault(x => x.Key.UniqueID == item.UniqueID).Value;
         }
-        return items.Count(x => x.Key.UniqueID == item.UniqueID && x.Key.IsLocked == false);
+        return items.Count(x => x.Key.UniqueID == item.UniqueID && x.Key.IsLocked == false && x.Key.IsEquipped == false);
     }
     /// <summary>
     /// Returns the total amount of item slots used in the inventory.
@@ -131,8 +131,20 @@ public class Inventory
             var current = items[i];
             for (int j = i - 1; j >= 0 && !(current.Key.ID > items[j].Key.ID); j--)
             {
-                items[j + 1] = items[j];
-                items[j] = current;
+                if(current.Key.ID == items[j].Key.ID)
+                {
+                    if(current.Key.Parameter.CompareTo(items[j].Key.Parameter) > 0)
+                    {
+                        items[j + 1] = items[j];
+                        items[j] = current;
+                    }
+                }
+                else
+                {
+                    items[j + 1] = items[j];
+                    items[j] = current;
+                }
+                
             }
         }
     }
