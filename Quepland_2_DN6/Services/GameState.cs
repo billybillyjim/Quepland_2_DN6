@@ -125,7 +125,7 @@ using System.Threading.Tasks;
     private RecipeTester RecipeTester = new RecipeTester();
     public static Random Random = new Random();
 
-    public bool SaveGame = false;
+    public static bool SaveGame = false;
     public static bool DieNextTick = false;
     public static string DieNextTickMessage = "";
     public static bool IsSaving = false;
@@ -134,8 +134,8 @@ using System.Threading.Tasks;
 
     public void Start()
     {
-        Console.WriteLine(CheckVersion("1.1.1b", "1.1.1b") + ":1.1.1b");
-        Console.WriteLine(CheckVersion("1.1.1b", "1.1.1") + ":1.1.1");
+        //Console.WriteLine(CheckVersion("1.1.1b", "1.1.1b") + ":1.1.1b");
+        //Console.WriteLine(CheckVersion("1.1.1b", "1.1.1") + ":1.1.1");
         if (GameTimer != null)
         {
             return;
@@ -605,6 +605,7 @@ using System.Threading.Tasks;
                         Console.WriteLine("Failed to find food buff for " + item.Name);
                         return;
                     }
+                    Player.Instance.ClearBoosts();
                     s.Boost = CurrentFood.FoodInfo.BuffAmount;
                     MessageManager.AddMessage("You eat a " + CurrentFood + "." + " It somehow makes you feel better at " + CurrentFood.FoodInfo.BuffedSkill + ".");
 
