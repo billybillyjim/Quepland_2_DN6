@@ -1,7 +1,7 @@
 ﻿@inject GameState GameState
 @implements IDisposable
 
-    <div class="row no-gutters mx-1 custom-scroll" style="overflow-y:auto;max-height:100vh;">
+    <div class="row no-gutters mx-1 custom-scroll" style="overflow-y:auto;max-height:100vh;padding-bottom:20px;">
     @foreach(Skill skill in Player.Instance.Skills)
     {
         if (skill.EXPTracker.Show)
@@ -31,6 +31,7 @@
                     {
                         <button class="btn btn-primary col mt-2 mx-2" @onclick=@(() => EnableSetGoal(skill.EXPTracker))>Set Goal</button>
                         <button class="btn btn-primary col mt-2 mx-2" @onclick=@(() => skill.EXPTracker.GoalExperience = 0)>Clear Goal</button>
+                        <button class="btn btn-primary col mt-2 mx-2" @onclick=@(() => ToggleDisplayOnSidebar(skill.EXPTracker))>Toggle Sidebar @(skill.EXPTracker.DisplayOnSidebar ? "Off" : "On")</button>
                     }
                     
                 </div>
@@ -55,7 +56,7 @@
         {
             t += s.EXPTracker.GoalExperience + "\n";
         }
-  
+
         t +=  String.Format("{0:n0}", s.EXPTracker.GetProgress()) + "%";
         return t;
     }
@@ -83,6 +84,10 @@
     {
         et.Show = false;
 
+    }
+    public void ToggleDisplayOnSidebar(ExperienceTracker et)
+    {
+        et.DisplayOnSidebar = !et.DisplayOnSidebar;
     }
     public void ResetAllTrackers()
     {
