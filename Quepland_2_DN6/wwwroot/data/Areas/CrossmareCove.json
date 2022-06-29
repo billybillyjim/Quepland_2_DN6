@@ -129,5 +129,18 @@
         "itemExchange": "Unlock Treasures:Graingilt Castle:Graingilt Treasure Key:You put a key to a lock..."
       }
     ]
+  },
+  {
+    "name": "Karakni Depths",
+    "id": 185,
+    "image": "Ocean",
+    "description": "The mainland has drifted entirely out of sight. The waves slowly lift the small boat up and down. The sailor is clearly seasick, leaving you to fish on your own.",
+    "areaURL": "KarakniDepths",
+    "actions": [
+      "Go Fishing:Giant Octopus,Eqalussuaq,Lion's Mane Jellyfish,Oar Fish,Colossal Squid:You lower your line down, down, down..."
+    ],
+    "npcs": [
+      "Sailor"
+    ]
   }
 ]
