@@ -595,6 +595,7 @@ using System.Threading.Tasks;
             
             if(Player.Instance.Inventory.RemoveItems(item, 1) == 1)
             {
+                Player.Instance.ClearBoosts();
                 CurrentFood = item;
                 HealingTicks = CurrentFood.FoodInfo.HealDuration;
                 if (CurrentFood.FoodInfo.BuffedSkill != null)

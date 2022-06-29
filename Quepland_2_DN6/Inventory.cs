@@ -168,10 +168,11 @@ public class Inventory
         //return HasItem(item.Name);
     }    
     /// <summary>
-    /// Checks if the inventory contains any items with the same name as the given string.
+    /// Checks if the inventory contains any items with the same name as the given string. Deprecated. Use unique id instead. 
     /// </summary>
     /// <param name="item"></param>
     /// <returns></returns>
+    [Obsolete("HasItem is deprecated, please use HasItem(string, bool) instead.(Names are not unique identifiers)")]
     public bool HasItem(string itemName)
     {
         if (itemName == null)
@@ -303,6 +304,7 @@ public class Inventory
         UpdateItemCount();
         return true;
     }
+    [Obsolete("AddItem is deprecated, please use AddItem(GameItem). (Get item by unique id first if need be)")]
     public bool AddItem(string itemName)
     {
         return AddItem(ItemManager.Instance.GetCopyOfItem(itemName));
@@ -322,6 +324,7 @@ public class Inventory
     {
         return AddMultipleOfItem(item, amount, out _);
     }
+
     public bool AddMultipleOfItem(string itemName, int amount)
     {
         return AddMultipleOfItem(ItemManager.Instance.GetItemByName(itemName), amount);
@@ -378,9 +381,10 @@ public class Inventory
                 KeyValuePair<GameItem, int> pair = new KeyValuePair<GameItem, int>();
                 foreach (KeyValuePair<GameItem, int> p in items)
                 {
-                    if (p.Key.Name == item.Name)
+                    if (p.Key.UniqueID == item.UniqueID)
                     {
                         pair = p;
+                        continue;
                     }
                 }
                 int oldAmt = pair.Value;

@@ -127,7 +127,7 @@
     }
     private void Buy(GameItem item)
     {
-        if (item == null)
+        if (item == null || ItemManager.Instance.GetUnpackingRecipe(item) == null)
         {
             return;
         }
