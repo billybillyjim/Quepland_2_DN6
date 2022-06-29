@@ -29,6 +29,8 @@ public class BattleManager
     public Monster SelectedOpponent { get; set; }
     private static readonly Random random = new Random();
 
+    public static string autoBattleOpponent = "";
+
     public string GetKillCounts()
     {
         string kc = "";
@@ -176,49 +178,51 @@ public class BattleManager
             }
             foreach (Monster opponent in CurrentOpponents)
             {
-                
-                if (opponent.CurrentHP <= 0 && opponent.IsDefeated == false)
+                if(opponent.IsDefeated == false)
                 {
-                    opponent.CurrentHP = 0;
-                    RollForDrops(opponent);
-                    opponent.IsDefeated = true;
-                    opponent.KillCount++;
-                    if(CurrentBoss != null)
+                    if (opponent.CurrentHP <= 0)
                     {
-                        CurrentBoss.OnDie(opponent);
-                    }
-                }
-                else if (opponent.TicksToNextAttack < 0 && opponent.IsDefeated == false)
-                {
-                    if (CurrentBoss != null && CurrentBoss.CustomAttacks)
-                    {
-                        CurrentBoss.OnAttack();
-                    }
-                    else if(CurrentBoss != null)
-                    {
-                        CurrentBoss.OnAttack();
-                        BeAttacked(opponent);
-                    }
-                    else
-                    {
-                        BeAttacked(opponent);
-                        
-                    }
-                    opponent.TicksToNextAttack = opponent.AttackSpeed;
-                }
-                else if(opponent.TicksToNextAttack == 1)
-                {
-                    if (CheckForQuickStrike())
-                    {
-                        Attack();
+                        opponent.CurrentHP = 0;
+                        RollForDrops(opponent);
+                        opponent.IsDefeated = true;
+                        opponent.KillCount++;
                         if (CurrentBoss != null)
                         {
-                            CurrentBoss.OnBeAttacked(Target);
+                            CurrentBoss.OnDie(opponent);
                         }
-                        Player.Instance.TicksToNextAttack = Player.Instance.GetWeaponAttackSpeed();
+                    }
+                    else if (opponent.TicksToNextAttack < 0)
+                    {
+                        if (CurrentBoss != null && CurrentBoss.CustomAttacks)
+                        {
+                            CurrentBoss.OnAttack();
+                        }
+                        else if (CurrentBoss != null)
+                        {
+                            CurrentBoss.OnAttack();
+                            BeAttacked(opponent);
+                        }
+                        else
+                        {
+                            BeAttacked(opponent);
+
+                        }
                         opponent.TicksToNextAttack = opponent.AttackSpeed;
                     }
-                    
+                    else if (opponent.TicksToNextAttack == 1)
+                    {
+                        if (CheckForQuickStrike())
+                        {
+                            Attack();
+                            if (CurrentBoss != null)
+                            {
+                                CurrentBoss.OnBeAttacked(Target);
+                            }
+                            Player.Instance.TicksToNextAttack = Player.Instance.GetWeaponAttackSpeed();
+                            opponent.TicksToNextAttack = opponent.AttackSpeed;
+                        }
+
+                    }
                 }
             }
             if (AllOpponentsDefeated())
@@ -355,7 +359,7 @@ public class BattleManager
     }
     public void Attack()
     {
-        if(Target == null || Target.IsDefeated)
+        if(Target == null || Target.IsDefeated || Target.CurrentHP == 0)
         {
             if (CurrentOpponents == null || CurrentOpponents.Count == 0)
             {

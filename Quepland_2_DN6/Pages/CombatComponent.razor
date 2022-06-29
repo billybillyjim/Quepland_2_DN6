@@ -94,8 +94,8 @@
                 </div>
                 @if (Player.Instance.CurrentFollower.AutoCollectSkill == "Advanced Scout")
                 {
-                    <div style="margin-left:-10px;">
-                        <Quepland_2_DN6.Components.CustomDropdownComponent BoxText="Select an opponent" @bind-Value="@selectedOpponent" DropdownItems="@GetPossibleOpponents()" EmptyText="There are no opponents to fight here"></Quepland_2_DN6.Components.CustomDropdownComponent>
+                    <div>
+                        <Quepland_2_DN6.Components.CustomDropdownComponent BoxText="Select an opponent" @bind-Value="@BattleManager.autoBattleOpponent" DropdownItems="@GetPossibleOpponents()" EmptyText="There are no opponents to fight here"></Quepland_2_DN6.Components.CustomDropdownComponent>
                     </div>
                 }
             }
@@ -123,8 +123,6 @@
 
 
     @code {
-
-        private string selectedOpponent = "";
 
         public List<string> GetPossibleOpponents()
         {
@@ -160,9 +158,9 @@
         private void ContinueBattles()
         {
             GameState.StopNonCombatActions();
-            if (BattleManager.Instance.AutoBattle && selectedOpponent != "")
+            if (BattleManager.Instance.AutoBattle && BattleManager.autoBattleOpponent != "")
             {
-                BattleManager.Instance.StartBattle(BattleManager.Instance.GetMonsterByName(selectedOpponent));
+                BattleManager.Instance.StartBattle(BattleManager.Instance.GetMonsterByName(BattleManager.autoBattleOpponent));
             }
             else
             {
