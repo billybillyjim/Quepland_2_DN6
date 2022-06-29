@@ -161,7 +161,7 @@
     {
         <button @onclick="@(() => UriHelper.NavigateTo("/Rates/"))">Rates</button>
         <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => EnableNewCompression())">Compression</button>
-
+        <button class="btn btn-primary" @onclick="@(() => UriHelper.NavigateTo("/Wiki/Main"))">Wiki</button>
     }
     @if (ShowCredits)
     {
@@ -176,7 +176,8 @@
     {
         <button class="btn btn-primary" @onclick="@(() => ShowCredits = !ShowCredits)">Credits</button>
     }
-    <button class="btn btn-primary" @onclick="@(() => UriHelper.NavigateTo("/Wiki/Main"))">Wiki</button>
+
+    
 </div>
 
 
