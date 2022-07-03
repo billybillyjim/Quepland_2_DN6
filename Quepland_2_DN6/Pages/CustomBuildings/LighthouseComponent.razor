@@ -12,6 +12,7 @@
     <div>There is a small door on the front of the lighthouse, but it's locked. A staircase wraps around to the top of the tower.</div>
     <div>
         <button class="btn btn-primary" @onclick="@(() => ChangeLocations("Tower Top"))">Climb up the stairs</button>
+        <button class="btn btn-primary" @onclick="@(() => ChangeLocations("B-1"))">Enter the door</button>
     </div>
 }
 else if (location == "Tower Top")
@@ -21,11 +22,38 @@ else if (location == "Tower Top")
         <button class="btn btn-primary" @onclick="@(() => ChangeLocations("Outside"))">Climb down the stairs</button>
     </div>
 }
+else if (location == "B-1")
+{
+    <div>The door swings open, revealing a spiral staircase that continues down into the dark. The floor rumbles and a gust of wind blows past you as you descend the steps. At the bottom of the stairs you enter a small room with an elaborately engraved wall. At the center is a small door handle, though it does not appear to be attached to anything.</div>
+    <Quepland_2_DN6.Components.NPCDialogComponent npc="Lighthouse Wall"></Quepland_2_DN6.Components.NPCDialogComponent>
+    <button class="btn btn-primary" @onclick="@(() => EnterGauntlet())">Touch the handle</button>
+}
+else if (location == "B-2")
+{
+    <div>The door swings open, revealing a spiral staircase that continues down into the dark. The floor rumbles and a gust of wind blows past you as you descend the steps. At the bottom of the stairs you enter a small room with an elaborately engraved wall.</div>
+   
+}
 
 
 @code {
 
     private string location = "Outside";
+
+    private void EnterGauntlet()
+    {
+        if(Player.Instance.Inventory.GetUsedSpaces() != 0)
+        {
+            string msg = "The handle feels hot to the touch.";
+            string item = " Your " + Player.Instance.Inventory.GetUniqueItems()[0].Key.Name + " begins to tremble violently.";
+            MessageManager.AddMessage(msg + item);
+            GameState.UpdateState();
+            return;
+        }
+
+        MessageManager.AddMessage("You feel your stomach tighten as the world around you folds in on itself. The room stretches longer and wider, darkness envelops you. In a moment the sensation passes and you find yourself standing in an open room made of cold, gray stone. There is a fine layer of snow on the ground, which glows just enough allow you to see around.");
+        location = "B-2";
+        GameState.UpdateState();
+    }
 
     private void ChangeLocations(string newloc)
     {
