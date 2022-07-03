@@ -1,5 +1,14 @@
 [
   {
+    "versionNumber": "1.1.1b",
+    "updates": [
+      "Fixed a bug where defeating the gashadokurou would immediately cause autobattling to continue.",
+      "Fixed a bug where not entering Nmekufu after climbing the Great Tree would lock you out from it.",
+      "Fixed a UI issue with the loot tracker."
+
+    ]
+  },
+  {
     "versionNumber": "1.1.1",
     "updates": [
       "Fixed a few typos.",

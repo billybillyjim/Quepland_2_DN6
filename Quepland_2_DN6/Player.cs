@@ -41,6 +41,7 @@ public class Player
     {
         BattleManager.Instance.AutoBattle = false;
         BattleManager.Instance.SelectedOpponent = null;
+        BattleManager.autoBattleOpponent = "";
         currentFollower = f;
 
     }

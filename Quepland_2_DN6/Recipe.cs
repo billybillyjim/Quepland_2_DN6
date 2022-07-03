@@ -323,12 +323,24 @@ public class Recipe
         if (CanCreate())
         {
             int maxOutput = GetMaxOutput();
+            var used = new List<Ingredient>();
             foreach(Ingredient ingredient in Ingredients)
             {
                 if (ingredient.DestroyOnUse)
                 {
                     ingredient.Item.Rerender = true;
-                    Player.Instance.Inventory.RemoveItems(ingredient.Item, ingredient.Amount * maxOutput);
+                    if(Player.Instance.Inventory.RemoveItems(ingredient.Item, ingredient.Amount * maxOutput) != ingredient.Amount * maxOutput)
+                    {
+                        foreach(Ingredient i in used)
+                        {
+                            Player.Instance.Inventory.AddMultipleOfItem(i.Item, i.Amount * maxOutput);
+                        }
+                        return false;
+                    }
+                    else
+                    {
+                        used.Add(ingredient);
+                    }
                     
                 }
             }
@@ -339,11 +351,11 @@ public class Recipe
                 {
                     if (long.TryParse(ExperienceGained.Split(':')[1], out long xp))
                     {
-                        Player.Instance.GainExperience("Artisan", xp * OutputAmount * maxOutput / 5);
+                        Player.Instance.GainExperience("Artisan", xp * OutputAmount * maxOutput + Output.Value);
                     }
                     else
                     {
-                        Player.Instance.GainExperience("Artisan", 15);
+                        Player.Instance.GainExperience("Artisan", 45);
                     }
                 }
             }

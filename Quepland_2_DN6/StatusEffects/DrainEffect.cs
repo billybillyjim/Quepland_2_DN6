@@ -37,9 +37,11 @@ public class DrainEffect : IStatusEffect
         if(RemainingTime % Speed == 0 && RemainingTime > 0)
         {
             MessageManager.AddMessage(Message);
-            int drain = m.HP / Power;
+            int drain = Math.Min(m.HP / Power, m.CurrentHP);
             m.CurrentHP -= drain;
+
             Player.Instance.CurrentHP = Math.Min(Player.Instance.MaxHP, Player.Instance.CurrentHP + drain);
+
         }
     }
 	public void DoEffect(Player p)

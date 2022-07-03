@@ -98,6 +98,25 @@ else if(activeWindow == "Loot")
             <button class="sidebar-buttons" style="@GetBGColor("Debug")" onclick="@(new Action(() => ChangeView("Debug")))"><img src="/data/Images/Alchemy.png" style="height:45px;width:45px;border:solid black 4px;">Debug</button>
 
         }
+        @foreach(Skill skill in Player.Instance.Skills)
+        {
+            if (skill.EXPTracker.DisplayOnSidebar)
+            {
+
+                    <button class="sidebar-buttons" 
+                    style="background-color:#4d4d4d" 
+                    onclick="@(new Action(() => ChangeView("EXP")))">
+                    <img src="/data/Images/@(skill.Name).png" 
+                    style="height:42px;width:42px;margin-top:10px;background:white;border-radius:0.5rem;"></button>
+                    <div class="progress"  @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, skill.Name, GetTooltip(skill))))"
+                                      @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+                    <div class="progress-bar" style="width:@(skill.EXPTracker.GetProgress())%;color:black;background-color:#51d051">
+
+                    </div>
+                </div>
+
+            }
+        }
     </div>
     </div>
 
@@ -137,6 +156,21 @@ else if(activeWindow == "Loot")
     {
         return NavMan.BaseUri.Contains("localhost");
 
+    }
+     public string GetTooltip(Skill s)
+    {
+        string t = s.Experience.ToString("#,##0.##") + " / ";
+        if (s.EXPTracker.GoalExperience == 0)
+        {
+            t += Skill.GetExperienceRequired(s.GetSkillLevelUnboosted() + 1).ToString("#,##0.##") + "\n";
+        }
+        else
+        {
+            t += s.EXPTracker.GoalExperience.ToString("#,##0.##") + "\n";
+        }
+
+        t +=  String.Format("{0:n0}", s.EXPTracker.GetProgress()) + "%";
+        return t;
     }
     protected override void OnInitialized()
     {

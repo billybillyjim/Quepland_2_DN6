@@ -44,7 +44,6 @@ public class Requirement
 				}
 				else if (Player.Instance.HasSkillRequirement(Skill, SkillLimit + 1))
                 {
-					Console.WriteLine("Player has too high of skill:" + SkillLimit);
 					return false;
                 }
 			}			

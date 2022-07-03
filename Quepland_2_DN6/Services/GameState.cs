@@ -28,7 +28,7 @@ using System.Threading.Tasks;
     public event EventHandler StateChanged;
     public IJSRuntime JSRuntime { get; set; }
 
-    public static string Version { get; set; } = "1.1.1";
+    public static string Version { get; set; } = "1.1.1b";
     public static List<Update> Updates { get; set; } = new List<Update>();
     public static Pluralizer Pluralizer = new Pluralizer();
 
@@ -125,7 +125,7 @@ using System.Threading.Tasks;
     private RecipeTester RecipeTester = new RecipeTester();
     public static Random Random = new Random();
 
-    public bool SaveGame = false;
+    public static bool SaveGame = false;
     public static bool DieNextTick = false;
     public static string DieNextTickMessage = "";
     public static bool IsSaving = false;
@@ -134,6 +134,8 @@ using System.Threading.Tasks;
 
     public void Start()
     {
+        //Console.WriteLine(CheckVersion("1.1.1b", "1.1.1b") + ":1.1.1b");
+        //Console.WriteLine(CheckVersion("1.1.1b", "1.1.1") + ":1.1.1");
         if (GameTimer != null)
         {
             return;
@@ -604,6 +606,7 @@ using System.Threading.Tasks;
                         Console.WriteLine("Failed to find food buff for " + item.Name);
                         return;
                     }
+                    Player.Instance.ClearBoosts();
                     s.Boost = CurrentFood.FoodInfo.BuffAmount;
                     MessageManager.AddMessage("You eat a " + CurrentFood + "." + " It somehow makes you feel better at " + CurrentFood.FoodInfo.BuffedSkill + ".");
 
@@ -1271,8 +1274,7 @@ using System.Threading.Tasks;
                             string min2 = Regex.Match(compMinor, @"\d+").Value;
                             if (int.TryParse(min2, out cmin))
                             {
-                                cRev = Regex.Match(minor, @"[a-zA-Z]").Value;
-
+                                cRev = Regex.Match(compMinor, @"[a-zA-Z]").Value;
                             }
                             else
                             {
@@ -1327,7 +1329,7 @@ using System.Threading.Tasks;
                 }
                 else if (cmin == min)
                 {
-                    return string.Compare(rev, cRev) >= 0;
+                    return string.Compare(cRev, rev) >= 0;
                 }
             }
         }

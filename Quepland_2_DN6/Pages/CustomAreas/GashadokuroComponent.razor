@@ -67,7 +67,7 @@ else
         <div style="position:relative">
             <div style="position:absolute;border-radius:0.5rem;padding:5px;top:0px;left:35%;@GetStyle(GashaHead)">
                 Gashadokuro Head
-                <button @onclick="@(() => Target(GashaHead))">Target</button>
+                <button class="btn btn-dark"  @onclick="@(() => Target(GashaHead))">Target</button>
                 <div class="progress" style="width:120px;height:40px;font-size:large;position:relative">
                     <div style="position:absolute;margin-Left:35px;line-height:40px;color:black">Attack</div>
                     <div class="progress-bar" style="width:@(GetOpponentAttackProgress(GashaHead));background-color:mediumpurple">
@@ -82,7 +82,7 @@ else
             </div>
             <div style="position:absolute;border-radius:0.5rem;padding:5px;right:10px;top:150px;@GetStyle(GashaRightHand)">
                 R Hand
-                <button @onclick="@(() => Target(GashaRightHand))">Target</button>
+                <button class="btn btn-dark"  @onclick="@(() => Target(GashaRightHand))">Target</button>
                 <div class="progress" style="width:120px;height:40px;font-size:large;position:relative">
                     <div style="position:absolute;margin-Left:35px;line-height:40px;color:black">Attack</div>
                     <div class="progress-bar" style="width:@(GetOpponentAttackProgress(GashaRightHand));background-color:mediumpurple">
@@ -97,7 +97,7 @@ else
             </div>
             <div style="position:absolute;border-radius:0.5rem;padding:5px;left:10px;top:150px;@GetStyle(GashaLeftHand)">
                 Left Hand
-                <button @onclick="@(() => Target(GashaLeftHand))">Target</button>
+                <button class="btn btn-dark" @onclick="@(() => Target(GashaLeftHand))">Target</button>
                 <div class="progress" style="width:120px;height:40px;font-size:large;position:relative">
                     <div style="position:absolute;margin-Left:35px;line-height:40px;color:black">Attack</div>
                     <div class="progress-bar" style="width:@(GetOpponentAttackProgress(GashaLeftHand));background-color:mediumpurple">
@@ -112,7 +112,7 @@ else
             </div>
             <div style="position:absolute;border-radius:0.5rem;padding:5px;top:250px;left:35%;@GetStyle(GashaSpine)">
                 Spine
-                <button @onclick="@(() => Target(GashaSpine))">Target</button>
+                <button class="btn btn-dark" @onclick="@(() => Target(GashaSpine))">Target</button>
                 <div class="progress" style="width:120px;height:40px;font-size:large;position:relative">
                     <div style="position:absolute;margin-Left:35px;line-height:40px;color:black">Attack</div>
                     <div class="progress-bar" style="width:@(GetOpponentAttackProgress(GashaSpine));background-color:mediumpurple">
@@ -186,6 +186,8 @@ else
     {
         if (GameState.IsStoppingNextTick == false)
         {
+            BattleManager.Instance.CurrentArea = null;
+            var Gasha = new Quepland_2_DN6.Bosses.Gashadokuro();
             GashaHead = BattleManager.Instance.GetMonsterByName("Gashadokuro Head");
             GashaRightHand = BattleManager.Instance.GetMonsterByName("Gashadokuro R Hand");
             GashaLeftHand = BattleManager.Instance.GetMonsterByName("Gashadokuro Left Hand");
@@ -196,7 +198,12 @@ else
             BattleManager.Instance.CurrentOpponents.Add(GashaRightHand);
             BattleManager.Instance.CurrentOpponents.Add(GashaLeftHand);
             BattleManager.Instance.CurrentOpponents.Add(GashaSpine);
-            BattleManager.Instance.SetBoss(new Quepland_2_DN6.Bosses.Gashadokuro());
+            Gasha.Monsters.Add(GashaHead);
+            Gasha.Monsters.Add(GashaRightHand);
+            Gasha.Monsters.Add(GashaLeftHand);
+            Gasha.Monsters.Add(GashaSpine);
+
+            BattleManager.Instance.SetBoss(Gasha);
 
             BattleManager.Instance.StartBattle();
             startedBattle = true;

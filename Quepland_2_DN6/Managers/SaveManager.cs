@@ -614,6 +614,7 @@ public static class SaveManager
         string file = "";
         //0
         file += Compress(GameState.CurrentGameMode.ToString()) + ",";
+        Console.WriteLine(GameState.CurrentGameMode.ToString());
         //1
         file += Compress(GameState.Version) + ",";
         //2

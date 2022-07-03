@@ -11,7 +11,8 @@
         background: #b0daff;
         color:black;
         border-radius: 0.5rem;">
-        @NPC.Name
+        <span @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e,NPC.Description)))"
+                @onmouseout="@(new Action(() => GameState.HideTooltip()))">@NPC.Name</span>
         @foreach (Dialog d in NPC.GetDialogsAtDepth(NPC.ConversationDepth))
         {
             @if (d.HasRequirements())

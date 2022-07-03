@@ -74,6 +74,9 @@ public class FollowerManager
                 f2.Banking = f.Banking;
                 f2.InventorySize = f.InventorySize;
                 f2.Inventory.LoadData(SaveManager.GetFollowerItemSave(f.Inventory));
+                f2.LoadInventorySize();
+
+                
             }
         }
         catch(Exception ex)
