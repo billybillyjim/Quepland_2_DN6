@@ -444,7 +444,17 @@ public static class SaveManager
         {
             if (await ContainsKeyAsync("GameState:" + mode))
             {
-                GameState.LoadSaveData(JsonConvert.DeserializeObject<GameStateSaveData>(Decompress(await GetItemAsync<string>("GameState:" + mode))));
+                var data = Decompress(await GetItemAsync<string>("GameState:" + mode));
+                if (GameState.CheckVersion("1.2.0", Decompress(await GetItemAsync<string>("Version:" + mode))))
+                {
+                    GameState.LoadSaveData(JsonConvert.DeserializeObject<GameStateSaveData>(data));
+                }
+                else
+                {
+                    var obj = JsonConvert.DeserializeObject<GameStateSaveData>(data);
+                    obj.ShowBackgrounds = true;
+                    GameState.LoadSaveData(obj);
+                }
             }
         }
         catch (Exception e)
