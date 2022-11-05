@@ -8,4 +8,5 @@ public class GameStateSaveData
 	public ArtisanTask CurrentTask { get; set; }
 	public bool CompactInventory { get; set; }
 	public bool HideLockedItems { get; set; }
+	public bool ShowBackgrounds { get; set; }
 }
