@@ -1,0 +1,33 @@
+﻿@inject GameState GameState
+@implements IDisposable
+
+<h3>Magic</h3>
+
+@foreach(ISpell spell in Spells){
+
+    <div @onclick="@(() => CastSpell(spell))">@spell.Name</div>
+}
+
+
+@code {
+    public List<ISpell> Spells = new List<ISpell>() { new Spells.Rain(), new Spells.Breathe() };
+
+    public void CastSpell(ISpell spell){
+        if(spell.Target == "Inventory"){
+            spell.Cast(Player.Instance.Inventory);
+        }
+        else if(spell.Target == "Player"){
+            spell.Cast(Player.Instance);
+        }
+        
+    }
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
