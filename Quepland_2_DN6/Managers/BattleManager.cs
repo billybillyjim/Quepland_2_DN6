@@ -394,10 +394,18 @@ public class BattleManager
         {
             if (Player.Instance.GetWeapon().Name == "Spine Shooter")
             {
-                if (Player.Instance.Inventory.HasItem("Cactus Spines"))
+                if (Player.Instance.Inventory.HasItem("Cactus Spines0", true))
                 {
 
-                    if(Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByName("Cactus Spines"), 1) == 1)
+                    if(Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByUniqueID("Cactus Spines0"), 1) == 1)
+                    {
+                        Player.Instance.GainExperienceFromWeapon(Player.Instance.GetWeapon(), total);
+                        MessageManager.AddMessage("You shoot the " + Target.Name + " for " + total + " damage!");
+                    }
+                }
+                else if(Player.Instance.Inventory.HasItem("Lion's Mane Stingers0", true))
+                {
+                    if (Player.Instance.Inventory.RemoveItems(ItemManager.Instance.GetItemByUniqueID("Lion's Mane Stingers0"), 1) == 1)
                     {
                         Player.Instance.GainExperienceFromWeapon(Player.Instance.GetWeapon(), total);
                         MessageManager.AddMessage("You shoot the " + Target.Name + " for " + total + " damage!");
