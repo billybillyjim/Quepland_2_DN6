@@ -1,0 +1,141 @@
+[
+  {
+    "name": "Mossy Stormling",
+    "hp": 2500,
+    "weaknesses": "Hammermanship",
+    "strengths": "Swordsmanship",
+    "attackSpeed": 25,
+    "armor": 35,
+    "damage": 80,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Black Wool Cape",
+          "weight": 3
+        },
+        {
+          "itemName": "Iron Sword",
+          "weight": 1
+        },
+        {
+          "itemName": "Lead Sword",
+          "weight": 5
+        },
+        {
+          "itemName": "Nickel Sword",
+          "weight": 5
+        },
+        {
+          "itemName": "Iron Hammer",
+          "weight": 1
+        },
+        {
+          "itemName": "Lesser Lead Hammer",
+          "weight": 5
+        },
+        {
+          "itemName": "Nickel Hammer",
+          "weight": 5
+        },
+        {
+          "itemName": "Iron Axe",
+          "weight": 1
+        },
+        {
+          "itemName": "Lead Axe",
+          "weight": 5
+        },
+        {
+          "itemName": "Nickel Axe",
+          "weight": 5
+        },
+        {
+          "itemName": "Iron Knife",
+          "weight": 1
+        },
+        {
+          "itemName": "Lead Knife",
+          "weight": 5
+        },
+        {
+          "itemName": "Nickel Knife",
+          "weight": 5
+        }
+      ]
+    }
+  },
+  {
+    "name": "Grassy Stormling",
+    "hp": 3000,
+    "weaknesses": "Swordsmanship",
+    "strengths": "Hammermanship",
+    "attackSpeed": 20,
+    "armor": 25,
+    "damage": 70,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Red Wool Cape",
+          "weight": 3
+        },
+        {
+          "itemName": "Milk Bread",
+          "weight": 1
+        },
+        {
+          "itemName": "Sweet Bread",
+          "weight": 5
+        },
+        {
+          "itemName": "Durum Bread",
+          "weight": 5
+        },
+        {
+          "itemName": "Rye Bread",
+          "weight": 5
+        },
+        {
+          "itemName": "Bread",
+          "weight": 5
+        }
+      ]
+    }
+  },
+  {
+    "name": "Floral Stormling",
+    "hp": 2000,
+    "weaknesses": "Axemanship",
+    "strengths": "Hammermanship",
+    "attackSpeed": 15,
+    "armor": 15,
+    "damage": 35,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Green Wool Cape",
+          "weight": 3
+        },
+        {
+          "itemName": "Black Bear Hat",
+          "weight": 5
+        },
+        {
+          "itemName": "Black Bear Boots",
+          "weight": 5
+        },
+        {
+          "itemName": "Black Bear Pants",
+          "weight": 5
+        },
+        {
+          "itemName": "Black Bear Shirt",
+          "weight": 5
+        },
+        {
+          "itemName": "Moose Gloves",
+          "weight": 1
+        }
+      ]
+    }
+  }
+]

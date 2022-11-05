@@ -2,16 +2,17 @@
 @inject GameState GameState
 
 
-<div class="row v-100" style="background-color:@GameState.BGColor;color:white;">
+<div class="row v-100" style="color:white;">
     @if (GameState.ShowStartMenu == false)
     {
         <div class="sidebar col-sm-3 col-md-2 v-100 p-0" style="z-index:5;  min-width:300px; max-width:300px; @GetGradient()">
             <UpdatedNavMenu />
         </div>
     }
-    <div class="col custom-scroll" style="position:relative;max-height:100vh;overflow-y:auto;" id="main-window">
+    <div class="col custom-scroll" style="position:relative;max-height:100vh;overflow-y:auto;" id="main-window" >
         @if (GameState.ShowStartMenu == false)
         {
+            <div class="bg-parent" style="z-index:-1;@GetBackgroundImage()"></div>
             @if (GameState.ShowSettings)
             {
                 <Quepland_2_DN6.Pages.SettingsComponent></Quepland_2_DN6.Pages.SettingsComponent>
@@ -61,9 +62,10 @@
                 </div>
             </div>
         }
-        <div class="px-2 vh-100 custom-scroll mt-2" style="overflow-y:auto;padding-bottom:200px;max-height:calc(100vh - 0.5rem);">
+        <div class="px-2 vh-100 custom-scroll mt-2" style="overflow-y:auto;padding-bottom:200px;max-height:calc(100vh - 0.5rem);z-index:1;">
             @Body
         </div>
+        
     </div>
     @if (GameState.ShowStartMenu == false)
     {
@@ -101,13 +103,48 @@
     private bool showMessages = true;
     private List<string> messageFilters = new List<string>() { "All", "Loot", "Dialogue" };
 
+    public string GetBackgroundImage()
+    {
+        if(!GameState.ShowBackgrounds){
+            return "";
+        }
+
+        var location = GameState.Location.Split('/').Last().Trim('/');
+        if(location == "QueplesTomb")
+        {
+            if (QuestManager.Instance.GetQuestByName("Queple's Sword").CheckFlag("Quest Start"))
+            {
+                return $"background-image:url(data/Images/BGs/QueplesTomb2.jpg)";
+            }
+            return $"background-image:url(data/Images/BGs/QueplesTomb.jpg)";
+        }
+        else if(location == "Battle"){
+           
+            if (!String.IsNullOrEmpty(BattleManager.Instance.ReturnLocation)){
+                return $"background-image:url(data/Images/BGs/{BattleManager.Instance.ReturnLocation}.jpg)";
+            }
+            else{
+                return $"background-image:url(data/Images/BGs/{BattleManager.Instance.CurrentArea.AreaURL}.jpg)";
+            }
+        }
+        return $"background-image:url(data/Images/BGs/{location}.jpg)";
+    }
     public string GetMessageWindowClass()
     {
+        var c = "";
+        if(GameState.ShowBackgrounds)
+        {
+            c += "transparent-message-window ";
+        }
         if (showMessages)
         {
-            return "message-window";
+            c+= "message-window ";
         }
-        return "hide-message-window";
+        else
+        {
+            c += "hide-message-window ";
+        }
+        return c;
     }
     private void ToggleMessageMenu()
     {

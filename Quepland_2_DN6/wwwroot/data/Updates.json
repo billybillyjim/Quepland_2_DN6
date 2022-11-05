@@ -1,10 +1,43 @@
 [
   {
+    "versionNumber": "1.1.2",
+    "updates": [
+      "Greatly boosted artisan experience rates.",
+      "Removed chickens from extractor shop.",
+      "Changed boosts to only work one at a time.",
+      "Added iseroite bar smithing.",
+      "Fixed bug where loaded hp and inventory sizes were off by one.",
+      "Inventory size now is loaded properly for followers",
+      "Fixed gem banking bug.",
+      "Fixed loot tracker bug for no value items.",
+      "Items required for dialog are now properly checked for removal before continuing.",
+      "Added a toggle for any skill in the exp tracker to display as a sidebar button.",
+      "Gather bonuses and experience requirements are now all rounded to 2 decimals.",
+      "Reduced tanning to 4 hours.",
+      "Fixed some typos",
+      "The game now hides import/export functions until it is finished loading.",
+      "Drain no longer overkills.",
+      "Sahotite and strongtium had their requirements reduced slightly.",
+      "Added descriptions for all the npcs.",
+      "Added missing fish."
+
+    ]
+  },
+  {
+    "versionNumber": "1.1.1c",
+    "updates": [
+      "Transit branches no longer compete for the highest position in the bank."
+
+
+    ]
+  },
+  {
     "versionNumber": "1.1.1b",
     "updates": [
       "Fixed a bug where defeating the gashadokurou would immediately cause autobattling to continue.",
       "Fixed a bug where not entering Nmekufu after climbing the Great Tree would lock you out from it.",
-      "Fixed a UI issue with the loot tracker."
+      "Fixed a UI issue with the loot tracker.",
+      "Fixed a bug with the version checker."
 
     ]
   },

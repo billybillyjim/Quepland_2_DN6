@@ -78,6 +78,15 @@
     "attackSpeed": 1
   },
   {
+    "name": "Stormwalker",
+    "hp": 25500,
+    "weaknesses": "",
+    "strengths": "Knifesmanship Swordsmanship",
+    "damage": 95,
+    "armor": 12000,
+    "attackSpeed": 4
+  },
+  {
     "name": "Ruwohane",
     "hp": 23500,
     "weaknesses": "Archery",

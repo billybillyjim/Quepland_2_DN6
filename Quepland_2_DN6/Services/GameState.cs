@@ -28,7 +28,7 @@ using System.Threading.Tasks;
     public event EventHandler StateChanged;
     public IJSRuntime JSRuntime { get; set; }
 
-    public static string Version { get; set; } = "1.1.1b";
+    public static string Version { get; set; } = "1.2.0";
     public static List<Update> Updates { get; set; } = new List<Update>();
     public static Pluralizer Pluralizer = new Pluralizer();
 
@@ -104,6 +104,9 @@ using System.Threading.Tasks;
     public static readonly int GameSpeed = 200;
     public static bool CompactInventoryView;
     public static bool HideLockedItems;
+    public static bool ShowBackgrounds = true;
+
+
     public int TicksToNextHeal;
     public int HealingTicks;
     public static int CurrentTick { get; set; }
@@ -131,6 +134,8 @@ using System.Threading.Tasks;
     public static bool IsSaving = false;
     private Stopwatch stopwatch = new Stopwatch();
     public static HCDeathInfo HCDeathInfo;
+
+    public static List<ISpell> ActiveSpells = new List<ISpell>();
 
     public void Start()
     {
@@ -176,6 +181,9 @@ using System.Threading.Tasks;
             DieNextTick = false;
             DieNextTickMessage = "Unknown";
         }
+
+        TickActiveSpells();
+
         if (stopActions)
         {
             ClearActions();
@@ -360,6 +368,42 @@ using System.Threading.Tasks;
         CurrentSmeltingRecipe = null;
         stopNoncombatActions = false;
         IsStoppingNextTick = false;
+    }
+
+    public void TickActiveSpells()
+    {
+        var spellsToRemove = new List<ISpell>();
+        foreach(ISpell spell in ActiveSpells)
+        {
+            if(spell.Target == "Player")
+            {
+                spell.Tick(Player.Instance);
+            }
+            else if(spell.Target == "Monster")
+            {
+
+            }
+            else if(spell.Target == "Inventory")
+            {
+                
+            }
+            else if(spell.Target == "None")
+            {
+                spell.Tick();
+            }
+            
+            spell.TimeRemaining--;
+            if(spell.TimeRemaining <= 0)
+            {
+                spellsToRemove.Add(spell);
+                MessageManager.AddMessage(spell.Name + " has run out.");
+            }
+            else if(spell.TimeRemaining == 60)
+            {
+                MessageManager.AddMessage(spell.Name + " will run out soon.");
+            }
+        }
+        ActiveSpells.RemoveAll(x => spellsToRemove.Contains(x));
     }
 
     public void Pause()
@@ -1175,12 +1219,13 @@ using System.Threading.Tasks;
 
     public static GameStateSaveData GetSaveData()
     {
-        return new GameStateSaveData { IsHunting = IsOnHuntingTrip, 
-            Location = Location, 
-            CurrentLand = CurrentLand.Name, 
+        return new GameStateSaveData { IsHunting = IsOnHuntingTrip,
+            Location = Location,
+            CurrentLand = CurrentLand.Name,
             CurrentTask = CurrentArtisanTask,
             HideLockedItems = HideLockedItems,
-            CompactInventory = CompactInventoryView
+            CompactInventory = CompactInventoryView,
+            ShowBackgrounds = ShowBackgrounds
         };
     }
     public static void LoadSaveData(GameStateSaveData data)
@@ -1188,7 +1233,7 @@ using System.Threading.Tasks;
         IsOnHuntingTrip = AreaManager.LoadedHuntingInfo;
         HideLockedItems = data.HideLockedItems;
         CompactInventoryView = data.CompactInventory;
-
+        ShowBackgrounds = data.ShowBackgrounds;
         CurrentArtisanTask = data.CurrentTask;
         if (data.Location == null || data.Location == "" || data.Location == "Battle")
         {
@@ -1215,6 +1260,11 @@ using System.Threading.Tasks;
                 }
             }
         }
+    }
+    public static void AddActiveSpell(ISpell spell, int duration)
+    {
+        spell.TimeRemaining = duration;
+        ActiveSpells.Add(spell);
     }
     public static void LoadAFKActionData(AFKAction action)
     {       

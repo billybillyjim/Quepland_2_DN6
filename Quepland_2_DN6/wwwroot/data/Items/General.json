@@ -544,5 +544,15 @@
     "gatherSpeed": 15,
     "icon": "HammerHead",
     "secondaryColor": "#FFD700"
+  },
+  {
+    "name": "Lion's Mane Stingers",
+    "description": "A stinger filled with neurotoxin. It looks a little like a cactus spine...",
+    "gatherString": "You extract some stingers from the lion's mane.",
+    "value": 35,
+    "gatherSpeed": 10,
+    "secondaryColor": "#F25C5C",
+    "icon": "Stinger",
+    "isStackable": true
   }
 ]

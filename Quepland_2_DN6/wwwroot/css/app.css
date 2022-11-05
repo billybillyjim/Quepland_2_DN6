@@ -91,6 +91,31 @@ app {
     user-select: none;
 }
 
+.bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0.2;
+    background-size: cover;
+    z-index: 0;
+    background-position-y: center;
+}
+
+.bg-parent {
+    min-height: 100%;
+    min-width: 100%;
+    overflow: hidden;
+    position: absolute;
+    background-position-y: center;
+    opacity: 0.2;
+    background-size: cover;
+    margin-left: -15px;
+}
+
+
+
 .bank-scroll {
     height: calc(100vh - 411px);
     max-height:592px;
@@ -309,6 +334,10 @@ app {
     padding-top: 15px !important;
     margin-left: 15px;
     overflow-x: hidden;
+}
+
+.transparent-message-window {
+    background-color:#4d4d4d8d!important;
 }
 
 #blazor-error-ui {
