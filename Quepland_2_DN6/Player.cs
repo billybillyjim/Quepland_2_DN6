@@ -32,6 +32,7 @@ public class Player
     public int Deaths { get; set; }
     public int ArtisanPoints { get; set; }
     public bool JustDied { get; set; }
+    public int Air { get; set; }
 
     public Skill LastGainedExp { get; set; }
     public Skill ExpTrackerSkill { get; set; }
@@ -266,7 +267,7 @@ public class Player
                 total += item.ArmorInfo.Damage;
                 if (weapon != null &&
                     (weapon.EnabledActions == "Archery" && Inventory.HasArrows() ||
-                    (weapon.Name == "Spine Shooter" && Inventory.HasItem("Cactus Spines"))))
+                    (weapon.Name == "Spine Shooter" && Inventory.HasItem("Cactus Spines0", true))))
                 {
                     total += item.ArmorInfo.RangedDamage;
                 }
@@ -274,10 +275,14 @@ public class Player
         }
         if(weapon != null)
         {
-            if(weapon.Name == "Spine Shooter" && Inventory.HasItem("Cactus Spines"))
+            if(weapon.Name == "Spine Shooter" && Inventory.HasItem("Cactus Spines0", true))
             {
                 total += 10;
                 
+            }
+            else if(weapon.Name == "Spine Shooter" && Inventory.HasItem("Lion's Mane Stingers0", true))
+            {
+                total += 100;
             }
             else if (weapon.EnabledActions == "Archery" && Inventory.HasArrows())
             {

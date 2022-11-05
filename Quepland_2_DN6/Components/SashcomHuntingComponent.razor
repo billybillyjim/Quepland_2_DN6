@@ -81,7 +81,6 @@ else
     private int LastGameTick;
     private int FinishGameTick;
     private int availableFish;
-    private int air;
     private bool IsCorralling;
     private bool IsGathering;
     private bool IsHunting;
@@ -112,7 +111,7 @@ else
     }
     public void ReturnForAir()
     {
-        air = 100;
+        Player.Instance.Air = 100;
         availableFish /= 2;
         IsCorralling = false;
         IsGathering = false;
@@ -145,13 +144,13 @@ else
 
     protected override void OnInitialized()
     {
-        air = 100;
+        Player.Instance.Air = 100;
         GameState.StateChanged += OnGameStateChanged;
     }
 
     private string GetAirProgress()
     {
-        return "width:" + (air) + "%";
+        return "width:" + (Player.Instance.Air) + "%";
     }
 
     public void Dispose()
@@ -192,22 +191,22 @@ else
             LastGameTick = GameState.CurrentTick;
             if (LastGameTick % 3 == 0)
             {
-                air--;
-                if (air == 25)
+                Player.Instance.Air--;
+                if (Player.Instance.Air == 25)
                 {
                     MessageManager.AddMessage("You are running out of air!", "red");
                 }
             }
 
 
-            if (air <= 0)
+            if (Player.Instance.Air <= 0)
             {
-                MessageManager.AddMessage("You run out of air, suffocate, and die.", "red");
+                MessageManager.AddMessage("You ran out of air, suffocated, and died.", "red");
                 IsGathering = false;
                 IsCorralling = false;
                 availableFish = 0;
                 Player.Instance.Die("Suffocation");
-                air = 100;
+                Player.Instance.Air = 100;
             }
         }
         StateHasChanged();
