@@ -196,6 +196,12 @@ public class Inventory
         }
         
     }
+    /// <summary>
+    /// Get an item by unique id. Empty is there to differentiate from HasItem(string) which takes a name.
+    /// </summary>
+    /// <param name="uniqueID"></param>
+    /// <param name="empty"></param>
+    /// <returns></returns>
     public bool HasItem(string uniqueID, bool empty)
     {
         if (uniqueID == null)
