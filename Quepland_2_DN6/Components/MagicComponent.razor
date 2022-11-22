@@ -8,18 +8,67 @@
     <div @onclick="@(() => CastSpell(spell))">@spell.Name</div>
 }
 
+@if(showInventory)
+{
+    @foreach (KeyValuePair<GameItem, int> item in Player.Instance.Inventory.GetUniqueItems().OrderBy(x => x.Key.ID))
+    {
+        if (item.Key != null && (GameState.HideLockedItems == false || item.Key.IsLocked == false))
+        {
+
+            <div oncontextmenu="return false;" draggable="false"
+                    onmouseup="@(new Action<MouseEventArgs>((args) => CastSpell(currentSpell, item.Key)))">
+                <ItemBoxComponent Item="@item.Key" ShowAmount="@true" shouldRender="@item.Key.Rerender"></ItemBoxComponent>
+            </div>
+
+        }
+    }
+}
 
 @code {
-    public List<ISpell> Spells = new List<ISpell>() { new Spells.Rain(), new Spells.Breathe() };
+    private bool showInventory;
+    private ISpell currentSpell = null;
+    public List<ISpell> Spells = new List<ISpell>() {
+        new Spells.Rain(),
+        new Spells.Breathe(),
+        new Spells.Lift(),
+        new Spells.Hypnotize(),
+        new Spells.Extract(),
+        new Spells.AxeFletch(),
+        new Spells.Dehydrate(),
+        new Spells.Enchant()
+    };
 
     public void CastSpell(ISpell spell){
         if(spell.Target == "Inventory"){
             spell.Cast(Player.Instance.Inventory);
         }
+        else if (spell.Target == "Item")
+        {
+            showInventory = true;
+            spell.Cast(Player.Instance);
+            currentSpell = spell;
+        }
         else if(spell.Target == "Player"){
             spell.Cast(Player.Instance);
         }
-        
+        else if(spell.Target == "Monster"){
+            spell.Cast(BattleManager.Instance.Target);
+        }
+        else if (spell.Target == "Gather")
+        {
+            spell.Cast();
+        }
+
+    }
+    public void CastSpell(ISpell spell, GameItem item)
+    {
+        if (spell.Target == "Item")
+        {
+            spell.Cast(Player.Instance.Inventory, item);
+            GameState.UpdateState();
+        }
+
+
     }
     protected override void OnInitialized()
     {

@@ -35,5 +35,6 @@ public class StatusEffectData
 	/// </summary>
 	public string CustomData { get; set; } = "";
 	public bool SelfInflicted { get; set; }
+    public bool OnProc { get; set; } = false;
 }
 

@@ -55,8 +55,6 @@ public class Skill
     [JsonProperty]
     private long _experience;
 
-
-
     public long Experience {
         get { return _experience; }     
     }

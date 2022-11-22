@@ -54,6 +54,33 @@
     "isStackable": true
   },
   {
+    "name": "Perpetual Seed",
+    "description": "The essence of perpetuance, extracted from something. Now it's all that remains.",
+    "gatherString": "You get a perpetual seed.",
+    "value": 35,
+    "secondaryColor": "#3083ff",
+    "icon": "Seeds",
+    "isStackable": true
+  },
+  {
+    "name": "Alluvial Seed",
+    "description": "The essence of alluvium, extracted from something. Now it's all that remains.",
+    "gatherString": "You get an alluvial seed.",
+    "value": 35,
+    "secondaryColor": "#3083ff",
+    "icon": "Seeds",
+    "isStackable": true
+  },
+  {
+    "name": "Rejuvinal Seed",
+    "description": "The essence of rejuvination, extracted from something. Now it's all that remains.",
+    "gatherString": "You get a rejuvinal seed.",
+    "value": 35,
+    "secondaryColor": "#3083ff",
+    "icon": "Seeds",
+    "isStackable": true
+  },
+  {
     "name": "Transit Branch",
     "description": "It vibrates slightly in your hand. ",
     "gatherString": "You get a transit branch.",

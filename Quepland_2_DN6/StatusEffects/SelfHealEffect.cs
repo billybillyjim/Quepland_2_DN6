@@ -10,6 +10,7 @@ public class SelfHealEffect : IStatusEffect
     public int Speed { get; set; }
     public int Power { get; set; }
     public int RemainingTime { get; set; }
+    public bool OnProc { get; set; } = false;
     public string CustomData { get; set; }
     public double ProcOdds { get; set; }
     private StatusEffectData d;

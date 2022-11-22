@@ -1,6 +1,8 @@
 ﻿using Quepland_2_DN6.Bosses;
+using Quepland_2_DN6.Spells;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
@@ -17,6 +19,7 @@ public class BattleManager
     public List<Monster> CurrentOpponents { get; set; } = new List<Monster>();
     public List<Monster> SpawnOpponents { get; set; } = new List<Monster>();
     public List<Monster> RemoveOpponents { get; set; } = new List<Monster>();
+    public List<Monster> Allies { get; set; } = new List<Monster>();
     public IBoss CurrentBoss { get; set; }
     public Monster Target { get; set; }
     public Area CurrentArea { get; set; }
@@ -104,6 +107,7 @@ public class BattleManager
         CurrentArea = area;
         int r = random.Next(0, CurrentArea.Monsters.Count);
         CurrentOpponents.Clear();
+        Allies.Clear();
         CurrentOpponents.Add(Monsters.FirstOrDefault(x => x.Name == CurrentArea.Monsters[r]));
         SelectedOpponent = null;
         if(CurrentOpponents[0] == null)
@@ -117,6 +121,7 @@ public class BattleManager
     public void StartBattle(Monster opponent)
     {
         CurrentOpponents.Clear();
+        Allies.Clear();
         CurrentOpponents.Add(opponent);
         if (AutoBattle)
         {
@@ -127,6 +132,7 @@ public class BattleManager
     public void StartBattle(List<Monster> opponents)
     {
         CurrentOpponents.Clear();
+        Allies.Clear();
         CurrentOpponents.AddRange(opponents);
         SelectedOpponent = null;
         StartBattle();
@@ -175,6 +181,25 @@ public class BattleManager
                     CurrentBoss.OnBeAttacked(Target);
                 }
                 Player.Instance.TicksToNextAttack = Player.Instance.GetWeaponAttackSpeed();
+            }
+            foreach(Monster ally in Allies)
+            {
+                if (ally.IsDefeated == false)
+                {
+                    if (ally.CurrentHP <= 0)
+                    {
+                        MessageManager.AddMessage(ally.Name + " died!");
+                        ally.CurrentHP = 0;
+                        ally.IsDefeated = true;
+                    }
+                    else if(ally.TicksToNextAttack < 0)
+                    {
+                        DoAllyAttack(ally);
+                        ally.TicksToNextAttack = ally.AttackSpeed;
+                    }
+                    ally.TicksToNextAttack--;
+                }
+                
             }
             foreach (Monster opponent in CurrentOpponents)
             {
@@ -309,6 +334,13 @@ public class BattleManager
             MessageManager.AddMessage("You defeated the " + opponent.Name + ".");
         }
     }
+    public void AddAlly(Monster m)
+    {
+        var ally = m.Copy();
+        ResetOpponent(ally);
+        Allies.Add(ally);
+        MessageManager.AddMessage(ally.Name + " has joined your side!");
+    }
     public void SpawnOpponentMidBattle(Monster m)
     {
         if(CurrentOpponents.Contains(m) == false && SpawnOpponents.Contains(m) == false)
@@ -359,14 +391,7 @@ public class BattleManager
     }
     public void Attack()
     {
-        if(Target == null || Target.IsDefeated || Target.CurrentHP == 0)
-        {
-            if (CurrentOpponents == null || CurrentOpponents.Count == 0)
-            {
-                return;
-            }
-            Target = GetNextTarget();
-        }
+        ConfirmTarget();
         RollForPlayerAttackEffects();
 
         int total = GetTotalPlayerDamage(Target);
@@ -379,7 +404,29 @@ public class BattleManager
             Target = GetNextTarget();
         }
     }
+    public void ConfirmTarget()
+    {
+        if (Target == null || Target.IsDefeated || Target.CurrentHP == 0)
+        {
+            if (CurrentOpponents == null || CurrentOpponents.Count == 0)
+            {
+                return;
+            }
+            Target = GetNextTarget();
+        }
+    }
 
+    public void DoAllyAttack(Monster ally)
+    {
+        ConfirmTarget();
+        int total = (int)Math.Max(1, (ally.Damage.ToRandomDamage()));
+        Target.CurrentHP -= total;
+        MessageManager.AddMessage(ally.Name + " attacks for " + total + " damage!");
+        if (Target.IsDefeated)
+        {
+            Target = GetNextTarget();
+        }
+    }
     public void GainCombatExperience(int total)
     {
         if (Player.Instance.GetWeapon() == null)

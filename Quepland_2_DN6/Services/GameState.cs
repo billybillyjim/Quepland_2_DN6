@@ -370,6 +370,23 @@ using System.Threading.Tasks;
         IsStoppingNextTick = false;
     }
 
+    public GameItem? MagicalGather()
+    {
+        if(CurrentGatherItem != null)
+        {
+            foreach(ISpell spell in ActiveSpells)
+            {
+                if (spell.Target == "Gather")
+                {
+                    //Updates Data for spell
+                    spell.Cast(Player.Instance.Inventory, CurrentGatherItem);
+                    return ItemManager.Instance.GetItemByUniqueID(spell.Data);
+                }
+            }
+        }
+        return null;
+    }
+    
     public void TickActiveSpells()
     {
         var spellsToRemove = new List<ISpell>();
@@ -387,10 +404,11 @@ using System.Threading.Tasks;
             {
                 
             }
-            else if(spell.Target == "None")
+            else
             {
                 spell.Tick();
             }
+
             
             spell.TimeRemaining--;
             if(spell.TimeRemaining <= 0)
@@ -415,9 +433,10 @@ using System.Threading.Tasks;
     {
         if (HasRequiredItemForGather())
         {
-            if (Player.Instance.FollowerGatherItem(CurrentGatherItem) == false)
+            GameItem? magicGatherSwap = MagicalGather();
+            if (Player.Instance.FollowerGatherItem(CurrentGatherItem, magicGatherSwap) == false)
             {
-                PlayerGatherItem();
+                PlayerGatherItem(magicGatherSwap);
             }
             if (CurrentGatherItem != null)
             {
@@ -439,10 +458,10 @@ using System.Threading.Tasks;
             }
         }
     }
-    private bool PlayerGatherItem()
+    private bool PlayerGatherItem(GameItem magicGatherSwap)
     {
 
-        if (Player.Instance.PlayerGatherItem(CurrentGatherItem) == false)
+        if (Player.Instance.PlayerGatherItem(CurrentGatherItem, magicGatherSwap) == false)
         {
             if(Player.Instance.CurrentFollower != null && Player.Instance.CurrentFollower.InventorySize > 0)
             {
@@ -1011,10 +1030,9 @@ using System.Threading.Tasks;
         {
             
             int baseValue = CurrentGatherItem.GatherSpeed.ToGaussianRandom();
-            //Console.WriteLine("Ticks to next gather:" + baseValue);
-            baseValue = (int)Math.Max(1, (double)baseValue * Player.Instance.GetGearMultiplier(CurrentGatherItem));
-           // Console.WriteLine("Ticks to next gather with gear:" + baseValue);
-            baseValue = (int)Math.Max(1, (double)baseValue * Player.Instance.GetLevelMultiplier(CurrentGatherItem));
+           
+            baseValue = (int)Math.Max(1, baseValue * Player.Instance.GetGearMultiplier(CurrentGatherItem));      
+            baseValue = (int)Math.Max(1, baseValue * Player.Instance.GetLevelMultiplier(CurrentGatherItem));
 
             return baseValue;
         }

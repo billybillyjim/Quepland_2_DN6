@@ -11,6 +11,7 @@ public class HatchEffect : IStatusEffect
     public int Power { get; set; }
     public int RemainingTime { get; set; }
     public string CustomData { get; set; }
+    public bool OnProc { get; set; } = true;
     public double ProcOdds { get; set; }
     public bool SelfInflicted { get; set; }
     private StatusEffectData d;
@@ -41,9 +42,7 @@ public class HatchEffect : IStatusEffect
     }
     public void DoEffect(Player p)
     {
-
-        MessageManager.AddMessage(Message);
-        BattleManager.Instance.SpawnOpponentMidBattle(BattleManager.Instance.GetMonsterByName(CustomData));
+        BattleManager.Instance.AddAlly(BattleManager.Instance.GetMonsterByName(CustomData));
         RemainingTime = 0;
 
     }

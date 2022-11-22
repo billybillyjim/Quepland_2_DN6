@@ -668,25 +668,34 @@ public class Inventory
 
     public bool HasToolRequirement(GameItem item)
     {
+        var actions = new HashSet<string>();
+        var canDo = new HashSet<string>();
         foreach(Requirement r in item.Requirements)
         {
             if(r.Action != "None")
             {
-                bool hasReq = true;
-                foreach (KeyValuePair<GameItem, int> i in items)
-                {
-                    //item.Key.itemPos = inventorySlotPos;
-                    if (i.Key.EnabledActions.Contains(r.Action) == false)
-                    {
-                        hasReq = false;
-                    }
-                }
-                return hasReq;
+                actions.Add(r.Action);
             }
         }
+        foreach (KeyValuePair<GameItem, int> i in items)
+        {
+            foreach(string action in actions)
+            {
+                if (i.Key.EnabledActions.Contains(action))
+                {
+                    canDo.Add(action);
+                }
+            }
+            
+        }
 
-        return true;
+        return actions.Count == canDo.Count;
     }
+    /// <summary>
+    /// Inventory contains an item that includes the action in its EnabledActions.
+    /// </summary>
+    /// <param name="action"></param>
+    /// <returns></returns>
     public bool HasToolRequirement(string action)
     {
         if (action == "None")
@@ -745,6 +754,7 @@ public class Inventory
             {
                 Console.WriteLine("Failed to find item with id:" + id);
                 Console.WriteLine(line);
+                it = ItemManager.Instance.GenerateNewItem(s);
             }
             if (s.Length >= 3)
             {

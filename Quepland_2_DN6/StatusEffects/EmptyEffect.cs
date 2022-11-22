@@ -9,6 +9,7 @@ public class EmptyEffect : IStatusEffect
     public int Duration { get; set; }
     public int Speed { get; set; }
     public int Power { get; set; }
+    public bool OnProc { get; set; } = false;
     public int RemainingTime { get; set; }
     public string CustomData { get; set; }
     public double ProcOdds { get; set; }

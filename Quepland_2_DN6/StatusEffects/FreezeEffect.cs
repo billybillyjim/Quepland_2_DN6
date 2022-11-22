@@ -11,6 +11,7 @@ public class FreezeEffect : IStatusEffect
     public int Power { get; set; }
     public int RemainingTime { get; set; }
     public string CustomData { get; set; }
+    public bool OnProc { get; set; } = false;
     public double ProcOdds { get; set; }
     public bool SelfInflicted { get; set; }
 

@@ -9,7 +9,7 @@
         public int Duration { get; set; }
         public string Target { get; set; } = "Inventory";
         public int TimeRemaining { get; set; }
-
+        public string Data { get; set; }
         public Rain() { }
         
 

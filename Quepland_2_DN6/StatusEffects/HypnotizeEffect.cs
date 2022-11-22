@@ -12,7 +12,7 @@ public class HypnotizeEffect : IStatusEffect
     public int RemainingTime { get; set; }
     public string CustomData { get; set; }
     public double ProcOdds { get; set; }
-
+    public bool OnProc { get; set; } = false;
     public string Message { get; set; }
     public bool SelfInflicted { get; set; }
     private StatusEffectData d;

@@ -3,15 +3,17 @@
 
 @implements IDisposable
 
-<div class="row no-gutters" style="position:absolute;top:60px;display:flex;padding:5px;min-height:700px;background-color:black;z-index:10;">
-
-    <div class="col-4">
-        <button class="btn btn-primary" @onclick="@(() => SaveManager.SaveGame())">Manual Save</button>
+<div class="col no-gutters" style="position:absolute;padding:5px;min-height:700px;background-color:#000000DD;z-index:10;margin-left: -15px;">
+    <h3>Settings</h3>
+    <div style="border:solid 1px gray;padding:1em;">
         <div>
             The game autosaves once every @(Extensions.GameTicksToSeconds(GameState.AutoSaveInterval) / 60f) Minutes, but you can manually save here. If it was successful, the save time in the bottom left corner will change.
         </div>
+        <div>
+            <button class="btn btn-primary" @onclick="@(() => SaveManager.SaveGame())">Manual Save</button>
+        </div>
     </div>
-    <div class="col-4">
+    <div style="border:solid 1px gray;padding:1em;">
         <div>
             <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => CompactInventory())">Compact Inventory</button>
         </div>
@@ -22,24 +24,32 @@
             <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => ToggleBackgrounds())">Toggle Backgrounds</button>
         </div>
     </div>
-    <div class="col-4">
+    <div style="border:solid 1px gray;padding:1em;">
         You can export your save to keep a backup somewhere. You can load an exported save from the main menu.
-        <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => ExportSave())">Export Save</button>
-        <input @bind-value="@exportedSave" />
+        <div>
+            <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => ExportSave())">Export Save</button>
+            <input @bind-value="@exportedSave" />
+        </div>
      </div>
-    <div class="col-4">
+    <div style="border:solid 1px gray;padding:1em;">
         If you have experienced a save game bug, the broken save is stored localStorage. You can retrieve it here and send it to the developer on discord for fixing.
-        <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => GetBrokenSave())">Get Broken Save</button>
-        <input @bind-value="@brokenSave" />
+        <div>
+            <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => GetBrokenSave())">Get Broken Save</button>
+            <input @bind-value="@brokenSave" />
+        </div>
+        
+    </div>
+   
+    <div style="border:solid 1px gray;padding:1em;">
+        <div style="text-align:center;">
+            <a target="_blank" href="https://discord.gg/bkH9MZa"><img style="height:50px;width:50px;background-color:white;border-radius:5px;cursor:pointer;" src="/data/Images/DiscordLogo.png" /></a> Join the <a target="_blank" href="https://discord.gg/bkH9MZa">Discord</a> for suggestions, guides, and community
+        </div>
+        <div>
+            Version:@GameState.Version
         </div>
    </div>
-
-    <div style="text-align:center;position:absolute;right:25%;bottom:10px;width:300px;">
-        <a target="_blank" href="https://discord.gg/bkH9MZa"><img style="height:50px;width:50px;background-color:white;border-radius:5px;cursor:pointer;" src="/data/Images/DiscordLogo.png" /></a> Join the <a target="_blank" href="https://discord.gg/bkH9MZa">Discord</a> for suggestions, guides, and community
-    </div>
-    <div style="position:absolute;right:10px;bottom:10px;">
-        Version:@GameState.Version
-    </div>
+</div>
+   
 
 
     @code {

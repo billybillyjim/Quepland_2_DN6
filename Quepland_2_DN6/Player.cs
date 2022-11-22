@@ -521,7 +521,7 @@ public class Player
     {
         Die("Unknown Reasons");
     }
-    public bool FollowerGatherItem(GameItem item)
+    public bool FollowerGatherItem(GameItem item, GameItem? magicItem)
     {
         if (CurrentFollower != null && CurrentFollower.IsBanking == false)
         {
@@ -537,9 +537,19 @@ public class Player
             }
             else if(CurrentFollower.MeetsRequirements(item))
             {
-                CurrentFollower.Inventory.AddItem(item.Copy());
+                if(magicItem != null)
+                {
+                    CurrentFollower.Inventory.AddItem(magicItem.Copy());
+                    
+                }
+                else
+                {
+                    CurrentFollower.Inventory.AddItem(item.Copy());
+                    MessageManager.AddMessage(item.GatherString);
+                }
+
                 GainExperience(item.ExperienceGained);
-                MessageManager.AddMessage(item.GatherString);
+                
                 return true;
             }
             else
@@ -555,13 +565,25 @@ public class Player
         }
         return false;
     }
-    public bool PlayerGatherItem(GameItem item)
+    public bool PlayerGatherItem(GameItem item, GameItem? magicGatherSwap)
     {
         if(item == null)
         {
             return false;
         }
-        if (Inventory.AddItem(item.Copy()) == false)
+        if (magicGatherSwap != null && Inventory.AddItem(magicGatherSwap.Copy()) == false)
+        {
+            if (CurrentFollower != null && CurrentFollower.IsBanking)
+            {
+                MessageManager.AddMessage("Your inventory is full. You wait for your follower to return from banking.");
+            }
+            else
+            {
+                MessageManager.AddMessage("Your inventory is full.");
+            }
+            return false;
+        }
+        else if (magicGatherSwap == null && Inventory.AddItem(item.Copy()) == false)
         {
             if (CurrentFollower != null && CurrentFollower.IsBanking)
             {
@@ -577,7 +599,7 @@ public class Player
         {
             GainExperience(item.ExperienceGained);
             MessageManager.AddMessage(item.GatherString);
-            
+
         }
         return true;
     }
@@ -607,6 +629,11 @@ public class Player
     {
         return Inventory.HasToolRequirement(item);
     }
+    /// <summary>
+    /// Player's inventory contains an item that includes the action in its EnabledActions.
+    /// </summary>
+    /// <param name="action"></param>
+    /// <returns></returns>
     public bool HasToolRequirement(string action)
     {
         return Inventory.HasToolRequirement(action);
@@ -617,6 +644,12 @@ public class Player
     }
     public void AddStatusEffect(IStatusEffect effect)
     {
+        if (effect.OnProc)
+        {
+            effect.DoEffect(this);
+            return;
+        }
+
         CurrentStatusEffects.Add(effect.Copy());
     }
     public void TickStatusEffects()

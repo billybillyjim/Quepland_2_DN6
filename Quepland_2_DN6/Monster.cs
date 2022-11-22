@@ -40,6 +40,12 @@ public class Monster
     }
     public void AddStatusEffect(IStatusEffect effect)
     {
+        if (effect.OnProc)
+        {
+            effect.DoEffect(this);
+            return;
+        }
+
         if (HasStatusEffect(effect.Name))
         {
             CurrentStatusEffects.First(x => x.Name == effect.Name).RemainingTime = effect.Duration;
@@ -66,5 +72,10 @@ public class Monster
             }
         }
         CurrentStatusEffects.RemoveAll(x => endedEffects.Contains(x));
+    }
+
+    public Monster Copy()
+    {
+        return new Monster() { Name=Name, Armor = Armor, AttackSpeed = AttackSpeed, HP = HP, DropTable = DropTable, Description = Description, Strengths = Strengths, Weaknesses = Weaknesses, Damage = Damage, IsDojoMember = IsDojoMember };
     }
 }
