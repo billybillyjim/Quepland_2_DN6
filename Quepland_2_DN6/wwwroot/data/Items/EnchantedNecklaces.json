@@ -134,7 +134,7 @@
           "name": "Undulate",
           "power": 15,
           "speed": 3,
-          "duration": 5,
+          "duration": 15,
           "message": "Your necklace flashes vibrantly, your weapon seems to be moving on its own!",
           "procOdds": 0.15
         }
@@ -157,7 +157,7 @@
           "name": "Cleave",
           "power": 15,
           "speed": 3,
-          "duration": 5,
+          "duration": 10,
           "message": "Your necklace flashes violently, your weapon seems aggressive somehow!",
           "procOdds": 0.15
         }
@@ -214,8 +214,8 @@
       "armorBonus": 9,
       "statusEffectData": [
         {
-          "name": "SelfHeal",
-          "power": 15,
+          "name": "Self Heal",
+          "power": 45,
           "speed": 3,
           "duration": 15,
           "message": "Your necklace flashes beautifully, you feel refreshed!",
@@ -250,7 +250,7 @@
       "armorBonus": 11,
       "statusEffectData": [
         {
-          "name": "QuickStrike",
+          "name": "Quick Strike",
           "power": 15,
           "speed": 3,
           "duration": 15,
@@ -288,9 +288,9 @@
       "statusEffectData": [
         {
           "name": "Burn",
-          "power": 15,
-          "speed": 3,
-          "duration": 15,
+          "power": 250,
+          "speed": 2,
+          "duration": 16,
           "message": "Your necklace flashes hotly, your opponent is on fire!",
           "procOdds": 0.15
         }
@@ -311,5 +311,55 @@
       "damage": 50
     },
     "secondaryColor": "#DFDFDF"
+  },
+  {
+    "name": "Potaki's Blessing",
+    "value": 2500,
+    "description": "A shiny necklace roped around a glistening tear-shaped stone. It feels warm to the touch.",
+    "gatherString": "You get a strange necklace.",
+    "gatherSpeed": 15,
+    "icon": "TearDropNecklace",
+    "equipSlot": "Neck",
+    "armorInfo": {
+      "armorBonus": 20,
+      "statusEffectData": [
+        {
+          "name": "Self Heal",
+          "power": 60,
+          "speed": 1,
+          "duration": 2,
+          "message": "Your necklace flashes beautifully, you feel refreshed!",
+          "procOdds": 0.25
+        }
+      ]
+
+    },
+    "secondaryColor": "#2DF5E9"
+  },
+  {
+    "name": "Labyrinthine Necklace",
+    "value": 1200,
+    "description": "A worn necklace with a beautiful pattern etched into the back side of it.",
+    "gatherString": "You get a necklace.",
+    "gatherSpeed": 15,
+    "icon": "TearDropNecklace",
+    "equipSlot": "Neck",
+    "armorInfo": {
+      "armorBonus": 25,
+      "rangedDamage": 25,
+      "statusEffectData": [
+        {
+          "name": "Hatch",
+          "power": 1,
+          "speed": 1,
+          "duration": 2,
+          "message": "Your necklace glows and an aur emerges from its center!",
+          "procOdds": 0.03,
+          "customData": "Screeching Aur",
+          "selfInflicted": true
+        }
+      ]
+    },
+    "secondaryColor": "#abcdef"
   }
 ]

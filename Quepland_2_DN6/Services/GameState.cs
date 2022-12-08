@@ -424,6 +424,21 @@ using System.Threading.Tasks;
         ActiveSpells.RemoveAll(x => spellsToRemove.Contains(x));
     }
 
+    public static bool PlayerIsUnderSpell(string spellName)
+    {
+        foreach(ISpell spell in ActiveSpells)
+        {
+            if(spell.Target == "Player")
+            {
+                if(spell.Name == spellName)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public void Pause()
     {
         GameTimer.Change(Timeout.Infinite, Timeout.Infinite);

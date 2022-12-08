@@ -302,6 +302,15 @@
     "isStackable": true
   },
   {
+    "name": "Ashes",
+    "description": "This used to be something else, probably.",
+    "gatherString": "You get some ashes.",
+    "value": 2,
+    "icon": "Powder",
+    "isStackable": true,
+    "secondaryColor": "#DDDDDD"
+  },
+  {
     "name": "Sandstone",
     "description": "Is it stone? Is it sand?",
     "gatherString": "You get some sandstone.",
@@ -499,6 +508,14 @@
     },
     "experienceBonusSkill": "Artisan",
     "experienceGainBonus": 0.15
+  },
+  {
+    "name": "Stick",
+    "description": "It's a stick.",
+    "gatherString": "You get a stick.",
+    "value": 2,
+    "secondaryColor": "#FFFFFF",
+    "icon": "Sticks"
   },
   {
     "name": "Hokibo's Feather",

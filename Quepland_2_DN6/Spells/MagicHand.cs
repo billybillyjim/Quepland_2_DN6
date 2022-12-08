@@ -2,12 +2,12 @@
 {
     public class MagicHand : ISpell
     {
-        public string Name { get; set; } = "Hypnotize";
+        public string Name { get; set; } = "Magic Hand";
         public string Description { get; set; }
         public int Power { get; set; } = 15;
         public string Message { get; set; } = "";
         public int Duration { get; set; } = 30;
-        public string Target { get; set; } = "Monster";
+        public string Target { get; set; } = "Player";
         public int TimeRemaining { get; set; }
         public string Data { get; set; }
         public MagicHand() { }

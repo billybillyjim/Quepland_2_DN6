@@ -12,6 +12,27 @@
         public string Data { get; set; }
         public Enchant() { }
 
+        private Dictionary<string, string> enchantmentTable = new Dictionary<string, string>()
+        {
+            { "Silver Necklace" , "Necklace of Purity" },
+            { "Gold Necklace" , "Necklace of Courage" },
+            { "Platinum Necklace" , "Necklace of Valor" },
+            { "Amberite Necklace" , "Incubation Necklace" },
+            { "Lizardite Necklace" , "Miasmic Necklace" },
+            { "Purpurite Necklace" , "Reverberation Necklace" },
+            { "Opal Necklace" , "Oscillation Necklace" },
+            { "Garnet Necklace" , "Piercing Necklace" },
+            { "Amethyst Necklace" , "Sleeping Necklace" },
+            { "Emerald Necklace" , "Perception Necklace" },
+            { "Aquamarine Necklace" , "Restoration Necklace" },
+            { "Topaz Necklace" , "Protection Necklace" },
+            { "Chrysoberyl Necklace" , "Anticipatory Necklace" },
+            { "Sapphire Necklace" , "Illusion Necklace" },
+            { "Ruby Necklace" , "Incineration Necklace" },
+            { "Diamond Necklace" , "Demolition Necklace" },
+            { "Potaki's Tear" , "Potaki's Blessing" },
+            { "Intricate Necklace" , "Labyrinthine Necklace" }
+        };
 
         public void Cast(Inventory inventory, GameItem item)
         {
@@ -22,14 +43,19 @@
             }
             if (inventory.HasItem(item))
             {
-                if(item.Category == "Necklaces")
+                if (enchantmentTable.TryGetValue(item.Name, out var newItemName))
                 {
+                    var newItem = ItemManager.Instance.GetItemByUniqueID(newItemName + "0");
+                
                     if(inventory.RemoveItems(item, 1) == 1)
                     {
-                        var newItem = ItemManager.Instance.GetItemByUniqueID(item.Name + " (Enchanted)0");
                         inventory.AddItem(newItem);
                         MessageManager.AddMessage("You enchanted the " + item.Name + " into a " + newItem.Name);
                     }
+                }
+                else
+                {
+                    MessageManager.AddMessage("You cannot seem to enchant this item.");
                 }
             }
             

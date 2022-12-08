@@ -2,21 +2,21 @@
 {
     public class Endure : ISpell
     {
-        public string Name { get; set; } = "Hypnotize";
+        public string Name { get; set; } = "Endure";
         public string Description { get; set; }
-        public int Power { get; set; } = 15;
-        public string Message { get; set; } = "";
+        public int Power { get; set; } = 1;
+        public string Message { get; set; } = "You feel prepared to handle the next hit!";
         public int Duration { get; set; } = 30;
-        public string Target { get; set; } = "Monster";
+        public string Target { get; set; } = "Player";
         public int TimeRemaining { get; set; }
         public string Data { get; set; }
         public Endure() { }
-        
 
-        public void Cast(Monster m)
+
+        public void Cast(Player player)
         {
-            m.AddStatusEffect(new HypnotizeEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
-            MessageManager.AddMessage(m.Name + " grows drowsy, it's doing everything it can to just stay awake!");
+            GameState.AddActiveSpell(this.Copy(), Duration);
+            MessageManager.AddMessage(Message);
         }
 
         public ISpell Copy()

@@ -2,7 +2,7 @@
 {
     public class Liquify : ISpell
     {
-        public string Name { get; set; } = "Mind Trick";
+        public string Name { get; set; } = "Liquify";
         public string Description { get; set; }
         public int Power { get; set; }
         public string Message { get; set; } = "";

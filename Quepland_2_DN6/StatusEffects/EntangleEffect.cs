@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-public class BurnEffect : IStatusEffect
+public class EntangleEffect : IStatusEffect
 {
-    public string Name { get; set; } = "Burn";
+    public string Name { get; set; } = "Freeze";
     public int Duration { get; set; }
     public int Speed { get; set; }
     public int Power { get; set; }
     public int RemainingTime { get; set; }
     public string CustomData { get; set; }
     public bool OnProc { get; set; } = false;
-
     public double ProcOdds { get; set; }
     public bool SelfInflicted { get; set; }
 
     public string Message { get; set; }
     private StatusEffectData d;
-    public BurnEffect(StatusEffectData data)
+    public EntangleEffect(StatusEffectData data)
     {
         Name = data.Name;
         Duration = data.Duration;
@@ -33,29 +32,29 @@ public class BurnEffect : IStatusEffect
     }
     public string GetDescription()
     {
-        return "Burns an enemy for " + Power + " damage every " + Speed + " game ticks, for " + Duration + " total ticks.";
+        return "Has a " + (ProcOdds * 100) + "% chance to trap an enemy for " + Duration + " total ticks.";
     }
     public void DoEffect(Monster m)
     {
-        if (RemainingTime % Speed == 0 && RemainingTime > 0 && Duration > 0)
+        if (RemainingTime % Speed == 0 && RemainingTime > 0)
         {
-            int dmg = (int)(Power * (RemainingTime / (float)Duration));
-            MessageManager.AddMessage(m.Name + " took " + dmg + " damage from being on fire.");
-            m.CurrentHP -= dmg;
-        }
+            m.TicksToNextAttack = m.AttackSpeed;
+            m.CurrentHP -= Power;
+            MessageManager.AddMessage(m.Name + " is entangled and cannot move! The vines grip hard for " + Power + " damage!");
+        } 
     }
     public void DoEffect(Player p)
     {
-        if (RemainingTime % Speed == 0 && RemainingTime > 0 && Duration > 0)
+        if (RemainingTime % Speed == 0 && RemainingTime > 0)
         {
-            int dmg = (int)(Power * (RemainingTime / (float)Duration));
-            MessageManager.AddMessage("You took " + dmg + " damage from being on fire.");
-            p.CurrentHP -= dmg;
+            p.TicksToNextAttack = p.GetWeaponAttackSpeed();
+            p.CurrentHP -= Power;
+            MessageManager.AddMessage("You are entangled and cannot move! The vines grip hard for " + Power + " damage!");
         }
     }
     public IStatusEffect Copy()
     {
-        return new BurnEffect(d);
+        return new EntangleEffect(d);
     }
 }
 

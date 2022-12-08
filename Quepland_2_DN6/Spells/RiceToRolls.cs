@@ -2,12 +2,12 @@
 {
     public class RiceToRolls : ISpell
     {
-        public string Name { get; set; } = "Mind Trick";
+        public string Name { get; set; } = "Rice to Rolls";
         public string Description { get; set; }
         public int Power { get; set; }
         public string Message { get; set; } = "";
         public int Duration { get; set; }
-        public string Target { get; set; } = "None";
+        public string Target { get; set; } = "Item";
         public int TimeRemaining { get; set; }
         public string Data { get; set; }
         public RiceToRolls() { }

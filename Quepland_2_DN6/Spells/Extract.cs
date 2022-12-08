@@ -58,12 +58,12 @@
             }
             if(item.Category == "Armors")
             {
-                int amt = (int)Math.Log10(item.Value);
+                int amt = (int)Math.Log10(item.Value) * 3;
                 components.Add(ItemManager.Instance.GetItem("Perpetual Seed", 0, ""), amt);
             }
             else if(item.Category == "Arrows")
             {
-                int amt = (int)Math.Log10(item.Value);
+                int amt = (int)Math.Log10(item.Value) * 2;
                 components.Add(ItemManager.Instance.GetItem("Fierce Seed", 0, ""), amt);
             }
             else if (item.Category == "Arrowtips")
@@ -83,18 +83,18 @@
             }
             else if (item.Category == "Bread")
             {
-                int amt = (int)Math.Log10(item.Value);
+                int amt = (int)Math.Log10(item.Value) * 2 ;
                 components.Add(ItemManager.Instance.GetItem("Warmth Seed", 0, ""), amt);
                 components.Add(ItemManager.Instance.GetItem("Rejuvinating Seed", 0, ""), amt);
             }
             else if (item.Category == "Elements")
             {
-                int amt = (int)Math.Log10(item.Value);
+                int amt = (int)Math.Log10(item.Value) * 2;
                 components.Add(ItemManager.Instance.GetItem("Etheral Seed", 0, ""), amt);
             }
             else if (item.Category == "Fishing")
             {
-                int amt = (int)Math.Log10(item.Value);
+                int amt = (int)Math.Log10(item.Value) * 2;
                 components.Add(ItemManager.Instance.GetItem("Alluvial Seed", 0, ""), amt);
             }
             else if (item.Category == "Gems")
@@ -104,7 +104,8 @@
             }
             else if (item.Category == "General")
             {
-
+                int amt = (int)Math.Log10(item.Value);
+                components.Add(ItemManager.Instance.GetItem("Alluvial Seed", 0, ""), amt);
             }
             else if (item.Category == "Hunting")
             {

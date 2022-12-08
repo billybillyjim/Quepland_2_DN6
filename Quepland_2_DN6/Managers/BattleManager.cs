@@ -1,6 +1,7 @@
 ﻿using Quepland_2_DN6.Bosses;
 using Quepland_2_DN6.Spells;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -145,7 +146,6 @@ public class BattleManager
             {
                 foreach(Monster o in SpawnOpponents)
                 {
-                    Console.WriteLine("Adding Opponent:" + o.Name);
                     ResetOpponent(o);
                     CurrentOpponents.Add(o);
                 }
@@ -155,7 +155,6 @@ public class BattleManager
             {
                 foreach (Monster o in RemoveOpponents)
                 {
-                    Console.WriteLine("Removing Opponent:" + o.Name);
                     CurrentOpponents.Remove(o);
                 }
                 RemoveOpponents.Clear();
@@ -275,16 +274,23 @@ public class BattleManager
 
             if (Player.Instance.CurrentHP <= 0)
             {
-                if(CurrentOpponents.Count > 0)
+                if (GameState.PlayerIsUnderSpell("Endure"))
                 {
-                    Player.Instance.Die("Killed by " + CurrentOpponents[0].Name);
+                    Player.Instance.CurrentHP = 1;
+                }
+                else if(CurrentOpponents.Count > 0)
+                {
+                    string opponentList = String.Join(", ", CurrentOpponents.Select(x => x.Name).ToArray(), 0, CurrentOpponents.Count - 1) + ", and " + CurrentOpponents.LastOrDefault().Name;
+                    Player.Instance.Die("Killed by " + opponentList);
+                    WonLastBattle = false;
                 }
                 else
                 {
                     Player.Instance.Die();
+                    WonLastBattle = false;
                 }
                
-                WonLastBattle = false;
+                
             }
 
         }
@@ -806,6 +812,14 @@ public class BattleManager
         else if (data.Name == "Hatch")
         {
             return new HatchEffect(data);
+        }
+        else if (data.Name == "Reflect")
+        {
+            return new ReflectEffect(data);
+        }
+        else if (data.Name == "Entangle")
+        {
+            return new EntangleEffect(data);
         }
         else
         {

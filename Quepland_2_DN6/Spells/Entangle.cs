@@ -2,7 +2,7 @@
 {
     public class Entangle : ISpell
     {
-        public string Name { get; set; } = "Hypnotize";
+        public string Name { get; set; } = "Entangle";
         public string Description { get; set; }
         public int Power { get; set; } = 15;
         public string Message { get; set; } = "";
@@ -15,9 +15,9 @@
 
         public void Cast(Monster m)
         {
-            m.AddStatusEffect(new HypnotizeEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
-            MessageManager.AddMessage(m.Name + " grows drowsy, it's doing everything it can to just stay awake!");
-        }
+            m.AddStatusEffect(new EntangleEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
+            MessageManager.AddMessage(m.Name + "is entangle by a magical vine!");
+        } 
 
         public ISpell Copy()
         {
