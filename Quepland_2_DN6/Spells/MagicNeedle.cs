@@ -9,7 +9,8 @@
         public int Duration { get; set; }
         public string Target { get; set; } = "Recipe";
         public int TimeRemaining { get; set; }
-        public string Data { get; set; }
+        public string Data { get; set; } 
+		public bool Unlocked { get; set; } = false;
         public MagicNeedle() { }
         
         //Automatically create all textile arts items 

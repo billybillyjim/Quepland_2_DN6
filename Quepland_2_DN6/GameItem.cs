@@ -58,6 +58,14 @@ public class GameItem
 	public List<Requirement> Requirements { get; set; } = new List<Requirement>();
 	public bool TestingItem { get; set; }
 
+	public string GetName(int amount)
+	{
+		if(amount == 1)
+		{
+			return Name;
+		}
+		return GetPlural();
+	}
 	public string GetPlural()
     {
         if (Name.Contains('('))

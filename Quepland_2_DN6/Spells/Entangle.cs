@@ -9,7 +9,8 @@
         public int Duration { get; set; } = 30;
         public string Target { get; set; } = "Monster";
         public int TimeRemaining { get; set; }
-        public string Data { get; set; }
+        public string Data { get; set; } 
+		public bool Unlocked { get; set; } = false;
         public Entangle() { }
         
 
@@ -17,6 +18,7 @@
         {
             m.AddStatusEffect(new EntangleEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
             MessageManager.AddMessage(m.Name + "is entangle by a magical vine!");
+            Player.Instance.GainExperience("Magic", Power);
         } 
 
         public ISpell Copy()

@@ -11,8 +11,10 @@
         public int TimeRemaining { get; set; }
         public string Data { get; set; }
 
+        public bool Unlocked { get; set; } = false;
+
         public AxeFletch() { }
-        
+
 
         public void Cast()
         {
@@ -20,12 +22,12 @@
             {
                 GameState.AddActiveSpell(this.Copy(), Duration);
                 MessageManager.AddMessage(Message);
+                Player.Instance.GainExperience("Magic", 50);
             }
             else
             {
                 MessageManager.AddMessage("You'll need some kind of axe in your inventory to activate this spell.");
             }
-
             
         }
         private Dictionary<string, string> replacements = new Dictionary<string, string>()

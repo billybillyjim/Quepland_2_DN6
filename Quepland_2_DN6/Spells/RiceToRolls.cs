@@ -7,17 +7,25 @@
         public int Power { get; set; }
         public string Message { get; set; } = "";
         public int Duration { get; set; }
-        public string Target { get; set; } = "Item";
+        public string Target { get; set; } = "Inventory";
         public int TimeRemaining { get; set; }
-        public string Data { get; set; }
+        public string Data { get; set; } 
+		public bool Unlocked { get; set; } = false;
         public RiceToRolls() { }
         
 
-        public void Cast()
+        public void Cast(Inventory inventory)
         {
+            var rice = ItemManager.Instance.GetItemByUniqueID("Rice0");
+            var rolls = ItemManager.Instance.GetItemByUniqueID("Rice Roll0");
+            if (inventory.HasItem(rice))
+            {
+                int removed = inventory.RemoveAllOfItem(rice);
+                inventory.AddMultipleOfItem(rolls, removed);
+                MessageManager.AddMessage(Message);
+            }
 
-
-            MessageManager.AddMessage(Message);
+            
         }
         public ISpell Copy()
         {

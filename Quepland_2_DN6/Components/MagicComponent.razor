@@ -10,32 +10,50 @@
 
 @if(showInventory)
 {
-    @foreach (KeyValuePair<GameItem, int> item in Player.Instance.Inventory.GetUniqueItems().OrderBy(x => x.Key.ID))
-    {
-        if (item.Key != null && (GameState.HideLockedItems == false || item.Key.IsLocked == false))
+    <div class="main-inventory custom-scroll">
+        @foreach (KeyValuePair<GameItem, int> item in Player.Instance.Inventory.GetUniqueItems().OrderBy(x => x.Key.ID))
         {
+            if (item.Key != null && (GameState.HideLockedItems == false || item.Key.IsLocked == false))
+            {
 
-            <div oncontextmenu="return false;" draggable="false"
+                <div oncontextmenu="return false;" draggable="false"
                     onmouseup="@(new Action<MouseEventArgs>((args) => CastSpell(currentSpell, item.Key)))">
-                <ItemBoxComponent Item="@item.Key" ShowAmount="@true" shouldRender="@item.Key.Rerender"></ItemBoxComponent>
-            </div>
+                    <ItemBoxComponent Item="@item.Key" ShowAmount="@true" shouldRender="@item.Key.Rerender"></ItemBoxComponent>
+                </div>
 
+            }
         }
-    }
+    </div>
+
 }
 
 @code {
     private bool showInventory;
     private ISpell currentSpell = null;
     public List<ISpell> Spells = new List<ISpell>() {
-        new Spells.Rain(),
-        new Spells.Breathe(),
-        new Spells.Lift(),
-        new Spells.Hypnotize(),
-        new Spells.Extract(),
         new Spells.AxeFletch(),
+        new Spells.Breathe(),
         new Spells.Dehydrate(),
-        new Spells.Enchant()
+        new Spells.Drain(),
+        new Spells.Enchant(),
+        new Spells.Extract(),
+        new Spells.Hypnotize(),
+        new Spells.Introspect(),
+        new Spells.Lift(),
+        new Spells.Liquify(),
+        new Spells.Lure(),
+        new Spells.MagicHand(),
+        new Spells.MagicNeedle(),
+        new Spells.MindTrick(),
+        new Spells.MoltenSwing(),
+        new Spells.Rain(),
+        new Spells.Rally(),
+        new Spells.Reflect(),
+        new Spells.Consume(),
+        new Spells.RiceToRolls(),
+        new Spells.TeleportBranch(),
+        new Spells.TemporalLeap()
+
     };
 
     public void CastSpell(ISpell spell){
@@ -52,7 +70,7 @@
             spell.Cast(Player.Instance);
         }
         else if(spell.Target == "Monster"){
-            spell.Cast(BattleManager.Instance.Target);
+           // spell.Cast(BattleManager.Instance.Target);
         }
         else if (spell.Target == "Gather")
         {

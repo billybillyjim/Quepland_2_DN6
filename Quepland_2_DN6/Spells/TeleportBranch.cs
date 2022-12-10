@@ -9,7 +9,8 @@
         public int Duration { get; set; }
         public string Target { get; set; } = "Item";
         public int TimeRemaining { get; set; }
-        public string Data { get; set; }
+        public string Data { get; set; } 
+		public bool Unlocked { get; set; } = false;
         public TeleportBranch() { }
 
         public void Cast(Inventory inventory, GameItem item)

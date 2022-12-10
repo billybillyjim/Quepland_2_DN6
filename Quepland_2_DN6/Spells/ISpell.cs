@@ -27,19 +27,33 @@ public interface ISpell
     public int TimeRemaining { get; set; }
     public string Target { get; set; }
 
-    public string Data { get; set; }
+    public string Data { get; set; } 
+	public bool Unlocked { get; set; } 
     public void Cast() { }
     public void Cast(Monster m) { }
     public void Cast(Player player) { }
     public void Cast(Inventory inventory, GameItem item) { }
     public void Cast(Inventory inventory) { }
+    public void Cast(Recipe recipe) { }
 
     public void Tick() { }
     public void Tick(Monster m) { }
     public void Tick(Player player) { }
     public void Tick(Inventory inventory, GameItem item) { }
     public void Tick(Inventory inventory) { }
+    public void Tick(Recipe recipe) { }
     public ISpell Copy();
+
+    public ISpell LoadData(SpellData data)
+    {
+        Description = data.Description;
+        Power = data.Power;
+        Message = data.Message;
+        Duration = data.Duration;
+        Target = data.Target;
+        Data = data.Data;
+        return this;
+    }
 
 }
 

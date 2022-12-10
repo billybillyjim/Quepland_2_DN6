@@ -86,7 +86,7 @@ using System.Threading.Tasks;
     public AlchemicalFormula CurrentAlchemyFormula;
     public static List<ProgressFlag> ProgressFlags { get; set; } = new List<ProgressFlag>();
     
-    public GameItem? CurrentFood { get; set; }
+    public static GameItem? CurrentFood { get; set; }
     public static bool CancelEating;
     public Recipe? CurrentRecipe;
     public static Land CurrentLand;
@@ -100,15 +100,15 @@ using System.Threading.Tasks;
     public RightSidebarComponent RightSidebarComponent { get; set; }
     public static NavigationManager UriHelper;
     public static ArtisanTask CurrentArtisanTask;
+
     public static int TicksToNextAction;
     public static readonly int GameSpeed = 200;
     public static bool CompactInventoryView;
     public static bool HideLockedItems;
     public static bool ShowBackgrounds = true;
 
-
-    public int TicksToNextHeal;
-    public int HealingTicks;
+    public static int TicksToNextHeal;
+    public static int HealingTicks;
     public static int CurrentTick { get; set; }
     public static int AutoSaveInterval { get; set; } = 4500;
     public static int GameWindowWidth { get; set; }
@@ -666,32 +666,32 @@ using System.Threading.Tasks;
         
 
     }
-    public void Eat(GameItem item)
+    public static void Eat(GameItem item, int customAmount, int customDuration)
     {
         if (item.FoodInfo != null)
         {
-            
-            if(Player.Instance.Inventory.RemoveItems(item, 1) == 1)
+
+            if (Player.Instance.Inventory.RemoveItems(item, customAmount) == customAmount)
             {
                 Player.Instance.ClearBoosts();
                 CurrentFood = item;
-                HealingTicks = CurrentFood.FoodInfo.HealDuration;
+                HealingTicks = customDuration;
                 if (CurrentFood.FoodInfo.BuffedSkill != null)
                 {
                     var s = Player.Instance.GetSkill(item.FoodInfo.BuffedSkill);
-                    if(s == null)
+                    if (s == null)
                     {
                         Console.WriteLine("Failed to find food buff for " + item.Name);
                         return;
                     }
                     Player.Instance.ClearBoosts();
                     s.Boost = CurrentFood.FoodInfo.BuffAmount;
-                    MessageManager.AddMessage("You eat a " + CurrentFood + "." + " It somehow makes you feel better at " + CurrentFood.FoodInfo.BuffedSkill + ".");
+                    MessageManager.AddMessage($"You eat a {customAmount} {CurrentFood.GetName(customAmount)} It somehow makes you feel better at {CurrentFood.FoodInfo.BuffedSkill }.");
 
                 }
                 else
                 {
-                    MessageManager.AddMessage("You eat a " + CurrentFood + ".");
+                    MessageManager.AddMessage($"You eat {customAmount} {CurrentFood.GetName(customAmount)}.");
 
                 }
             }
@@ -699,14 +699,19 @@ using System.Threading.Tasks;
             {
                 MessageManager.AddMessage("Please unlock " + CurrentFood + " before eating it.");
             }
-            
+
         }
         else
         {
             Console.WriteLine("Item has no food info:" + item.Name);
         }
-
-
+    }
+    public static void Eat(GameItem item)
+    {
+        if(item.FoodInfo != null)
+        {
+            Eat(item, 1, item.FoodInfo.HealDuration);
+        }
     }
     private void HealPlayer()
     {

@@ -9,15 +9,37 @@
         public int Duration { get; set; }
         public string Target { get; set; } = "Item";
         public int TimeRemaining { get; set; }
-        public string Data { get; set; }
+        public string Data { get; set; } 
+		public bool Unlocked { get; set; } = false;
         public Introspect() { }
-        
 
-        public void Cast()
+
+        public void Cast(Inventory inventory, GameItem item)
         {
-
-
-            MessageManager.AddMessage(Message);
+            if (inventory.HasItem(item))
+            {
+                if(item.AlchemyInfo != null)
+                {
+                    if(item.AlchemyInfo.QueplarValue != 0 && item.AlchemyInfo.QueplarMultiplier == 0)
+                    {
+                        MessageManager.AddMessage($"The {item.Name} quivers. A blast of knowledge echoes throughout your mind. You see it clearly. A number forms... {item.AlchemyInfo.QueplarValue}.");
+                    }
+                    else if (item.AlchemyInfo.QueplarValue == 0 && item.AlchemyInfo.QueplarMultiplier != 0)
+                    {
+                        MessageManager.AddMessage($"The {item.Name} quivers. A blast of knowledge echoes throughout your mind. You see it clearly. A number forms... {item.AlchemyInfo.QueplarMultiplier}.");
+                    }
+                    else if (item.AlchemyInfo.QueplarValue != 0 && item.AlchemyInfo.QueplarMultiplier != 0)
+                    {
+                        MessageManager.AddMessage($"The {item.Name} quivers. A blast of knowledge echoes throughout your mind. You see them clearly. Two numbers form... {item.AlchemyInfo.QueplarValue} and {item.AlchemyInfo.QueplarMultiplier}.");
+                    }
+                }
+                else
+                {
+                    MessageManager.AddMessage("Nothing seems to happen with this item...");
+                }
+                
+            }
+            
         }
         public ISpell Copy()
         {

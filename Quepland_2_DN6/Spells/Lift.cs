@@ -9,7 +9,8 @@
         public int Duration { get; set; } = 30;
         public string Target { get; set; } = "Player";
         public int TimeRemaining { get; set; }
-        public string Data { get; set; }
+        public string Data { get; set; } 
+		public bool Unlocked { get; set; } = false;
         public Lift() { }
         
 

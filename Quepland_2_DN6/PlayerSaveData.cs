@@ -11,4 +11,5 @@ public class PlayerSaveData
 	public string ActiveFollowerName { get; set; }
 	public List<string> EquippedItems { get; set; }
 	public List<AlchemicalFormula> KnownAlchemyFormulae { get; set;  }	
+	public List<string> MagicUnlocks { get; set; }
 }

@@ -290,6 +290,10 @@ public class Player
             }
 
         }
+        if (HasStatusEffect("Rally"))
+        {
+            total = (int)(total * (1 + (CurrentHP / (double)MaxHP)));
+        }
         return Math.Max(1, total);
     }
     public void ClearBoosts()
@@ -714,8 +718,13 @@ public class Player
             ArtisanPoints = ArtisanPoints,
             InventorySize = Inventory.GetSize(),
             EquippedItems = equipped,
-            KnownAlchemyFormulae = KnownAlchemicalFormulae
+            KnownAlchemyFormulae = KnownAlchemicalFormulae,
+            MagicUnlocks = MagicManager.Instance.GetMagicUnlocks()
         };
+    }
+    public List<ISpell> GetKnownCombatSpells()
+    {
+        return new List<ISpell>();
     }
     public void LoadSaveData(PlayerSaveData data, string version)
     {

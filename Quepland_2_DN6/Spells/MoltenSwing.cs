@@ -9,7 +9,8 @@
         public int Duration { get; set; } = 600;
         public string Target { get; set; } = "Gather";
         public int TimeRemaining { get; set; }
-        public string Data { get; set; }
+        public string Data { get; set; } 
+		public bool Unlocked { get; set; } = false;
         public MoltenSwing() { }
 
         public static Dictionary<string, string> replacements = new Dictionary<string, string>()

@@ -10,6 +10,7 @@
         public string Target { get; set; } = "Player";
         public int TimeRemaining { get; set; }
         public string Data { get; set; }
+        public bool Unlocked { get; set; } = false;
         public Breathe() { }
         
 
@@ -19,6 +20,7 @@
             Player.Instance.Air = 100;
             GameState.AddActiveSpell(this.Copy(), Duration);
             MessageManager.AddMessage(Message);
+            Player.Instance.GainExperience("Magic", 70);
         }
         public void Tick(Player player)
         {

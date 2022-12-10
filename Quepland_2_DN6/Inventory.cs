@@ -546,6 +546,10 @@ public class Inventory
         UpdateItemCount();
         return removed;
     }
+    public int RemoveAllOfItem(GameItem item)
+    {
+        return RemoveItems(item, int.MaxValue);
+    }
     public int RemoveUnlockedItems(GameItem item, int amount)
     {
         if (amount <= 0 || item == null)

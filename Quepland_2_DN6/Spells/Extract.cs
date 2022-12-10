@@ -9,7 +9,8 @@
         public int Duration { get; set; } = 0;
         public string Target { get; set; } = "Item";
         public int TimeRemaining { get; set; }
-        public string Data { get; set; }
+        public string Data { get; set; } 
+		public bool Unlocked { get; set; } = false;
         public Extract() { }
         
 
@@ -39,6 +40,7 @@
                             }
                         }
                     }
+                    Player.Instance.GainExperience("Magic", item.Value / 20);
                 }
             }
 

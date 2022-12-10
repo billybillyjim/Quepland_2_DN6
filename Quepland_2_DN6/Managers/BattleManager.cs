@@ -821,6 +821,10 @@ public class BattleManager
         {
             return new EntangleEffect(data);
         }
+        else if (data.Name == "Rally")
+        {
+            return new RallyEffect(data);
+        }
         else
         {
             Console.WriteLine("Warning:" + data.Name + " not in list of status effects in Battle Manager.");

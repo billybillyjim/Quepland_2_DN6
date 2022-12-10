@@ -9,7 +9,8 @@
         public int Duration { get; set; } = 30;
         public string Target { get; set; } = "Monster";
         public int TimeRemaining { get; set; }
-        public string Data { get; set; }
+        public string Data { get; set; } 
+		public bool Unlocked { get; set; } = false;
         public Hypnotize() { }
         
 
@@ -17,6 +18,7 @@
         {
             m.AddStatusEffect(new HypnotizeEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
             MessageManager.AddMessage(m.Name + " grows drowsy, it's doing everything it can to just stay awake!");
+            Player.Instance.GainExperience("Magic", 50);
         }
 
         public ISpell Copy()

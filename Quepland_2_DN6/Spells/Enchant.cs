@@ -9,7 +9,8 @@
         public int Duration { get; set; }
         public string Target { get; set; } = "Item";
         public int TimeRemaining { get; set; }
-        public string Data { get; set; }
+        public string Data { get; set; } 
+		public bool Unlocked { get; set; } = false;
         public Enchant() { }
 
         private Dictionary<string, string> enchantmentTable = new Dictionary<string, string>()
@@ -51,6 +52,7 @@
                     {
                         inventory.AddItem(newItem);
                         MessageManager.AddMessage("You enchanted the " + item.Name + " into a " + newItem.Name);
+                        Player.Instance.GainExperience("Magic", item.Value / 8);
                     }
                 }
                 else
