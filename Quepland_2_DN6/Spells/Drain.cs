@@ -8,7 +8,9 @@
         public string Message { get; set; } = "";
         public int Duration { get; set; } = 30;
         public string Target { get; set; } = "Monster";
-        public int TimeRemaining { get; set; }
+        public int TimeRemaining { get; set; } 
+		public int Cooldown { get; set; } 
+		public int CooldownRemaining { get; set; }
         public string Data { get; set; } 
 		public bool Unlocked { get; set; } = false; 
 
@@ -17,8 +19,14 @@
 
         public void Cast(Monster m)
         {
+            if (CooldownRemaining > 0)
+            {
+                MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
+                return;
+            }
             var dmg = Power * Player.Instance.GetLevel("Magic");
             m.AddStatusEffect(new DrainEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = dmg, Speed = 5}));
+            CooldownRemaining = Cooldown;
             MessageManager.AddMessage("You sap the " + m.Name + " of its energy!");
             Player.Instance.GainExperience("Magic", dmg);
         }

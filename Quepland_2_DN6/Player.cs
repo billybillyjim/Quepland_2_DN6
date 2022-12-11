@@ -722,10 +722,7 @@ public class Player
             MagicUnlocks = MagicManager.Instance.GetMagicUnlocks()
         };
     }
-    public List<ISpell> GetKnownCombatSpells()
-    {
-        return new List<ISpell>();
-    }
+
     public void LoadSaveData(PlayerSaveData data, string version)
     {
         string error = "";
@@ -741,7 +738,11 @@ public class Player
             Deaths = data.DeathCount;
             ArtisanPoints = data.ArtisanPoints;
             CalculateInventorySpaces();
-        
+            if(data.MagicUnlocks != null)
+            {
+                MagicManager.Instance.LoadSpellUnlocks(data.MagicUnlocks);
+            }
+            
             if(data.EquippedItems.Count == 0)
             {
                 return;

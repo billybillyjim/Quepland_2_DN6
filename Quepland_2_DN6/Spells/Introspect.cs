@@ -8,7 +8,9 @@
         public string Message { get; set; } = "";
         public int Duration { get; set; }
         public string Target { get; set; } = "Item";
-        public int TimeRemaining { get; set; }
+        public int TimeRemaining { get; set; } 
+		public int Cooldown { get; set; } 
+		public int CooldownRemaining { get; set; }
         public string Data { get; set; } 
 		public bool Unlocked { get; set; } = false;
         public Introspect() { }
@@ -16,6 +18,11 @@
 
         public void Cast(Inventory inventory, GameItem item)
         {
+            if (CooldownRemaining > 0)
+            {
+                MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
+                return;
+            }
             if (inventory.HasItem(item))
             {
                 if(item.AlchemyInfo != null)
@@ -37,7 +44,7 @@
                 {
                     MessageManager.AddMessage("Nothing seems to happen with this item...");
                 }
-                
+                CooldownRemaining = Cooldown;
             }
             
         }

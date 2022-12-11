@@ -5,10 +5,12 @@
         public string Name { get; set; } = "Temporal Leap";
         public string Description { get; set; }
         public int Power { get; set; } = 1;
-        public string Message { get; set; } = "The world begins to blur into a fog. Reality flows past you at in incomprehensible speed. You stumble forward, a little bit older.";
+        public string Message { get; set; } = "";
         public int Duration { get; set; }
         public string Target { get; set; } = "None";
-        public int TimeRemaining { get; set; }
+        public int TimeRemaining { get; set; } 
+		public int Cooldown { get; set; } 
+		public int CooldownRemaining { get; set; }
         public string Data { get; set; } 
 		public bool Unlocked { get; set; } = false;
         public TemporalLeap() { }
@@ -16,29 +18,61 @@
 
         public void Cast()
         {
+            if (CooldownRemaining > 0)
+            {
+                MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
+                return;
+            }
             foreach (Building b in AreaManager.Instance.Buildings)
             {
                 if (b.TanningSlots.Count > 0)
                 {
                     foreach (TanningSlot slot in b.TanningSlots)
                     {
-                        var newTime = slot.FinishTime.AddHours(-6);
-                        slot.FinishTime = newTime;
+                        if(slot.FinishTime.Year > 1999)
+                        {
+                            try
+                            {
+                                var newTime = slot.FinishTime.AddHours(-6);
+                                slot.FinishTime = newTime;
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+                        
                     }
                 }
             }
             foreach (Dojo d in AreaManager.Instance.Dojos)
             {
-                d.LastWinTime = d.LastWinTime?.AddHours(-6);
-                d.LastLossTime = d.LastLossTime?.AddHours(-6);
+                try
+                {
+                    d.LastWinTime = d.LastWinTime?.AddHours(-6);
+                    d.LastLossTime = d.LastLossTime?.AddHours(-6);
+                }
+                catch
+                {
+
+                }
+                
             }
             foreach(Area a in AreaManager.Instance.Areas)
             {
                 if(a.TrapSlot != null)
                 {
-                    a.TrapSlot.HarvestTime = a.TrapSlot.HarvestTime.AddHours(-6);
+                    try
+                    {
+                        a.TrapSlot.HarvestTime = a.TrapSlot.HarvestTime.AddHours(-6);
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
+            CooldownRemaining = Cooldown;
             MessageManager.AddMessage(Message);
         }
         public ISpell Copy()

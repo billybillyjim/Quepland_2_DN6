@@ -1,7 +1,7 @@
 ﻿@inject GameState GameState
 @implements IDisposable
 
-<div>
+<div style="max-height:100vh;">
     @foreach (Skill s in Player.Instance.Skills)
     {
         <div>
@@ -60,6 +60,17 @@
         </button>
     </div>
     <div>
+        <button @onclick="@(() => UnlockAllSpells())">
+            Unlock All Spells
+        </button>
+    </div>
+    <div>
+        <input @bind-value="spellName"/>
+        <button @onclick="@(() => UnlockSpell())">
+            Unlock Spell
+        </button>
+    </div>
+    <div>
         <button @onclick="@(() => CompleteAllQuests())">
             Complete Quests
         </button>
@@ -112,8 +123,17 @@
 
     private string itemName = "";
     private string areaURL = "";
+    private string spellName = "";
     private bool showAllFollowers;
 
+    public void UnlockSpell(){
+        MagicManager.Instance.UnlockSpell(spellName);
+    }
+    public void UnlockAllSpells(){
+        foreach(ISpell spell in MagicManager.Instance.Spells){
+            MagicManager.Instance.UnlockSpell(spell.Name);
+        }
+    }
 
     public void show()
     {

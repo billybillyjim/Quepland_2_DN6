@@ -8,7 +8,9 @@
         public string Message { get; set; } = "";
         public int Duration { get; set; } = 30;
         public string Target { get; set; } = "Monster";
-        public int TimeRemaining { get; set; }
+        public int TimeRemaining { get; set; } 
+		public int Cooldown { get; set; } 
+		public int CooldownRemaining { get; set; }
         public string Data { get; set; } 
 		public bool Unlocked { get; set; } = false;
         public Entangle() { }
@@ -16,7 +18,13 @@
 
         public void Cast(Monster m)
         {
+            if (CooldownRemaining > 0)
+            {
+                MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
+                return;
+            }
             m.AddStatusEffect(new EntangleEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
+            CooldownRemaining = Cooldown;
             MessageManager.AddMessage(m.Name + "is entangle by a magical vine!");
             Player.Instance.GainExperience("Magic", Power);
         } 

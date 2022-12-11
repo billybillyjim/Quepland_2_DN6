@@ -6,7 +6,8 @@
     "Message": "The axe in your hand begins to quiver. It seems to have taken on a mind of its own.",
     "Duration": 600,
     "Target": "Gather",
-    "Data": null
+    "Data": null,
+    "Cooldown": 300
   },
   {
     "Name": "Breathe",
@@ -15,7 +16,8 @@
     "Message": "Your lungs are filled in an instant with a popping sound. You feel satisfied. For a while, you don't feel the need to inhale or exhale at all.",
     "Duration": 600,
     "Target": "Player",
-    "Data": null
+    "Data": null,
+    "Cooldown": 300
   },
   {
     "Name": "Dehydrate",
@@ -24,7 +26,8 @@
     "Message": "You draw all the water out from the ",
     "Duration": 0,
     "Target": "Item",
-    "Data": null
+    "Data": null,
+    "Cooldown": 30
   },
   {
     "Name": "Drain",
@@ -33,7 +36,8 @@
     "Message": "",
     "Duration": 30,
     "Target": "Monster",
-    "Data": null
+    "Data": null,
+    "Cooldown": 60
   },
   {
     "Name": "Enchant",
@@ -42,7 +46,8 @@
     "Message": "",
     "Duration": 0,
     "Target": "Item",
-    "Data": null
+    "Data": null,
+    "Cooldown": 20
   },
   {
     "Name": "Magic Needle",
@@ -51,7 +56,8 @@
     "Message": "The needle springs to life, quickly sewing together anything it can find in your inventory.",
     "Duration": 0,
     "Target": "Recipe",
-    "Data": null
+    "Data": null,
+    "Cooldown": 30
   },
   {
     "Name": "Mind Trick",
@@ -60,7 +66,8 @@
     "Message": "",
     "Duration": 0,
     "Target": "Monster",
-    "Data": null
+    "Data": null,
+    "Cooldown": 60
   },
   {
     "Name": "Molten Swing",
@@ -69,7 +76,8 @@
     "Message": "The pickaxe in your hand begins to glow white hot.",
     "Duration": 600,
     "Target": "Gather",
-    "Data": null
+    "Data": null,
+    "Cooldown": 300
   },
   {
     "Name": "Rain",
@@ -78,7 +86,8 @@
     "Message": "The air grows thick with humidity, enveloping you in a thick fog. A sudden updraft clears your view and it begins to rain.",
     "Duration": 0,
     "Target": "Inventory",
-    "Data": null
+    "Data": null,
+    "Cooldown": 20
   },
   {
     "Name": "Rally",
@@ -87,7 +96,8 @@
     "Message": "Any exhaustion you have seems to melt away. You feel energized.",
     "Duration": 30,
     "Target": "Player",
-    "Data": null
+    "Data": null,
+    "Cooldown": 60
   },
   {
     "Name": "Reflect",
@@ -96,7 +106,8 @@
     "Message": "A cold shiver runs down your torso. A dim blue glow seems to shimmer from a field around your body.",
     "Duration": 30,
     "Target": "Player",
-    "Data": null
+    "Data": null,
+    "Cooldown": 60
   },
   {
     "Name": "Consume",
@@ -105,7 +116,8 @@
     "Message": "",
     "Duration": 0,
     "Target": "Item",
-    "Data": null
+    "Data": null,
+    "Cooldown": 50
   },
   {
     "Name": "Rice to Rolls",
@@ -114,7 +126,8 @@
     "Message": "The rice flies into the air in a flurry of grain, quickly forming spheres. Seaweed seeps out of the bottom of each roll, forming finished rolls.",
     "Duration": 0,
     "Target": "Inventory",
-    "Data": null
+    "Data": null,
+    "Cooldown": 30
   },
   {
     "Name": "Teleport Branch",
@@ -123,7 +136,8 @@
     "Message": "The branches in your inventory begin to tremble, then pop into the air with a sudden snap.",
     "Duration": 0,
     "Target": "Inventory",
-    "Data": null
+    "Data": null,
+    "Cooldown": 20
   },
   {
     "Name": "Temporal Leap",
@@ -132,6 +146,7 @@
     "Message": "The world begins to blur into a fog. Reality flows past you at in incomprehensible speed. You stumble forward, a little bit older.",
     "Duration": 0,
     "Target": "None",
-    "Data": null
+    "Data": null,
+    "Cooldown": 300
   }
 ]

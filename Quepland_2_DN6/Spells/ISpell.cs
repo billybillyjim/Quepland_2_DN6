@@ -25,6 +25,8 @@ public interface ISpell
     /// Time until spell expires, in seconds.
     /// </summary>
     public int TimeRemaining { get; set; }
+    public int Cooldown { get; set; } 
+    public int CooldownRemaining { get; set; }
     public string Target { get; set; }
 
     public string Data { get; set; } 

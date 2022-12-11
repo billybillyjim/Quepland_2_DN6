@@ -2,14 +2,32 @@
 @implements IDisposable
 
 <h3>Magic</h3>
+<div class="main-inventory custom-scroll">
+@foreach(ISpell spell in MagicManager.Instance.Spells){
+    @if(spell == null){
+        <div>Null Spell</div>
+    }
+    else if(spell.Unlocked){
+        <div class="unselectable" style="@GetBG(spell);margin:2px;height:50px;width:50px;position:relative;box-sizing: border-box;border-radius:0.25rem;" draggable="false">
 
-@foreach(ISpell spell in Spells){
+            <img style="height: 46px;width: 46px; margin:5px;" src="/data/Images/@(spell.Name).png" draggable="false"
+                 @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowItemTooltip(e, spell.Name, spell.Description)))"
+                 @onmouseout="@(new Action(() => GameState.HideTooltip()))"
+                 @onclick="@(() => CastSpell(spell))" />
+            
+        </div>
 
-    <div @onclick="@(() => CastSpell(spell))">@spell.Name</div>
+    }
+    
+}
+</div>
+@if (MagicManager.Instance.NoSpellsUnlocked()){
+    <div>You don't know any magic yet. Try exploring the world and see if you can find someone or something to teach you!</div>
 }
 
-@if(showInventory)
+@if (showInventory && currentSpell != null)
 {
+    <div>Select an item to cast @currentSpell.Name on.</div>
     <div class="main-inventory custom-scroll">
         @foreach (KeyValuePair<GameItem, int> item in Player.Instance.Inventory.GetUniqueItems().OrderBy(x => x.Key.ID))
         {
@@ -30,31 +48,24 @@
 @code {
     private bool showInventory;
     private ISpell currentSpell = null;
-    public List<ISpell> Spells = new List<ISpell>() {
-        new Spells.AxeFletch(),
-        new Spells.Breathe(),
-        new Spells.Dehydrate(),
-        new Spells.Drain(),
-        new Spells.Enchant(),
-        new Spells.Extract(),
-        new Spells.Hypnotize(),
-        new Spells.Introspect(),
-        new Spells.Lift(),
-        new Spells.Liquify(),
-        new Spells.Lure(),
-        new Spells.MagicHand(),
-        new Spells.MagicNeedle(),
-        new Spells.MindTrick(),
-        new Spells.MoltenSwing(),
-        new Spells.Rain(),
-        new Spells.Rally(),
-        new Spells.Reflect(),
-        new Spells.Consume(),
-        new Spells.RiceToRolls(),
-        new Spells.TeleportBranch(),
-        new Spells.TemporalLeap()
+    string bg = "background:#DDD";
+    string color = "rgba(0,212,255,1)";
+    string cooldownColor = "rgba(255,212,0,1)";
+    public string GetBG(ISpell spell){
+        
+        if(spell.TimeRemaining > 0){
+            var h = (int)((spell.TimeRemaining / (double)spell.Duration) * 100);
+            var cooldown = (int)((Math.Max(spell.CooldownRemaining, 0) / Math.Max(spell.Cooldown, 1)) * 100);
+            var showCooldown = cooldown > 0;
+                      
+            bg = $"background: linear-gradient(0deg, #DDD {(showCooldown ? cooldown : h)}%, {(showCooldown ? cooldownColor : color)} {(showCooldown ? cooldown : h)}%)";
+        }
+        if(spell.CooldownRemaining > 0){
 
-    };
+        }
+
+        return bg;
+    }
 
     public void CastSpell(ISpell spell){
         if(spell.Target == "Inventory"){
@@ -72,7 +83,7 @@
         else if(spell.Target == "Monster"){
            // spell.Cast(BattleManager.Instance.Target);
         }
-        else if (spell.Target == "Gather")
+        else if (spell.Target == "Gather" || spell.Target == "None")
         {
             spell.Cast();
         }

@@ -28,17 +28,56 @@ public class MagicManager
 
     public async Task LoadSpells(HttpClient Http)
     {
-        Spells.AddRange(await Http.GetFromJsonAsync<ISpell[]>("data/Spells.json"));
-
+        List<SpellData> spellData = new List<SpellData>();
+        spellData.AddRange(await Http.GetFromJsonAsync<SpellData[]>("data/Spells.json"));
+        foreach(SpellData sd in spellData)
+        {
+            Spells.Add(GetSpellFromData(sd));
+            Console.WriteLine(sd);
+        }
+        
     }
-    public void LoadSpellUnlocks(string data)
+    public bool NoSpellsUnlocked()
     {
-
+        foreach(ISpell spell in Spells)
+        {
+            if (spell.Unlocked)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public void LoadSpellUnlocks(List<string> data)
+    {
+        if(data != null)
+        {
+            Console.WriteLine(data);
+            foreach (string spell in data)
+            {
+                var s = Spells.FirstOrDefault(x => x.Name == spell);
+                if(s != null)
+                {
+                    s.Unlocked = true;
+                }
+                else
+                {
+                    Console.WriteLine("No spell with name: " + spell);
+                }
+            }
+        }
+        
     }
     public List<string> GetMagicUnlocks()
     {
         List<string> data = new List<string>();
-
+        foreach (ISpell spell in Spells)
+        {
+            if (spell.Unlocked)
+            {
+                data.Add(spell.Name);
+            }
+        }
         return data;
     }
     public bool UnlockSpell(string spellName)
@@ -47,6 +86,7 @@ public class MagicManager
         {
             if(spell.Name == spellName)
             {
+                Console.WriteLine("Unlocking " + spell.Name);
                 spell.Unlocked = true;
                 return true;
             }
@@ -141,7 +181,7 @@ public class MagicManager
         {
             spell = new Consume();
         }
-        else if (data.Name == "Rice To Rolls")
+        else if (data.Name == "Rice to Rolls")
         {
             spell = new RiceToRolls();
         }
@@ -156,7 +196,7 @@ public class MagicManager
 
         if (spell == null)
         {
-            Console.WriteLine("Warning:" + data.Name + " not in list of status effects in Battle Manager.");
+            Console.WriteLine("Warning:" + data.Name + " not in list of status effects in Magic Manager.");
             return null;
         }
         spell.LoadData(data);

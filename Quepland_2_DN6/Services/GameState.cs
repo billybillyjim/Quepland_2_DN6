@@ -136,7 +136,6 @@ using System.Threading.Tasks;
     public static HCDeathInfo HCDeathInfo;
 
     public static List<ISpell> ActiveSpells = new List<ISpell>();
-
     public void Start()
     {
         //Console.WriteLine(CheckVersion("1.1.1b", "1.1.1b") + ":1.1.1b");
@@ -386,7 +385,7 @@ using System.Threading.Tasks;
         }
         return null;
     }
-    
+
     public void TickActiveSpells()
     {
         var spellsToRemove = new List<ISpell>();
@@ -1109,6 +1108,7 @@ using System.Threading.Tasks;
         CurrentLand = AreaManager.Instance.GetLandByName("Quepland");
         UriHelper = URIHelper;
         Updates = await Http.GetFromJsonAsync<List<Update>>("data/Updates.json");
+        await MagicManager.Instance.LoadSpells(Http);
         await ItemManager.Instance.LoadItems(Http);
         await Player.Instance.LoadSkills(Http);
         await NPCManager.Instance.LoadNPCs(Http);

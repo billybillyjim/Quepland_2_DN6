@@ -8,6 +8,7 @@ public class SpellData
     public int Duration { get; set; }
     public string Target { get;set; }
     public string Data { get; set; }
+    public int Cooldown { get; set; }
 
 }
 

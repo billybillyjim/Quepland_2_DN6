@@ -8,7 +8,9 @@
         public string Message { get; set; } = "You draw all the water out from the ";
         public int Duration { get; set; }
         public string Target { get; set; } = "Item";
-        public int TimeRemaining { get; set; }
+        public int TimeRemaining { get; set; } 
+		public int Cooldown { get; set; } 
+		public int CooldownRemaining { get; set; }
         public string Data { get; set; }
         public bool Unlocked { get; set; } = false;
         public Dehydrate() { }
@@ -16,6 +18,11 @@
 
         public void Cast(Inventory inventory, GameItem item)
         {
+            if (CooldownRemaining > 0)
+            {
+                MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
+                return;
+            }
             if (inventory.HasItem(item))
             {
                 if(item.TanningInfo != null)
@@ -23,6 +30,7 @@
                     if(inventory.RemoveItems(item, 1) == 1)
                     {
                         inventory.AddItem(item.TanningInfo.TansInto);
+                        CooldownRemaining = Cooldown;
                         MessageManager.AddMessage(Message + item.Name);
                         Player.Instance.GainExperience("Magic", item.Value / 10);
                         return;
@@ -33,6 +41,7 @@
                     if (inventory.RemoveItems(item, 1) == 1)
                     {
                         inventory.AddItem(ItemManager.Instance.GetItemByUniqueID("Empty Bottle0"));
+                        CooldownRemaining = Cooldown;
                         MessageManager.AddMessage(Message + item.Name);
                         Player.Instance.GainExperience("Magic", item.Value / 10);
                         return;
@@ -43,6 +52,7 @@
                     if (inventory.RemoveItems(item, 1) == 1)
                     {
                         inventory.AddItem(ItemManager.Instance.GetItemByUniqueID("Empty Bucket0"));
+                        CooldownRemaining = Cooldown;
                         MessageManager.AddMessage(Message + item.Name);
                         Player.Instance.GainExperience("Magic", item.Value / 10);
                         return;

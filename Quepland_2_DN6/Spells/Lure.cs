@@ -8,7 +8,9 @@
         public string Message { get; set; } = "";
         public int Duration { get; set; }
         public string Target { get; set; } = "None";
-        public int TimeRemaining { get; set; }
+        public int TimeRemaining { get; set; } 
+		public int Cooldown { get; set; } 
+		public int CooldownRemaining { get; set; }
         public string Data { get; set; } 
 		public bool Unlocked { get; set; } = false;
         public Lure() { }
@@ -16,9 +18,15 @@
 
         public void Cast()
         {
+            if (CooldownRemaining > 0)
+            {
+                MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
+                return;
+            }
             if (Player.Instance.HasToolRequirement("Fishing"))
             {
-                GameState.AddActiveSpell(this.Copy(), Duration);
+                GameState.AddActiveSpell(this, Duration);
+                CooldownRemaining = Cooldown;
                 MessageManager.AddMessage(Message);
                 Player.Instance.GainExperience("Magic", 50);
             }

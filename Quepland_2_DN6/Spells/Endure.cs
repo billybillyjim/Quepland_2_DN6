@@ -8,7 +8,9 @@
         public string Message { get; set; } = "You feel prepared to handle the next hit!";
         public int Duration { get; set; } = 30;
         public string Target { get; set; } = "Player";
-        public int TimeRemaining { get; set; }
+        public int TimeRemaining { get; set; } 
+		public int Cooldown { get; set; } 
+		public int CooldownRemaining { get; set; }
         public string Data { get; set; } 
 		public bool Unlocked { get; set; } = false;
         public Endure() { }
@@ -16,7 +18,13 @@
 
         public void Cast(Player player)
         {
-            GameState.AddActiveSpell(this.Copy(), Duration);
+            if (CooldownRemaining > 0)
+            {
+                MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
+                return;
+            }
+            GameState.AddActiveSpell(this, Duration);
+            CooldownRemaining = Cooldown;
             MessageManager.AddMessage(Message);
             Player.Instance.GainExperience("Magic", 120);
         }
