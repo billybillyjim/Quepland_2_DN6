@@ -64,7 +64,7 @@
     "Description": "Confuse your opponent.",
     "Power": 0,
     "Message": "",
-    "Duration": 0,
+    "Duration": 30,
     "Target": "Monster",
     "Data": null,
     "Cooldown": 60

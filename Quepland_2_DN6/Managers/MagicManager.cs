@@ -32,8 +32,13 @@ public class MagicManager
         spellData.AddRange(await Http.GetFromJsonAsync<SpellData[]>("data/Spells.json"));
         foreach(SpellData sd in spellData)
         {
-            Spells.Add(GetSpellFromData(sd));
+            var spell = GetSpellFromData(sd);
+            Spells.Add(spell);
             Console.WriteLine(sd);
+            if(sd.Target == "Monster" || sd.Target == "Player")
+            {
+                CombatSpells.Add(spell);
+            }
         }
         
     }

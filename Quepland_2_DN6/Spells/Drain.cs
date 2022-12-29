@@ -24,6 +24,16 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if(m.CurrentHP <= 0)
+            {
+                MessageManager.AddMessage($"{m.Name} doesn't have any energy left to drain!");
+                return;
+            }
+            if (BattleManager.Instance.BattleHasEnded)
+            {
+                MessageManager.AddMessage($"{m.Name} is long gone!");
+                return;
+            }
             var dmg = Power * Player.Instance.GetLevel("Magic");
             m.AddStatusEffect(new DrainEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = dmg, Speed = 5}));
             CooldownRemaining = Cooldown;

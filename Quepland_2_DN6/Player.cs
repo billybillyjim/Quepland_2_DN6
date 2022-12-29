@@ -28,6 +28,8 @@ public class Player
     public Follower CurrentFollower { get { return currentFollower; } }
     public int MaxHP = 50;
     public int CurrentHP;
+    public int MaxMP = 1;
+    public int CurrentMP;
     public int TicksToNextAttack { get; set; }
     public int Deaths { get; set; }
     public int ArtisanPoints { get; set; }
@@ -461,6 +463,29 @@ public class Player
                 MessageManager.AddMessage("You feel healthier. Your maximum HP has increased by 5.");
             }
         }
+        else if (skill.Name == "Magic")
+        {
+            MaxMP += 1;
+            if(skill.GetSkillLevelUnboosted() % 3 == 0 && skill.GetSkillLevelUnboosted() % 3 == 0)
+            {
+                MaxMP += 8;
+                MessageManager.AddMessage("You feel a great deal better at magic. Your maximum MP has increased by 9!");
+            }
+            else if (skill.GetSkillLevelUnboosted() % 3 == 0)
+            {
+                MaxMP += 3;
+                MessageManager.AddMessage("You feel much better at magic. Your maximum MP has increased by 4!");
+            }
+            else if (skill.GetSkillLevelUnboosted() % 7 == 0)
+            {
+                MaxMP += 5;
+                MessageManager.AddMessage("You feel much better at magic. Your maximum MP has increased by 6!");
+            }
+            else
+            {
+                MessageManager.AddMessage("You feel healthier. Your maximum HP has increased by 5.");
+            }
+        }
 
         if (skill.Experience >= Skill.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
         {
@@ -714,6 +739,7 @@ public class Player
             ActiveFollowerName = CurrentFollower?.Name ?? "None",
             CurrentHP = CurrentHP,
             MaxHP = MaxHP,
+            CurrentMP = CurrentMP,
             DeathCount = Deaths,
             ArtisanPoints = ArtisanPoints,
             InventorySize = Inventory.GetSize(),
@@ -730,11 +756,17 @@ public class Player
         {
             if (data.ActiveFollowerName != "None")
             {
-              error = "Failed to load active follower data for:" + data.ActiveFollowerName;
-               SetFollower(FollowerManager.Instance.GetFollowerByName(data.ActiveFollowerName));
+                error = "Failed to load active follower data for:" + data.ActiveFollowerName;
+                SetFollower(FollowerManager.Instance.GetFollowerByName(data.ActiveFollowerName));
             }
             CurrentHP = data.CurrentHP;
             CalculateMaxHP();
+            if (GameState.CheckVersion(version))
+            {
+                CurrentMP = data.CurrentMP;
+
+            }
+            
             Deaths = data.DeathCount;
             ArtisanPoints = data.ArtisanPoints;
             CalculateInventorySpaces();
@@ -806,6 +838,23 @@ public class Player
             hp += 5;
         }
         MaxHP = hp;
+    }
+    private void CalculateMaxMP()
+    {
+        int mp = 1;
+        for (int i = 1; i <= GetLevel("Magic"); i++)
+        {
+            if (i % 3 == 0)
+            {
+                mp += 3;
+            }
+            if(i % 7 == 0)
+            {
+                mp += 5;
+            }
+            mp += 1;
+        }
+        MaxMP = mp;
     }
     private void CalculateInventorySpaces()
     {

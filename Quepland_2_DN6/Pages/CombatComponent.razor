@@ -76,7 +76,7 @@
                 {
                     @if(spell.Unlocked){
                         <div>
-                            <img style="height:30px;width:30px;margin:3px;background-color:white;border-radius:0.25rem;" src="data/Images/@(spell.Name).png"
+                            <img style="@GetBG(spell);@GetBorder(spell);height:30px;width:30px;margin:3px;background-color:white;border-radius:0.25rem;" src="data/Images/@(spell.Name).png"
                                  @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, spell.Description)))"
                                  @onmouseout="@(new Action(() => GameState.HideTooltip()))"
                                  @onclick="@(() => spell.Cast(BattleManager.Instance.Target))" />
@@ -147,6 +147,34 @@
 
 
 @code {
+
+    string color = "rgba(0,212,255,1)";
+    string cooldownColor = "rgba(255,212,0,1)";
+
+    public string GetBorder(ISpell spell)
+    {
+        if (spell.TimeRemaining > 0)
+        {
+            return "border: solid 2px gold;box-shadow: gold 0px 0px 5px;";
+        }
+        return "";
+
+    }
+    public string GetBG(ISpell spell)
+    {
+        string bg = "background:#DDD";
+        if (spell.CooldownRemaining > 0)
+        {
+            var h = (int)((spell.CooldownRemaining / (double)spell.Cooldown) * 100);
+            var cooldown = (int)((Math.Max(spell.CooldownRemaining, 0) / Math.Max(spell.Cooldown, 1)) * 100);
+            var showCooldown = cooldown > 0;
+
+            bg = $"background: linear-gradient(0deg, #DDD {(showCooldown ? cooldown : h)}%, {(showCooldown ? cooldownColor : color)} {(showCooldown ? cooldown : h)}%)";
+        }
+
+
+        return bg;
+    }
 
     public string GetGradient(Monster m)
     {

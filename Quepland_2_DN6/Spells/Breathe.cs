@@ -32,6 +32,11 @@
         public void Tick(Player player)
         {
             Player.Instance.Air = 101;
+            Player.Instance.CurrentHP++;
+            if(Player.Instance.CurrentHP >= Player.Instance.MaxHP)
+            {
+                Player.Instance.CurrentHP = Player.Instance.MaxHP;
+            }
         }
         public ISpell Copy()
         {

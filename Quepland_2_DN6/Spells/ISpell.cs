@@ -54,6 +54,8 @@ public interface ISpell
         Duration = data.Duration;
         Target = data.Target;
         Data = data.Data;
+        Cooldown = data.Cooldown;
+        CooldownRemaining = -1;
         return this;
     }
 

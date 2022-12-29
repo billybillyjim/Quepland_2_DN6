@@ -23,6 +23,11 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if (m.CurrentHP <= 0)
+            {
+                MessageManager.AddMessage($"{m.Name} doesn't need to be entangled to not go anywhere!");
+                return;
+            }
             m.AddStatusEffect(new EntangleEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
             CooldownRemaining = Cooldown;
             MessageManager.AddMessage(m.Name + "is entangle by a magical vine!");

@@ -241,6 +241,14 @@ using System.Threading.Tasks;
         if (!Player.Instance.JustDied)
         {
             Player.Instance.TickStatusEffects();
+            if(CurrentTick % Math.Max(10, 50 - Player.Instance.GetLevel("Magic") / 10) == 0)
+            {
+                Player.Instance.CurrentMP++;
+                if(Player.Instance.CurrentMP > Player.Instance.MaxMP)
+                {
+                    Player.Instance.CurrentMP = Player.Instance.MaxMP;
+                }
+            }
         }
         
         if (CurrentFood != null && CurrentTick % CurrentFood.FoodInfo.HealSpeed == 0)
@@ -421,6 +429,11 @@ using System.Threading.Tasks;
             }
         }
         ActiveSpells.RemoveAll(x => spellsToRemove.Contains(x));
+
+        foreach(ISpell spell in MagicManager.Instance.Spells)
+        {
+            spell.CooldownRemaining--;
+        }
     }
 
     public static bool PlayerIsUnderSpell(string spellName)
@@ -714,7 +727,10 @@ using System.Threading.Tasks;
     }
     private void HealPlayer()
     {
-
+        if(CurrentFood == null)
+        {
+            return;
+        }
         int healAmount = Math.Min(Player.Instance.MaxHP - Player.Instance.CurrentHP, CurrentFood.FoodInfo.HealAmount);
         Player.Instance.CurrentHP += healAmount;
         Player.Instance.GainExperience("HP", healAmount * 3);
@@ -727,7 +743,7 @@ using System.Threading.Tasks;
         {
             if (CurrentFood.FoodInfo.BuffedSkill != null)
             {
-                Player.Instance.Skills.Find(x => x.Name == CurrentFood.FoodInfo.BuffedSkill).Boost = 0;
+                Player.Instance.ClearBoosts();
             }
             CurrentFood = null;
         }
@@ -1031,13 +1047,14 @@ using System.Threading.Tasks;
     }
     public static ProgressFlag GetFlagByName(string name)
     {
-        ProgressFlag flag = ProgressFlags.FirstOrDefault(x => x.Name == name);
+        ProgressFlag? flag = ProgressFlags.FirstOrDefault(x => x.Name == name);
         if(flag == null)
         {
             Console.WriteLine("Failed to find flag with name:" + name);
         }
         return flag;
     }
+
     public static bool FlagIsMet(string name)
     {
         ProgressFlag f = GetFlagByName(name);

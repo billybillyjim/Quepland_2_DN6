@@ -5,6 +5,7 @@ public class PlayerSaveData
 {
 	public int CurrentHP { get; set; }
 	public int MaxHP { get; set;}
+	public int CurrentMP { get; set; }
 	public int DeathCount { get; set; }
 	public int ArtisanPoints { get; set; }
 	public int InventorySize { get; set; }

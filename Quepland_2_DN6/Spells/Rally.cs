@@ -23,6 +23,11 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if (BattleManager.Instance.BattleHasEnded)
+            {
+                MessageManager.AddMessage($"There's nothing you need to rally against now!");
+                return;
+            }
             p.AddStatusEffect(new RallyEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
             CooldownRemaining = Cooldown;
             MessageManager.AddMessage(Message);

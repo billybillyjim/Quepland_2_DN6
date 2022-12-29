@@ -1,16 +1,16 @@
 ﻿@inject GameState GameState
 @implements IDisposable
 
-<h3>Magic</h3>
+<h3 class="m-2">Magic</h3>
 <div class="main-inventory custom-scroll">
 @foreach(ISpell spell in MagicManager.Instance.Spells){
     @if(spell == null){
         <div>Null Spell</div>
     }
     else if(spell.Unlocked){
-        <div class="unselectable" style="@GetBG(spell);margin:2px;height:50px;width:50px;position:relative;box-sizing: border-box;border-radius:0.25rem;" draggable="false">
+        <div class="unselectable" style="@GetBG(spell);@GetBorder(spell);margin:2px;height:50px;width:50px;position:relative;box-sizing: border-box;border-radius:0.25rem;" draggable="false">
 
-            <img style="height: 46px;width: 46px; margin:5px;" src="/data/Images/@(spell.Name).png" draggable="false"
+            <img style="height: 46px;width: 46px; margin:2.5px;" src="/data/Images/@(spell.Name).png" draggable="false"
                  @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowItemTooltip(e, spell.Name, spell.Description)))"
                  @onmouseout="@(new Action(() => GameState.HideTooltip()))"
                  @onclick="@(() => CastSpell(spell))" />
@@ -48,21 +48,31 @@
 @code {
     private bool showInventory;
     private ISpell currentSpell = null;
-    string bg = "background:#DDD";
+
     string color = "rgba(0,212,255,1)";
     string cooldownColor = "rgba(255,212,0,1)";
-    public string GetBG(ISpell spell){
-        
-        if(spell.TimeRemaining > 0){
-            var h = (int)((spell.TimeRemaining / (double)spell.Duration) * 100);
+
+    public string GetBorder(ISpell spell)
+    {
+        if(spell.TimeRemaining > 0)
+        {
+            return "border: solid 2px gold;box-shadow: gold 0px 0px 5px;";
+        }
+        return "";
+
+    }
+    public string GetBG(ISpell spell)
+    {
+        string bg = "background:#DDD";
+        if (spell.CooldownRemaining > 0)
+        {
+            var h = (int)((spell.CooldownRemaining / (double)spell.Cooldown) * 100);
             var cooldown = (int)((Math.Max(spell.CooldownRemaining, 0) / Math.Max(spell.Cooldown, 1)) * 100);
             var showCooldown = cooldown > 0;
                       
             bg = $"background: linear-gradient(0deg, #DDD {(showCooldown ? cooldown : h)}%, {(showCooldown ? cooldownColor : color)} {(showCooldown ? cooldown : h)}%)";
         }
-        if(spell.CooldownRemaining > 0){
 
-        }
 
         return bg;
     }
