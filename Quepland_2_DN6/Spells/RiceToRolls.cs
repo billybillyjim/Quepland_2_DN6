@@ -31,6 +31,7 @@
                 inventory.AddMultipleOfItem(rolls, removed);
                 CooldownRemaining = Cooldown;
                 MessageManager.AddMessage(Message);
+                Player.Instance.GainExperience("Magic", 145);
             }
 
             

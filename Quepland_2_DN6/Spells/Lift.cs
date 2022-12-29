@@ -27,6 +27,7 @@
             {
                 GameState.AddActiveSpell(this, Duration);
                 CooldownRemaining = Cooldown;
+                Player.Instance.GainExperience("Magic", 250);
                 MessageManager.AddMessage(Message);
             }
             else

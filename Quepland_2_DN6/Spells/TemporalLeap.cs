@@ -74,6 +74,7 @@
             }
             CooldownRemaining = Cooldown;
             MessageManager.AddMessage(Message);
+            Player.Instance.GainExperience("Magic", 600);
         }
         public ISpell Copy()
         {

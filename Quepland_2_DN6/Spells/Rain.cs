@@ -38,6 +38,7 @@
             var bottlemsg = amt > 0 ? $" The water pours down and fills {amt} {(amt != 1 ? "bottles" : "bottle")} with water." : "";
             CooldownRemaining = Cooldown;
             MessageManager.AddMessage(Message + bucketmsg + bottlemsg);
+            Player.Instance.GainExperience("Magic", 25);
         }
         public ISpell Copy()
         {

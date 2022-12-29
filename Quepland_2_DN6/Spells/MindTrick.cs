@@ -35,6 +35,7 @@
             }
             m.AddStatusEffect(new StunEffect(new StatusEffectData() { Name = Name, Duration = Duration, Power = Power, Speed = 5 }));
             CooldownRemaining = Cooldown;
+            Player.Instance.GainExperience("Magic", 100);
             MessageManager.AddMessage(Message);
         }
         public ISpell Copy()

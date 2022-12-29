@@ -30,6 +30,7 @@
                 {
                     inventory.AddItem(newItem);
                     CooldownRemaining = Cooldown;
+                    Player.Instance.GainExperience("Magic", 250);
                     MessageManager.AddMessage("You imbued the " + item.Name + " with magic. Now it's a " + newItem.Name);
                 }
             }

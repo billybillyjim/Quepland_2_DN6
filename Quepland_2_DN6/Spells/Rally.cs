@@ -31,6 +31,7 @@
             p.AddStatusEffect(new RallyEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
             CooldownRemaining = Cooldown;
             MessageManager.AddMessage(Message);
+            Player.Instance.GainExperience("Magic", 120);
         }
 
 

@@ -31,6 +31,7 @@
                     GameState.Eat(item, amt, amt * item.FoodInfo.HealDuration);
                     CooldownRemaining = Cooldown;
                     MessageManager.AddMessage(Message);
+                    Player.Instance.GainExperience("Magic", 55);
                 }
             }
             
