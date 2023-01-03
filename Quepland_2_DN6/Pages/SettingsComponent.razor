@@ -16,12 +16,20 @@
     <div style="border:solid 1px gray;padding:1em;">
         <div>
             <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => CompactInventory())">Compact Inventory</button>
+            Compact inventory shows all items as single stacks, even when they aren't stackable. This can save screen space for smaller screens.
         </div>
         <div>
             <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => HideLockedItems())">Hide Locked Items</button>
+            This makes locked items not appear in your inventory, if you don't want to see them.
         </div>
         <div>
             <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => ToggleBackgrounds())">Toggle Backgrounds</button>
+            This toggles the background images if you prefer the plain background.
+        </div>
+        <div>
+            <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => ToggleOldBankMode())">Toggle Old Bank Mode</button> 
+            <div>(@(GameState.UseOldBank ? "Currently: On" : "Currently: Off"))</div>
+            This uses the old method of bank viewing. The new bank view exists because the bank used to be very slow, but Blazor has been updated and it should be a bit more performant now. Use this if you cannot scroll or the new bank method does not work for you. Let me know if it runs nicely, it may be time to just go back to regular rendering. 
         </div>
     </div>
     <div style="border:solid 1px gray;padding:1em;">
@@ -52,20 +60,24 @@
    
 
 
-    @code {
+@code {
     private string brokenSave = "";
-        private string exportedSave = "";
-        private bool restoreFollowersMenu;
-        private bool hasRestoredFollowers;
-        private bool QRMenu;
-        private List<Follower> followersToRestore = new List<Follower>();
+    private string exportedSave = "";
+    private bool restoreFollowersMenu;
+    private bool hasRestoredFollowers;
+    private bool QRMenu;
+    private List<Follower> followersToRestore = new List<Follower>();
 
     public async Task GetBrokenSave()
     {
         brokenSave = await SaveManager.GetItemAsync<string>("SaveError");
     }
 
-        public void ToggleFollower(Follower f)
+    public void ToggleOldBankMode()
+    {
+        GameState.UseOldBank = !GameState.UseOldBank;
+    }
+    public void ToggleFollower(Follower f)
         {
             if(followersToRestore.Contains(f) == false)
             {

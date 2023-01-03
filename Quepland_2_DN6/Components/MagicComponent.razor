@@ -11,7 +11,7 @@
         <div class="unselectable" style="@GetBG(spell);@GetBorder(spell);margin:2px;height:50px;width:50px;position:relative;box-sizing: border-box;border-radius:0.25rem;" draggable="false">
 
             <img style="height: 46px;width: 46px; margin:2.5px;" src="/data/Images/@(spell.Name).png" draggable="false"
-                 @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowItemTooltip(e, spell.Name, spell.Description)))"
+                 @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowItemTooltip(e, spell.Description, spell.GetCostText())))"
                  @onmouseout="@(new Action(() => GameState.HideTooltip()))"
                  @onclick="@(() => CastSpell(spell))" />
             

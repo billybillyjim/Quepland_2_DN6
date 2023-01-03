@@ -5,7 +5,6 @@
 
 @if (GameState.CurrentGameMode != GameState.GameType.Ultimate)
 {
-   
     <div style="overflow-y:hidden;height:100%;">
         <div style="margin-bottom:35px;">
             Quantity:
@@ -108,56 +107,113 @@
                 </div>
             }
         </div>
-        <div @ref="@bankViewReference" style="overflow-y:scroll;" class="bank-scroll" id="bank-window" @onscroll="@(() => UpdateVisibleItems())">
-            @if (!addingTags)
-            {
-                <div style="display: flex; flex-wrap: wrap;align-content: flex-start;padding-top:@(top)px;height:@(windowHeight)px">
-                    @foreach (KeyValuePair<GameItem, int> item in GetBankItems())
-                    {
-                        if (item.Key != null)
+        @if (GameState.UseOldBank)
+        {
+            <div style="overflow-y:scroll;" class="bank-scroll" id="bank-window">
+                @if (!addingTags)
+                {
+                    <div style="display: flex; flex-wrap: wrap;align-content: flex-start;">
+                        @foreach (KeyValuePair<GameItem, int> item in Bank.Instance.Inventory.GetItems())
                         {
-                            <div oncontextmenu="return false;"
+                            if (item.Key != null)
+                            {
+                                <div oncontextmenu="return false;"
                                  onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))"
                                  @onclick="@(() => Withdraw(item.Key))" style="margin-left:-3px;cursor:pointer">
-                                <Quepland_2_DN6.Components.ItemBoxComponent @key="item" Item="@item.Key" ShowAmount="@true" Inventory="@Bank.Instance.Inventory" shouldRender="@item.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
-                            </div>
+                                    <Quepland_2_DN6.Components.ItemBoxComponent @key="item" Item="@item.Key" ShowAmount="@true" Inventory="@Bank.Instance.Inventory" shouldRender="@item.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
+                                </div>
+                            }
                         }
-                    }
-                    @for (int i = 0; i < GetEmptyItemsToFillRow(); i++)
-                    {
-                        <div style="margin-left:-3px;">
-                            <Quepland_2_DN6.Components.ItemBoxComponent></Quepland_2_DN6.Components.ItemBoxComponent>
-
-                        </div>
-                    }
-                </div>
-
-            }
-            else if (addingTags)
-            {
-                <div style="display: flex; flex-wrap: wrap;align-content: flex-start;padding-top:@(top)px;height:@(windowHeight)px">
-                    @foreach (KeyValuePair<GameItem, int> item in GetBankItems())
-                    {
-                        if (item.Key != null)
+                        @for (int i = 0; i < GetEmptyItemsToFillRow(); i++)
                         {
-                            <div oncontextmenu="return false;"
-                                 @onclick="@(() => ToggleTagOnItem(item.Key))" style="margin-left:-3px;cursor:pointer;@GetOpacity(item.Key)">
-                                <Quepland_2_DN6.Components.ItemBoxComponent @key="item" Item="@item.Key" ShowAmount="@true" Inventory="@Bank.Instance.Inventory" HideTooltip="true" shouldRender="@item.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
+                            <div style="margin-left:-3px;">
+                                <Quepland_2_DN6.Components.ItemBoxComponent></Quepland_2_DN6.Components.ItemBoxComponent>
 
                             </div>
                         }
-                    }
-                    @for (int i = 0; i < GetEmptyItemsToFillRow(); i++)
-                    {
-                        int temp = i;
-                        <div style="margin-left:-3px;">
-                            <Quepland_2_DN6.Components.ItemBoxComponent></Quepland_2_DN6.Components.ItemBoxComponent>
+                    </div>
 
-                        </div>
-                    }
-                </div>
-            }
-        </div>
+                }
+                else if (addingTags)
+                {
+                    <div style="display: flex; flex-wrap: wrap;align-content: flex-start;padding-top:@(top)px;height:@(windowHeight)px">
+                        @foreach (KeyValuePair<GameItem, int> item in GetBankItems())
+                        {
+                            if (item.Key != null)
+                            {
+                                <div oncontextmenu="return false;"
+                 @onclick="@(() => ToggleTagOnItem(item.Key))" style="margin-left:-3px;cursor:pointer;@GetOpacity(item.Key)">
+                                    <Quepland_2_DN6.Components.ItemBoxComponent @key="item" Item="@item.Key" ShowAmount="@true" Inventory="@Bank.Instance.Inventory" HideTooltip="true" shouldRender="@item.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
+
+                                </div>
+                            }
+                        }
+                        @for (int i = 0; i < GetEmptyItemsToFillRow(); i++)
+                        {
+                            int temp = i;
+                            <div style="margin-left:-3px;">
+                                <Quepland_2_DN6.Components.ItemBoxComponent></Quepland_2_DN6.Components.ItemBoxComponent>
+
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div @ref="@bankViewReference" style="overflow-y:scroll;" class="bank-scroll" id="bank-window" @onscroll="@(() => UpdateVisibleItems())">
+                @if (!addingTags)
+                {
+                    <div style="display: flex; flex-wrap: wrap;align-content: flex-start;padding-top:@(top)px;height:@(windowHeight)px">
+                        @foreach (KeyValuePair<GameItem, int> item in GetBankItems())
+                        {
+                            if (item.Key != null)
+                            {
+                                <div oncontextmenu="return false;"
+                 onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, item.Key)))"
+                 @onclick="@(() => Withdraw(item.Key))" style="margin-left:-3px;cursor:pointer">
+                                    <Quepland_2_DN6.Components.ItemBoxComponent @key="item" Item="@item.Key" ShowAmount="@true" Inventory="@Bank.Instance.Inventory" shouldRender="@item.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
+                                </div>
+                            }
+                        }
+                        @for (int i = 0; i < GetEmptyItemsToFillRow(); i++)
+                        {
+                            <div style="margin-left:-3px;">
+                                <Quepland_2_DN6.Components.ItemBoxComponent></Quepland_2_DN6.Components.ItemBoxComponent>
+
+                            </div>
+                        }
+                    </div>
+
+                }
+                else if (addingTags)
+                {
+                    <div style="display: flex; flex-wrap: wrap;align-content: flex-start;padding-top:@(top)px;height:@(windowHeight)px">
+                        @foreach (KeyValuePair<GameItem, int> item in GetBankItems())
+                        {
+                            if (item.Key != null)
+                            {
+                                <div oncontextmenu="return false;"
+                 @onclick="@(() => ToggleTagOnItem(item.Key))" style="margin-left:-3px;cursor:pointer;@GetOpacity(item.Key)">
+                                    <Quepland_2_DN6.Components.ItemBoxComponent @key="item" Item="@item.Key" ShowAmount="@true" Inventory="@Bank.Instance.Inventory" HideTooltip="true" shouldRender="@item.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
+
+                                </div>
+                            }
+                        }
+                        @for (int i = 0; i < GetEmptyItemsToFillRow(); i++)
+                        {
+                            int temp = i;
+                            <div style="margin-left:-3px;">
+                                <Quepland_2_DN6.Components.ItemBoxComponent></Quepland_2_DN6.Components.ItemBoxComponent>
+
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+        
     </div>
 }
 else

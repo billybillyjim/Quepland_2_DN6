@@ -117,6 +117,7 @@ using System.Threading.Tasks;
     public static double RightSidebarWidth { get; set; }
     public static int GameLoadProgress { get; set; }
     public static bool ShowTome { get; set; }
+    public static bool UseOldBank { get; set; }
     public static string CurrentTome { get; set; } = "None";
     public int MinWindowWidth { get; set; } = 600;
     public double BankWindowWidth { get; set; } = 550;
@@ -1280,7 +1281,8 @@ using System.Threading.Tasks;
             CurrentTask = CurrentArtisanTask,
             HideLockedItems = HideLockedItems,
             CompactInventory = CompactInventoryView,
-            ShowBackgrounds = ShowBackgrounds
+            ShowBackgrounds = ShowBackgrounds,
+            UseOldBankView = UseOldBank
         };
     }
     public static void LoadSaveData(GameStateSaveData data)
@@ -1290,6 +1292,7 @@ using System.Threading.Tasks;
         CompactInventoryView = data.CompactInventory;
         ShowBackgrounds = data.ShowBackgrounds;
         CurrentArtisanTask = data.CurrentTask;
+        UseOldBank = data.UseOldBankView;
         if (data.Location == null || data.Location == "" || data.Location == "Battle")
         {
             Location = "QueplandFields";

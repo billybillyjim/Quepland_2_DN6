@@ -79,24 +79,24 @@
           "weight": 3
         },
         {
-          "itemName": "Milk Bread",
+          "itemName": "Milk Dough",
           "weight": 1
         },
         {
-          "itemName": "Sweet Bread",
+          "itemName": "Sweet Dough",
           "weight": 5
         },
         {
-          "itemName": "Durum Bread",
+          "itemName": "Durum Dough",
           "weight": 5
         },
         {
-          "itemName": "Rye Bread",
+          "itemName": "Rye Dough",
           "weight": 5
         },
         {
-          "itemName": "Bread",
-          "weight": 5
+          "itemName": "Dough",
+          "weight": 15
         }
       ]
     }
@@ -133,6 +133,93 @@
         },
         {
           "itemName": "Moose Gloves",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  {
+    "name": "Withered Stormling",
+    "hp": 1000,
+    "weaknesses": "Axemanship",
+    "strengths": "Hammermanship",
+    "attackSpeed": 10,
+    "armor": 5,
+    "damage": 15,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Yeast",
+          "weight": 3
+        },
+        {
+          "itemName": "Quern Stone",
+          "weight": 3
+        },
+        {
+          "itemName": "Empty Bucket",
+          "weight": 3
+        }
+      ]
+    }
+  },
+  {
+    "name": "Wilting Stormling",
+    "hp": 1500,
+    "weaknesses": "Axemanship",
+    "strengths": "Hammermanship",
+    "attackSpeed": 14,
+    "armor": 8,
+    "damage": 20,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Bone Dagger",
+          "weight": 3
+        },
+        {
+          "itemName": "Stone Axe",
+          "weight": 3
+        },
+        {
+          "itemName": "Bone Blade",
+          "weight": 3
+        },
+        {
+          "itemName": "Iron Hammer",
+          "weight": 3
+        }
+      ]
+    }
+  },
+  {
+    "name": "Weakened Stormling",
+    "hp": 1800,
+    "weaknesses": "Axemanship",
+    "strengths": "Hammermanship",
+    "attackSpeed": 15,
+    "armor": 11,
+    "damage": 40,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Wild Boar Hat",
+          "weight": 5
+        },
+        {
+          "itemName": "Wild Boar Boots",
+          "weight": 5
+        },
+        {
+          "itemName": "Wild Boar Pants",
+          "weight": 5
+        },
+        {
+          "itemName": "Wild Boar Shirt",
+          "weight": 5
+        },
+        {
+          "itemName": "Wild Boar Gloves",
           "weight": 1
         }
       ]

@@ -10,5 +10,7 @@ public class SpellData
     public string Data { get; set; }
     public int Cooldown { get; set; }
 
+    public List<Ingredient> Cost { get; set; }
+
 }
 

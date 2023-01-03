@@ -12,7 +12,8 @@
 		public int Cooldown { get; set; } 
 		public int CooldownRemaining { get; set; }
         public string Data { get; set; } 
-		public bool Unlocked { get; set; } = false; 
+		public bool Unlocked { get; set; } = false;
+        public List<Ingredient> Cost { get; set; }
 
         public Drain() { }
         
@@ -24,7 +25,13 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
-            if(m.CurrentHP <= 0)
+            ISpell spell = this;
+            if (!spell.PayCost())
+            {
+                MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
+                return;
+            }
+            if (m.CurrentHP <= 0)
             {
                 MessageManager.AddMessage($"{m.Name} doesn't have any energy left to drain!");
                 return;

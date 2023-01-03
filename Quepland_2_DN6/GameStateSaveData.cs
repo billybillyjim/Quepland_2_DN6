@@ -9,4 +9,5 @@ public class GameStateSaveData
 	public bool CompactInventory { get; set; }
 	public bool HideLockedItems { get; set; }
 	public bool ShowBackgrounds { get; set; }
+	public bool UseOldBankView { get; set; }
 }

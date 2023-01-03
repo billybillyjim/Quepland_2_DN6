@@ -44,6 +44,8 @@ public interface ISpell
     public void Tick(Inventory inventory, GameItem item) { }
     public void Tick(Inventory inventory) { }
     public void Tick(Recipe recipe) { }
+
+    public List<Ingredient> Cost { get; set; }
     public ISpell Copy();
 
     public ISpell LoadData(SpellData data)
@@ -55,9 +57,53 @@ public interface ISpell
         Target = data.Target;
         Data = data.Data;
         Cooldown = data.Cooldown;
+        Cost = data.Cost;
         CooldownRemaining = -1;
         return this;
     }
+    public string GetCostText()
+    {
+        string t = GetMPCost() + " MP\nor\n";
+        foreach(Ingredient i in Cost)
+        {
+            t += i.ToString() + "\n";
+        }
 
+        return t;
+    }
+    public int GetMPCost()
+    {
+        int cost = 0;
+        foreach(Ingredient i in Cost)
+        {
+            cost += i.Item.Value;
+        }
+        return Math.Max(1, cost / 75);
+    }
+    public bool PayCost()
+    {
+        var cost = GetMPCost();
+        if (Player.Instance.CurrentMP >= cost)
+        {
+            Player.Instance.CurrentMP -= cost;
+            return true;
+        }
+        foreach(Ingredient i in Cost)
+        {
+            if(Player.Instance.Inventory.GetNumberOfUnlockedItem(i.Item) < i.Amount)
+            {
+                return false;
+            }
+        }
+        foreach(Ingredient i in Cost)
+        {
+            if(i.Amount != Player.Instance.Inventory.RemoveItems(i.Item, i.Amount))
+            {
+                return false;
+            }
+            
+        }
+        return true;
+    }
 }
 

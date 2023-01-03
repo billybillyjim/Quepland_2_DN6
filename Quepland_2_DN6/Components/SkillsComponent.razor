@@ -64,6 +64,7 @@
                             <div>
                                 Magic is an ancient and complex art. You'll have to learn a spell to use it. Then either pay the casting seed cost, or use your own magical abilities.
                             </div>
+                            <div style="overflow-y:scroll;max-height:calc(100vh - 225px);">
                             @foreach(ISpell spell in MagicManager.Instance.Spells)
                             {
                                 if(spell.Unlocked)
@@ -81,6 +82,7 @@
                                 }
                                 
                             }
+                            </div>
                         }
                     }
                     else

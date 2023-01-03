@@ -13,6 +13,7 @@
 		public int CooldownRemaining { get; set; }
         public string Data { get; set; } 
 		public bool Unlocked { get; set; } = false;
+        public List<Ingredient> Cost { get; set; }
         public MoltenSwing() { }
 
         public static Dictionary<string, string> replacements = new Dictionary<string, string>()
@@ -41,6 +42,12 @@
             if (CooldownRemaining > 0)
             {
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
+                return;
+            }
+            ISpell spell = this;
+            if (!spell.PayCost())
+            {
+                MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
             if (Player.Instance.HasToolRequirement("Mining"))

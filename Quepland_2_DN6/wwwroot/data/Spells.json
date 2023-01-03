@@ -7,7 +7,17 @@
     "Duration": 600,
     "Target": "Gather",
     "Data": null,
-    "Cooldown": 300
+    "Cooldown": 300,
+    "Cost": [
+      {
+        "itemName": "Perpetual Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Thought Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Breathe",
@@ -17,7 +27,17 @@
     "Duration": 600,
     "Target": "Player",
     "Data": null,
-    "Cooldown": 300
+    "Cooldown": 300,
+    "Cost": [
+      {
+        "itemName": "Alimental Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Perpetual Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Dehydrate",
@@ -27,7 +47,17 @@
     "Duration": 0,
     "Target": "Item",
     "Data": null,
-    "Cooldown": 30
+    "Cooldown": 30,
+    "Cost": [
+      {
+        "itemName": "Etheral Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Ruinous Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Drain",
@@ -37,7 +67,17 @@
     "Duration": 30,
     "Target": "Monster",
     "Data": null,
-    "Cooldown": 60
+    "Cooldown": 60,
+    "Cost": [
+      {
+        "itemName": "Fierce Seed",
+        "amount": 2
+      },
+      {
+        "itemName": "Alimental Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Enchant",
@@ -47,7 +87,37 @@
     "Duration": 0,
     "Target": "Item",
     "Data": null,
-    "Cooldown": 20
+    "Cooldown": 20,
+    "Cost": [
+      {
+        "itemName": "Etheral Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Corporeal Seed",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "Name": "Lift",
+    "Description": "Reduce the weight of your weapon.",
+    "Power": 0,
+    "Message": "",
+    "Duration": 30,
+    "Target": "Player",
+    "Data": null,
+    "Cooldown": 20,
+    "Cost": [
+      {
+        "itemName": "Fierce Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Momentary Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Magic Needle",
@@ -57,7 +127,17 @@
     "Duration": 0,
     "Target": "Recipe",
     "Data": null,
-    "Cooldown": 30
+    "Cooldown": 30,
+    "Cost": [
+      {
+        "itemName": "Perpetual Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Thought Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Mind Trick",
@@ -67,7 +147,17 @@
     "Duration": 30,
     "Target": "Monster",
     "Data": null,
-    "Cooldown": 60
+    "Cooldown": 60,
+    "Cost": [
+      {
+        "itemName": "Fierce Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Thought Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Molten Swing",
@@ -77,7 +167,17 @@
     "Duration": 600,
     "Target": "Gather",
     "Data": null,
-    "Cooldown": 300
+    "Cooldown": 300,
+    "Cost": [
+      {
+        "itemName": "Perpetual Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Warmth Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Rain",
@@ -87,7 +187,17 @@
     "Duration": 0,
     "Target": "Inventory",
     "Data": null,
-    "Cooldown": 20
+    "Cooldown": 20,
+    "Cost": [
+      {
+        "itemName": "Alluvial Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Corporeal Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Rally",
@@ -97,7 +207,13 @@
     "Duration": 30,
     "Target": "Player",
     "Data": null,
-    "Cooldown": 60
+    "Cooldown": 60,
+    "Cost": [
+      {
+        "itemName": "Fierce Seed",
+        "amount": 3
+      }
+    ]
   },
   {
     "Name": "Reflect",
@@ -107,7 +223,17 @@
     "Duration": 30,
     "Target": "Player",
     "Data": null,
-    "Cooldown": 60
+    "Cooldown": 60,
+    "Cost": [
+      {
+        "itemName": "Fierce Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Alimental Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Consume",
@@ -117,7 +243,17 @@
     "Duration": 0,
     "Target": "Item",
     "Data": null,
-    "Cooldown": 50
+    "Cooldown": 50,
+    "Cost": [
+      {
+        "itemName": "Alimental Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Momentary Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Rice to Rolls",
@@ -127,7 +263,17 @@
     "Duration": 0,
     "Target": "Inventory",
     "Data": null,
-    "Cooldown": 30
+    "Cooldown": 30,
+    "Cost": [
+      {
+        "itemName": "Alimental Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Corporeal Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Teleport Branch",
@@ -137,7 +283,17 @@
     "Duration": 0,
     "Target": "Inventory",
     "Data": null,
-    "Cooldown": 20
+    "Cooldown": 20,
+    "Cost": [
+      {
+        "itemName": "Perpetual Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Momentary Seed",
+        "amount": 1
+      }
+    ]
   },
   {
     "Name": "Temporal Leap",
@@ -147,6 +303,12 @@
     "Duration": 0,
     "Target": "None",
     "Data": null,
-    "Cooldown": 300
+    "Cooldown": 300,
+    "Cost": [
+      {
+        "itemName": "Perpetual Seed",
+        "amount": 5
+      }
+    ]
   }
 ]

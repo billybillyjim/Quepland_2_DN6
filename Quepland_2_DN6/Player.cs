@@ -483,7 +483,7 @@ public class Player
             }
             else
             {
-                MessageManager.AddMessage("You feel healthier. Your maximum HP has increased by 5.");
+                MessageManager.AddMessage("You feel better at magic. Your maximum MP has increased by 1.");
             }
         }
 

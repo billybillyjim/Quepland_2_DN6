@@ -75,6 +75,8 @@ else if(location == "Gauntlet")
         <br />
         <Quepland_2_DN6.Components.GatherButtonComponent ActionText="Gather Wheat:Wheat:You begin picking wheat..."></Quepland_2_DN6.Components.GatherButtonComponent>
         <br />
+        <Quepland_2_DN6.Components.ConvertItemsComponent ActionText="Gather Water from the river:Bucket of Water:Empty Bucket:You begin drawing water from the river."></Quepland_2_DN6.Components.ConvertItemsComponent>
+        <br />
 
     }
     else if(room == "Artisan")
@@ -124,6 +126,10 @@ else if(location == "Boss")
     private string location = "Outside";
     private string room = "Entrance";
     private int currentFloor = 1;
+    private Dictionary<int, List<string>> FloorEnemies = new Dictionary<int, List<string>>()
+    {
+        {1,new List<string>(){ "Stormling",  } }
+    };
     private Dictionary<string, string> Descriptions = new Dictionary<string, string>() 
     { 
         {"Entrance", "The cold floor has fresh footprints leading in one direction. You can smell baked bread in another. A warm glow illuminates a third path."},

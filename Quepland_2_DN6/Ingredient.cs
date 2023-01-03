@@ -17,4 +17,13 @@ public class Ingredient
     public string ItemName { get; set; }
     public int Amount { get; set; } = 1;
     public bool DestroyOnUse { get; set; } = true;
+
+    public override string ToString()
+    {
+        if(Amount == 1)
+        {
+            return Amount + " " + Item.Name;
+        }
+        return Amount + " " + GameState.Pluralizer.Pluralize(Item.Name);
+    }
 }
