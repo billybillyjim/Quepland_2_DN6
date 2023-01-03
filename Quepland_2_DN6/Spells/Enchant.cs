@@ -45,15 +45,16 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+
+            if (item.Name.Contains("Enchanted"))
+            {
+                MessageManager.AddMessage("This item is already enchanted.");
+                return;
+            }
             ISpell spell = this;
             if (!spell.PayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
-                return;
-            }
-            if (item.Name.Contains("Enchanted"))
-            {
-                MessageManager.AddMessage("This item is already enchanted.");
                 return;
             }
             if (inventory.HasItem(item))

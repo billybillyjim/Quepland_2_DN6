@@ -44,23 +44,21 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if (!Player.Instance.HasToolRequirement("Mining"))
+            {
+                MessageManager.AddMessage("You'll need some kind of pickaxe in your inventory to activate this spell.");
+                return;
+            }
             ISpell spell = this;
             if (!spell.PayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
-            if (Player.Instance.HasToolRequirement("Mining"))
-            {
-                GameState.AddActiveSpell(this, Duration);
-                CooldownRemaining = Cooldown;
-                Player.Instance.GainExperience("Magic", 145);
-                MessageManager.AddMessage(Message);
-            }
-            else
-            {
-                MessageManager.AddMessage("You'll need some kind of pickaxe in your inventory to activate this spell.");
-            }
+            GameState.AddActiveSpell(this, Duration);
+            CooldownRemaining = Cooldown;
+            Player.Instance.GainExperience("Magic", 145);
+            MessageManager.AddMessage(Message);
         }
 
         public void Cast(Inventory inventory, GameItem item)

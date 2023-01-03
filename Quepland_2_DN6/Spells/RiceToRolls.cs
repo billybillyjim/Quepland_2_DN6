@@ -24,24 +24,26 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+
+            var rice = ItemManager.Instance.GetItemByUniqueID("Rice0");
+            var rolls = ItemManager.Instance.GetItemByUniqueID("Rice Roll0");
+            if (!inventory.HasItem(rice))
+            {
+                MessageManager.AddMessage($"You don't have any rice!");
+                return;
+            }
             ISpell spell = this;
             if (!spell.PayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
-            var rice = ItemManager.Instance.GetItemByUniqueID("Rice0");
-            var rolls = ItemManager.Instance.GetItemByUniqueID("Rice Roll0");
-            if (inventory.HasItem(rice))
-            {
-                int removed = inventory.RemoveAllOfItem(rice);
-                inventory.AddMultipleOfItem(rolls, removed);
-                CooldownRemaining = Cooldown;
-                MessageManager.AddMessage(Message);
-                Player.Instance.GainExperience("Magic", 145);
-            }
+            int removed = inventory.RemoveAllOfItem(rice);
+            inventory.AddMultipleOfItem(rolls, removed);
+            CooldownRemaining = Cooldown;
+            MessageManager.AddMessage(Message);
+            Player.Instance.GainExperience("Magic", 145);
 
-            
         }
 
         public ISpell Copy()

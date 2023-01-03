@@ -25,16 +25,17 @@
                 return;
             }
             ISpell spell = this;
-            if (!spell.PayCost())
-            {
-                MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
-                return;
-            }
+            
             if (inventory.HasItem(item))
             {
                 if(item.TanningInfo != null)
                 {
-                    if(inventory.RemoveItems(item, 1) == 1)
+                    if (!spell.PayCost())
+                    {
+                        MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
+                        return;
+                    }
+                    if (inventory.RemoveItems(item, 1) == 1)
                     {
                         inventory.AddItem(item.TanningInfo.TansInto);
                         CooldownRemaining = Cooldown;
@@ -45,6 +46,11 @@
                 }
                 else if(item.Name == "Bottle of Water")
                 {
+                    if (!spell.PayCost())
+                    {
+                        MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
+                        return;
+                    }
                     if (inventory.RemoveItems(item, 1) == 1)
                     {
                         inventory.AddItem(ItemManager.Instance.GetItemByUniqueID("Empty Bottle0"));
@@ -56,6 +62,11 @@
                 }
                 else if(item.Name == "Bucket of Water")
                 {
+                    if (!spell.PayCost())
+                    {
+                        MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
+                        return;
+                    }
                     if (inventory.RemoveItems(item, 1) == 1)
                     {
                         inventory.AddItem(ItemManager.Instance.GetItemByUniqueID("Empty Bucket0"));

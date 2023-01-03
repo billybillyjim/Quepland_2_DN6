@@ -41,7 +41,12 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
-            MessageManager.AddMessage(CooldownRemaining + ":" + Cooldown);
+            ISpell spell = this;
+            if (!spell.PayCost())
+            {
+                MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
+                return;
+            }
             GameState.AddActiveSpell(this, Duration);
             CooldownRemaining = Cooldown;
             MessageManager.AddMessage(Message);

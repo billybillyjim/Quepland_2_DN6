@@ -24,24 +24,28 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if (item.FoodInfo == null)
+            {
+                MessageManager.AddMessage($"It doesn't appear to work on things that aren't food...");
+                return;
+                
+            }
+            if (!inventory.HasItem(item))
+            {
+                MessageManager.AddMessage($"You'll need at least some food for the spell to work.");
+                return;
+            }
             ISpell spell = this;
             if (!spell.PayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
-            if (item.FoodInfo != null)
-            {
-                if (inventory.HasItem(item))
-                {
-                    int amt = inventory.GetNumberOfUnlockedItem(item);
-                    GameState.Eat(item, amt, amt * item.FoodInfo.HealDuration);
-                    CooldownRemaining = Cooldown;
-                    MessageManager.AddMessage(Message);
-                    Player.Instance.GainExperience("Magic", 55);
-                }
-            }
-            
+            int amt = inventory.GetNumberOfUnlockedItem(item);
+            GameState.Eat(item, amt, amt * item.FoodInfo.HealDuration);
+            CooldownRemaining = Cooldown;
+            MessageManager.AddMessage(Message);
+            Player.Instance.GainExperience("Magic", 55);
         }
         public ISpell Copy()
         {

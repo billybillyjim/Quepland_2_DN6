@@ -24,24 +24,22 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+
+            if (!Player.Instance.HasToolRequirement("Fishing"))
+            {
+                MessageManager.AddMessage("You'll need some kind of fishing gear in your inventory to activate this spell.");
+                return;
+            }
             ISpell spell = this;
             if (!spell.PayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
-            if (Player.Instance.HasToolRequirement("Fishing"))
-            {
-                GameState.AddActiveSpell(this, Duration);
-                CooldownRemaining = Cooldown;
-                MessageManager.AddMessage(Message);
-                Player.Instance.GainExperience("Magic", 50);
-            }
-            else
-            {
-                MessageManager.AddMessage("You'll need some kind of fishing gear in your inventory to activate this spell.");
-            }
-            
+            GameState.AddActiveSpell(this, Duration);
+            CooldownRemaining = Cooldown;
+            MessageManager.AddMessage(Message);
+            Player.Instance.GainExperience("Magic", 50);
         }
         public void Cast(Inventory inventory, GameItem item)
         {

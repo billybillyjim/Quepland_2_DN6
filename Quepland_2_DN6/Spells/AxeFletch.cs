@@ -26,24 +26,21 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if (!Player.Instance.HasToolRequirement("Woodcutting"))
+            {
+                MessageManager.AddMessage("You'll need some kind of axe in your inventory to activate this spell.");
+            }
             ISpell spell = this;
             if (!spell.PayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
-            if (Player.Instance.HasToolRequirement("Woodcutting"))
-            {
-                GameState.AddActiveSpell(this, Duration);
-                CooldownRemaining = Cooldown;
-                MessageManager.AddMessage(Message);
-                Player.Instance.GainExperience("Magic", 50);
-            }
-            else
-            {
-                MessageManager.AddMessage("You'll need some kind of axe in your inventory to activate this spell.");
-            }
-            
+
+            GameState.AddActiveSpell(this, Duration);
+            CooldownRemaining = Cooldown;
+            MessageManager.AddMessage(Message);
+            Player.Instance.GainExperience("Magic", 50);
         }
         private Dictionary<string, string> replacements = new Dictionary<string, string>()
         {

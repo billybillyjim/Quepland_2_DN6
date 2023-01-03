@@ -24,15 +24,15 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if (BattleManager.Instance.BattleHasEnded)
+            {
+                MessageManager.AddMessage($"There's nothing you need to endure right now!");
+                return;
+            }
             ISpell spell = this;
             if (!spell.PayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
-                return;
-            }
-            if (BattleManager.Instance.BattleHasEnded)
-            {
-                MessageManager.AddMessage($"There's nothing you need to endure right now!");
                 return;
             }
             GameState.AddActiveSpell(this, Duration);

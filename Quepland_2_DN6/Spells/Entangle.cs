@@ -24,15 +24,15 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if (m.CurrentHP <= 0)
+            {
+                MessageManager.AddMessage($"{m.Name} doesn't need to be entangled to not go anywhere!");
+                return;
+            }
             ISpell spell = this;
             if (!spell.PayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
-                return;
-            }
-            if (m.CurrentHP <= 0)
-            {
-                MessageManager.AddMessage($"{m.Name} doesn't need to be entangled to not go anywhere!");
                 return;
             }
             m.AddStatusEffect(new EntangleEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
