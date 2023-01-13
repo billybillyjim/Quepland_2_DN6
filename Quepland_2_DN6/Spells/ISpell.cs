@@ -86,7 +86,6 @@ public interface ISpell
         var cost = GetMPCost();
         if (Player.Instance.CurrentMP >= cost)
         {
-            Player.Instance.CurrentMP -= cost;
             return true;
         }
         foreach (Ingredient i in Cost)

@@ -466,7 +466,7 @@ public class Player
         else if (skill.Name == "Magic")
         {
             MaxMP += 1;
-            if(skill.GetSkillLevelUnboosted() % 3 == 0 && skill.GetSkillLevelUnboosted() % 3 == 0)
+            if(skill.GetSkillLevelUnboosted() % 3 == 0 && skill.GetSkillLevelUnboosted() % 7 == 0)
             {
                 MaxMP += 8;
                 MessageManager.AddMessage("You feel a great deal better at magic. Your maximum MP has increased by 9!");
@@ -716,6 +716,7 @@ public class Player
             s.ResetExperience();
         }
         CalculateMaxHP();
+        CalculateMaxMP();
         CalculateInventorySpaces();
     }
     public PlayerSaveData GetSaveData()
@@ -761,6 +762,7 @@ public class Player
             }
             CurrentHP = data.CurrentHP;
             CalculateMaxHP();
+            CalculateMaxMP();
             if (GameState.CheckVersion(version))
             {
                 CurrentMP = data.CurrentMP;
@@ -875,7 +877,7 @@ public class Player
     /// <returns></returns>
     public int GetMagicRestoreRate()
     {
-        return Math.Max(10, 50 - Player.Instance.GetLevel("Magic") / 10);
+        return Math.Max(10, 50 - Player.Instance.GetLevel("Magic") / 4);
     }
 }
 

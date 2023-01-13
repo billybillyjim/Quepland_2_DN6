@@ -81,12 +81,15 @@
 
     public void ToggleAutoCastSpell(ISpell spell)
     {
+
         if (spell.CanPayCost() && GameState.AutoCastSpells.Contains(spell) == false)
         {
+            MessageManager.AddMessage($"You begin autocasting {spell.Name}.");
             GameState.AutoCastSpells.Add(spell);
         }
-        else
+        else if(GameState.CancelAutoCastSpells.Contains(spell) == false)
         {
+            MessageManager.AddMessage($"You stop autocasting {spell.Name}.");
             GameState.CancelAutoCastSpells.Add(spell);
         }
     }
@@ -105,7 +108,7 @@
             spell.Cast(Player.Instance);
         }
         else if(spell.Target == "Monster"){
-            // spell.Cast(BattleManager.Instance.Target);
+             spell.Cast(BattleManager.Instance.Target);
         }
         else if (spell.Target == "Gather" || spell.Target == "None")
         {

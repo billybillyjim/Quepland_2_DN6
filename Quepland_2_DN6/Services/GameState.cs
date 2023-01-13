@@ -137,6 +137,7 @@ using System.Threading.Tasks;
     public static HCDeathInfo HCDeathInfo;
 
     public static List<ISpell> ActiveSpells = new List<ISpell>();
+    public static List<ISpell> CancelActiveSpells = new List<ISpell>();
     public static List<ISpell> AutoCastSpells = new List<ISpell>();
     public static List<ISpell> CancelAutoCastSpells = new List<ISpell>();
     public void Start()
@@ -399,7 +400,11 @@ using System.Threading.Tasks;
 
     public void TickActiveSpells()
     {
+        ActiveSpells.RemoveAll(x => CancelActiveSpells.Contains(x));
+        CancelActiveSpells = new List<ISpell>();
+
         var spellsToRemove = new List<ISpell>();
+
         foreach(ISpell spell in ActiveSpells)
         {
             if(spell.Target == "Player")
@@ -432,6 +437,10 @@ using System.Threading.Tasks;
             }
         }
         ActiveSpells.RemoveAll(x => spellsToRemove.Contains(x));
+        foreach(ISpell spell in CancelAutoCastSpells)
+        {
+            MessageManager.AddMessage($"You stop autocasting {spell.Name}");
+        }
         AutoCastSpells.RemoveAll(x => CancelAutoCastSpells.Contains(x));
         CancelAutoCastSpells = new List<ISpell>();
 
@@ -444,6 +453,7 @@ using System.Threading.Tasks;
         {
             if (spell.CooldownRemaining <= 0 && spell.CanPayCost())
             {
+                MessageManager.AddMessage($"Casting {spell.Name}");
                 if (spell.Target == "Inventory")
                 {
                     spell.Cast(Player.Instance.Inventory);
@@ -1358,6 +1368,11 @@ using System.Threading.Tasks;
         }
     }
     public static void AddActiveSpell(ISpell spell, int duration)
+    {
+        spell.TimeRemaining = duration;
+        ActiveSpells.Add(spell);
+    }
+    public static void RemoveActiveSpell(ISpell spell, int duration)
     {
         spell.TimeRemaining = duration;
         ActiveSpells.Add(spell);

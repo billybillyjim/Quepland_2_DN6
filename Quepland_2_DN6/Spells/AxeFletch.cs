@@ -29,6 +29,8 @@
             if (!Player.Instance.HasToolRequirement("Woodcutting"))
             {
                 MessageManager.AddMessage("You'll need some kind of axe in your inventory to activate this spell.");
+                GameState.CancelAutoCastSpells.Add(this);
+                return;
             }
             ISpell spell = this;
             if (!spell.CanPayCost())

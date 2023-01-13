@@ -28,6 +28,7 @@
             if (!Player.Instance.HasToolRequirement("Fishing"))
             {
                 MessageManager.AddMessage("You'll need some kind of fishing gear in your inventory to activate this spell.");
+                GameState.CancelAutoCastSpells.Add(this);
                 return;
             }
             ISpell spell = this;
@@ -47,7 +48,7 @@
             if (item.Category == "Fishing")
             {
                 inventory.AddItem(item);
-                MessageManager.AddMessage($"An extra {item.Name} appears in your inventory.");
+                MessageManager.AddMessage($"An extra {item.Name} leaps out into your inventory!");
                 Data = item.UniqueID;
             }
         }

@@ -277,6 +277,8 @@ public class BattleManager
                 if (GameState.PlayerIsUnderSpell("Endure"))
                 {
                     Player.Instance.CurrentHP = 1;
+                    GameState.RemoveActiveSpell("Endure");
+
                 }
                 else if(CurrentOpponents.Count > 0)
                 {

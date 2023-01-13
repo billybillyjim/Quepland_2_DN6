@@ -40,6 +40,26 @@
     ]
   },
   {
+    "Name": "Consume",
+    "Description": "Consume the essence of much food at once.",
+    "Power": 0,
+    "Message": "The food trembles and begins to swirl around you. As it fizzles away, you feel it strengthening you!",
+    "Duration": 1,
+    "Target": "Item",
+    "Data": null,
+    "Cooldown": 50,
+    "Cost": [
+      {
+        "itemName": "Alimental Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Perpetual Seed",
+        "amount": 1
+      }
+    ]
+  },
+  {
     "Name": "Dehydrate",
     "Description": "Withdraw water from objects.",
     "Power": 0,
@@ -88,6 +108,46 @@
     "Target": "Item",
     "Data": null,
     "Cooldown": 20,
+    "Cost": [
+      {
+        "itemName": "Etheral Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Corporeal Seed",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "Name": "Endure",
+    "Description": "Prepare your body to withstand the next hit.",
+    "Power": 0,
+    "Message": "You feel prepared to handle the next hit!",
+    "Duration": 30,
+    "Target": "Player",
+    "Data": null,
+    "Cooldown": 90,
+    "Cost": [
+      {
+        "itemName": "Etheral Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Corporeal Seed",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "Name": "Entangle",
+    "Description": "Prepare your body to withstand the next hit.",
+    "Power": 0,
+    "Message": "You feel prepared to handle the next hit!",
+    "Duration": 30,
+    "Target": "Monster",
+    "Data": null,
+    "Cooldown": 90,
     "Cost": [
       {
         "itemName": "Etheral Seed",

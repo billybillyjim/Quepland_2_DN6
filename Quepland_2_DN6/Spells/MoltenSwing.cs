@@ -47,6 +47,7 @@
             if (!Player.Instance.HasToolRequirement("Mining"))
             {
                 MessageManager.AddMessage("You'll need some kind of pickaxe in your inventory to activate this spell.");
+                GameState.CancelAutoCastSpells.Add(this);
                 return;
             }
             ISpell spell = this;
