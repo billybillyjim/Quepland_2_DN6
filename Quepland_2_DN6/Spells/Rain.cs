@@ -25,11 +25,12 @@
                 return;
             }
             ISpell spell = this;
-            if (!spell.PayCost())
+            if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
+            spell.PayCost();
             var buckets = ItemManager.Instance.GetItemByUniqueID("Empty Bucket0");
             var filled = ItemManager.Instance.GetItemByUniqueID("Bucket of Water0");
             var amt = inventory.RemoveItems(buckets, 1000);

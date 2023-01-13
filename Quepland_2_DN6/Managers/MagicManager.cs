@@ -37,7 +37,11 @@ public class MagicManager
             Console.WriteLine(sd);
             if(sd.Target == "Monster" || sd.Target == "Player")
             {
-                CombatSpells.Add(spell);
+                if(sd.Name != "Breathe")
+                {
+                    CombatSpells.Add(spell);
+                }
+                
             }
         }
         

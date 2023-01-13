@@ -869,5 +869,13 @@ public class Player
         }
         Inventory.SetSize(spaces);
     }
+    /// <summary>
+    /// The rate in game ticks that magic is restored.
+    /// </summary>
+    /// <returns></returns>
+    public int GetMagicRestoreRate()
+    {
+        return Math.Max(10, 50 - Player.Instance.GetLevel("Magic") / 10);
+    }
 }
 

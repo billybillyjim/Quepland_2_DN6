@@ -30,13 +30,14 @@
             {
                 if(item.TanningInfo != null)
                 {
-                    if (!spell.PayCost())
+                    if (!spell.CanPayCost())
                     {
                         MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                         return;
                     }
                     if (inventory.RemoveItems(item, 1) == 1)
                     {
+                        spell.PayCost();
                         inventory.AddItem(item.TanningInfo.TansInto);
                         CooldownRemaining = Cooldown;
                         MessageManager.AddMessage(Message + item.Name);
@@ -46,13 +47,14 @@
                 }
                 else if(item.Name == "Bottle of Water")
                 {
-                    if (!spell.PayCost())
+                    if (!spell.CanPayCost())
                     {
                         MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                         return;
                     }
                     if (inventory.RemoveItems(item, 1) == 1)
                     {
+                        spell.PayCost();
                         inventory.AddItem(ItemManager.Instance.GetItemByUniqueID("Empty Bottle0"));
                         CooldownRemaining = Cooldown;
                         MessageManager.AddMessage(Message + item.Name);
@@ -62,13 +64,14 @@
                 }
                 else if(item.Name == "Bucket of Water")
                 {
-                    if (!spell.PayCost())
+                    if (!spell.CanPayCost())
                     {
                         MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                         return;
                     }
                     if (inventory.RemoveItems(item, 1) == 1)
                     {
+                        spell.PayCost();
                         inventory.AddItem(ItemManager.Instance.GetItemByUniqueID("Empty Bucket0"));
                         CooldownRemaining = Cooldown;
                         MessageManager.AddMessage(Message + item.Name);

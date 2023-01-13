@@ -137,6 +137,8 @@ using System.Threading.Tasks;
     public static HCDeathInfo HCDeathInfo;
 
     public static List<ISpell> ActiveSpells = new List<ISpell>();
+    public static List<ISpell> AutoCastSpells = new List<ISpell>();
+    public static List<ISpell> CancelAutoCastSpells = new List<ISpell>();
     public void Start()
     {
         //Console.WriteLine(CheckVersion("1.1.1b", "1.1.1b") + ":1.1.1b");
@@ -242,7 +244,7 @@ using System.Threading.Tasks;
         if (!Player.Instance.JustDied)
         {
             Player.Instance.TickStatusEffects();
-            if(CurrentTick % Math.Max(10, 50 - Player.Instance.GetLevel("Magic") / 10) == 0)
+            if(CurrentTick % Player.Instance.GetMagicRestoreRate() == 0)
             {
                 Player.Instance.CurrentMP++;
                 if(Player.Instance.CurrentMP > Player.Instance.MaxMP)
@@ -430,10 +432,42 @@ using System.Threading.Tasks;
             }
         }
         ActiveSpells.RemoveAll(x => spellsToRemove.Contains(x));
+        AutoCastSpells.RemoveAll(x => CancelAutoCastSpells.Contains(x));
+        CancelAutoCastSpells = new List<ISpell>();
 
         foreach(ISpell spell in MagicManager.Instance.Spells)
         {
             spell.CooldownRemaining--;
+        }
+
+        foreach(ISpell spell in AutoCastSpells)
+        {
+            if (spell.CooldownRemaining <= 0 && spell.CanPayCost())
+            {
+                if (spell.Target == "Inventory")
+                {
+                    spell.Cast(Player.Instance.Inventory);
+                }
+                else if (spell.Target == "Item")
+                {
+                    MessageManager.AddMessage("You're not quite sure how to autocast this spell.");
+                }
+                else if (spell.Target == "Player")
+                {
+                    spell.Cast(Player.Instance);
+                }
+                else if (spell.Target == "Monster")
+                {
+                    if(BattleManager.Instance.BattleHasEnded == false && BattleManager.Instance.Target != null)
+                    {
+                        spell.Cast(BattleManager.Instance.Target);
+                    }                     
+                }
+                else if (spell.Target == "Gather" || spell.Target == "None")
+                {
+                    spell.Cast();
+                }
+            }
         }
     }
 
@@ -735,6 +769,10 @@ using System.Threading.Tasks;
         int healAmount = Math.Min(Player.Instance.MaxHP - Player.Instance.CurrentHP, CurrentFood.FoodInfo.HealAmount);
         Player.Instance.CurrentHP += healAmount;
         Player.Instance.GainExperience("HP", healAmount * 3);
+
+        int magicAmount = Math.Min(Player.Instance.MaxMP - Player.Instance.CurrentMP, CurrentFood.FoodInfo.MagicAmount);
+        Player.Instance.CurrentMP += magicAmount;
+
         if (Player.Instance.CurrentHP <= 0)
         {
             Player.Instance.Die("Food Poisoning");

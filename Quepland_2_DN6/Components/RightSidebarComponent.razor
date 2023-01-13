@@ -18,7 +18,7 @@
 
             </div>
             <div class="progress" style="width:100%;border-radius:0px;position:relative;background-color:dimgray;height:15px;"
-                 @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e,"Magic Regeneration", "" + (Math.Max(10, 50 - Player.Instance.GetLevel("Magic") / 10) * (float)GameState.GameSpeed / 1000).ToString("N2") + " Seconds")))"
+                 @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e,"Magic Regeneration", "" + (Player.Instance.GetMagicRestoreRate() * (float)GameState.GameSpeed / 1000).ToString("N2") + " Seconds / Point")))"
                     @onmouseout="@(new Action(() => GameState.HideTooltip()))">
                 <div class="progress-bar" style="width:@(GetPlayerMPPercent());background-color:rebeccapurple;position:relative">
 

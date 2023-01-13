@@ -36,11 +36,12 @@
                 return;
             }
             ISpell spell = this;
-            if (!spell.PayCost())
+            if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
+            spell.PayCost();
             int amt = inventory.GetNumberOfUnlockedItem(item);
             GameState.Eat(item, amt, amt * item.FoodInfo.HealDuration);
             CooldownRemaining = Cooldown;

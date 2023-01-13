@@ -25,11 +25,12 @@
                 return;
             }
             ISpell spell = this;
-            if (!spell.PayCost())
+            if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
+            spell.PayCost();
             m.AddStatusEffect(new ReflectEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
             CooldownRemaining = Cooldown;
             MessageManager.AddMessage(m.Name + " grows drowsy, it's doing everything it can to just stay awake!");
@@ -42,11 +43,12 @@
                 return;
             }
             ISpell spell = this;
-            if (!spell.PayCost())
+            if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
+            spell.PayCost();
             GameState.AddActiveSpell(this, Duration);
             CooldownRemaining = Cooldown;
             MessageManager.AddMessage(Message);

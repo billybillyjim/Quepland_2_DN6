@@ -11,7 +11,9 @@
         <div class="unselectable" style="@GetBG(spell);@GetBorder(spell);margin:2px;height:50px;width:50px;position:relative;box-sizing: border-box;border-radius:0.25rem;" draggable="false">
 
             <img style="height: 46px;width: 46px; margin:2.5px;" src="/data/Images/@(spell.Name).png" draggable="false"
-                 @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowItemTooltip(e, spell.Description, spell.GetCostText())))"
+             oncontextmenu="return false;"
+             onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args, spell)))"
+                 @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowItemTooltip(e, spell.Name, spell.Description + "\n" + spell.GetCostText())))"
                  @onmouseout="@(new Action(() => GameState.HideTooltip()))"
                  @onclick="@(() => CastSpell(spell))" />
             
@@ -69,12 +71,24 @@
             var h = (int)((spell.CooldownRemaining / (double)spell.Cooldown) * 100);
             var cooldown = (int)((Math.Max(spell.CooldownRemaining, 0) / Math.Max(spell.Cooldown, 1)) * 100);
             var showCooldown = cooldown > 0;
-                      
+
             bg = $"background: linear-gradient(0deg, #DDD {(showCooldown ? cooldown : h)}%, {(showCooldown ? cooldownColor : color)} {(showCooldown ? cooldown : h)}%)";
         }
 
 
         return bg;
+    }
+
+    public void ToggleAutoCastSpell(ISpell spell)
+    {
+        if (spell.CanPayCost() && GameState.AutoCastSpells.Contains(spell) == false)
+        {
+            GameState.AutoCastSpells.Add(spell);
+        }
+        else
+        {
+            GameState.CancelAutoCastSpells.Add(spell);
+        }
     }
 
     public void CastSpell(ISpell spell){
@@ -91,7 +105,7 @@
             spell.Cast(Player.Instance);
         }
         else if(spell.Target == "Monster"){
-           // spell.Cast(BattleManager.Instance.Target);
+            // spell.Cast(BattleManager.Instance.Target);
         }
         else if (spell.Target == "Gather" || spell.Target == "None")
         {
@@ -108,6 +122,24 @@
         }
 
 
+    }
+    public void ShowMenu(MouseEventArgs args, ISpell spell)
+    {
+        if (args.Button == 2)
+        {
+            GameState.CurrentContextMenu = new ContextMenu();
+
+            GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Cast " + spell.Name, new Action(() => CastSpell(spell))));
+            if (GameState.AutoCastSpells.Contains(spell))
+            {
+                GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Cancel Autocast " + spell.Name, new Action(() => ToggleAutoCastSpell(spell))));
+            }
+            else
+            {
+                GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Autocast " + spell.Name, new Action(() => ToggleAutoCastSpell(spell))));
+            }
+            GameState.ShowContextMenu(args);
+        }
     }
     protected override void OnInitialized()
     {

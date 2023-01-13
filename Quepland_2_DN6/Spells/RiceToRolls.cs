@@ -33,11 +33,12 @@
                 return;
             }
             ISpell spell = this;
-            if (!spell.PayCost())
+            if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
+            spell.PayCost();
             int removed = inventory.RemoveAllOfItem(rice);
             inventory.AddMultipleOfItem(rolls, removed);
             CooldownRemaining = Cooldown;

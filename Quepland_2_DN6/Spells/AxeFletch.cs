@@ -31,12 +31,12 @@
                 MessageManager.AddMessage("You'll need some kind of axe in your inventory to activate this spell.");
             }
             ISpell spell = this;
-            if (!spell.PayCost())
+            if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
-
+            spell.PayCost();
             GameState.AddActiveSpell(this, Duration);
             CooldownRemaining = Cooldown;
             MessageManager.AddMessage(Message);

@@ -36,11 +36,12 @@
                 return;
             }
             ISpell spell = this;
-            if (!spell.PayCost())
+            if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
+            spell.PayCost();
             var dmg = Power * Player.Instance.GetLevel("Magic");
             m.AddStatusEffect(new DrainEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = dmg, Speed = 5}));
             CooldownRemaining = Cooldown;

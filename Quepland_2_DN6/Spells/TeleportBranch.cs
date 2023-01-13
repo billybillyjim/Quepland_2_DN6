@@ -24,13 +24,14 @@
                 return;
             }
             ISpell spell = this;
-            if (!spell.PayCost())
+            if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
             if (inventory.HasItem(item))
             {
+                spell.PayCost();
                 var newItem = ItemManager.Instance.GetItemByUniqueID("Transit Branch0");
 
                 if (inventory.RemoveItems(item, 1) == 1)

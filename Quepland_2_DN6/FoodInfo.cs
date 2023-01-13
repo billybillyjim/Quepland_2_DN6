@@ -3,6 +3,7 @@
 public class FoodInfo
 {
 	public int HealAmount { get; set; }
+	public int MagicAmount { get; set; } = 0;
 	/// <summary>
 	/// The number of heals per item eaten. Decrements once every HealSpeed ticks.
 	/// </summary>

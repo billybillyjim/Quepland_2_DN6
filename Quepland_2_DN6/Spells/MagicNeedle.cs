@@ -25,11 +25,12 @@
                 return;
             }
             ISpell spell = this;
-            if (!spell.PayCost())
+            if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
+            spell.PayCost();
             CooldownRemaining = Cooldown;
             Player.Instance.GainExperience("Magic", 225);
             MessageManager.AddMessage(Message);

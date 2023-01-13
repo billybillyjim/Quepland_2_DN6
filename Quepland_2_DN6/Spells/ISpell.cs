@@ -31,6 +31,7 @@ public interface ISpell
 
     public string Data { get; set; } 
 	public bool Unlocked { get; set; } 
+
     public void Cast() { }
     public void Cast(Monster m) { }
     public void Cast(Player player) { }
@@ -80,7 +81,7 @@ public interface ISpell
         }
         return Math.Max(1, cost / 75);
     }
-    public bool PayCost()
+    public bool CanPayCost()
     {
         var cost = GetMPCost();
         if (Player.Instance.CurrentMP >= cost)
@@ -88,21 +89,30 @@ public interface ISpell
             Player.Instance.CurrentMP -= cost;
             return true;
         }
-        foreach(Ingredient i in Cost)
+        foreach (Ingredient i in Cost)
         {
-            if(Player.Instance.Inventory.GetNumberOfUnlockedItem(i.Item) < i.Amount)
+            if (Player.Instance.Inventory.GetNumberOfUnlockedItem(i.Item) < i.Amount)
             {
                 return false;
             }
         }
-        foreach(Ingredient i in Cost)
+        return true;
+    }
+    public bool PayCost()
+    {
+        if (CanPayCost())
         {
-            if(i.Amount != Player.Instance.Inventory.RemoveItems(i.Item, i.Amount))
+            foreach (Ingredient i in Cost)
             {
-                return false;
+                if (i.Amount != Player.Instance.Inventory.RemoveItems(i.Item, i.Amount))
+                {
+                    return false;
+                }
+
             }
-            
+
         }
+        
         return true;
     }
 }

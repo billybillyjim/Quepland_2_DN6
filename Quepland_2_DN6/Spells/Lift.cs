@@ -27,13 +27,15 @@
             if (Player.Instance.GetWeaponAttackSpeed() <= 15)
             {
                 MessageManager.AddMessage("Your weapon feels lighter now, but it doesn't seem to make much of a difference. Maybe with a heavier weapon...");
+
             }
             ISpell spell = this;
-            if (!spell.PayCost())
+            if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
+            spell.PayCost();
             GameState.AddActiveSpell(this, Duration);
             CooldownRemaining = Cooldown;
             Player.Instance.GainExperience("Magic", 250);
