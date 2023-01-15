@@ -24,9 +24,19 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if(m == null)
+            {
+                MessageManager.AddMessage($"Nothing needs to be entangled!");
+                return;
+            }
             if (m.CurrentHP <= 0)
             {
                 MessageManager.AddMessage($"{m.Name} doesn't need to be entangled to not go anywhere!");
+                return;
+            }
+            if (BattleManager.Instance.BattleHasEnded)
+            {
+                MessageManager.AddMessage($"{m.Name} is long gone!");
                 return;
             }
             ISpell spell = this;
@@ -38,7 +48,7 @@
             spell.PayCost();
             m.AddStatusEffect(new EntangleEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
             CooldownRemaining = Cooldown;
-            MessageManager.AddMessage(m.Name + "is entangle by a magical vine!");
+            MessageManager.AddMessage(m.Name + Message);
             Player.Instance.GainExperience("Magic", Power);
         } 
 

@@ -106,6 +106,7 @@ using System.Threading.Tasks;
     public static bool CompactInventoryView;
     public static bool HideLockedItems;
     public static bool ShowBackgrounds = true;
+    public static int ExtractWarningValue = 1000;
 
     public static int TicksToNextHeal;
     public static int HealingTicks;
@@ -137,9 +138,10 @@ using System.Threading.Tasks;
     public static HCDeathInfo HCDeathInfo;
 
     public static List<ISpell> ActiveSpells = new List<ISpell>();
-    public static List<ISpell> CancelActiveSpells = new List<ISpell>();
+    public static List<string> CancelActiveSpells = new List<string>();
     public static List<ISpell> AutoCastSpells = new List<ISpell>();
     public static List<ISpell> CancelAutoCastSpells = new List<ISpell>();
+    public static GameItem LastAutoCastItemTarget { get; set; }
     public void Start()
     {
         //Console.WriteLine(CheckVersion("1.1.1b", "1.1.1b") + ":1.1.1b");
@@ -400,8 +402,8 @@ using System.Threading.Tasks;
 
     public void TickActiveSpells()
     {
-        ActiveSpells.RemoveAll(x => CancelActiveSpells.Contains(x));
-        CancelActiveSpells = new List<ISpell>();
+        ActiveSpells.RemoveAll(x => CancelActiveSpells.Contains(x.Name));
+        CancelActiveSpells = new List<string>();
 
         var spellsToRemove = new List<ISpell>();
 
@@ -453,14 +455,13 @@ using System.Threading.Tasks;
         {
             if (spell.CooldownRemaining <= 0 && spell.CanPayCost())
             {
-                MessageManager.AddMessage($"Casting {spell.Name}");
                 if (spell.Target == "Inventory")
                 {
                     spell.Cast(Player.Instance.Inventory);
                 }
                 else if (spell.Target == "Item")
                 {
-                    MessageManager.AddMessage("You're not quite sure how to autocast this spell.");
+                    spell.Cast(Player.Instance.Inventory, LastAutoCastItemTarget);                    
                 }
                 else if (spell.Target == "Player")
                 {
@@ -1330,7 +1331,8 @@ using System.Threading.Tasks;
             HideLockedItems = HideLockedItems,
             CompactInventory = CompactInventoryView,
             ShowBackgrounds = ShowBackgrounds,
-            UseOldBankView = UseOldBank
+            UseOldBankView = UseOldBank,
+            ExtractWarningValue = ExtractWarningValue
         };
     }
     public static void LoadSaveData(GameStateSaveData data)
@@ -1340,7 +1342,8 @@ using System.Threading.Tasks;
         CompactInventoryView = data.CompactInventory;
         ShowBackgrounds = data.ShowBackgrounds;
         CurrentArtisanTask = data.CurrentTask;
-        UseOldBank = data.UseOldBankView;
+        UseOldBank = data.UseOldBankView;      
+        ExtractWarningValue = data.ExtractWarningValue;
         if (data.Location == null || data.Location == "" || data.Location == "Battle")
         {
             Location = "QueplandFields";
@@ -1372,10 +1375,9 @@ using System.Threading.Tasks;
         spell.TimeRemaining = duration;
         ActiveSpells.Add(spell);
     }
-    public static void RemoveActiveSpell(ISpell spell, int duration)
+    public static void RemoveActiveSpellByName(string spell)
     {
-        spell.TimeRemaining = duration;
-        ActiveSpells.Add(spell);
+        CancelActiveSpells.Add(spell);
     }
     public static void LoadAFKActionData(AFKAction action)
     {       

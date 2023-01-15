@@ -25,6 +25,11 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if (m == null)
+            {
+                MessageManager.AddMessage($"Nothing can be drained!");
+                return;
+            }
             if (m.CurrentHP <= 0)
             {
                 MessageManager.AddMessage($"{m.Name} doesn't have any energy left to drain!");

@@ -29,7 +29,14 @@
 
 @if (showInventory && currentSpell != null)
 {
-    <div>Select an item to cast @currentSpell.Name on.</div>
+    @if(spellToAutoCast == null)
+    {
+        <div>Select an item to cast @currentSpell.Name on.</div>
+    }
+    else
+    {
+        <div>Select an item to begin autocasting @spellToAutoCast.Name on.</div>
+    }
     <div class="main-inventory custom-scroll">
         @foreach (KeyValuePair<GameItem, int> item in Player.Instance.Inventory.GetUniqueItems().OrderBy(x => x.Key.ID))
         {
@@ -49,6 +56,7 @@
 
 @code {
     private bool showInventory;
+    private ISpell spellToAutoCast;
     private ISpell currentSpell = null;
 
     string color = "rgba(0,212,255,1)";
@@ -79,19 +87,27 @@
         return bg;
     }
 
+    public void ChooseItemAutoCastSpell(ISpell spell)
+    {
+        showInventory = true;
+        spellToAutoCast = spell;
+        currentSpell = spell;
+    }
+
     public void ToggleAutoCastSpell(ISpell spell)
     {
 
         if (spell.CanPayCost() && GameState.AutoCastSpells.Contains(spell) == false)
         {
+
             MessageManager.AddMessage($"You begin autocasting {spell.Name}.");
             GameState.AutoCastSpells.Add(spell);
         }
         else if(GameState.CancelAutoCastSpells.Contains(spell) == false)
         {
-            MessageManager.AddMessage($"You stop autocasting {spell.Name}.");
             GameState.CancelAutoCastSpells.Add(spell);
         }
+        spellToAutoCast = null;
     }
 
     public void CastSpell(ISpell spell){
@@ -101,14 +117,14 @@
         else if (spell.Target == "Item")
         {
             showInventory = true;
-            spell.Cast(Player.Instance);
+
             currentSpell = spell;
         }
         else if(spell.Target == "Player"){
             spell.Cast(Player.Instance);
         }
         else if(spell.Target == "Monster"){
-             spell.Cast(BattleManager.Instance.Target);
+            spell.Cast(BattleManager.Instance.Target);
         }
         else if (spell.Target == "Gather" || spell.Target == "None")
         {
@@ -120,7 +136,16 @@
     {
         if (spell.Target == "Item")
         {
-            spell.Cast(Player.Instance.Inventory, item);
+            if(spell == spellToAutoCast)
+            {
+                GameState.LastAutoCastItemTarget = item;
+                ToggleAutoCastSpell(spell);
+            }
+            else
+            {
+                spell.Cast(Player.Instance.Inventory, item);
+            }
+            
             GameState.UpdateState();
         }
 
@@ -139,7 +164,15 @@
             }
             else
             {
-                GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Autocast " + spell.Name, new Action(() => ToggleAutoCastSpell(spell))));
+                if(spell.Target == "Item")
+                {
+                    GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Autocast " + spell.Name, new Action(() => ChooseItemAutoCastSpell(spell))));
+                }
+                else
+                {
+                    GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Autocast " + spell.Name, new Action(() => ToggleAutoCastSpell(spell))));
+                }
+                
             }
             GameState.ShowContextMenu(args);
         }

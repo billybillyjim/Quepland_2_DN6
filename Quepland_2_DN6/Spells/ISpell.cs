@@ -99,8 +99,14 @@ public interface ISpell
     }
     public bool PayCost()
     {
+        var cost = GetMPCost();
         if (CanPayCost())
         {
+            if (Player.Instance.CurrentMP >= cost)
+            {
+                Player.Instance.CurrentMP -= cost;
+                return true;
+            }
             foreach (Ingredient i in Cost)
             {
                 if (i.Amount != Player.Instance.Inventory.RemoveItems(i.Item, i.Amount))

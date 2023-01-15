@@ -41,11 +41,11 @@
                     }
                     else if (item.AlchemyInfo.QueplarValue == 0 && item.AlchemyInfo.QueplarMultiplier != 0)
                     {
-                        MessageManager.AddMessage($"The {item.Name} quivers. A blast of knowledge echoes throughout your mind. You see it clearly. A number forms... {item.AlchemyInfo.QueplarMultiplier}.");
+                        MessageManager.AddMessage($"The {item.Name} quivers. A blast of knowledge echoes throughout your mind. You see it clearly. An x and a number forms... x{item.AlchemyInfo.QueplarMultiplier}.");
                     }
                     else if (item.AlchemyInfo.QueplarValue != 0 && item.AlchemyInfo.QueplarMultiplier != 0)
                     {
-                        MessageManager.AddMessage($"The {item.Name} quivers. A blast of knowledge echoes throughout your mind. You see them clearly. Two numbers form... {item.AlchemyInfo.QueplarValue} and {item.AlchemyInfo.QueplarMultiplier}.");
+                        MessageManager.AddMessage($"The {item.Name} quivers. A blast of knowledge echoes throughout your mind. You see them clearly. Two numbers form... {item.AlchemyInfo.QueplarValue} and x{item.AlchemyInfo.QueplarMultiplier}.");
                     }
                     Player.Instance.GainExperience("Magic", 120);
                 }

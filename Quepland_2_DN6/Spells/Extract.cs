@@ -24,43 +24,89 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
+            if(item == null)
+            {
+                MessageManager.AddMessage($"WARNING:Item was null.");
+                return;
+            }
+            if(item.IsSellable == false || item.Category == "QuestItems")
+            {
+                MessageManager.AddMessage($"You aren't sure why, but you feel like it's a bad idea to cast this spell on this item, so you decide not to.");
+                return;
+            }
             ISpell spell = this;
             if (!spell.CanPayCost())
             {
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
+                GameState.RemoveActiveSpellByName(spell.Name);
                 return;
             }
-            if (inventory.HasItem(item))
+            if(item.Value >= GameState.ExtractWarningValue)
             {
-                spell.PayCost();
-                var components = GetComponents(item);
-
-                if(components.Count > 0)
-                {
-                    int req = components.Count;
-                    foreach(KeyValuePair<GameItem, int> i in components)
-                    {
-                        if (inventory.HasItem(i.Key))
-                        {
-                            req--;
-                        }
-                    }
-                    if(inventory.GetAvailableSpaces() >= req)
-                    {
-                        if(inventory.RemoveItems(item, 1) == 1)
-                        {
-                            foreach(KeyValuePair<GameItem, int> i in components)
-                            {
-                                inventory.AddMultipleOfItem(i.Key, i.Value);
-                            }
-                        }
-                    }
-                    Player.Instance.GainExperience("Magic", item.Value / 20);
-                }
-                CooldownRemaining = Cooldown;
-                MessageManager.AddMessage(Message);
+                MessageManager.AddMessage($"This item is worth more than " + GameState.ExtractWarningValue + ". If you are sure you want to extract it into magic seeds, you can increase the limit in the settings.");
+                GameState.RemoveActiveSpellByName(spell.Name);
+                return;
             }
-            
+            if (!inventory.HasItem(item))
+            {
+                MessageManager.AddMessage($"You have run out of {item.GetName(2)}.");
+                GameState.RemoveActiveSpellByName(spell.Name);
+                return;
+            }
+            if (inventory.GetNumberOfUnlockedItem(item) == 0)
+            {
+                MessageManager.AddMessage($"You can't extract items that are locked.");
+                GameState.RemoveActiveSpellByName(spell.Name);
+                return;
+            }
+            var components = GetComponents(item);
+            int req = components.Count;
+
+            if (req == 0)
+            {
+                MessageManager.AddMessage($"{item.Name} does not extract into anything.");
+                return;
+            }
+            foreach (KeyValuePair<GameItem, int> i in components)
+            {
+                if (inventory.HasItem(i.Key))
+                {
+                    req--;
+                }
+            }
+            if (inventory.GetAvailableSpaces() < req)
+            {
+                MessageManager.AddMessage($"You don't have enough inventory space to cast this spell.");
+                GameState.RemoveActiveSpellByName(spell.Name);
+                return;
+            }  
+            if(inventory.RemoveItems(item, 1) != 1)
+            {
+                MessageManager.AddMessage($"You can't extract items that are locked.");
+                GameState.RemoveActiveSpellByName(spell.Name);
+                return;
+            }
+            foreach (KeyValuePair<GameItem, int> i in components)
+            {
+                inventory.AddMultipleOfItem(i.Key, i.Value);
+            }
+
+            spell.PayCost();
+
+            Player.Instance.GainExperience("Magic", item.Value / 20);
+            MessageManager.AddMessage("You get " + GetComponentsString(components) + ", destroying the " + item.GetName(1) + " in the process.");      
+       
+            CooldownRemaining = Cooldown;
+        }
+
+        private string GetComponentsString(Dictionary<GameItem, int> components)
+        {
+            string output = "";
+            foreach(KeyValuePair<GameItem, int> pair in components)
+            {
+                output += pair.Value + " " + pair.Key.GetName(pair.Value);
+            }
+            return output;
         }
 
         private Dictionary<GameItem, int> GetComponents(GameItem item)
@@ -103,7 +149,7 @@
             {
                 int amt = (int)Math.Log10(item.Value) * 2 ;
                 components.Add(ItemManager.Instance.GetItem("Warmth Seed", 0, ""), amt);
-                components.Add(ItemManager.Instance.GetItem("Rejuvinating Seed", 0, ""), amt);
+                components.Add(ItemManager.Instance.GetItem("Rejuvinal Seed", 0, ""), amt);
             }
             else if (item.Category == "Elements")
             {
@@ -128,7 +174,7 @@
             else if (item.Category == "Hunting")
             {
                 int amt = (int)Math.Log10(item.Value);
-                components.Add(ItemManager.Instance.GetItem("Rejuvinating Seed", 0, ""), amt);
+                components.Add(ItemManager.Instance.GetItem("Rejuvinal Seed", 0, ""), amt);
 
             }
             else if (item.Category == "Jerkies")
@@ -140,7 +186,7 @@
             {
                 int amt = (int)Math.Log10(item.Value);
                 components.Add(ItemManager.Instance.GetItem("Warmth Seed", 0, ""), amt);
-                components.Add(ItemManager.Instance.GetItem("Rejuvinating Seed", 0, ""), amt);
+                components.Add(ItemManager.Instance.GetItem("Rejuvinal Seed", 0, ""), amt);
 
             }
             else if (item.Category == "Magic")
@@ -172,7 +218,7 @@
             else if (item.Category == "Sushi")
             {
                 int amt = (int)Math.Log10(item.Value);
-                components.Add(ItemManager.Instance.GetItem("Rejuvinating Seed", 0, ""), amt);
+                components.Add(ItemManager.Instance.GetItem("Rejuvinal Seed", 0, ""), amt);
             }
             else if (item.Category == "Textiles")
             {

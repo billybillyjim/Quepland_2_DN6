@@ -10,4 +10,6 @@ public class GameStateSaveData
 	public bool HideLockedItems { get; set; }
 	public bool ShowBackgrounds { get; set; }
 	public bool UseOldBankView { get; set; }
+
+	public int ExtractWarningValue { get; set; } = 1000;
 }

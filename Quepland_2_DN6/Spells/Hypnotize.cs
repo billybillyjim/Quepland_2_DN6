@@ -43,7 +43,7 @@
             spell.PayCost();
             m.AddStatusEffect(new HypnotizeEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
             CooldownRemaining = Cooldown;
-            MessageManager.AddMessage(m.Name + " grows drowsy, it's doing everything it can to just stay awake!");
+            MessageManager.AddMessage(m.Name + Message);
             Player.Instance.GainExperience("Magic", 50);
         }
 

@@ -28,8 +28,19 @@
         </div>
         <div>
             <button class="btn btn-primary" style="margin:10px;padding:10px;" @onclick="@(() => ToggleOldBankMode())">Toggle Old Bank Mode</button> 
-            <div>(@(GameState.UseOldBank ? "Currently: On" : "Currently: Off"))</div>
-            This uses the old method of bank viewing. The new bank view exists because the bank used to be very slow, but Blazor has been updated and it should be a bit more performant now. Use this if you cannot scroll or the new bank method does not work for you. Let me know if it runs nicely, it may be time to just go back to regular rendering. 
+            (@(GameState.UseOldBank ? "Currently: On" : "Currently: Off"))
+            <div>                      
+                This uses the old method of bank viewing.
+                The new bank view exists because the bank used to be very slow, 
+                but Blazor has been updated and it should be a bit more performant now. 
+                Use this if you cannot scroll or the new bank method does not work for you. 
+                Let me know if it runs nicely, it may be time to just go back to regular rendering.
+            </div>
+        </div>
+        <div style="margin-top:10px;padding:10px;">
+            <label for="extract-value">Maximum Extract Value</label>
+            <input id="extract-value" type="number" min="1" @bind-value="@GameState.ExtractWarningValue" />
+            This is the most expensive item value you can use the extract spell on. (Note that an item's value is double the sell value.)
         </div>
     </div>
     <div style="border:solid 1px gray;padding:1em;">

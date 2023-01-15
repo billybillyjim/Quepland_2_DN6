@@ -141,13 +141,73 @@
   },
   {
     "Name": "Entangle",
-    "Description": "Prepare your body to withstand the next hit.",
+    "Description": "Grow vines to entrap an opponent.",
     "Power": 0,
-    "Message": "You feel prepared to handle the next hit!",
+    "Message": " is entangled by a magical vine!",
     "Duration": 30,
     "Target": "Monster",
     "Data": null,
     "Cooldown": 90,
+    "Cost": [
+      {
+        "itemName": "Etheral Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Corporeal Seed",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "Name": "Extract",
+    "Description": "Draw the essence out of items, concentrating them into magical seeds.",
+    "Power": 0,
+    "Message": "",
+    "Duration": 0,
+    "Target": "Item",
+    "Data": null,
+    "Cooldown": 5,
+    "Cost": [
+      {
+        "itemName": "Etheral Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Corporeal Seed",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "Name": "Hypnotize",
+    "Description": "Relax an opponent into a sleepy state.",
+    "Power": 15,
+    "Message": " grows drowsy, it's doing everything it can to just stay awake!",
+    "Duration": 30,
+    "Target": "Monster",
+    "Data": null,
+    "Cooldown": 90,
+    "Cost": [
+      {
+        "itemName": "Etheral Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Corporeal Seed",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "Name": "Introspect",
+    "Description": "Discover more about the intrinsic qualities of an item.",
+    "Power": 15,
+    "Message": "",
+    "Duration": 30,
+    "Target": "Item",
+    "Data": null,
+    "Cooldown": 5,
     "Cost": [
       {
         "itemName": "Etheral Seed",
@@ -175,6 +235,26 @@
       },
       {
         "itemName": "Momentary Seed",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "Name": "Lure",
+    "Description": "Attract fish to yourself.",
+    "Power": 15,
+    "Message": "Your hands begin to tremble, followed by a horrid smell.",
+    "Duration": 600,
+    "Target": "Item",
+    "Data": null,
+    "Cooldown": 300,
+    "Cost": [
+      {
+        "itemName": "Etheral Seed",
+        "amount": 1
+      },
+      {
+        "itemName": "Corporeal Seed",
         "amount": 1
       }
     ]
@@ -291,26 +371,6 @@
       },
       {
         "itemName": "Alimental Seed",
-        "amount": 1
-      }
-    ]
-  },
-  {
-    "Name": "Consume",
-    "Description": "Consume many of something.",
-    "Power": 0,
-    "Message": "",
-    "Duration": 0,
-    "Target": "Item",
-    "Data": null,
-    "Cooldown": 50,
-    "Cost": [
-      {
-        "itemName": "Alimental Seed",
-        "amount": 1
-      },
-      {
-        "itemName": "Momentary Seed",
         "amount": 1
       }
     ]
