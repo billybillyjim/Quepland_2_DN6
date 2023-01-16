@@ -222,7 +222,7 @@
   {
     "Name": "Lift",
     "Description": "Reduce the weight of your weapon.",
-    "Power": 0,
+    "Power": 15,
     "Message": "",
     "Duration": 30,
     "Target": "Player",
@@ -245,7 +245,7 @@
     "Power": 15,
     "Message": "Your hands begin to tremble, followed by a horrid smell.",
     "Duration": 600,
-    "Target": "Item",
+    "Target": "Gather",
     "Data": null,
     "Cooldown": 300,
     "Cost": [

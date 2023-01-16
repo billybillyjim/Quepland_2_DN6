@@ -81,12 +81,25 @@
                 @foreach (ISpell spell in MagicManager.Instance.CombatSpells)
                 {
                     @if(spell.Unlocked){
-                        <div>
-                            <img style="@GetBG(spell);@GetBorder(spell);height:30px;width:30px;margin:3px;background-color:white;border-radius:0.25rem;" src="data/Images/@(spell.Name).png"
-                                 @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, spell.Name, spell.Description)))"
-                                 @onmouseout="@(new Action(() => GameState.HideTooltip()))"
-                                 @onclick="@(() => spell.Cast(BattleManager.Instance.Target))" />
-                        </div>
+                        @if(spell.Target == "Monster")
+                        {
+                            <div>
+                                <img style="@GetBG(spell);@GetBorder(spell);height:30px;width:30px;margin:3px;background-color:white;border-radius:0.25rem;" src="data/Images/@(spell.Name).png"
+                                     @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, spell.Name, spell.Description)))"
+                                     @onmouseout="@(new Action(() => GameState.HideTooltip()))"
+                                     @onclick="@(() => spell.Cast(BattleManager.Instance.Target))" />
+                            </div>
+                        }
+                        else if(spell.Target == "Player")
+                        {
+                            <div>
+                                <img style="@GetBG(spell);@GetBorder(spell);height:30px;width:30px;margin:3px;background-color:white;border-radius:0.25rem;" src="data/Images/@(spell.Name).png"
+                                     @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, spell.Name, spell.Description)))"
+                                     @onmouseout="@(new Action(() => GameState.HideTooltip()))"
+                                     @onclick="@(() => spell.Cast(Player.Instance))" />
+                            </div>
+                        }
+                        
                     }
                     
                 }

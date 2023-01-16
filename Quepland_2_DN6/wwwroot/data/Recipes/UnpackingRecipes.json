@@ -19,6 +19,7 @@
       }
     ],
     "outputAmount": 15,
+    "maxOutputsPerAction": 15,
     "recipeActionString": "You begin emptying the bag...",
     "recipeButtonString": "Empty"
   },

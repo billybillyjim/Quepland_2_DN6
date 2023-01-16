@@ -441,7 +441,11 @@ using System.Threading.Tasks;
         ActiveSpells.RemoveAll(x => spellsToRemove.Contains(x));
         foreach(ISpell spell in CancelAutoCastSpells)
         {
-            MessageManager.AddMessage($"You stop autocasting {spell.Name}");
+            if (AutoCastSpells.Contains(spell))
+            {
+                MessageManager.AddMessage($"You stop autocasting {spell.Name}");
+            }
+            
         }
         AutoCastSpells.RemoveAll(x => CancelAutoCastSpells.Contains(x));
         CancelAutoCastSpells = new List<ISpell>();
@@ -664,6 +668,12 @@ using System.Threading.Tasks;
         {
             TicksToNextAction = CurrentRecipe.CraftingSpeed;
             MessageManager.AddMessage(CurrentRecipe.GetOutputsString().Replace("$", (created * CurrentRecipe.OutputAmount).ToString()));
+            if(CurrentRecipe.OutputAmount != created)
+            {
+                CurrentRecipe = null;
+                MessageManager.AddMessage("You have run out of space.");
+                return;
+            }
             if(CurrentRecipe.CanCreate() == false)
             {
                 

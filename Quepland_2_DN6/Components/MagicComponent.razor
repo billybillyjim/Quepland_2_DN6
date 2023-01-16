@@ -111,7 +111,9 @@
     }
 
     public void CastSpell(ISpell spell){
+        showInventory = false;
         if(spell.Target == "Inventory"){
+            showInventory = true;
             spell.Cast(Player.Instance.Inventory);
         }
         else if (spell.Target == "Item")
@@ -121,6 +123,7 @@
             currentSpell = spell;
         }
         else if(spell.Target == "Player"){
+            
             spell.Cast(Player.Instance);
         }
         else if(spell.Target == "Monster"){
