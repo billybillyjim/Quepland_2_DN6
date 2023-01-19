@@ -36,6 +36,8 @@ public class Player
     public bool JustDied { get; set; }
     public int Air { get; set; }
 
+    public string LighthouseLocation { get; set; } = "Outside";
+
     public Skill LastGainedExp { get; set; }
     public Skill ExpTrackerSkill { get; set; }
     public List<IStatusEffect> CurrentStatusEffects { get; set; } = new List<IStatusEffect>();
@@ -543,6 +545,13 @@ public class Player
                 BattleManager.Instance.CurrentDojo = null;
             }
             BattleManager.Instance.EndBattle();
+            if (GameState.Location == "CantilaBeach/CantilaLighthouse")
+            {
+                LighthouseLocation = "B-1";
+                GameState.IsInLighthouse = false;
+                Player.Instance.Inventory.Clear();
+                MessageManager.AddMessage("You find yourself back outside the door with a headache and nothing you gathered inside.");
+            }
         }
 
     }

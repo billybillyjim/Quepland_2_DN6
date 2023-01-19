@@ -43,6 +43,7 @@ using System.Threading.Tasks;
     public bool IsStoppingNextTick { get; set; }
     private static bool cancelTask;
     public static bool IsOnHuntingTrip { get; set; }
+    public static bool IsInLighthouse { get; set; }
     public static bool UseNewSaveCompression { get; set; }
     public bool ShowMap { get; set; }
     public static AFKAction CurrentAFKAction { get; set; }

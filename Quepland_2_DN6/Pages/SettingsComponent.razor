@@ -10,7 +10,7 @@
             The game autosaves once every @(Extensions.GameTicksToSeconds(GameState.AutoSaveInterval) / 60f) Minutes, but you can manually save here. If it was successful, the save time in the bottom left corner will change.
         </div>
         <div>
-            <button class="btn btn-primary" @onclick="@(() => SaveManager.SaveGame())">Manual Save</button>
+            <button class="btn btn-primary" @onclick="@(() => Save())">Manual Save</button>
         </div>
     </div>
     <div style="border:solid 1px gray;padding:1em;">
@@ -78,6 +78,12 @@
     private bool hasRestoredFollowers;
     private bool QRMenu;
     private List<Follower> followersToRestore = new List<Follower>();
+
+    public async void Save()
+    {
+        await SaveManager.SaveGame();
+        MessageManager.AddMessage("Successfully saved the game.");
+    }
 
     public async Task GetBrokenSave()
     {

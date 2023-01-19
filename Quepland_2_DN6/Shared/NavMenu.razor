@@ -14,7 +14,7 @@
 </div>
 
 <div  style="width:300px!important">
-    @if (GameState.IsOnHuntingTrip == false && GameState.CurrentAFKAction == null)
+    @if (GameState.IsOnHuntingTrip == false && GameState.CurrentAFKAction == null && !GameState.IsInLighthouse)
     {
 
         <ul class="nav flex-column">

@@ -9,7 +9,7 @@
 </div>
 
 <div class="custom-scroll" style="max-height:100vh;overflow-y:auto;">
-    @if (GameState.IsOnHuntingTrip == false && GameState.CurrentAFKAction == null)
+    @if (GameState.IsOnHuntingTrip == false && GameState.CurrentAFKAction == null && !GameState.IsInLighthouse)
     {
         <ul class="nav flex-column">
             <li class="nav-item px-3 mr-0">
@@ -90,11 +90,15 @@
     {
         if (GameState.IsOnHuntingTrip)
         {
-            <button class="btn btn-primary" @onclick="@(() => CancelHunt())">Cancel Hunt</button>
+            <button class="btn btn-primary ml-4 m-2" @onclick="@(() => CancelHunt())">Cancel Hunt</button>
+        }
+        else if (GameState.IsInLighthouse)
+        {
+            <button class="btn btn-primary ml-4 m-2" @onclick="@(() => FleeLighthouse())">Flee</button>
         }
         else
         {
-            <button class="btn btn-primary" @onclick="@(() => CancelAFKing())">Cancel Action</button>
+            <button class="btn btn-primary ml-4 m-2" @onclick="@(() => CancelAFKing())">Cancel Action</button>
         }
     }
     <ul style="margin-bottom:50px;">
@@ -145,7 +149,14 @@
     public void CancelHunt()
     {
         GameState.CancelHuntingTrip();
-        
+
+        GameState.UpdateState();
+    }
+    public void FleeLighthouse()
+    {
+        Player.Instance.Inventory.Clear();
+        Player.Instance.LighthouseLocation = "Outside";
+        GameState.IsInLighthouse = false;
         GameState.UpdateState();
     }
 

@@ -3,12 +3,13 @@
 @inject NavigationManager UriHelper
 
     <h1>The Lighthouse</h1>
-<br />
-<button class="btn btn-primary" @onclick="@(() => Exit())">Return to the beach</button>
-<br />
 
-@if (location == "Outside")
+
+@if (Player.Instance.LighthouseLocation == "Outside")
 {
+    <br />
+    <button class="btn btn-primary" @onclick="@(() => Exit())">Return to the beach</button>
+    <br />
     @if(QuestManager.Instance.GetQuestByName("Queple's Sword").Progress >= 10)
     {
     <div>There is a small door on the front of the lighthouse, it appears to have snapped off its hinges. A staircase wraps around to the top of the tower.</div>
@@ -27,47 +28,54 @@
     }
 
 }
-else if (location == "Tower Top")
+else if (Player.Instance.LighthouseLocation == "Tower Top")
 {
+    <br />
+    <button class="btn btn-primary" @onclick="@(() => Exit())">Return to the beach</button>
+    <br />
     <div>The lighthouse is shining brightly, but there's no one here. You feel a slight rumble beneath your feet. A strange desire to open the door down below stirs within you.</div>
     <div>
         <button class="btn btn-primary" @onclick="@(() => ChangeLocations("Outside"))">Climb down the stairs</button>
     </div>
 }
-else if (location == "B-1")
+else if (Player.Instance.LighthouseLocation == "B-1")
 {
-    <div>The door swings open, revealing a spiral staircase that continues down into the dark. The floor rumbles and a gust of wind blows past you as you descend the steps. At the bottom of the stairs you enter a small room with an elaborately engraved wall. At the center is a small door handle, though it does not appear to be attached to anything.</div>
+    <br />
+<button class="btn btn-primary" @onclick="@(() => Exit())">Return to the beach</button>
+<br />
+    <div>The door swings open, revealing a spiral staircase that continues down into the dark. The floor rumbles and a gust of wind blows past you as you descend the steps. 
+        At the bottom of the stairs you enter a small room with an elaborately engraved wall. At the center is a small door handle, floating in the air.</div>
     <Quepland_2_DN6.Components.NPCDialogComponent npc="Lighthouse Wall"></Quepland_2_DN6.Components.NPCDialogComponent>
     <button class="btn btn-primary" @onclick="@(() => EnterGauntlet())">Touch the handle</button>
 }
-else if (location == "B-2")
+else if (Player.Instance.LighthouseLocation == "B-2")
 {
     <div>The way forward is lighted with a thin layer of glowing leaves. Ahead you can hear the muffled sound rattling of bones and scraping of metal against stone.</div>
     <button class="btn btn-primary" @onclick="@(() => StartGauntlet())">Begin Descending</button>
 }
-else if(location == "Gauntlet")
+else if(Player.Instance.LighthouseLocation == "Gauntlet")
 {
     //Boss Fight
     if(currentFloor == 5)
     {
-        <button class="btn btn-primary" @onclick="@(() => ChangeLocations("Boss"))">Enter Room</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeLocations("Boss"))">Enter Room</button>
     }
     else if(room == "Entrance")
     {
         <div>@GetDescription()</div>
  
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Gather"))">Enter Nature Chamber</button>
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Artisan"))">Enter Workshop</button>
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Gather"))">Enter Nature Chamber</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Artisan"))">Enter Workshop</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
     }
     else if(room == "Gather")
     {
         <div>@GetDescription()</div>
 
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Artisan"))">Enter Workshop</button>
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Artisan"))">Enter Workshop</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
 
         <Quepland_2_DN6.Components.GatherButtonComponent ActionText="Chop Balsa Trees:Balsa Logs"></Quepland_2_DN6.Components.GatherButtonComponent>
         <br />
@@ -83,9 +91,9 @@ else if(location == "Gauntlet")
     {
         <div>@GetDescription()</div>
 
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Gather"))">Enter Nature Chamber</button>
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Gather"))">Enter Nature Chamber</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
 
 
         <Quepland_2_DN6.Components.GatherButtonComponent ActionText="Collect Rolls:Rice Roll:You start gathering rice rolls."></Quepland_2_DN6.Components.GatherButtonComponent>
@@ -98,10 +106,10 @@ else if(location == "Gauntlet")
     {
         <div>@GetDescription()</div>
         @if (BattleManager.Instance.BattleHasEnded)
-        {             
-            <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Gather"))">Enter Nature Chamber</button>
-            <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
-            <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
+        {
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Gather"))">Enter Nature Chamber</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
         }
         else
         {
@@ -113,17 +121,16 @@ else if(location == "Gauntlet")
     else if(room == "Descend")
     {
         <div>@GetDescription()</div>
-        <button class="btn btn-primary" @onclick="@(() => ChangeRoom("Entrance"))">Continue Downard</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Entrance"))">Continue Downard</button>
     }
 }
-else if(location == "Boss")
+else if(Player.Instance.LighthouseLocation == "Boss")
 {
     
 }
 
 @code {
 
-    private string location = "Outside";
     private string room = "Entrance";
     private int currentFloor = 1;
     private Dictionary<int, List<string>> FloorEnemies = new Dictionary<int, List<string>>()
@@ -160,9 +167,11 @@ else if(location == "Boss")
 
     private void StartGauntlet()
     {
+        GameState.IsInLighthouse = true;
         ChangeLocations("Gauntlet");
+        ChangeRoom("Combat");
         BattleManager.Instance.CurrentOpponents.Clear();
-        BattleManager.Instance.CurrentOpponents.Add(BattleManager.Instance.GetMonsterByName("Stormling"));
+        BattleManager.Instance.CurrentOpponents.Add(BattleManager.Instance.GetMonsterByName("Wilting Stormling"));
         BattleManager.Instance.StartBattle();
     }
     private void EnterGauntlet()
@@ -177,13 +186,13 @@ else if(location == "Boss")
         }
 
         MessageManager.AddMessage("You feel your stomach tighten as the world around you folds in on itself. The room stretches longer and wider, darkness envelops you. In a moment the sensation passes and you find yourself standing in an open room made of cold, gray stone. There is a fine layer of snow on the ground, which glows just enough allow you to see around.");
-        location = "B-2";
+        ChangeLocations("B-2");
         GameState.UpdateState();
     }
 
     private void ChangeLocations(string newloc)
     {
-        location = newloc;
+        Player.Instance.LighthouseLocation = newloc;
         GameState.UpdateState();
     }
     private void Exit()

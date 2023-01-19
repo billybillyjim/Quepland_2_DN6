@@ -7,7 +7,7 @@
         public int Power { get; set; }
         public string Message { get; set; } = "";
         public int Duration { get; set; }
-        public string Target { get; set; } = "Item";
+        public string Target { get; set; } = "Inventory";
         public int TimeRemaining { get; set; } 
 		public int Cooldown { get; set; } 
 		public int CooldownRemaining { get; set; }
@@ -16,7 +16,7 @@
         public List<Ingredient> Cost { get; set; }
         public TeleportBranch() { }
 
-        public void Cast(Inventory inventory, GameItem item)
+        public void Cast(Inventory inventory)
         {
             if (CooldownRemaining > 0)
             {
@@ -29,18 +29,31 @@
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
-            if (inventory.HasItem(item))
+            
+            int amountToRemove = Math.Min(inventory.GetAvailableSpaces(), Player.Instance.GetLevel("Magic"));
+            if(amountToRemove == 0)
+            {
+                MessageManager.AddMessage($"You don't have any inventory space to cast this spell.");
+                return;
+            }
+
+            var branch = ItemManager.Instance.GetItemByUniqueID("Sticks0");
+            if (inventory.HasItem(branch))
             {
                 spell.PayCost();
                 var newItem = ItemManager.Instance.GetItemByUniqueID("Transit Branch0");
+                
+                int amountRemoved = inventory.RemoveItems(branch, amountToRemove);
 
-                if (inventory.RemoveItems(item, 1) == 1)
-                {
-                    inventory.AddItem(newItem);
-                    CooldownRemaining = Cooldown;
-                    Player.Instance.GainExperience("Magic", 250);
-                    MessageManager.AddMessage("You imbued the " + item.Name + " with magic. Now it's a " + newItem.Name);
-                }
+                inventory.AddMultipleOfItem(newItem, amountRemoved);
+                CooldownRemaining = Cooldown;
+                Player.Instance.GainExperience("Magic", 250);
+                MessageManager.AddMessage($"You imbued the {branch.Name} with magic, getting {amountRemoved} {newItem.GetName(amountRemoved)}.");
+                
+            }
+            else
+            {
+                MessageManager.AddMessage($"You don't have any sticks.");
             }
         }
 

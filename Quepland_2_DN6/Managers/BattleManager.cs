@@ -69,14 +69,10 @@ public class BattleManager
     {
         Monsters.AddRange(await Http.GetFromJsonAsync<Monster[]>("data/Monsters/DojoOpponents.json"));
 
-        foreach(Monster m in Monsters)
-        {
-            m.IsDojoMember = true;
-        }
         Monsters.AddRange(await Http.GetFromJsonAsync<Monster[]>("data/Monsters/Overworld.json"));
         Monsters.AddRange(await Http.GetFromJsonAsync<Monster[]>("data/Monsters/Underworld.json"));
         Monsters.AddRange(await Http.GetFromJsonAsync<Monster[]>("data/Monsters/Bosses.json"));
-        
+        Monsters.AddRange(await Http.GetFromJsonAsync<Monster[]>("data/Monsters/Lighthouse.json"));
         Monsters.AddRange(await Http.GetFromJsonAsync<Monster[]>("data/Monsters/EasternLands.json"));
 
         foreach(Monster m in Monsters)

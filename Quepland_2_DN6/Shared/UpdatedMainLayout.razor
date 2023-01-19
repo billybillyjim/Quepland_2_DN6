@@ -118,6 +118,21 @@
             }
             return $"background-image:url(data/Images/BGs/QueplesTomb.jpg)";
         }
+        else if (location == "CantilaLighthouse")
+        {
+            if (Player.Instance.LighthouseLocation == "B-1")
+            {
+                return $"background-image:url(data/Images/BGs/LighthouseB1.jpg)";
+            }
+            else if (Player.Instance.LighthouseLocation == "B-2")
+            {
+                return $"background-image:url(data/Images/BGs/LighthouseHallway.jpg)";
+            }
+            else if (Player.Instance.LighthouseLocation == "Gauntlet")
+            {
+                return $"background-image:url(data/Images/BGs/LighthouseDungeon.jpg)";
+            }
+        }
         else if(location == "Battle"){
            
             if (!String.IsNullOrEmpty(BattleManager.Instance.ReturnLocation)){
