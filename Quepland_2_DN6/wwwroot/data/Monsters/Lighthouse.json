@@ -193,6 +193,44 @@
     }
   },
   {
+    "name": "Budding Stormling",
+    "hp": 2100,
+    "weaknesses": "Axemanship",
+    "strengths": "Hammermanship",
+    "attackSpeed": 10,
+    "armor": 25,
+    "damage": 30,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Milk Dough",
+          "amount": 2,
+          "weight": 1
+        },
+        {
+          "itemName": "Sweet Dough",
+          "amount": 2,
+          "weight": 5
+        },
+        {
+          "itemName": "Durum Dough",
+          "amount": 2,
+          "weight": 5
+        },
+        {
+          "itemName": "Rye Dough",
+          "amount": 2,
+          "weight": 5
+        },
+        {
+          "itemName": "Dough",
+          "amount": 2,
+          "weight": 15
+        }
+      ]
+    }
+  },
+  {
     "name": "Weakened Stormling",
     "hp": 1800,
     "weaknesses": "Axemanship",

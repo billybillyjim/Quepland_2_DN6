@@ -107,6 +107,8 @@ else if(Player.Instance.LighthouseLocation == "Gauntlet")
         <div>@GetDescription()</div>
         @if (BattleManager.Instance.BattleHasEnded)
         {
+
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Artisan"))">Enter Workshop</button>
             <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Gather"))">Enter Nature Chamber</button>
             <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
             <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
@@ -126,7 +128,15 @@ else if(Player.Instance.LighthouseLocation == "Gauntlet")
 }
 else if(Player.Instance.LighthouseLocation == "Boss")
 {
-    
+    @if (BattleManager.Instance.BattleHasEnded)
+    {
+        <div>@GetDescription()</div>
+        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Artisan"))">Enter Workshop</button>
+    }
+    else
+    {
+        <CombatComponent></CombatComponent>
+    }
 }
 
 @code {
@@ -135,15 +145,18 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     private int currentFloor = 1;
     private Dictionary<int, List<string>> FloorEnemies = new Dictionary<int, List<string>>()
     {
-        {1,new List<string>(){ "Stormling",  } }
+        {1,new List<string>(){ "Wilting Stormling", "Withered Stormling", "Weakened Stormling" } },
+        {2,new List<string>(){ "Wilting Stormling", "Grassy Stormling", "Budding Stormling" } },
+        {3,new List<string>(){ "Floral Stormling", "Grassy Stormling", "Mossy Stormling" } }
     };
     private Dictionary<string, string> Descriptions = new Dictionary<string, string>() 
     { 
         {"Entrance", "The cold floor has fresh footprints leading in one direction. You can smell baked bread in another. A warm glow illuminates a third path."},
         {"Gather", "You find a small forest growing here. A small stream flows by, full of some kinds of fish."},
-        {"Artisan", "Prepared rice rolls sit in a pile near the oven."},
+        {"Artisan", "Prepared rice rolls sit in a pile near the oven. A large smithy is still warm but unattended."},
         {"Combat", "Some of the creatures that live down here have spotted you!"},
         {"Descend", "A staircase leads deeper into the dungeon. An icy wind blows steadily upward out of the entryway."},
+        {"Boss", "A pi"}
     };
 
     public string GetDescription()
@@ -153,14 +166,26 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     private void Descend()
     {
         currentFloor++;
-        room = "Entrance";
+        if(currentFloor == 4)
+        {
+            room = "Boss";
+            BattleManager.Instance.CurrentOpponents.Clear();
+            BattleManager.Instance.CurrentOpponents.Add(BattleManager.Instance.GetMonsterByName("Stormwalker"));
+            BattleManager.Instance.StartBattle();
+        }
+        else
+        {
+            room = "Entrance";
+        }
+        
     }
     private void ChangeRoom(string newRoom)
     {
 
         room = newRoom;
         if(room == "Combat"){
-            BattleManager.Instance.StartBattle();
+            string opponent = FloorEnemies[currentFloor][GameState.Random.Next(FloorEnemies[currentFloor].Count)];
+            BattleManager.Instance.StartBattle(BattleManager.Instance.GetMonsterByName(opponent));
         }
         GameState.UpdateState();
     }

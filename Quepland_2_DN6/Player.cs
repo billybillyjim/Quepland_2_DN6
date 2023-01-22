@@ -231,6 +231,13 @@ public class Player
             equippedItems.Remove(item);
         }
     }
+    public void UnequipAll()
+    {
+        foreach (KeyValuePair<GameItem, int> pair in Inventory.GetItems())
+        {
+            Unequip(pair.Key);
+        }
+    }
     public int GetTotalDamage()
     {
         int total = 0;
@@ -549,6 +556,7 @@ public class Player
             {
                 LighthouseLocation = "B-1";
                 GameState.IsInLighthouse = false;
+                Player.Instance.UnequipAll();
                 Player.Instance.Inventory.Clear();
                 MessageManager.AddMessage("You find yourself back outside the door with a headache and nothing you gathered inside.");
             }
