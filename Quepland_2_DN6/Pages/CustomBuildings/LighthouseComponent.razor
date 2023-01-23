@@ -123,7 +123,7 @@ else if(Player.Instance.LighthouseLocation == "Gauntlet")
     else if(room == "Descend")
     {
         <div>@GetDescription()</div>
-        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Entrance"))">Continue Downard</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => Descend())">Continue Downard</button>
     }
 }
 else if(Player.Instance.LighthouseLocation == "Boss")
@@ -131,7 +131,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     @if (BattleManager.Instance.BattleHasEnded)
     {
         <div>@GetDescription()</div>
-        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Artisan"))">Enter Workshop</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => LootAndLeave())">Enter Workshop</button>
     }
     else
     {
@@ -168,15 +168,22 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         currentFloor++;
         if(currentFloor == 4)
         {
-            room = "Boss";
+            Player.Instance.LighthouseLocation = "Boss";
             BattleManager.Instance.CurrentOpponents.Clear();
+
             BattleManager.Instance.CurrentOpponents.Add(BattleManager.Instance.GetMonsterByName("Stormwalker"));
+            BattleManager.Instance.SetBoss(new Quepland_2_DN6.Bosses.Stormwalker());
             BattleManager.Instance.StartBattle();
         }
         else
         {
             room = "Entrance";
         }
+
+    }
+    public void LootAndLeave()
+    {
+        Player.Instance.LighthouseLocation = "Outside";
         
     }
     private void ChangeRoom(string newRoom)

@@ -17,6 +17,7 @@ public class Drop
     public string ItemParameter { get; set; } = "";
 	public int Weight { get; set; } = 1;
 	public int Amount { get; set; } = 1;
+    public int MinAmount { get; set; } = 1;
 
     public override string ToString()
     {

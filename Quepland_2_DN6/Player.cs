@@ -307,6 +307,22 @@ public class Player
         }
         return Math.Max(1, total);
     }
+    public float GetMagicDamage()
+    {
+        int dmg = 0;
+        foreach(GameItem item in equippedItems)
+        {
+            if(item.ArmorInfo != null)
+            {
+                dmg += item.ArmorInfo.MagicDamage;
+            }
+            if(item.WeaponInfo != null)
+            {
+                dmg += item.WeaponInfo.MagicDamage;
+            }
+        }
+        return 1 + (dmg / 100f);
+    }
     public void ClearBoosts()
     {
         foreach(Skill s in Skills)

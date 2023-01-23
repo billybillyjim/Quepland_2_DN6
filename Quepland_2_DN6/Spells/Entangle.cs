@@ -46,7 +46,8 @@
                 return;
             }
             spell.PayCost();
-            m.AddStatusEffect(new EntangleEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = Power, Speed = 5}));
+            var dmg = (int)(Power * Player.Instance.GetLevel("Magic") * Player.Instance.GetMagicDamage());
+            m.AddStatusEffect(new EntangleEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = dmg, Speed = 5}));
             CooldownRemaining = Cooldown;
             MessageManager.AddMessage(m.Name + Message);
             Player.Instance.GainExperience("Magic", Power);

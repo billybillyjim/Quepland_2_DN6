@@ -43,10 +43,10 @@ namespace Quepland_2_DN6.Bosses
         };
         private List<int> weaknessRotationArmors = new List<int>()
         {
-            300,
-            225,
-            120,
-            40
+            600,
+            425,
+            320,
+            140
         };
         private int currentWeaknessRotation = 0;
         public void OnBeAttacked(Monster monster) 
@@ -54,8 +54,9 @@ namespace Quepland_2_DN6.Bosses
             attackedCount++;
             if(attackedCount > 3)
             {
+                attackedCount = 0;
                 currentWeaknessRotation++;
-                if(currentWeaknessRotation > weaknessRotation.Count)
+                if(currentWeaknessRotation >= weaknessRotation.Count)
                 {
                     currentWeaknessRotation = 0;
                 }

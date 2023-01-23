@@ -110,6 +110,10 @@ public class MagicManager
             spell = new AxeFletch();
            
         }
+        else if (data.Name == "Blast")
+        {
+            spell = new Blast();
+        }
         else if(data.Name == "Breathe")
         {
             spell = new Breathe();

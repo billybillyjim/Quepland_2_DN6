@@ -25,6 +25,7 @@ public class DropTable
         }
         return drops;
     }
+    
     public Drop GetDrop()
     {
         if(Drops.Count == 0)

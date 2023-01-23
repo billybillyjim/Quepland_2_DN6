@@ -82,9 +82,9 @@
     "hp": 25500,
     "weaknesses": "",
     "strengths": "",
-    "damage": 95,
+    "damage": 205,
     "armor": 400,
-    "attackSpeed": 4,
+    "attackSpeed": 25,
     "statusEffectData": [
       {
         "name": "Entangle",

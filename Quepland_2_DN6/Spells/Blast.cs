@@ -1,10 +1,10 @@
 ﻿namespace Quepland_2_DN6.Spells
 {
-    public class Drain : ISpell
+    public class Blast : ISpell
     {
-        public string Name { get; set; } = "Drain";
+        public string Name { get; set; } = "Blast";
         public string Description { get; set; }
-        public int Power { get; set; } = 1;
+        public int Power { get; set; } = 15;
         public string Message { get; set; } = "";
         public int Duration { get; set; } = 30;
         public string Target { get; set; } = "Monster";
@@ -14,8 +14,7 @@
         public string Data { get; set; } 
 		public bool Unlocked { get; set; } = false;
         public List<Ingredient> Cost { get; set; }
-
-        public Drain() { }
+        public Blast() { }
         
 
         public void Cast(Monster m)
@@ -25,14 +24,14 @@
                 MessageManager.AddMessage($"You aren't quite ready to cast that spell again. ({Math.Round(CooldownRemaining / 5f, 2)})");
                 return;
             }
-            if (m == null)
+            if(m == null)
             {
-                MessageManager.AddMessage($"Nothing can be drained!");
+                MessageManager.AddMessage($"Nothing needs to be blasted!");
                 return;
             }
             if (m.CurrentHP <= 0)
             {
-                MessageManager.AddMessage($"{m.Name} doesn't have any energy left to drain!");
+                MessageManager.AddMessage($"{m.Name} doesn't need to be blasted!");
                 return;
             }
             if (BattleManager.Instance.BattleHasEnded)
@@ -48,15 +47,16 @@
             }
             spell.PayCost();
             var dmg = (int)(Power * Player.Instance.GetLevel("Magic") * Player.Instance.GetMagicDamage());
-            m.AddStatusEffect(new DrainEffect(new StatusEffectData() {  Name=Name, Duration = Duration, Power = dmg, Speed = 5}));
+            m.CurrentHP -= dmg;
+            Player.Instance.TicksToNextAttack += 10;
             CooldownRemaining = Cooldown;
-            MessageManager.AddMessage("You sap the " + m.Name + " of its energy!");
-            Player.Instance.GainExperience("Magic", dmg);
-        }
+            MessageManager.AddMessage(m.Name + Message);
+            Player.Instance.GainExperience("Magic", Power);
+        } 
 
         public ISpell Copy()
         {
-            return new Drain() {Name=Name, Description=Description, Duration=Duration, TimeRemaining=TimeRemaining,Target=Target, Message=Message, Power=Power };
+            return new Entangle() {Name=Name, Description=Description, Duration=Duration, TimeRemaining=TimeRemaining,Target=Target, Message=Message, Power=Power };
         }
     }
 }

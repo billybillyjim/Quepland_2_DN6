@@ -20,6 +20,26 @@
     ]
   },
   {
+    "Name": "Blast",
+    "Description": "Create a burst of energy.",
+    "Power": 7,
+    "Message": " is struck with a powerful force!",
+    "Duration": 1,
+    "Target": "Monster",
+    "Data": null,
+    "Cooldown": 40,
+    "Cost": [
+      {
+        "itemName": "Fierce Seed",
+        "amount": 3
+      },
+      {
+        "itemName": "Alimental Seed",
+        "amount": 1
+      }
+    ]
+  },
+  {
     "Name": "Breathe",
     "Description": "Bring forth air in your lungs.",
     "Power": 0,
@@ -82,7 +102,7 @@
   {
     "Name": "Drain",
     "Description": "Sap the life from living beings.",
-    "Power": 15,
+    "Power": 4,
     "Message": "",
     "Duration": 30,
     "Target": "Monster",

@@ -438,7 +438,19 @@ public class Inventory
                 return false;
             }
         }
-        return AddMultipleOfItem(i, drop.Amount);
+        int amount = drop.Amount;
+        if(drop.MinAmount > 1)
+        {
+            if(drop.MinAmount < amount)
+            {
+                amount = GameState.Random.Next(drop.MinAmount, amount);
+            }
+            else
+            {
+                Console.WriteLine(drop.ItemName + $" has a lower amount than minAmount:{amount} vs {drop.MinAmount}");
+            }
+        }
+        return AddMultipleOfItem(i, amount);
     }
     /// <summary>
     /// Replaces molten bars with cooled bars, returns the number replaced.
