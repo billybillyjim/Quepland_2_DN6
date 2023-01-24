@@ -47,7 +47,7 @@ public static class HuntingManager
                 Drop d = TripInfo.DropTable.GetDrop();
                 if (ItemManager.Instance.GetItemByName(d.ItemName).HasRequirements())
                 {
-                    Player.Instance.Inventory.AddDrop(d);
+                    Player.Instance.Inventory.AddDrop(d, out _);
                     Player.Instance.GainExperience(ItemManager.Instance.GetItemByName(d.ItemName).ExperienceGained);
                     MessageManager.AddMessage("You hunted a " + d + " on your trip.");
                 }

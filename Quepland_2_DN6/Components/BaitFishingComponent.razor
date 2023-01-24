@@ -126,7 +126,7 @@ else
             return;
         }
         MessageManager.AddMessage("You caught a " + d.ItemName + "!");
-        Player.Instance.Inventory.AddDrop(d);
+        Player.Instance.Inventory.AddDrop(d, out _);
         Player.Instance.GainExperience(d.Item.ExperienceGained);
         GameState.UpdateState();
     }

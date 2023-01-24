@@ -12,7 +12,7 @@ namespace Quepland_2_DN6.Bosses
         {
             Drop d = ItemManager.Instance.GetMinigameDropTable("Sotu Nran Waterfall").DropTable.GetDrop();
             MessageManager.AddMessage("The creature screams in rage and disappears under the water. The waterfall opens up to reveal a pile of treasure. You grab " + d.Amount + " " + d.Item + " quickly and escape before the creature returns.");
-            Player.Instance.Inventory.AddDrop(d);
+            Player.Instance.Inventory.AddDrop(d, out _);
         }
         public void OnAttack() 
         {

@@ -47,7 +47,7 @@
         Drop d = dropTable.DropTable.GetDrop();
         if (Player.Instance.Inventory.RemoveItems(input, 1) == 1)
         {
-            Player.Instance.Inventory.AddDrop(d);
+            Player.Instance.Inventory.AddDrop(d, out _);
             if(d.Amount > 1)
             {
                 MessageManager.AddMessage("You found " + d.Amount + " " + d.Item.GetPlural() + "!");

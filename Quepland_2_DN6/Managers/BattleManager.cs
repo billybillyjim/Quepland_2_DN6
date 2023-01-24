@@ -364,7 +364,7 @@ public class BattleManager
     {
         if (Player.Instance.CurrentFollower != null && Player.Instance.CurrentFollower.AutoCollectSkill == "Gathering Scout")
         {
-            Player.Instance.CurrentFollower.Inventory.AddDrop(drop);
+            Player.Instance.CurrentFollower.Inventory.AddDrop(drop, out _);
 
             if (Player.Instance.CurrentFollower.Inventory.GetAvailableSpaces() == 0)
             {
@@ -373,7 +373,7 @@ public class BattleManager
         }
         else
         {
-            Player.Instance.Inventory.AddDrop(drop);
+            Player.Instance.Inventory.AddDrop(drop, out _);
         }
     }
 

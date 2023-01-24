@@ -424,10 +424,11 @@ public class Inventory
         return true;
     }
     
-    public bool AddDrop(Drop drop)
+    public bool AddDrop(Drop drop, out int added)
     {
-        if(drop == null || drop.ItemName == "Unset")
-        {
+        added = 0;
+        if (drop == null || drop.ItemName == "Unset")
+        {           
             return false;
         }
         GameItem i = ItemManager.Instance.GetCopyOfItem(drop.ItemName, drop.ItemParameter);
@@ -450,7 +451,7 @@ public class Inventory
                 Console.WriteLine(drop.ItemName + $" has a lower amount than minAmount:{amount} vs {drop.MinAmount}");
             }
         }
-        return AddMultipleOfItem(i, amount);
+        return AddMultipleOfItem(i, amount, out amount);
     }
     /// <summary>
     /// Replaces molten bars with cooled bars, returns the number replaced.

@@ -275,7 +275,7 @@ else if (mineType == "Depths")
             }
             else
             {
-                if (Player.Instance.Inventory.AddDrop(nextDrop))
+                if (Player.Instance.Inventory.AddDrop(nextDrop, out _))
                 {
                     Player.Instance.GainExperience("Mining", 100);
                     GetGem();

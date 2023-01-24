@@ -46,7 +46,7 @@ public class HunterTrapSlot
                 {
                     MessageManager.AddMessage("You find a " + drop.Item + " in the trap.");
                     Player.Instance.GainExperience(drop.Item.ExperienceGained);
-                    Player.Instance.Inventory.AddDrop(drop);
+                    Player.Instance.Inventory.AddDrop(drop, out _);
                 }
                 else
                 {

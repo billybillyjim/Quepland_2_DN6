@@ -36,6 +36,6 @@ public class LootTracker
             DataDict.Add(m.Name, new Inventory(int.MaxValue, true));
 
         }
-        DataDict[m.Name].AddDrop(d);
+        DataDict[m.Name].AddDrop(d, out _);
     }
 }

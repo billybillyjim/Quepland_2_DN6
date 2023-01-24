@@ -184,7 +184,15 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     public void LootAndLeave()
     {
         Player.Instance.LighthouseLocation = "Outside";
+        GameState.IsInLighthouse = false;
+        var table = ItemManager.Instance.GetMinigameDropTable("Lighthouse").DropTable;
+        var drop1 = table.GetDrop();
+        var drop2 = table.GetDrop();
         
+        Player.Instance.Inventory.AddDrop(drop1, out int dropAmount1);
+        Player.Instance.Inventory.AddDrop(drop2, out int dropAmount2);
+
+        MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} and {dropAmount2} {drop2.Item.GetName(dropAmount2)}.");
     }
     private void ChangeRoom(string newRoom)
     {

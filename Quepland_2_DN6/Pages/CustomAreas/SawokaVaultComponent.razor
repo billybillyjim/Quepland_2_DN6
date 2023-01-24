@@ -86,7 +86,7 @@
         {
             return;
         }
-        Player.Instance.Inventory.AddDrop(d);
+        Player.Instance.Inventory.AddDrop(d, out _);
         MessageManager.AddMessage("You insert the key into the safe and it disolves. You open the door to find " + d.ItemName);
 
     }
