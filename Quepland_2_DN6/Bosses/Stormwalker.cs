@@ -50,7 +50,7 @@ namespace Quepland_2_DN6.Bosses
         };
         private int currentWeaknessRotation = 0;
         public void OnBeAttacked(Monster monster) 
-        {
+        {            
             attackedCount++;
             if(attackedCount > 3)
             {

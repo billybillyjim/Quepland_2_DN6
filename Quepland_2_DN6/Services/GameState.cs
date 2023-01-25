@@ -109,6 +109,9 @@ using System.Threading.Tasks;
     public static bool ShowBackgrounds = true;
     public static int ExtractWarningValue = 1000;
 
+    public static int StartingLighthouseTick = 0;
+    public static int BestLighthouseTime = int.MaxValue;
+
     public static int TicksToNextHeal;
     public static int HealingTicks;
     public static int CurrentTick { get; set; }

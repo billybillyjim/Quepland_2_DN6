@@ -1,6 +1,6 @@
 [
   {
-    "name": "Mossy Stormling",
+    "name": "Grassy Stormling",
     "hp": 2500,
     "weaknesses": "Hammermanship",
     "strengths": "Swordsmanship",
@@ -14,58 +14,30 @@
           "weight": 3
         },
         {
-          "itemName": "Iron Sword",
+          "itemName": "Milk Dough",
           "weight": 1
         },
         {
-          "itemName": "Lead Sword",
+          "itemName": "Sweet Dough",
           "weight": 5
         },
         {
-          "itemName": "Nickel Sword",
+          "itemName": "Durum Dough",
           "weight": 5
         },
         {
-          "itemName": "Iron Hammer",
-          "weight": 1
-        },
-        {
-          "itemName": "Lesser Lead Hammer",
+          "itemName": "Rye Dough",
           "weight": 5
         },
         {
-          "itemName": "Nickel Hammer",
-          "weight": 5
-        },
-        {
-          "itemName": "Iron Axe",
-          "weight": 1
-        },
-        {
-          "itemName": "Lead Axe",
-          "weight": 5
-        },
-        {
-          "itemName": "Nickel Axe",
-          "weight": 5
-        },
-        {
-          "itemName": "Iron Knife",
-          "weight": 1
-        },
-        {
-          "itemName": "Lead Knife",
-          "weight": 5
-        },
-        {
-          "itemName": "Nickel Knife",
-          "weight": 5
+          "itemName": "Dough",
+          "weight": 15
         }
       ]
     }
   },
   {
-    "name": "Grassy Stormling",
+    "name": "Mossy Stormling",
     "hp": 3000,
     "weaknesses": "Swordsmanship",
     "strengths": "Hammermanship",
@@ -93,10 +65,6 @@
         {
           "itemName": "Rye Dough",
           "weight": 5
-        },
-        {
-          "itemName": "Dough",
-          "weight": 15
         }
       ]
     }
@@ -165,28 +133,86 @@
   },
   {
     "name": "Wilting Stormling",
-    "hp": 1500,
+    "hp": 1100,
     "weaknesses": "Axemanship",
     "strengths": "Hammermanship",
-    "attackSpeed": 14,
-    "armor": 8,
+    "attackSpeed": 18,
+    "armor": 3,
     "damage": 20,
     "dropTable": {
       "drops": [
         {
-          "itemName": "Bone Dagger",
+          "itemName": "Copper Ore",
           "weight": 3
         },
         {
-          "itemName": "Stone Axe",
+          "itemName": "Tin Ore",
           "weight": 3
         },
         {
-          "itemName": "Bone Blade",
+          "itemName": "Calamine",
           "weight": 3
         },
         {
-          "itemName": "Iron Hammer",
+          "itemName": "Pentlandite",
+          "weight": 3
+        }
+      ]
+    }
+  },
+  {
+    "name": "Degenerate Stormling",
+    "hp": 1500,
+    "weaknesses": "Axemanship",
+    "strengths": "Hammermanship",
+    "attackSpeed": 13,
+    "armor": 18,
+    "damage": 30,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Calamine",
+          "weight": 3
+        },
+        {
+          "itemName": "Pentlandite",
+          "weight": 3
+        },
+        {
+          "itemName": "Iron Ore",
+          "weight": 3
+        },
+        {
+          "itemName": "Coal",
+          "weight": 3
+        }
+      ]
+    }
+  },
+  {
+    "name": "Waning Stormling",
+    "hp": 1900,
+    "weaknesses": "Axemanship",
+    "strengths": "Hammermanship",
+    "attackSpeed": 12,
+    "armor": 28,
+    "damage": 40,
+    "dropTable": {
+      "drops": [
+        {
+          "itemName": "Iron Ore",
+          "weight": 3
+        },
+        {
+          "itemName": "Coal",
+          "weight": 3
+        },
+        {
+          "itemName": "Bauxite",
+          "weight": 3
+        },
+        {
+          "itemName": "Galena",
           "weight": 3
         }
       ]
@@ -241,23 +267,23 @@
     "dropTable": {
       "drops": [
         {
-          "itemName": "Wild Boar Hat",
+          "itemName": "Deer Hat",
           "weight": 5
         },
         {
-          "itemName": "Wild Boar Boots",
+          "itemName": "Deer Boots",
           "weight": 5
         },
         {
-          "itemName": "Wild Boar Pants",
+          "itemName": "Deer Pants",
           "weight": 5
         },
         {
-          "itemName": "Wild Boar Shirt",
+          "itemName": "Deer Shirt",
           "weight": 5
         },
         {
-          "itemName": "Wild Boar Gloves",
+          "itemName": "Deer Gloves",
           "weight": 1
         }
       ]

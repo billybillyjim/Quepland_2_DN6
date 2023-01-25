@@ -103,6 +103,31 @@
                     }
                     
                 }
+                </div>
+                <div style="display:flex;margin-top:10px;">
+                <div style="line-height:36px;">
+                    Quick Inventory:
+                </div>
+                @foreach(var pair in Player.Instance.Inventory.GetUniqueItems())
+                {
+                    @if(pair.Key.WeaponInfo != null)
+                    {
+                        <div @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Equip " + pair.Key.Name, pair.Key.Description)))"
+                             @onmouseout="@(new Action(() => GameState.HideTooltip()))"
+                             @onclick="@(() => Player.Instance.Equip(pair.Key))">
+                            <Quepland_2_DN6.Components.ItemBoxComponent Item="pair.Key" shouldRender="@pair.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
+                        </div>
+                    }
+                    @if(pair.Key.FoodInfo != null)
+                    {
+                        <div @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Equip " + pair.Key.Name, pair.Key.Description)))"
+                             @onmouseout="@(new Action(() => GameState.HideTooltip()))"
+                             @onclick="@(() => GameState.Eat(pair.Key))">
+                            <Quepland_2_DN6.Components.ItemBoxComponent Item="pair.Key"shouldRender="@pair.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
+                        </div>
+                    }
+                    
+                }
             </div>
             <div style="display:flex;margin-top:10px;">
                 @foreach (Monster ally in BattleManager.Instance.Allies)

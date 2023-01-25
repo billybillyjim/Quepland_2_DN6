@@ -146,8 +146,8 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     private Dictionary<int, List<string>> FloorEnemies = new Dictionary<int, List<string>>()
     {
         {1,new List<string>(){ "Wilting Stormling", "Withered Stormling", "Weakened Stormling" } },
-        {2,new List<string>(){ "Wilting Stormling", "Grassy Stormling", "Budding Stormling" } },
-        {3,new List<string>(){ "Floral Stormling", "Grassy Stormling", "Mossy Stormling" } }
+        {2,new List<string>(){ "Degenerate Stormling", "Grassy Stormling", "Budding Stormling" } },
+        {3,new List<string>(){ "Waning Stormling", "Floral Stormling", "Mossy Stormling" } }
     };
     private Dictionary<string, string> Descriptions = new Dictionary<string, string>() 
     { 
@@ -185,13 +185,21 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     {
         Player.Instance.LighthouseLocation = "Outside";
         GameState.IsInLighthouse = false;
+        int duration = GameState.CurrentTick - GameState.StartingLighthouseTick;
+        MessageManager.AddMessage($"You made it through the lighthouse in {TimeSpan.FromSeconds(duration / 5).ToString()}.");
+        if (duration < GameState.BestLighthouseTime && GameState.BestLighthouseTime != int.MaxValue)
+        {
+            MessageManager.AddMessage($"That's the fastest you've done it yet!");
+        }
+        GameState.BestLighthouseTime = Math.Min(GameState.BestLighthouseTime, duration);
+        
         var table = ItemManager.Instance.GetMinigameDropTable("Lighthouse").DropTable;
         var drop1 = table.GetDrop();
         var drop2 = table.GetDrop();
-        
+
         Player.Instance.Inventory.AddDrop(drop1, out int dropAmount1);
         Player.Instance.Inventory.AddDrop(drop2, out int dropAmount2);
-
+        
         MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} and {dropAmount2} {drop2.Item.GetName(dropAmount2)}.");
     }
     private void ChangeRoom(string newRoom)
@@ -207,6 +215,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
 
     private void StartGauntlet()
     {
+        GameState.StartingLighthouseTick = GameState.CurrentTick;
         GameState.IsInLighthouse = true;
         ChangeLocations("Gauntlet");
         ChangeRoom("Combat");

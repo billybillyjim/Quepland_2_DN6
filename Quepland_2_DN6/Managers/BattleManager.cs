@@ -546,6 +546,10 @@ public class BattleManager
                 }
             }
         }
+        if(m.Name == "Stormwalker")
+        {
+            bonus *= 3;
+        }
 
         return Math.Min(Math.Max(bonus, 0.1), 10);
     }
