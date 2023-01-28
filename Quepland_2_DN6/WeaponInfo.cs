@@ -10,6 +10,7 @@ public class WeaponInfo
     public int ArmorBonus { get; set; }
 
     public bool IsArrow { get; set; }
+    public int MPCost {  get; set; }    
     public List<Requirement> WearRequirements { get; set; } = new List<Requirement>();
     private List<IStatusEffect> statusEffects;
     public List<IStatusEffect> StatusEffects { get 

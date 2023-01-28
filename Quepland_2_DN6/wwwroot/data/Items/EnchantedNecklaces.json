@@ -322,6 +322,7 @@
     "equipSlot": "Neck",
     "armorInfo": {
       "armorBonus": 20,
+      "magicDamage": 10,
       "statusEffectData": [
         {
           "name": "Self Heal",
@@ -329,7 +330,8 @@
           "speed": 1,
           "duration": 2,
           "message": "Your necklace flashes beautifully, you feel refreshed!",
-          "procOdds": 0.25
+          "procOdds": 0.25,
+          "selfInflicted": true
         }
       ]
 

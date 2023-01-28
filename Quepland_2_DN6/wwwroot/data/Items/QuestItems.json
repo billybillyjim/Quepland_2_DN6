@@ -73,7 +73,8 @@
     "icon": "TearDropNecklace",
     "equipSlot": "Neck",
     "armorInfo": {
-      "armorBonus": 15
+      "armorBonus": 15,
+      "magicDamage": 5
     },
     "isSellable": false,
     "secondaryColor": "#2DF5E9"

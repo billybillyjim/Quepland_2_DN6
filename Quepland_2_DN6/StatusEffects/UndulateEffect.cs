@@ -39,9 +39,9 @@ public class UndulateEffect : IStatusEffect
         if (RemainingTime % Speed == 0 && RemainingTime > 0)
         {
             MessageManager.AddMessage(Message, "#34baeb");
-            int total = BattleManager.Instance.GetTotalPlayerDamage(m);
+            int total = BattleManager.Instance.GetTotalPlayerDamage(m, out _);
             m.CurrentHP -= total;
-            BattleManager.Instance.GainCombatExperience(total);
+            BattleManager.Instance.GainCombatExperience(total, "None");
         }
     }
     public void DoEffect(Player p)

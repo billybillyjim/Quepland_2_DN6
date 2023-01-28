@@ -32,7 +32,9 @@ namespace Quepland_2_DN6.Bosses.ImaynimaynElements
             {
                 if (Fall)
                 {
-                    if(Player.Instance.GetItemInSlot("Neck") == null || Player.Instance.GetItemInSlot("Neck").Name != "Potaki's Tear")
+                    if(Player.Instance.GetItemInSlot("Neck") == null || 
+                       Player.Instance.GetItemInSlot("Neck").Name != "Potaki's Tear" ||
+                       Player.Instance.GetItemInSlot("Neck").Name != "Potaki's Blessing")
                     {
                         CurrentTick--;
                     }

@@ -238,69 +238,120 @@ public class Player
             Unequip(pair.Key);
         }
     }
-    public int GetTotalDamage()
+    public int GetTotalDamage(out string attackType)
     {
         int total = 0;
-        total += GetSkill("Strength").GetSkillLevel() * 3;
+        
         GameItem weapon = GetWeapon();
+        bool hasArrows = Inventory.HasArrows();
+        bool hasMP = Player.Instance.CurrentMP >= (weapon != null ? weapon.WeaponInfo.MPCost : 0);
+        bool useSpineShooter = false;
+        attackType = "None";
+
+        if (weapon != null)
+        {
+            attackType = weapon.EnabledActions;
+            if(attackType == "Magic" && !hasMP)
+            {
+                attackType = "None";
+            }
+            else if(attackType == "Archery")
+            {
+                if (weapon.Name == "Spine Shooter")
+                {
+                    useSpineShooter = Inventory.HasItem("Cactus Spines0", true) || Inventory.HasItem("Lion's Mane Stingers0", true);
+                    if (Inventory.HasItem("Lion's Mane Stingers0", true))
+                    {
+                        total += 100;
+                    }
+                    else if (Inventory.HasItem("Cactus Spines0", true))
+                    {
+                        total += 10;
+                    }
+                    else
+                    {
+                        attackType = "None";
+                    }
+                }
+                else if (hasArrows)
+                {
+                    total += Inventory.GetStrongestArrow().WeaponInfo.RangedDamage;
+                }
+                else
+                {
+                    attackType = "None";
+                }                
+            }
+        }
+        if(attackType == "Magic")
+        {
+            total += GetSkill("Magic").GetSkillLevel() * 5;
+        }
+        else
+        {
+            total += GetSkill("Strength").GetSkillLevel() * 3;
+        }
+
         foreach(GameItem item in equippedItems)
         {
             if(item.WeaponInfo != null)
             {
                 total += item.WeaponInfo.Damage;
-                if (weapon != null && weapon.EnabledActions == "Archery")
+                if(weapon != null)
                 {
-                    if (Inventory.HasArrows())
+                    if (weapon.EnabledActions == "Archery")
                     {
-                        total += item.WeaponInfo.RangedDamage;
+                        if (hasArrows)
+                        {
+                            total += item.WeaponInfo.RangedDamage;
+                        }
+                        else
+                        {
+                            total += GetLevel("Strength");
+                        }
+                    }
+                    else if (weapon.EnabledActions == "Magic")
+                    {
+                        if (hasMP)
+                        {
+                            total = (int)(total * (1 + (item.WeaponInfo.MagicDamage / 100d)));
+                        }
+                        else
+                        {
+                            total += GetLevel("Strength");
+                        }
                     }
                     else
                     {
-                        total += GetLevel("Strength");
+                        string skill = item.GetSkillForWeaponExp();
+                        if (skill == "")
+                        {
+                            total += GetLevel("Strength");
+                        }
+                        else
+                        {
+                            total += GetSkill(skill).GetSkillLevel() * 3;
+                        }
                     }
-                }
-                else
-                {
-                    string skill = item.GetSkillForWeaponExp();
-                    if (skill == "")
-                    {
-                        total += GetLevel("Strength");
-                    }
-                    else
-                    {
-                        total += GetSkill(skill).GetSkillLevel() * 3;
-                    }              
-                }
-
+                }             
             }
             if(item.ArmorInfo != null)
             {
                 total += item.ArmorInfo.Damage;
-                if (weapon != null &&
-                    (weapon.EnabledActions == "Archery" && Inventory.HasArrows() ||
-                    (weapon.Name == "Spine Shooter" && Inventory.HasItem("Cactus Spines0", true))))
+                if (weapon != null)
                 {
-                    total += item.ArmorInfo.RangedDamage;
+                    if ((weapon.EnabledActions == "Archery" && hasArrows) || useSpineShooter)
+                    {
+                        total += item.ArmorInfo.RangedDamage;
+                    }
+                    else if (weapon.EnabledActions == "Magic" && hasMP)
+                    {
+                        total = (int)(total * (1 + (item.ArmorInfo.MagicDamage / 100d)));
+                    }
                 }
             }
         }
-        if(weapon != null)
-        {
-            if(weapon.Name == "Spine Shooter" && Inventory.HasItem("Cactus Spines0", true))
-            {
-                total += 10;
-                
-            }
-            else if(weapon.Name == "Spine Shooter" && Inventory.HasItem("Lion's Mane Stingers0", true))
-            {
-                total += 100;
-            }
-            else if (weapon.EnabledActions == "Archery" && Inventory.HasArrows())
-            {
-                total += Inventory.GetStrongestArrow().WeaponInfo.RangedDamage;                        
-            }
-
-        }
+ 
         if (HasStatusEffect("Rally"))
         {
             total = (int)(total * (1 + (CurrentHP / (double)MaxHP)));
@@ -433,9 +484,7 @@ public class Player
         }
         else if (weapon.EnabledActions.Contains("Archery"))
         {
-
-                GainExperience("Archery", (int)(damageDealt * 1.5));
-
+            GainExperience("Archery", (int)(damageDealt * 1.5));
         }
         else if (weapon.EnabledActions.Contains("Fishing"))
         {
@@ -446,6 +495,10 @@ public class Player
             GainExperience("Hammermanship", (int)(damageDealt * 0.1));
             GainExperience("Strength", (int)(damageDealt * 0.5));
             GainExperience("Mining", (int)(damageDealt * 0.08));
+        }
+        else if (weapon.EnabledActions.Contains("Magic"))
+        {
+            GainExperience("Magic", (int)(damageDealt * 0.1));
         }
         else
         {

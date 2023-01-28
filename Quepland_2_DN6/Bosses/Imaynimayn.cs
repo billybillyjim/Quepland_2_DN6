@@ -22,9 +22,23 @@ namespace Quepland_2_DN6.Bosses
                 pad.Tick();
                 if(PlayerPosition == pad.Position && pad.HasFallen)
                 {
-                    MessageManager.AddMessage("The water feels like its draining your life force!", "red");
-                    Player.Instance.CurrentHP -= (Player.Instance.MaxHP / 5);
-                    Monsters[0].CurrentHP += Player.Instance.MaxHP / 4;
+                    if(Player.Instance.Inventory.HasItem("Potaki's Blessing0", false))
+                    {
+                        MessageManager.AddMessage("Potaki's Blessing glows a brilliant blue light! The water feels like its boiling but it does not hurt you!");
+                    }
+                    else if (Player.Instance.Inventory.HasItem("Potaki's Tear0", false))
+                    {
+                        MessageManager.AddMessage("Potaki's Tear glows a shining blue light! The water feels like its draining your life force slightly!");
+                        Player.Instance.CurrentHP -= (Player.Instance.MaxHP / 25);
+                        Monsters[0].CurrentHP += Player.Instance.MaxHP / 20;
+                    }
+                    else
+                    {
+                        MessageManager.AddMessage("The water feels like its draining your life force!", "red");
+                        Player.Instance.CurrentHP -= (Player.Instance.MaxHP / 5);
+                        Monsters[0].CurrentHP += Player.Instance.MaxHP / 4;
+                    }
+                    
                 }
             }
             if(currentTick % attackRatio == 0)
@@ -34,9 +48,23 @@ namespace Quepland_2_DN6.Bosses
         }
         public void OnSpecialAttack()
         {
-            Player.Instance.CurrentHP -= (Player.Instance.MaxHP / 7);
-            Monsters[0].CurrentHP += Player.Instance.MaxHP / 7;
-            MessageManager.AddMessage("The creature roars and draws your life away.");
+            if (Player.Instance.Inventory.HasItem("Potaki's Blessing0", false))
+            {
+                MessageManager.AddMessage("Potaki's Blessing glows a brilliant blue light! The creature roars to no effect!");
+            }
+            else if (Player.Instance.Inventory.HasItem("Potaki's Tear0", false))
+            {
+                MessageManager.AddMessage("Potaki's Tear glows a shining blue light! The creature roars and draws some of your life away!");
+                Player.Instance.CurrentHP -= (Player.Instance.MaxHP / 35);
+                Monsters[0].CurrentHP += Player.Instance.MaxHP / 30;
+            }
+            else
+            {
+                Player.Instance.CurrentHP -= (Player.Instance.MaxHP / 7);
+                Monsters[0].CurrentHP += Player.Instance.MaxHP / 7;
+                MessageManager.AddMessage("The creature roars and draws your life away.");
+            }
+
             if(NextLilypadTarget != null)
             {
                 if(Monsters[0].CurrentHP % 2 == 0)

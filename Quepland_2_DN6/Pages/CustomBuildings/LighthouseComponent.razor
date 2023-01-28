@@ -131,7 +131,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     @if (BattleManager.Instance.BattleHasEnded)
     {
         <div>@GetDescription()</div>
-        <button class="btn btn-primary m-2" @onclick="@(() => LootAndLeave())">Enter Workshop</button>
+        <button class="btn btn-primary m-2" @onclick="@(() => LootAndLeave())">Enter the staircase</button>
     }
     else
     {
@@ -146,7 +146,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     private Dictionary<int, List<string>> FloorEnemies = new Dictionary<int, List<string>>()
     {
         {1,new List<string>(){ "Wilting Stormling", "Withered Stormling", "Weakened Stormling" } },
-        {2,new List<string>(){ "Degenerate Stormling", "Grassy Stormling", "Budding Stormling" } },
+        {2,new List<string>(){ "Degenerate Stormling",  "Budding Stormling", "Grassy Stormling" } },
         {3,new List<string>(){ "Waning Stormling", "Floral Stormling", "Mossy Stormling" } }
     };
     private Dictionary<string, string> Descriptions = new Dictionary<string, string>() 
@@ -156,7 +156,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         {"Artisan", "Prepared rice rolls sit in a pile near the oven. A large smithy is still warm but unattended."},
         {"Combat", "Some of the creatures that live down here have spotted you!"},
         {"Descend", "A staircase leads deeper into the dungeon. An icy wind blows steadily upward out of the entryway."},
-        {"Boss", "A pi"}
+        {"Boss", "The stormwalker lies motionless. You can see a stairway at the back end of the room."}
     };
 
     public string GetDescription()
@@ -169,6 +169,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         if(currentFloor == 4)
         {
             Player.Instance.LighthouseLocation = "Boss";
+            room = "Boss";
             BattleManager.Instance.CurrentOpponents.Clear();
 
             BattleManager.Instance.CurrentOpponents.Add(BattleManager.Instance.GetMonsterByName("Stormwalker"));
@@ -186,6 +187,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         Player.Instance.LighthouseLocation = "Outside";
         GameState.IsInLighthouse = false;
         int duration = GameState.CurrentTick - GameState.StartingLighthouseTick;
+        MessageManager.AddMessage($"You descend the stairs and arrive in a small workshop. You grab something from a pile of valuables in each hand before a strange light overtakes you. You find yourself back outside the lighthouse.");
         MessageManager.AddMessage($"You made it through the lighthouse in {TimeSpan.FromSeconds(duration / 5).ToString()}.");
         if (duration < GameState.BestLighthouseTime && GameState.BestLighthouseTime != int.MaxValue)
         {

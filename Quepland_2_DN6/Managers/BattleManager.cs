@@ -377,11 +377,18 @@ public class BattleManager
         }
     }
 
-    public int GetTotalPlayerDamage(Monster m)
+    public int GetTotalPlayerDamage(Monster m, out string attackType)
     {
+        var weapon = Player.Instance.GetWeapon();
+        if(weapon != null)
+        {
+            attackType = Player.Instance.GetWeapon().EnabledActions;
+        }
+        
         double minHit = (((Player.Instance.GetWeaponAttackSpeed() / 5d) - 1d) / 12d);
  
-        var baseDmg = (int)(Player.Instance.GetTotalDamage() * CalculateTypeBonus(m));
+        var baseDmg = (int)(Player.Instance.GetTotalDamage(out attackType) * CalculateTypeBonus(m));
+
         int total = (int)Math.Max(minHit * baseDmg, baseDmg.ToRandomDamage() );
         if (m.CurrentStatusEffects.OfType<CleaveEffect>().Any())
         {
@@ -398,10 +405,18 @@ public class BattleManager
         ConfirmTarget();
         RollForPlayerAttackEffects();
 
-        int total = GetTotalPlayerDamage(Target);
+        int total = GetTotalPlayerDamage(Target, out string attackType);
+        MessageManager.AddMessage(attackType);
         Target.CurrentHP -= total;
-
-        GainCombatExperience(total);
+        if(attackType == "Magic")
+        {   
+            Player.Instance.CurrentMP -= Player.Instance.GetWeapon().WeaponInfo.MPCost;
+            if(Player.Instance.CurrentMP < 0)
+            {
+                Player.Instance.CurrentMP = 0;
+            }
+        }
+        GainCombatExperience(total, attackType);
         
         if (Target.IsDefeated)
         {
@@ -431,7 +446,7 @@ public class BattleManager
             Target = GetNextTarget();
         }
     }
-    public void GainCombatExperience(int total)
+    public void GainCombatExperience(int total, string attackType)
     {
         if (Player.Instance.GetWeapon() == null)
         {
@@ -490,6 +505,21 @@ public class BattleManager
                     MessageManager.AddMessage("You whack the " + Target.Name + " with your bow for " + total + " damage!");
                 }
             }
+            return;
+        }
+        if(Player.Instance.GetWeapon().EnabledActions == "Magic")
+        {
+            if(attackType == "Magic")
+            {
+                Player.Instance.GainExperienceFromWeapon(Player.Instance.GetWeapon(), total);
+                MessageManager.AddMessage("You blast the " + Target.Name + " for " + total + " damage!");
+            }
+            else
+            {
+                Player.Instance.GainExperience("Strength", total);
+                MessageManager.AddMessage("You whack the " + Target.Name + " with your staff for " + total + " damage!");
+            }
+            
             return;
         }
 

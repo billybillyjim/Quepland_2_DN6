@@ -129,6 +129,9 @@ using System.Threading.Tasks;
     public double BankWindowHeight { get; set; } = 540;
     public int AlchemyStage;
     public int AutoSmithedItemCount { get; set; } = 0;
+    public static bool IsEarthQuaking = false;
+    public static int EarthquakeTicks = 6;
+    public static int EarthquakeTicksRemaining = 0;
 
     private QuestTester QuestTester = new QuestTester();
     private RecipeTester RecipeTester = new RecipeTester();
@@ -293,6 +296,19 @@ using System.Threading.Tasks;
             Player.Instance.ClearBoosts();
             Player.Instance.JustDied = false;
         }
+        else if(CurrentTick % 600 == 0)
+        {
+            if(BattleManager.Instance.GetMonsterByName("Imaynimayn").KillCount > 0 && BattleManager.Instance.GetMonsterByName("Withered Stormling").KillCount == 0)
+            {
+                CauseEarthquake();
+            }
+        }
+        EarthquakeTicksRemaining--;
+        if(EarthquakeTicksRemaining <= 0)
+        {
+            IsEarthQuaking = false;
+        }
+
         if (cancelTask)
         {
             CurrentArtisanTask = null;
@@ -372,6 +388,38 @@ using System.Threading.Tasks;
             CurrentBook = NewBook;
             NewBook = null;
         }    
+    }
+    public void CauseEarthquake()
+    {
+        if (IsInLighthouse)
+        {
+            return;
+        }
+        IsEarthQuaking = true;
+        EarthquakeTicksRemaining = EarthquakeTicks;
+        if (CurrentLand.Name == "Quepland")
+        {
+            if (Location == "CantilaBeach/CantilaLighthouse")
+            {
+                MessageManager.AddMessage("The ground shakes violently, almost knocking you to your feet. A loud shriek emits from the lighthouse entrance.", "red");
+
+            }
+            else if (Location.Contains("Uragota"))
+            {
+                MessageManager.AddMessage("The ground shakes violently, almost knocking you to your feet. You hear a strange noise in the direction of the lighthouse.", "red");
+            }
+            else
+            {
+                MessageManager.AddMessage("The ground shakes beneath your feet. ", "red");
+            }
+            
+        }
+        else
+        {
+            MessageManager.AddMessage("You sense a light rumbling in the air. Something must be happening very far away.", "red");
+        }
+        
+        
     }
     public static void CancelTask()
     {

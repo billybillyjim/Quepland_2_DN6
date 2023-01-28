@@ -15,29 +15,29 @@
         },
         {
           "itemName": "Milk Dough",
-          "weight": 1
+          "weight": 1,
+          "amount": 1
         },
         {
-          "itemName": "Sweet Dough",
-          "weight": 5
+          "itemName": "Durum Flour",
+          "weight": 5,
+          "amount": 3
         },
         {
-          "itemName": "Durum Dough",
-          "weight": 5
-        },
-        {
-          "itemName": "Rye Dough",
-          "weight": 5
+          "itemName": "Rye Flour",
+          "weight": 5,
+          "amount": 3
         },
         {
           "itemName": "Dough",
-          "weight": 15
+          "weight": 15,
+          "amount": 3
         }
       ]
     }
   },
   {
-    "name": "Mossy Stormling",
+    "name": "Floral Stormling",
     "hp": 3000,
     "weaknesses": "Swordsmanship",
     "strengths": "Hammermanship",
@@ -47,30 +47,49 @@
     "dropTable": {
       "drops": [
         {
-          "itemName": "Red Wool Cape",
+          "itemName": "Milk",
+          "weight": 3,
+          "amount": 3
+        },
+        {
+          "itemName": "Bucket of Water",
+          "weight": 3,
+          "amount": 3
+        },
+        {
+          "itemName": "Salt",
+          "weight": 3,
+          "amount": 3
+        },
+        {
+          "itemName": "Oil",
+          "weight": 3,
+          "amount": 3
+        },
+        {
+          "itemName": "Chicken Egg",
+          "weight": 3,
+          "amount": 3
+        },
+        {
+          "itemName": "Sugar",
+          "weight": 3,
+          "amount": 3
+        },
+        {
+          "itemName": "Yeast",
+          "weight": 3,
+          "amount": 3
+        },
+        {
+          "itemName": "Quern Stone",
           "weight": 3
-        },
-        {
-          "itemName": "Milk Dough",
-          "weight": 1
-        },
-        {
-          "itemName": "Sweet Dough",
-          "weight": 5
-        },
-        {
-          "itemName": "Durum Dough",
-          "weight": 5
-        },
-        {
-          "itemName": "Rye Dough",
-          "weight": 5
         }
       ]
     }
   },
   {
-    "name": "Floral Stormling",
+    "name": "Mossy Stormling",
     "hp": 2000,
     "weaknesses": "Axemanship",
     "strengths": "Hammermanship",
@@ -122,7 +141,7 @@
         },
         {
           "itemName": "Quern Stone",
-          "weight": 3
+          "weight": 5
         },
         {
           "itemName": "Empty Bucket",
@@ -229,29 +248,33 @@
     "dropTable": {
       "drops": [
         {
-          "itemName": "Milk Dough",
-          "amount": 2,
-          "weight": 1
+          "itemName": "Milk",
+          "weight": 3,
+          "amount": 2
         },
         {
-          "itemName": "Sweet Dough",
-          "amount": 2,
-          "weight": 5
+          "itemName": "Bucket of Water",
+          "weight": 3,
+          "amount": 2
         },
         {
-          "itemName": "Durum Dough",
-          "amount": 2,
-          "weight": 5
+          "itemName": "Empty Bucket",
+          "weight": 3,
+          "amount": 2
         },
         {
-          "itemName": "Rye Dough",
-          "amount": 2,
-          "weight": 5
+          "itemName": "Sugar",
+          "weight": 3,
+          "amount": 2
         },
         {
-          "itemName": "Dough",
-          "amount": 2,
-          "weight": 15
+          "itemName": "Yeast",
+          "weight": 3,
+          "amount": 2
+        },
+        {
+          "itemName": "Quern Stone",
+          "weight": 3
         }
       ]
     }
