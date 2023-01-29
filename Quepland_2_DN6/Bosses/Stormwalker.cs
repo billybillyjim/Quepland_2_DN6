@@ -52,7 +52,7 @@ namespace Quepland_2_DN6.Bosses
         public void OnBeAttacked(Monster monster) 
         {            
             attackedCount++;
-            if(attackedCount > 3)
+            if(attackedCount > 4)
             {
                 attackedCount = 0;
                 currentWeaknessRotation++;
@@ -62,6 +62,7 @@ namespace Quepland_2_DN6.Bosses
                 }
                 monster.Strengths = strengthRotation[currentWeaknessRotation];
                 monster.Weaknesses = weaknessRotation[currentWeaknessRotation];
+                monster.TicksToNextAttack = 4 - currentWeaknessRotation * 10;
                 MessageManager.AddMessage(weaknessRotationMessages[currentWeaknessRotation], "red");
 
             }

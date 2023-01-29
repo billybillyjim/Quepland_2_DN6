@@ -71,50 +71,64 @@ else if(Player.Instance.LighthouseLocation == "Gauntlet")
     }
     else if(room == "Gather")
     {
-        <div>@GetDescription()</div>
+        @if (BattleManager.Instance.BattleHasEnded)
+        {
+            <div>@GetDescription()</div>
 
-        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Artisan"))">Enter Workshop</button>
-        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
-        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Artisan"))">Enter Workshop</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Gather"))">Find another stormling here</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
 
-        <Quepland_2_DN6.Components.GatherButtonComponent ActionText="Chop Balsa Trees:Balsa Logs"></Quepland_2_DN6.Components.GatherButtonComponent>
-        <br />
-        <Quepland_2_DN6.Components.GatherButtonComponent ActionText="Catch Fish:Crab,Manta Ray,Scallop:You start fishing..."></Quepland_2_DN6.Components.GatherButtonComponent>
-        <br />
-        <Quepland_2_DN6.Components.GatherButtonComponent ActionText="Gather Wheat:Wheat:You begin picking wheat..."></Quepland_2_DN6.Components.GatherButtonComponent>
-        <br />
-        <Quepland_2_DN6.Components.ConvertItemsComponent ActionText="Gather Water from the river:Bucket of Water:Empty Bucket:You begin drawing water from the river."></Quepland_2_DN6.Components.ConvertItemsComponent>
-        <br />
-
+            <Quepland_2_DN6.Components.GatherButtonComponent ActionText="Catch Fish:Crab,Manta Ray,Scallop:You start fishing..."></Quepland_2_DN6.Components.GatherButtonComponent>
+            <br />
+            <Quepland_2_DN6.Components.GatherButtonComponent ActionText="Gather Wheat:Wheat:You begin picking wheat..."></Quepland_2_DN6.Components.GatherButtonComponent>
+            <br />
+            <Quepland_2_DN6.Components.ConvertItemsComponent ActionText="Gather Water from the river:Bucket of Water:Empty Bucket:You begin drawing water from the river."></Quepland_2_DN6.Components.ConvertItemsComponent>
+            <br />
+        }
+        else
+        {
+            <CombatComponent></CombatComponent>
+        }
     }
     else if(room == "Artisan")
     {
-        <div>@GetDescription()</div>
+        @if (BattleManager.Instance.BattleHasEnded)
+        {
+            <div>@GetDescription()</div>
 
-        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Gather"))">Enter Nature Chamber</button>
-        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
-        <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Artisan"))">Find another stormling here</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Gather"))">Enter Nature Chamber</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
 
 
-        <Quepland_2_DN6.Components.GatherButtonComponent ActionText="Collect Rolls:Rice Roll:You start gathering rice rolls."></Quepland_2_DN6.Components.GatherButtonComponent>
-        <br />
-        <Quepland_2_DN6.Components.OvenComponent></Quepland_2_DN6.Components.OvenComponent>
-        <br />
-        <Quepland_2_DN6.Pages.SmithyComponent Location="Lighthouse"></Quepland_2_DN6.Pages.SmithyComponent>
+            <Quepland_2_DN6.Components.GatherButtonComponent ActionText="Collect Rolls:Rice Roll:You start gathering rice rolls."></Quepland_2_DN6.Components.GatherButtonComponent>
+            <br />
+            <Quepland_2_DN6.Components.OvenComponent></Quepland_2_DN6.Components.OvenComponent>
+            <br />
+            <Quepland_2_DN6.Pages.SmithyComponent Location="Lighthouse"></Quepland_2_DN6.Pages.SmithyComponent>
+        }
+        else
+        {
+            <CombatComponent></CombatComponent>
+        }
     }
     else if(room == "Combat")
     {
-        <div>@GetDescription()</div>
+        
         @if (BattleManager.Instance.BattleHasEnded)
         {
-
+            <div>You are in an underground labyrinth.</div>
             <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Artisan"))">Enter Workshop</button>
             <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Gather"))">Enter Nature Chamber</button>
-            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Enter Barracks</button>
+            <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Combat"))">Find another stormling here</button>
             <button class="btn btn-primary m-2" @onclick="@(() => ChangeRoom("Descend"))">Descend Stairs</button>
         }
         else
         {
+            <div>@GetDescription()</div>
              <CombatComponent></CombatComponent>
         }
        
@@ -143,12 +157,13 @@ else if(Player.Instance.LighthouseLocation == "Boss")
 
     private string room = "Entrance";
     private int currentFloor = 1;
-    private Dictionary<int, List<string>> FloorEnemies = new Dictionary<int, List<string>>()
+    private Dictionary<string, List<string>> RoomEnemies = new Dictionary<string, List<string>>()
     {
-        {1,new List<string>(){ "Wilting Stormling", "Withered Stormling", "Weakened Stormling" } },
-        {2,new List<string>(){ "Degenerate Stormling",  "Budding Stormling", "Grassy Stormling" } },
-        {3,new List<string>(){ "Waning Stormling", "Floral Stormling", "Mossy Stormling" } }
+        {"Artisan",new List<string>(){ "Wilting Stormling", "Wilting Stormling", "Waning Stormling", "Degenerate Stormling" } },
+        {"Gather",new List<string>(){ "Withered Stormling", "Withered Stormling", "Budding Stormling", "Floral Stormling" } },
+        {"Combat",new List<string>(){ "Weakened Stormling",  "Weakened Stormling", "Grassy Stormling", "Mossy Stormling" } }
     };
+
     private Dictionary<string, string> Descriptions = new Dictionary<string, string>() 
     { 
         {"Entrance", "The cold floor has fresh footprints leading in one direction. You can smell baked bread in another. A warm glow illuminates a third path."},
@@ -206,12 +221,12 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     }
     private void ChangeRoom(string newRoom)
     {
-
+        GameState.StopNonCombatActions();
         room = newRoom;
-        if(room == "Combat"){
-            string opponent = FloorEnemies[currentFloor][GameState.Random.Next(FloorEnemies[currentFloor].Count)];
-            BattleManager.Instance.StartBattle(BattleManager.Instance.GetMonsterByName(opponent));
-        }
+        
+        string opponent = RoomEnemies[room][currentFloor];
+        BattleManager.Instance.StartBattle(BattleManager.Instance.GetMonsterByName(opponent));
+        
         GameState.UpdateState();
     }
 
@@ -236,7 +251,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
             return;
         }
 
-        MessageManager.AddMessage("You feel your stomach tighten as the world around you folds in on itself. The room stretches longer and wider, darkness envelops you. In a moment the sensation passes and you find yourself standing in an open room made of cold, gray stone. There is a fine layer of snow on the ground, which glows just enough allow you to see around.");
+        MessageManager.AddMessage("You feel your stomach tighten as the world around you folds in on itself. The room stretches longer and wider, darkness envelops you. In a moment the sensation passes and you find yourself standing in an open room made of cold, gray stone. There is a layer of leaves on the ground, which glow just enough allow you to see around.");
         ChangeLocations("B-2");
         GameState.UpdateState();
     }

@@ -2,7 +2,8 @@
 @implements IDisposable 
 
 
-        <div class="custom-dropdown" style="cursor:pointer;width:fit-content;width:-moz-fit-content;min-width:200px;" onmouseleave="@(new Action(() => Close()))" @onclick="@(() => Select())">
+        <div class="custom-dropdown" style="cursor:pointer;width:fit-content;width:-moz-fit-content;min-width:200px;" 
+        onmouseleave="@(new Action(() => Close()))" @onclick="@(() => Select())">
             @if(DropdownItems == null || DropdownItems.Count == 0)
             {
                 @EmptyText
@@ -57,6 +58,7 @@
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
     private bool selected;
+    private bool closing;
     private string width = "width:fit-content;";
     /// <summary>
     /// The text shown when the list is empty. Defaults to "You don't have any."
@@ -79,21 +81,31 @@
     {
         Value = item;
         selectedValue = item;
-        selected = false;
-        GameState.UpdateState();
+        closing = true;
         return ValueChanged.InvokeAsync(Value);
     }
     public void Select()
     {
         if(DropdownItems.Count > 0)
-        {
-            selected = !selected;
+        {            
+            if (closing)
+            {
+                selected = false;
+                closing = false;
+            }
+            else
+            {
+                selected = !selected;
+            }
+
+
             GameState.UpdateState();
         }
 
     }
     public void Close()
     {
+        
         selected = false;
         GameState.UpdateState();
     }

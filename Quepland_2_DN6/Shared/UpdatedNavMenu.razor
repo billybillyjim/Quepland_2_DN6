@@ -155,6 +155,8 @@
     public void FleeLighthouse()
     {
         Player.Instance.Inventory.Clear();
+        MessageManager.AddMessage("You run as fast as you can out of the lighthouse, shedding anything you had on your along the way.");
+
         Player.Instance.LighthouseLocation = "Outside";
         GameState.IsInLighthouse = false;
         GameState.UpdateState();

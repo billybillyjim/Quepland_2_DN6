@@ -114,6 +114,7 @@ using System.Threading.Tasks;
 
     public static int TicksToNextHeal;
     public static int HealingTicks;
+    public static int SmithingActionsRemaining { get; set; }
     public static int CurrentTick { get; set; }
     public static int AutoSaveInterval { get; set; } = 4500;
     public static int GameWindowWidth { get; set; }
@@ -215,6 +216,7 @@ using System.Threading.Tasks;
         else if (TicksToNextAction <= 0 && CurrentSmithingRecipe != null && CurrentSmeltingRecipe != null)
         {
             SmithItem();
+
         }
         else if (TicksToNextAction <= 0 && CurrentAlchemyFormula != null)
         {
@@ -298,7 +300,7 @@ using System.Threading.Tasks;
         }
         else if(CurrentTick % 600 == 0)
         {
-            if(BattleManager.Instance.GetMonsterByName("Imaynimayn").KillCount > 0 && BattleManager.Instance.GetMonsterByName("Withered Stormling").KillCount == 0)
+            if(BattleManager.Instance.GetMonsterByName("Imaynimayn").KillCount > 0 && BattleManager.Instance.GetMonsterByName("Wilting Stormling").KillCount == 0)
             {
                 CauseEarthquake();
             }
@@ -720,7 +722,7 @@ using System.Threading.Tasks;
         {
             TicksToNextAction = CurrentRecipe.CraftingSpeed;
             MessageManager.AddMessage(CurrentRecipe.GetOutputsString().Replace("$", (created * CurrentRecipe.OutputAmount).ToString()));
-            if(CurrentRecipe.OutputAmount != created)
+            if(CurrentRecipe.OutputAmount * CurrentRecipe.MaxOutputsPerAction != created)
             {
                 CurrentRecipe = null;
                 MessageManager.AddMessage("You have run out of space.");
@@ -935,6 +937,16 @@ using System.Threading.Tasks;
                 }
                 TicksToNextAction = 12;
                 SmithingManager.SmithingStage = 0;
+                if(SmithingActionsRemaining != int.MaxValue)
+                {
+                    SmithingActionsRemaining--;
+                }
+                
+                if(SmithingActionsRemaining <= 0)
+                {
+                    StopActions();
+                    SmithingActionsRemaining = int.MaxValue;
+                }
             }
         }
         else if(SmithingManager.SmithingStage == 3)

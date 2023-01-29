@@ -138,13 +138,17 @@
             return $"background-image:url(data/Images/BGs/SotuNran.jpg)";
         }
         else if(location == "Battle"){
-           
+
             if (!String.IsNullOrEmpty(BattleManager.Instance.ReturnLocation)){
                 return $"background-image:url(data/Images/BGs/{BattleManager.Instance.ReturnLocation}.jpg)";
             }
             else{
                 return $"background-image:url(data/Images/BGs/{BattleManager.Instance.CurrentArea.AreaURL}.jpg)";
             }
+        }
+        else if(location == "Bank")
+        {
+            return "";   
         }
         return $"background-image:url(data/Images/BGs/{location}.jpg)";
     }

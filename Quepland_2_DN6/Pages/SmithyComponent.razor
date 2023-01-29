@@ -9,6 +9,24 @@
     <CustomDropdownComponent BoxText="Select an Ore or Bar" EmptyText="You don't have any ores or bars." MinWidth="300" @bind-value="Source" DropdownItems="@GetSmeltables()"></CustomDropdownComponent>
     <CustomDropdownComponent BoxText="Select a Product" EmptyText="Please select a source." MinWidth="300" @bind-value="Product" DropdownItems="@GetSmithables()"></CustomDropdownComponent>
 
+    <button class="btn btn-primary m-2" @onclick="(() => SetNumberToMake(1))" >
+        Make 1
+    </button>
+    
+    @if (showInput)
+    {
+        <input class="form-control m-2" @bind-value="makeX" />
+        <button class="btn btn-primary m-2" @onclick="(() => SetNumberToMake(makeX))">Confirm</button>
+    }
+    else
+    {
+        <button class="btn btn-primary m-2" @onclick="(() => showInput = true)">
+            Make X
+        </button>
+    }
+    <button class="btn btn-primary m-2" @onclick="(() => SetNumberToMake(int.MaxValue))">
+        Make All
+    </button>
 
     <br />
 
@@ -70,6 +88,8 @@
     [Parameter]
     public string Location { get; set; }
     private string s = "";
+    private bool showInput;
+    private int makeX = 10;
     string Source
     {
         get { return s; }
@@ -86,6 +106,11 @@
     private List<Recipe> smithables = new List<Recipe>();
     private Smithy thisSmithy;
 
+    public void SetNumberToMake(int value)
+    {
+        GameState.SmithingActionsRemaining = value;
+    }
+
     public List<string> GetSmithables()
     {
         if (smithables.Count > 0)
@@ -98,7 +123,7 @@
     {
         if (smeltables.Count > 0)
         {
-            return smeltables.Select(x => x.GetShortIngredientsString()).ToList();
+            return smeltables.Where(x => x.CanCreate()).OrderBy(x => x.GetShortIngredientsString()).Select(x => x.GetShortIngredientsString()).ToList();
         }
         return new List<string>();
     }

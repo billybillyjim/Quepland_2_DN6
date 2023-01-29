@@ -14,24 +14,24 @@
           "weight": 3
         },
         {
-          "itemName": "Milk Dough",
-          "weight": 1,
-          "amount": 1
+          "itemName": "Black Bear Hat",
+          "weight": 5
         },
         {
-          "itemName": "Durum Flour",
-          "weight": 5,
-          "amount": 3
+          "itemName": "Black Bear Boots",
+          "weight": 5
         },
         {
-          "itemName": "Rye Flour",
-          "weight": 5,
-          "amount": 3
+          "itemName": "Black Bear Pants",
+          "weight": 5
         },
         {
-          "itemName": "Dough",
-          "weight": 15,
-          "amount": 3
+          "itemName": "Black Bear Shirt",
+          "weight": 5
+        },
+        {
+          "itemName": "Moose Gloves",
+          "weight": 1
         }
       ]
     }
@@ -83,14 +83,18 @@
         },
         {
           "itemName": "Quern Stone",
-          "weight": 3
+          "weight": 1
+        },
+        {
+          "itemName": "Small Net",
+          "weight": 1
         }
       ]
     }
   },
   {
     "name": "Mossy Stormling",
-    "hp": 2000,
+    "hp": 2400,
     "weaknesses": "Axemanship",
     "strengths": "Hammermanship",
     "attackSpeed": 15,
@@ -103,24 +107,24 @@
           "weight": 3
         },
         {
-          "itemName": "Black Bear Hat",
+          "itemName": "Mammoth Hat",
           "weight": 5
         },
         {
-          "itemName": "Black Bear Boots",
+          "itemName": "Mammoth Boots",
           "weight": 5
         },
         {
-          "itemName": "Black Bear Pants",
+          "itemName": "Mammoth Pants",
           "weight": 5
         },
         {
-          "itemName": "Black Bear Shirt",
+          "itemName": "Mammoth Shirt",
           "weight": 5
         },
         {
-          "itemName": "Moose Gloves",
-          "weight": 1
+          "itemName": "Polar Bear Gloves(Clawed)",
+          "weight": 2
         }
       ]
     }
@@ -136,15 +140,15 @@
     "dropTable": {
       "drops": [
         {
-          "itemName": "Yeast",
-          "weight": 3
-        },
-        {
           "itemName": "Quern Stone",
           "weight": 5
         },
         {
           "itemName": "Empty Bucket",
+          "weight": 3
+        },
+        {
+          "itemName": "Small Net",
           "weight": 3
         }
       ]
@@ -274,7 +278,11 @@
         },
         {
           "itemName": "Quern Stone",
-          "weight": 3
+          "weight": 2
+        },
+        {
+          "itemName": "Small Net",
+          "weight": 2
         }
       ]
     }
