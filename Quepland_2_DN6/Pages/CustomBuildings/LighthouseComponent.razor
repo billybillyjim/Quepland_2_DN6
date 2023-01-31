@@ -47,6 +47,46 @@ else if (Player.Instance.LighthouseLocation == "B-1")
         At the bottom of the stairs you enter a small room with an elaborately engraved wall. At the center is a small door handle, floating in the air.</div>
     <Quepland_2_DN6.Components.NPCDialogComponent npc="Lighthouse Wall"></Quepland_2_DN6.Components.NPCDialogComponent>
     <button class="btn btn-primary" @onclick="@(() => EnterGauntlet())">Touch the handle</button>
+
+    @if (FollowerManager.Instance.HasFollowerCapableOf("Adventure"))
+    {
+        @if(Player.Instance.CurrentFollower != null && Player.Instance.CurrentFollower.AutoCollectSkill == "Adventurer")
+        {
+            <button class="btn btn-primary m-2" @onclick=@(() => AutoRaid())>Enter with @Player.Instance.CurrentFollower.Name</button>
+        }
+        else
+        {
+            <button class="btn btn-primary m-2 disabled" >Enter with Follower</button>
+        }
+        
+    }
+
+}
+else if(Player.Instance.LighthouseLocation == "AutoRaid")
+{
+    <div>
+        Progress:
+        <div class="progress" style="width:100%;height:20px;font-size:large;position:relative;margin-top:10px;">
+
+            <div class="progress-bar" style="width:@(GetRaidProgress());background-color:mediumpurple">
+            </div>
+        </div>
+    </div>
+    @if(afkAction != null && afkAction.IsReady())
+    {
+        <button class="btn btn-primary m-2" @onclick=@(() => CompleteAutoRaid())>Loot and Leave</button>
+    }
+    else if(afkAction != null)
+    {
+        <button class="btn btn-primary m-2" @onclick=@(() => CancelAutoRaid())>Flee the Lighthouse</button>
+    }
+    else
+    {
+        <button class="btn btn-primary m-2" @onclick=@(() => CancelAutoRaid())>Flee the Lighthouse</button>
+    }
+    
+
+    
 }
 else if (Player.Instance.LighthouseLocation == "B-2")
 {
@@ -157,6 +197,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
 
     private string room = "Entrance";
     private int currentFloor = 1;
+    AFKAction afkAction;
     private Dictionary<string, List<string>> RoomEnemies = new Dictionary<string, List<string>>()
     {
         {"Artisan",new List<string>(){ "Wilting Stormling", "Wilting Stormling", "Waning Stormling", "Degenerate Stormling" } },
@@ -173,7 +214,46 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         {"Descend", "A staircase leads deeper into the dungeon. An icy wind blows steadily upward out of the entryway."},
         {"Boss", "The stormwalker lies motionless. You can see a stairway at the back end of the room."}
     };
-
+    public void AutoRaid()
+    {
+        var raidCompletionTime = GameState.Random.Next((int)(GameState.BestLighthouseTime * 1.5), GameState.BestLighthouseTime * 2);
+        int minutes = Math.Max(10, GameState.TicksToSeconds(raidCompletionTime) / 60);
+        afkAction = new AFKAction();
+        afkAction.IsActive = true;
+        afkAction.StartTime = DateTime.UtcNow;
+        afkAction.ReturnTime = DateTime.UtcNow.AddMinutes(minutes);
+        MessageManager.AddMessage($"You enter the lighthouse with {Player.Instance.CurrentFollower.Name}."); 
+        Player.Instance.LighthouseLocation = "AutoRaid";
+        GameState.StartingLighthouseTick = GameState.CurrentTick;
+        GameState.IsInLighthouse = true;
+        GameState.CurrentAFKAction = afkAction;
+        GameState.SaveGame = true;
+    }
+    public string GetRaidProgress()
+    {
+        if(afkAction != null)
+        {
+            var total = afkAction.ReturnTime.Subtract(afkAction.StartTime).TotalSeconds;
+            var timeSinceStart = GameState.TicksToSeconds(GameState.CurrentTick - GameState.StartingLighthouseTick);
+            return ((timeSinceStart / total) * 100) + "%";
+        }
+        return "-1%";
+    }
+    public void CompleteAutoRaid()
+    {
+        LootAndLeave();
+        afkAction.IsActive = false;
+        GameState.CurrentAFKAction = null;
+        GameState.UpdateState();
+    }
+    public void CancelAutoRaid()
+    {
+        Player.Instance.LighthouseLocation = "Outside";
+        GameState.IsInLighthouse = false;
+        afkAction.IsActive = false;
+        GameState.CurrentAFKAction = null;
+        GameState.UpdateState();
+    }
     public string GetDescription()
     {
         return Descriptions[room];
@@ -209,15 +289,24 @@ else if(Player.Instance.LighthouseLocation == "Boss")
             MessageManager.AddMessage($"That's the fastest you've done it yet!");
         }
         GameState.BestLighthouseTime = Math.Min(GameState.BestLighthouseTime, duration);
-        
+
         var table = ItemManager.Instance.GetMinigameDropTable("Lighthouse").DropTable;
+       
         var drop1 = table.GetDrop();
         var drop2 = table.GetDrop();
 
         Player.Instance.Inventory.AddDrop(drop1, out int dropAmount1);
-        Player.Instance.Inventory.AddDrop(drop2, out int dropAmount2);
+        if (afkAction == null)
+        {            
+            Player.Instance.Inventory.AddDrop(drop2, out int dropAmount2);
+            MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} and {dropAmount2} {drop2.Item.GetName(dropAmount2)}.");
+        }
+        else
+        {
+            MessageManager.AddMessage($"You successfully escape the lighthouse and split your loot with your adventuring partner.");
+            MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} from your raid and {Player.Instance.CurrentFollower.Name} gets {drop2.Item.GetName(drop2.Amount)}.");
+        }
         
-        MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} and {dropAmount2} {drop2.Item.GetName(dropAmount2)}.");
     }
     private void ChangeRoom(string newRoom)
     {

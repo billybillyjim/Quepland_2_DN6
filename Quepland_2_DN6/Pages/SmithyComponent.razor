@@ -9,22 +9,23 @@
     <CustomDropdownComponent BoxText="Select an Ore or Bar" EmptyText="You don't have any ores or bars." MinWidth="300" @bind-value="Source" DropdownItems="@GetSmeltables()"></CustomDropdownComponent>
     <CustomDropdownComponent BoxText="Select a Product" EmptyText="Please select a source." MinWidth="300" @bind-value="Product" DropdownItems="@GetSmithables()"></CustomDropdownComponent>
 
-    <button class="btn btn-primary m-2" @onclick="(() => SetNumberToMake(1))" >
+    <button class="btn btn-primary m-2" disabled="@(GameState.SmithX == 1)" @onclick="(() => SetNumberToMake(1))">
         Make 1
     </button>
     
     @if (showInput)
     {
-        <input class="form-control m-2" @bind-value="makeX" />
+        <label for="make-x">Make</label>
+        <input id="make-x" type="number" min="2" max="@(int.MaxValue - 1)" class="m-2" @bind-value="makeX" />
         <button class="btn btn-primary m-2" @onclick="(() => SetNumberToMake(makeX))">Confirm</button>
     }
     else
     {
-        <button class="btn btn-primary m-2" @onclick="(() => showInput = true)">
-            Make X
+        <button disabled="@(makeX == GameState.SmithX)" class="btn btn-primary m-2" @onclick="(() => showInput = true)">
+            Make @(GetAmount())
         </button>
     }
-    <button class="btn btn-primary m-2" @onclick="(() => SetNumberToMake(int.MaxValue))">
+    <button class="btn btn-primary m-2" disabled="@(GameState.SmithX == int.MaxValue)" @onclick="(() => SetNumberToMake(int.MaxValue))">
         Make All
     </button>
 
@@ -108,9 +109,17 @@
 
     public void SetNumberToMake(int value)
     {
-        GameState.SmithingActionsRemaining = value;
+        GameState.SmithX = value;
+        showInput = false;
     }
-
+    public string GetAmount()
+    {
+        if (GameState.SmithX <= 1 || GameState.SmithX == int.MaxValue)
+        {
+            return "X";
+        }
+        return "" + GameState.SmithX;
+    }
     public List<string> GetSmithables()
     {
         if (smithables.Count > 0)
@@ -129,7 +138,7 @@
     }
     public void Smith()
     {
-
+        GameState.SmithingActionsRemaining = GameState.SmithX;
         Recipe source = ItemManager.Instance.GetSmithingRecipeByIngredients(Source);
         Recipe product = ItemManager.Instance.GetSmithingRecipeByOutput(Product);
         if (Player.Instance.CurrentFollower != null &&

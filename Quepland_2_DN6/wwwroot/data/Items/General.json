@@ -154,6 +154,13 @@
     "icon": "Bone Shard"
   },
   {
+    "name": "Bone Fragment",
+    "description": "A bit of bone dropped by a stormwalker. You could form this into some kind of weapon.",
+    "value": 15000,
+    "icon": "Bone Shard",
+    "secondaryColor": "#ffffff"
+  },
+  {
     "name": "Hemp",
     "description": "A fast-growing weed useful for turning into fiber.",
     "value": 10,

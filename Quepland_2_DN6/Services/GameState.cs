@@ -115,6 +115,8 @@ using System.Threading.Tasks;
     public static int TicksToNextHeal;
     public static int HealingTicks;
     public static int SmithingActionsRemaining { get; set; }
+    public static int SmithX { get; set; }
+    public static int AutoRaidCompletionTick { get; set; }
     public static int CurrentTick { get; set; }
     public static int AutoSaveInterval { get; set; } = 4500;
     public static int GameWindowWidth { get; set; }
@@ -1583,6 +1585,10 @@ using System.Threading.Tasks;
     public void UpdateState()
     {
         StateHasChanged();
+    }
+    public static int TicksToSeconds(int ticks)
+    {
+        return (int)(ticks * (GameSpeed / 1000f));
     }
 }
 

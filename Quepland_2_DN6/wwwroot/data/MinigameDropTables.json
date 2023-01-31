@@ -904,13 +904,23 @@
           "minAmount": 50
         },
         {
-          "itemName": "Queplinium Ore",
-          "weight": 5,
+          "itemName": "Honean Mantle",
+          "weight": 8,
           "amount": 1
         },
         {
-          "itemName": "Shrinking Cloth",
-          "weight": 5,
+          "itemName": "Honean Pants",
+          "weight": 8,
+          "amount": 1
+        },
+        {
+          "itemName": "Metacarpal Staff",
+          "weight": 4,
+          "amount": 1
+        },
+        {
+          "itemName": "Bone Fragment",
+          "weight": 4,
           "amount": 1
         }
       ]

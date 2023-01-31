@@ -32,6 +32,10 @@ public class FollowerManager
     {
         return Followers.FirstOrDefault(x => x.Name == name);
     }
+    public bool HasFollowerCapableOf(string action)
+    {
+        return Followers.Any(x => x.AutoCollectSkill.Contains(action));
+    }
     public string GetNewSaveData()
     {
         string data = "[";
