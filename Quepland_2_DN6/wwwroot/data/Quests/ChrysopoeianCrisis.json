@@ -28,6 +28,14 @@
       "description": "Linehart Wichperger asked you to plant poison in Hadeas Tajek's room."
     },
     {
+      "name": "Pondering",
+      "description": "You asked to think about Linehart Wichperger's request."
+    },
+    {
+      "name": "Linehart Rejected",
+      "description": "You refused Linehart Wichperger's request."
+    },
+    {
       "name": "Agreed To Frame",
       "description": "You agreed to plant poison in Hadeas Tajek's room."
     },

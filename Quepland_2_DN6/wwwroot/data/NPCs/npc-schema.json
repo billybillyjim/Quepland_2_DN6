@@ -121,6 +121,14 @@
                   "type": "integer",
                   "description": "The maximum progress that the quest must be. Defaults to int.maxValue."
                 },
+                "questFlag": {
+                  "type": "string",
+                  "description": "A flag that marks quest progress."
+                },
+                "questFlagValue": {
+                  "type": "boolean",
+                  "description": "A value that tells whether the flag should be true or false."
+                },
                 "progressFlag": {
                   "type": "string",
                   "description": "A flag that marks game progress."

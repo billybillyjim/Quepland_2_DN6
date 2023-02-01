@@ -11,6 +11,11 @@ public class Requirement
 	public string LockedFollower { get; set; } = "None";
 	public string ProgressFlag { get; set; } = "None";
 	public bool ProgressFlagValue { get; set; } = true;
+	/// <summary>
+	/// Having a Quest Flag will override the quest progress requirement.
+	/// </summary>
+	public string QuestFlag { get; set; } = "None";
+	public bool QuestFlagValue { get; set; } = true;
 	public bool RequireAreaLocked { get; set; } = false;
 	/// <summary>
 	/// The inclusive minimum step the quest must be at to fulfill the requirement.
@@ -83,11 +88,23 @@ public class Requirement
 			}
 			if (Quest != "None")
 			{
-				int progress = QuestManager.Instance.GetQuestByName(Quest).Progress;
-				if (progress < MinimumQuestProgress || progress > MaximumQuestProgress)
+				if(QuestFlag != "None")
 				{
-					return false;
+					var met = QuestManager.Instance.GetQuestByName(Quest).CheckFlag(QuestFlag);
+					if (met != QuestFlagValue)
+					{
+						return false;
+					}
 				}
+				else
+				{
+                    int progress = QuestManager.Instance.GetQuestByName(Quest).Progress;
+                    if (progress < MinimumQuestProgress || progress > MaximumQuestProgress)
+                    {
+                        return false;
+                    }
+                }
+				
 			}
 			if(ProgressFlag != "None")
             {
@@ -137,11 +154,31 @@ public class Requirement
 		}
 		if (Quest != "None")
 		{
-			int progress = QuestManager.Instance.GetQuestByName(Quest).Progress;
-			if (progress < MinimumQuestProgress || progress > MaximumQuestProgress)
+            if (QuestFlag != "None")
+            {
+                var met = QuestManager.Instance.GetQuestByName(Quest).CheckFlag(QuestFlag);
+                if (met != QuestFlagValue)
+                {
+					if (met)
+					{
+                        req += $"You need to complete {QuestFlag}({ met } instead of {QuestFlagValue})";
+                    }
+					else
+					{
+                        req += $"You already completed {QuestFlag}({ met } instead of {QuestFlagValue})";
+                    }
+                    
+                }
+            }
+			else
 			{
-				req += "You need to progress further in the quest " + Quest;
-			}
+                int progress = QuestManager.Instance.GetQuestByName(Quest).Progress;
+                if (progress < MinimumQuestProgress || progress > MaximumQuestProgress)
+                {
+                    req += "You need to progress further in the quest " + Quest;
+                }
+            }
+            
 		}
 		return req;
     }

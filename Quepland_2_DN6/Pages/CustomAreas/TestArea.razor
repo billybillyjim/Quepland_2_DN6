@@ -1,0 +1,46 @@
+﻿@page "/World/TestArea"
+@inject GameState GameState
+@inject NavigationManager UriHelper
+@implements IDisposable
+
+<div>Progress:@QuestManager.Instance.GetQuestByName("Chrysopoeian Crisis").Progress</div>
+@foreach (QuestFlag flag in QuestManager.Instance.GetQuestByName("Chrysopoeian Crisis").Flags)
+{
+    <div>Flag:@flag.Name</div>
+    <div>Progress Value:@flag.ProgressValue</div>
+    <div>Completed:@flag.Completed</div>
+    <div>Description:@flag.Description</div>
+    <br/>
+}
+
+<Quepland_2_DN6.Components.NPCDialogComponent npc="Oikaaz"></Quepland_2_DN6.Components.NPCDialogComponent>
+<Quepland_2_DN6.Components.NPCDialogComponent npc="Linehart Wichperger"></Quepland_2_DN6.Components.NPCDialogComponent>
+<Quepland_2_DN6.Components.NPCDialogComponent npc="Marschna Finrer"></Quepland_2_DN6.Components.NPCDialogComponent>
+<Quepland_2_DN6.Components.NPCDialogComponent npc="Hadeas Tajek"></Quepland_2_DN6.Components.NPCDialogComponent>
+<Quepland_2_DN6.Components.NPCDialogComponent npc="Sinapius"></Quepland_2_DN6.Components.NPCDialogComponent>
+<Quepland_2_DN6.Components.NPCDialogComponent npc="Rodor Bavnidsko"></Quepland_2_DN6.Components.NPCDialogComponent>
+<Quepland_2_DN6.Components.NPCDialogComponent npc="Laclav Rivin"></Quepland_2_DN6.Components.NPCDialogComponent>
+<Quepland_2_DN6.Components.NPCDialogComponent npc="Elderly Man"></Quepland_2_DN6.Components.NPCDialogComponent>
+
+
+
+@code {
+
+
+    protected override void OnInitialized()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+    }
+    protected override void OnParametersSet()
+    {
+
+        GameState.UpdateState();
+
+    }
+
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

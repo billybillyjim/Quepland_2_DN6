@@ -9,6 +9,12 @@
 </div>
 
 <div class="custom-scroll" style="max-height:100vh;overflow-y:auto;">
+    @if (IsTesting())
+    {
+        <div class="ml-2" style="@GetStyle("TestArea")" onclick="@(new Action(() => GoToArea("TestArea")))">
+            <img style="height: 45px; width: 45px; padding: 5px; margin-right: 10px; border-radius: 0.25rem; background-color: white;" src="@("data/Images/Bread.png")" />Test
+        </div>
+    }
     @if (GameState.IsOnHuntingTrip == false && GameState.CurrentAFKAction == null && !GameState.IsInLighthouse)
     {
         <ul class="nav flex-column">
@@ -151,6 +157,11 @@
         GameState.CancelHuntingTrip();
 
         GameState.UpdateState();
+    }
+    public bool IsTesting()
+    {
+        return UriHelper.BaseUri.Contains("localhost");
+
     }
     public void FleeLighthouse()
     {

@@ -4,30 +4,45 @@
 
 @if (thisBuilding != null)
 {
+    <h4>@location</h4>
+    @GetDescription()
+
     @if(location == "Entrance")
     {
 
     }
-    <br />
-    <div>@location</div>
-    
-
-
-
-
-
+    else if(location == "Main Hall")
+    {
+        
+    }
+    else if(location == "Entry Hallway")
+    {
+        
+    }
+    else if(location == "Courtyard")
+    {
+        
+    }
+    else if(location == "Headmaster Tower")
+    {
+        
+    }
+    else if(location == "Dormatory")
+    {
+        
+    }
 }
 
 @code {
-    private List<string> Descriptions = new List<string>()
+    private Dictionary<string, string> Descriptions = new Dictionary<string, string>()
     {
-            "You step into a brightly lit courtyard. The center of the room has a wide, open sunroof that opens over a shallow pool. On the far side of the room are double doors that lead further into the complex.",
-            "The main hall houses a massive table made of solid metal. A pair of mirrors sit facing each chair that surround the table.",
-            "There are two booths built into the wall of the hallway here. One sells elements, the other, metals. Both appear to be quite expensive.",
-            "The main buildings of the guild encircle the main hall, which is surrounded by a large courtyard. You can see the doors to the dormitory, as well as the library.",
-            "For an expansive building, the library is barren. Empty shelves line the walls of the building, and only a handful of books can be seen lying about, covered in a thick layer of dust. A notice on the wall lists the guild members and their checkout list.",
-            "The headmaster lives at the top of the stairs. A series of mirrors line the walls, allowing anyone at the top of the stairs to see all the way down to the bottom."
-
+           {"Entrance", "You step into a brightly lit courtyard. The center of the room has a wide, open sunroof that opens over a shallow pool. On the far side of the room are double doors that lead further into the complex." },
+           {"Main Hall", "The main hall houses a massive table made of solid metal. A pair of mirrors sit facing each chair that surround the table." },
+           {"Entry Hallway", "There are two booths built into the wall of the hallway here. One sells elements, the other, metals. Both appear to be quite expensive." },
+           {"Courtyard",  "The main buildings of the guild encircle the main hall, which is surrounded by a large courtyard. You can see the doors to the dormitory, as well as the library." },
+           {"Library", "For an expansive building, the library is barren. Empty shelves line the walls of the building, and only a handful of books can be seen lying about, covered in a thick layer of dust. A notice on the wall lists the guild members and their checkout list." },
+           {"Headmaster Tower",  "The headmaster lives at the top of the stairs. A series of mirrors line the walls, allowing anyone at the top of the stairs to see all the way down to the bottom." },
+           {"Dormatory", "The dormatory is almost entirely empty. A hallway of doors to one side is completely boarded up."}
     };
     private string location = "Entrance";
     [Parameter]
@@ -35,6 +50,11 @@
     [Parameter]
     public string buildingURL { get; set; }
     public Building thisBuilding { get; set; }
+
+    public string GetDescription()
+    {
+        return Descriptions[location];
+    }
 
     private void Exit()
     {

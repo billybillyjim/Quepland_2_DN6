@@ -21,6 +21,18 @@
                 <button class="btn btn-dark" style="margin:5px;" @onclick="@(() => Talk(d))">@d.ButtonText</button>
 
             }
+        }
+        <br />
+        @foreach (Dialog d in NPC.GetDialogsAtDepth(NPC.ConversationDepth))
+        {            
+            @if (IsTesting())
+            {
+                <br />
+                <button class="btn btn-light" style="margin:5px;" @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, GetAllRequirements(d))))"
+            @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+                    @d.ButtonText
+                </button>
+            }
 
         }
         @if (NPC.Shop != null)
@@ -36,7 +48,21 @@
     [Parameter]
     public string npc { get; set; }
     private NPC NPC;
+    public bool IsTesting()
+    {
+        return UriHelper.BaseUri.Contains("localhost");
 
+    }
+    public string GetAllRequirements(Dialog d)
+    {
+        var reqs = "";
+        foreach(Requirement r in d.Requirements)
+        {
+            reqs += r.ToString() + "\n";
+        }
+        return reqs;
+
+    }
     private void Talk(Dialog d)
     {
         d.Talk();

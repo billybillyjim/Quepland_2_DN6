@@ -127,14 +127,18 @@ public class Dialog
 
 	private void DoQuestCheck()
 	{
-		if (Quest != "None" && NewQuestProgressValue != -1)
+		if (Quest != "None")
 		{
-			if (NewQuestProgressValue == 1 && QuestManager.Instance.GetQuestByName(Quest).Progress == 0 && HasStartedQuest == false)
+			if(NewQuestProgressValue != -1)
 			{
-				HasStartedQuest = true;
-				MessageManager.AddMessage("You've started the quest " + Quest + ".", "#00ff00");
-			}
-			QuestManager.Instance.GetQuestByName(Quest).Progress = NewQuestProgressValue;
+                if (NewQuestProgressValue == 1 && QuestManager.Instance.GetQuestByName(Quest).Progress == 0 && HasStartedQuest == false)
+                {
+                    HasStartedQuest = true;
+                    MessageManager.AddMessage("You've started the quest " + Quest + ".", "#00ff00");
+                }
+                QuestManager.Instance.GetQuestByName(Quest).Progress = NewQuestProgressValue;
+            }
+			
 			if (CompleteQuest)
 			{
 				QuestManager.Instance.GetQuestByName(Quest).Complete();
