@@ -258,10 +258,11 @@
     },
     {
       "buttonText": "I lost the poison",
-      "responseText": "You WHAT!? How could you possibly lose something like that? You had one job!",
+      "responseText": "You WHAT!? How could you possibly lose something like that? You had one job! I don't have any more. You'll have to procure some of your own.",
       "depth": 0,
+      "newDepthOnTalk": 1,
       "quest": "Chrysopoeian Crisis",
-      "setFlag": "Agreed To Frame",
+      "setFlag": "Poison Lost",
       "newQuestProgressValue": 5,
       "requirements": [
         {
@@ -270,7 +271,35 @@
         },
         {
           "item": "Poison",
-          "itemLimit": 1
+          "itemLimit": 0
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Poison Lost",
+          "questFlagValue": false
+        }
+      ]
+    },
+    {
+      "buttonText": "How do I get more?",
+      "responseText": "You'll need to be discrete. There's an alchemist in the eastern district who has been banished from the guild. He made me the first bottle of poison and will probably have more.",
+      "depth": 1,
+      "newDepthOnTalk": 2,
+      "quest": "Chrysopoeian Crisis",
+      "setFlag": "Sent to Eastern Tsu",
+      "newQuestProgressValue": 5,
+      "requirements": [
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Agreed To Frame"
+        },
+        {
+          "item": "Poison",
+          "itemLimit": 0
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Poison Lost"
         }
       ]
     }
