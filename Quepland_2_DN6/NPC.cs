@@ -17,6 +17,7 @@ public class NPC
     }
 	public List<Dialog> GetDialogsAtDepth(int depth)
     {
-		return Dialogs.Where(x => x.Depth == depth).ToList();
+
+		return Dialogs.Where(x => (x.Depth == depth || (x.MinDepth != -1 && x.MinDepth < depth) || (x.MaxDepth != -1 && x.MaxDepth > depth) )).ToList();
     }
 }

@@ -47,7 +47,10 @@
 @code {
     [Parameter]
     public string npc { get; set; }
+
     private NPC NPC;
+    [Parameter]
+    public int depthOnLoad { get; set; } = 0;
     public bool IsTesting()
     {
         return UriHelper.BaseUri.Contains("localhost");
@@ -84,6 +87,7 @@
     protected override void OnParametersSet()
     {
         NPC = NPCManager.Instance.GetNPCByName(npc);
+        NPC.ConversationDepth = depthOnLoad;
         GameState.UpdateState();
     }
     public void Dispose()

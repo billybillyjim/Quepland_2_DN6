@@ -24,6 +24,8 @@ public class Dialog
 	public List<Requirement> Requirements { get; set; } = new List<Requirement>();
 	private bool HasStartedQuest;
 	public int Depth { get; set; }
+	public int MinDepth { get; set; } = -1;
+	public int MaxDepth { get; set; } = -1;
 	public int NewDepthOnTalk { get; set; }
 	public string SetFlag { get; set; } = "None";
 	public bool SetFlagValue { get; set; } = true;

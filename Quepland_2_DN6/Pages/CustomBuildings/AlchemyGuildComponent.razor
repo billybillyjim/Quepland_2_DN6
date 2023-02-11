@@ -1,11 +1,22 @@
-﻿@page "/World/NorthTsu/AlchemyGuild"
+﻿@page "/World/NorthTsuCity/AlchemyGuild"
 @inject GameState GameState
 @inject NavigationManager UriHelper
 
 @if (thisBuilding != null)
 {
     <h4>@location</h4>
-    @GetDescription()
+    <div>
+        @GetDescription()
+    </div>
+    
+
+    @foreach(KeyValuePair<string, string> loc in Descriptions)
+    {
+        if(location != loc.Key)
+        {
+            <button class="btn btn-primary m-2" @onclick="(() => ChangeLocations(loc.Key))">@loc.Key</button>
+        }
+    }
 
     @if(location == "Entrance")
     {
@@ -21,14 +32,24 @@
     }
     else if(location == "Courtyard")
     {
-        
+        <Quepland_2_DN6.Components.NPCDialogComponent npc="Linehart Wichperger"></Quepland_2_DN6.Components.NPCDialogComponent>
     }
     else if(location == "Headmaster Tower")
     {
-        
+        <Quepland_2_DN6.Components.NPCDialogComponent npc="Hadeas Tajek"></Quepland_2_DN6.Components.NPCDialogComponent>
+
     }
     else if(location == "Dormatory")
     {
+        <Quepland_2_DN6.Components.NPCDialogComponent npc="Marschna Finrer"></Quepland_2_DN6.Components.NPCDialogComponent>
+        <Quepland_2_DN6.Components.NPCDialogComponent npc="Rodor Bavnidsko"></Quepland_2_DN6.Components.NPCDialogComponent>
+    }
+    else if(location == "Library")
+    {
+        if(GameState.CurrentTick > libraryEntranceTick + waitTicksBeforeLinehartAppears)
+        {
+            <Quepland_2_DN6.Components.NPCDialogComponent depthOnLoad=20 npc="Linehart Wichperger" ></Quepland_2_DN6.Components.NPCDialogComponent>
+        }
         
     }
 }
@@ -50,10 +71,21 @@
     [Parameter]
     public string buildingURL { get; set; }
     public Building thisBuilding { get; set; }
+    private int libraryEntranceTick = 0;
+    private int waitTicksBeforeLinehartAppears = 100;
 
     public string GetDescription()
     {
         return Descriptions[location];
+    }
+
+    public void ChangeLocations(string newLoc)
+    {
+        location = newLoc;
+        if(location == "Library")
+        {
+            libraryEntranceTick = GameState.CurrentTick;
+        }
     }
 
     private void Exit()

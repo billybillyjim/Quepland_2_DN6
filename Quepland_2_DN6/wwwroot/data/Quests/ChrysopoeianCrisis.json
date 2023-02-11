@@ -48,6 +48,10 @@
       "description": "Linehart said you could get poison from an alchemist in Eastern Tsu City."
     },
     {
+      "name": "Poison Recipe Offer",
+      "description": "Sinapius asked you what you can give in exchange for the poison recipe."
+    },
+    {
       "name": "Check On Supplier",
       "description": "Sinapius asked you to check on his alchemical goods supplier in Sunajo fortress."
     },

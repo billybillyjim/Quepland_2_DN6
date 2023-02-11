@@ -18,6 +18,16 @@
         {
           "quest": "Chrysopoeian Crisis",
           "questFlag": "Sent to Eastern Tsu"
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Poison Recipe Learned",
+          "questFlagValue": false
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Found Supplier",
+          "questFlagValue": false
         }
       ]
     },
@@ -179,6 +189,8 @@
       "responseText": "What can you offer me?",
       "depth": 7,
       "newDepthOnTalk": 8,
+      "quest": "Chrysopoeian Crisis",
+      "setFlag": "Poison Recipe Offer",
       "newQuestProgressValue": 5,
       "requirements": [
         {
@@ -189,12 +201,14 @@
           "quest": "Chrysopoeian Crisis",
           "questFlag": "Sent to Eastern Tsu"
         }
+
       ]
     },
     {
       "buttonText": "Offer Alchemy Knowledge",
       "responseText": "It does sound like you know more about alchemy than you first let on... Teach me what you know and you have yourself a deal.",
-      "depth": 8,
+      "minDepth": 0,
+      "maxDepth": 10,
       "quest": "Chrysopoeian Crisis",
       "setFlag": "Alchemical Knowledge Offered",
       "newDepthOnTalk": 9,
@@ -207,16 +221,30 @@
         {
           "quest": "Chrysopoeian Crisis",
           "questFlag": "Sent to Eastern Tsu"
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Poison Recipe Offer"
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Poison Recipe Learned",
+          "questFlagValue": false
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Found Supplier",
+          "questFlagValue": false
         }
       ]
     },
     {
-      "buttonText": "Teach what you know",
+      "buttonText": "Teach what you know about alchemy",
       "responseText": "This is amazing! How did you figure all this out? Also, a deal is a deal, so here's my poison recipe.",
-      "depth": 9,
+      "depth": 11,
       "quest": "Chrysopoeian Crisis",
       "setFlag": "Poison Recipe Learned",
-      "newDepthOnTalk": 9,
+      "newDepthOnTalk": 0,
       "newQuestProgressValue": 5,
       "requirements": [
         {
@@ -226,13 +254,39 @@
         {
           "quest": "Chrysopoeian Crisis",
           "questFlag": "Sent to Eastern Tsu"
+        },
+        {
+          "skill": "Alchemy",
+          "skillLevel": 70
+        }
+      ]
+    },
+    {
+      "buttonText": "Teach what you know about alchemy",
+      "responseText": "This is... Not nearly enough for me to be willing to trade with you.",
+      "depth": 11,
+      "newDepthOnTalk": 0,
+      "newQuestProgressValue": 5,
+      "requirements": [
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Agreed To Frame"
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Sent to Eastern Tsu"
+        },
+        {
+          "skill": "Alchemy",
+          "skillLimit": 69
         }
       ]
     },
     {
       "buttonText": "Offer Money",
       "responseText": "I am a little short on money. This shop is not cheap to run and with most of the alchemists having left the city, business is not what it once was. Tell you what, if you can get me out of debt you have a deal. I need about 20,000,000.",
-      "depth": 8,
+      "minDepth": 0,
+      "maxDepth": 10,
       "quest": "Chrysopoeian Crisis",
       "setFlag": "Money Offered",
       "newDepthOnTalk": 9,
@@ -245,6 +299,16 @@
         {
           "quest": "Chrysopoeian Crisis",
           "questFlag": "Sent to Eastern Tsu"
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Poison Recipe Learned",
+          "questFlagValue": false
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Found Supplier",
+          "questFlagValue": false
         }
       ]
     },
@@ -275,7 +339,8 @@
     {
       "buttonText": "Offer Help",
       "responseText": "My supplier did not arrive with goods this week. He's stationed in Sunajo fortress northeast of here. I am wondering if I need to find a new supplier. Can you journey there and report back what you find?",
-      "depth": 8,
+      "minDepth": 0,
+      "maxDepth": 10,
       "quest": "Chrysopoeian Crisis",
       "setFlag": "Check On Supplier",
       "newDepthOnTalk": 0,
@@ -288,6 +353,16 @@
         {
           "quest": "Chrysopoeian Crisis",
           "questFlag": "Sent to Eastern Tsu"
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Poison Recipe Learned",
+          "questFlagValue": false
+        },
+        {
+          "quest": "Chrysopoeian Crisis",
+          "questFlag": "Found Supplier",
+          "questFlagValue": false
         }
       ]
     },
@@ -311,23 +386,6 @@
         {
           "quest": "Chrysopoeian Crisis",
           "questFlag": "Found Supplier"
-        }
-      ]
-    },
-    {
-      "buttonText": "Offer Nothing",
-      "responseText": "No. If you can't offer me anything then don't bother.",
-      "depth": 8,
-      "newDepthOnTalk": 0,
-      "newQuestProgressValue": 5,
-      "requirements": [
-        {
-          "quest": "Chrysopoeian Crisis",
-          "questFlag": "Agreed To Frame"
-        },
-        {
-          "quest": "Chrysopoeian Crisis",
-          "questFlag": "Sent to Eastern Tsu"
         }
       ]
     }

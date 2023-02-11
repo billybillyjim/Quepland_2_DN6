@@ -302,6 +302,13 @@
           "questFlag": "Poison Lost"
         }
       ]
+    },
+    {
+      "buttonText": "Follow Linehart",
+      "responseText": "You quickly hide behind a bookshelf and follow Linehart to an old wooden door at the back corner of the library. He opens it and descends the spiral staircase on the other side.",
+      "depth": 20,
+      "newDepthOnTalk": 21
+      
     }
 
   ]
