@@ -302,7 +302,7 @@ using System.Threading.Tasks;
         }
         else if(CurrentTick % 600 == 0)
         {
-            if(BattleManager.Instance.GetMonsterByName("Imaynimayn").KillCount > 0 && BattleManager.Instance.GetMonsterByName("Wilting Stormling").KillCount == 0)
+            if(CheckProgressFlag("Entered Lighthouse", false) && QuestManager.Instance.GetQuestByName("Queple's Sword").IsComplete)
             {
                 CauseEarthquake();
             }
@@ -414,7 +414,7 @@ using System.Threading.Tasks;
             }
             else
             {
-                MessageManager.AddMessage("The ground shakes beneath your feet. ", "red");
+                MessageManager.AddMessage("The ground shakes beneath your feet. You hear something in the direction of the coast.", "red");
             }
             
         }
@@ -724,7 +724,7 @@ using System.Threading.Tasks;
         {
             TicksToNextAction = CurrentRecipe.CraftingSpeed;
             MessageManager.AddMessage(CurrentRecipe.GetOutputsString().Replace("$", (created * CurrentRecipe.OutputAmount).ToString()));
-            if(CurrentRecipe.OutputAmount * CurrentRecipe.MaxOutputsPerAction != created)
+            if(CurrentRecipe.OutputAmount * CurrentRecipe.MaxOutputsPerAction != created * CurrentRecipe.OutputAmount)
             {
                 CurrentRecipe = null;
                 MessageManager.AddMessage("You have run out of space.");
@@ -1170,6 +1170,14 @@ using System.Threading.Tasks;
         TicksToNextAction = recipe.CraftingSpeed;
         MessageManager.AddMessage(recipe.RecipeActionString);
         UpdateState();
+    }
+    public static void SetProgressFlag(string name, bool value)
+    {
+        GetFlagByName(name).Completed = value;
+    }
+    public static bool CheckProgressFlag(string name, bool value)
+    {
+        return GetFlagByName(name).Completed == value;
     }
     public static ProgressFlag GetFlagByName(string name)
     {
