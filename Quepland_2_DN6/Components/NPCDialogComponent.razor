@@ -23,15 +23,17 @@
             }
         }
         <br />
-        @foreach (Dialog d in NPC.GetDialogsAtDepth(NPC.ConversationDepth))
-        {            
-            @if (IsTesting())
-            {
+        @if (IsTesting())
+        {
+            @foreach (Dialog d in NPC.GetDialogsAtDepth(NPC.ConversationDepth))
+            {            
+            
                 <br />
                 <button class="btn btn-light" style="margin:5px;" @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, GetAllRequirements(d))))"
             @onmouseout="@(new Action(() => GameState.HideTooltip()))">
                     @d.ButtonText
                 </button>
+                
             }
 
         }
@@ -39,7 +41,7 @@
         {
             <ShopComponent Shop="@NPC.Shop" itemsPerRow="9"></ShopComponent>
         }
-
+       
 
     </div>
     <br />
