@@ -10,13 +10,13 @@
     </div>
     
 
-    @foreach(KeyValuePair<string, string> loc in Descriptions)
+    @*@foreach(KeyValuePair<string, string> loc in Descriptions)
     {
         if(location != loc.Key)
         {
             <button class="btn btn-primary m-2" @onclick="(() => ChangeLocations(loc.Key))">@loc.Key</button>
         }
-    }
+    }*@
 
     @if(location == "Entrance")
     {
