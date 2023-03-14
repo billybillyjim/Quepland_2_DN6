@@ -291,7 +291,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         GameState.BestLighthouseTime = Math.Min(GameState.BestLighthouseTime, duration);
 
         var table = ItemManager.Instance.GetMinigameDropTable("Lighthouse").DropTable;
-       
+
         var drop1 = table.GetDrop();
         var drop2 = table.GetDrop();
 
@@ -306,16 +306,16 @@ else if(Player.Instance.LighthouseLocation == "Boss")
             MessageManager.AddMessage($"You successfully escape the lighthouse and split your loot with your adventuring partner.");
             MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} from your raid and {Player.Instance.CurrentFollower.Name} gets {drop2.Item.GetName(drop2.Amount)}.");
         }
-        
+
     }
     private void ChangeRoom(string newRoom)
     {
         GameState.StopNonCombatActions();
         room = newRoom;
-        
+
         string opponent = RoomEnemies[room][currentFloor];
         BattleManager.Instance.StartBattle(BattleManager.Instance.GetMonsterByName(opponent));
-        
+
         GameState.UpdateState();
     }
 
@@ -339,7 +339,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
             GameState.UpdateState();
             return;
         }
-
+        GameState.SetProgressFlag("Entered Lighthouse", true);
         MessageManager.AddMessage("You feel your stomach tighten as the world around you folds in on itself. The room stretches longer and wider, darkness envelops you. In a moment the sensation passes and you find yourself standing in an open room made of cold, gray stone. There is a layer of leaves on the ground, which glow just enough allow you to see around.");
         ChangeLocations("B-2");
         GameState.UpdateState();

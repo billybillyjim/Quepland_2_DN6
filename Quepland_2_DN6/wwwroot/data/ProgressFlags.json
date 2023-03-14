@@ -26,5 +26,12 @@
     "progressValue": 0,
     "progressData": "",
     "completed": false
+  },
+  {
+    "name": "Entered Lighthouse",
+    "description": "You've been inside the lighthouse.",
+    "progressValue": 0,
+    "progressData": "",
+    "completed": false
   }
 ]
