@@ -129,68 +129,48 @@
         }
         @if (ItemManager.Instance.GetUnpackingRecipe(Item) != null)
         {
-            if (Item.FoodInfo != null)
+
+            if (ItemManager.Instance.GetUnpackingRecipe(Item).HasSpace())
             {
-                if (ItemManager.Instance.GetUnpackingRecipe(Item).HasSpace())
-                {
-                    <div class="item-view-button" style="bottom:45px;">
-                        @if (GameState.CurrentRecipe == ItemManager.Instance.GetUnpackingRecipe(Item))
-                        {
-                            <div style="position:relative;">
-                                <div class="progress" style="position:absolute;top:0px;width:100%;height:5px;border-radius:0.25rem;z-index:3;">
-                                    <div class="progress-bar" style="@GetProgress()"></div>
-                                </div>
+                <div class="item-view-button">
+                    @if (GameState.CurrentRecipe == ItemManager.Instance.GetUnpackingRecipe(Item))
+                    {
+                        <div style="position:relative;">
+                            <div class="progress" style="position:absolute;top:0px;width:100%;height:5px;border-radius:0.25rem;z-index:3;">
+                                <div class="progress-bar" style="@GetProgress()"></div>
                             </div>
-                        }
+                        </div>
+                    }
+                    @if (ItemManager.Instance.GetUnpackingRecipe(Item).HasRequirements())
+                    {
                         <button class="btn btn-light"
-                                @onclick="@(() => GameState.SetCraftingItem(ItemManager.Instance.GetUnpackingRecipe(Item)))">
+                            @onclick="@(() => GameState.SetCraftingItem(ItemManager.Instance.GetUnpackingRecipe(Item)))">
                             @ItemManager.Instance.GetUnpackingRecipe(Item).RecipeButtonString
                         </button>
-                    </div>
-
-                }
-                else
-                {
-                    <div class="item-view-button"  style="bottom:45px;">
-                        <button class="btn btn-light" style="opacity:0.7" @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "You don't have enough inventory space.")))"
-                                @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+                    }
+                    else
+                    {
+                        <button class="btn btn-light" style="opacity:0.7"
+                            @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, ItemManager.Instance.GetUnpackingRecipe(Item).GetRequirementTooltip())))"
+                            @onmouseout="@(new Action(() => GameState.HideTooltip()))">
                             @ItemManager.Instance.GetUnpackingRecipe(Item).RecipeButtonString
                         </button>
-                    </div>
+                    }
+                        
+                </div>
 
-                }
             }
             else
             {
-                if (ItemManager.Instance.GetUnpackingRecipe(Item).HasSpace())
-                {
-                    <div class="item-view-button">
-                        @if (GameState.CurrentRecipe == ItemManager.Instance.GetUnpackingRecipe(Item))
-                        {
-                            <div style="position:relative;">
-                                <div class="progress" style="position:absolute;top:0px;width:100%;height:5px;border-radius:0.25rem;z-index:3;">
-                                    <div class="progress-bar" style="@GetProgress()"></div>
-                                </div>
-                            </div>
-                        }
-                        <button class="btn btn-light"
-                                @onclick="@(() => GameState.SetCraftingItem(ItemManager.Instance.GetUnpackingRecipe(Item)))">
-                            @ItemManager.Instance.GetUnpackingRecipe(Item).RecipeButtonString
-                        </button>
-                    </div>
-
-                }
-                else
-                {
-                    <div class="item-view-button">
-                        <button class="btn btn-light" style="opacity:0.7" @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "You don't have enough inventory space.")))"
-                                @onmouseout="@(new Action(() => GameState.HideTooltip()))">
-                            @ItemManager.Instance.GetUnpackingRecipe(Item).RecipeButtonString
-                        </button>
-                    </div>
-
-                }
+                <div class="item-view-button">
+                    <button class="btn btn-light" style="opacity:0.7" @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "You don't have enough inventory space.")))"
+                            @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+                        @ItemManager.Instance.GetUnpackingRecipe(Item).RecipeButtonString
+                    </button>
+                </div>
+                    
             }
+
         }
         @if (Item.OpenCraftingMenuText != "None")
         {
