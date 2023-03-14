@@ -178,6 +178,28 @@
     "maxOutputsPerAction": 1
   },
   {
+    "outputItemName": "Giant Fishing Rod",
+    "ingredients": [
+      {
+        "itemName": "Ebisian Fishing Rod",
+        "amount": 1
+      },
+      {
+        "itemName": "Platinum Sword",
+        "amount": 1
+      }
+    ],
+    "preventArtisanTask": true,
+    "recipeActionString": "You somehow manage to combine the rod and sword into a giant fishing rod.",
+    "requirements": [
+      {
+        "skill": "Smithing",
+        "skillLevel": 75
+      }
+    ],
+    "maxOutputsPerAction": 1
+  },
+  {
     "outputItemName": "No Soliciting Sign",
     "ingredients": [
       {
@@ -380,24 +402,6 @@
     ],
     "recipeActionString": "You shove the two pieces together in various ways, until you hear a satisfying 'click'.",
     "maxOutputsPerAction": 1,
-    "preventArtisanTask": true
-  },
-  {
-    "outputItemName": "Lion's Mane Stingers",
-    "ingredients": [
-      {
-        "itemName": "Lion's Mane Jellyfish"
-      }
-    ],
-    "experienceGained": "Culinary Arts:250",
-    "requirements": [
-      {
-        "skill": "Culinary Arts",
-        "skillLevel": 99
-      }
-    ],
-    "maxOutputsPerAction": 1,
-    "outputAmount": 5,
     "preventArtisanTask": true
   }
 ]
