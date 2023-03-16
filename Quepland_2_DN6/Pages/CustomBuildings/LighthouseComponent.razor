@@ -4,7 +4,6 @@
 
     <h1>The Lighthouse</h1>
 
-
 @if (Player.Instance.LighthouseLocation == "Outside")
 {
     <br />
@@ -260,7 +259,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         {
             GameState.CurrentAFKAction.IsActive = false;
         }
-        
+
         GameState.CurrentAFKAction = null;
         GameState.UpdateState();
     }
@@ -292,7 +291,17 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         Player.Instance.LighthouseLocation = "Outside";
         GameState.IsInLighthouse = false;
         int duration = GameState.CurrentTick - GameState.StartingLighthouseTick;
-        MessageManager.AddMessage($"You descend the stairs and arrive in a small workshop. You grab something from a pile of valuables in each hand before a strange light overtakes you. You find yourself back outside the lighthouse.");
+        if (GameState.Random.Next(7) == 0 && GameState.BestLighthouseTime != int.MaxValue && !FollowerManager.Instance.GetFollowerByName("Kenbo Daito").IsUnlocked)
+        {
+            FollowerManager.Instance.GetFollowerByName("Kenbo Daito").IsUnlocked = true;
+            MessageManager.AddMessage($"You meet another adventurer in the workshop. He grasps your ankle before you depart. Back in the lighthouse, he offers to help you for saving his life. He spent years in the labyrinth and could never find a way to escape... But now he kind of misses it back there.");
+        }
+        else
+        {
+            MessageManager.AddMessage($"You descend the stairs and arrive in a small workshop. You grab something from a pile of valuables in each hand before a strange light overtakes you. You find yourself back outside the lighthouse.");
+
+        }
+
         MessageManager.AddMessage($"You made it through the lighthouse in {TimeSpan.FromSeconds(duration / 5).ToString()}.");
         if (duration < GameState.BestLighthouseTime && GameState.BestLighthouseTime != int.MaxValue)
         {
@@ -310,9 +319,12 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         {            
             Player.Instance.Inventory.AddDrop(drop2, out int dropAmount2);
             MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} and {dropAmount2} {drop2.Item.GetName(dropAmount2)}.");
+
+           
         }
         else
         {
+            
             MessageManager.AddMessage($"You successfully escape the lighthouse and split your loot with your adventuring partner.");
             MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} from your raid and {Player.Instance.CurrentFollower.Name} gets {drop2.Amount} {drop2.Item.GetName(drop2.Amount)}.");
         }
