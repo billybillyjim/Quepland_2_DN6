@@ -12,4 +12,5 @@ public class GameStateSaveData
 	public bool UseOldBankView { get; set; }
 
 	public int ExtractWarningValue { get; set; } = 1000;
+	public int StartingLighthouseTick { get; set; } = 0;
 }

@@ -1,7 +1,20 @@
 [
   {
-    "versionNumber": "1.1.2",
+    "versionNumber": "1.2.0",
     "updates": [
+      "Added magic skill, find scrolls around the map to learn spells. Definitely open to reworking the skill if it needs it.",
+      "Air is now stored on the player instead of the underwater area it matters.",
+      "Fixed some typos.",
+      "Stopped checking names for similarity. This should fix a few different bugs in the banking interface.",
+      "Fixed bug where crafting amount for some items was wrong.",
+      "Added a small dungeon in the lighthouse.",
+      "Added Stormwalker boss.",
+      "Fixed a few bugs relating to dialog.",
+      "Made a number of changes to quest dialogs for future development.",
+      "Added a check for skills for unpacking some items.",
+      "Added a new follower for auto-completing the new dungeon.",
+      "Removed some items from artisan tasks.",
+      "Added a giant fishing rod recipe.",
       "Greatly boosted artisan experience rates.",
       "Removed chickens from extractor shop.",
       "Changed boosts to only work one at a time.",
@@ -19,7 +32,9 @@
       "Drain no longer overkills.",
       "Sahotite and strongtium had their requirements reduced slightly.",
       "Added descriptions for all the npcs.",
-      "Added missing fish."
+      "Added missing fish.",
+      "Added art backgrounds. These were made with AI. I didn't really know it was a controversial topic until after I had made them all. You can disable them in the settings if you don't like them.'",
+      "There are quite a few other changes I did not do a good job of implementing. If you encounter a bug or other issue, I'll be paying close attention and putting out a patch sometime in the next few days. I'm sure I have missed some things."
 
     ]
   },

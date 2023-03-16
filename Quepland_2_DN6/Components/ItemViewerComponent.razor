@@ -127,6 +127,10 @@
         {
             <div class="item-view-button"><button class="btn btn-light" @onclick="@(() => EatItem())">Eat</button></div>
         }
+        @if (Item.Name == "Spell Scroll")
+        {
+            <div class="item-view-button"><button class="btn btn-light" @onclick="@(() => ReadScroll())">Read</button></div>
+        }
         @if (ItemManager.Instance.GetUnpackingRecipe(Item) != null)
         {
 
@@ -234,13 +238,41 @@
     public GameItem Item { get; set; }
     private bool HideValue;
 
+    public void ReadScroll()
+    {
+        if (Item.Parameter != "")
+        {
+
+            var s = MagicManager.Instance.GetSpell(Item.Parameter);
+            if(s != null)
+            {
+                if (s.Unlocked)
+                {
+                    MessageManager.AddMessage("You read the scroll to find that it contains the spell " + s.Name + ". You already know how to cast the spell, but some of the information is new to you. You learned a little bit more about magic.");
+                    Player.Instance.GainExperience("Magic", Player.Instance.GetLevel("Magic") * 15);
+                }
+                else
+                {
+                    MagicManager.Instance.UnlockSpell(Item.Parameter);
+                    MessageManager.AddMessage("You read the scroll to find that it contains the spell " + s.Name + ". You've unlocked a new spell!");
+                }
+                
+            }
+            if (Player.Instance.Inventory.RemoveItems(Item, 1) == 1)
+            {
+                if (Player.Instance.Inventory.HasItem(Item) == false)
+                {
+                    ClearItem();
+                }
+            }
+        }
+    }
 
     public void Stake()
     {
         if (GameState.Location.Contains('/'))
         {
             MessageManager.AddMessage("You should step outside before doing that.");
-            Console.WriteLine(GameState.Location);
             return;
         }
         MessageManager.AddMessage("You stab the branch into the ground and it begins to glow.");

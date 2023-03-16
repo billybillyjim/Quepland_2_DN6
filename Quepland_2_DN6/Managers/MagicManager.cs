@@ -46,6 +46,33 @@ public class MagicManager
         }
         
     }
+
+    public ISpell? GetSpell(string name)
+    {
+        foreach (ISpell spell in Spells)
+        {
+            if (spell.Name == name)
+            {
+                return spell;
+            }
+        }
+        return null;
+    }
+
+    public ISpell GetRandomSpell()
+    {
+        var count = 0;
+        foreach (ISpell spell in Spells)
+        {
+            if (GameState.Random.Next(Spells.Count) == count)
+            {
+                return spell;
+            }
+            count++;
+        }
+        return Spells[count - 1];
+    }
+
     public bool NoSpellsUnlocked()
     {
         foreach(ISpell spell in Spells)

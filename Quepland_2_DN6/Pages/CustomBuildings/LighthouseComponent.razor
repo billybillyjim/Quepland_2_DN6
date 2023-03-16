@@ -72,11 +72,11 @@ else if(Player.Instance.LighthouseLocation == "AutoRaid")
             </div>
         </div>
     </div>
-    @if(afkAction != null && afkAction.IsReady())
+    @if (GameState.CurrentAFKAction != null && GameState.CurrentAFKAction.IsReady())
     {
         <button class="btn btn-primary m-2" @onclick=@(() => CompleteAutoRaid())>Loot and Leave</button>
     }
-    else if(afkAction != null)
+    else if (GameState.CurrentAFKAction != null)
     {
         <button class="btn btn-primary m-2" @onclick=@(() => CancelAutoRaid())>Flee the Lighthouse</button>
     }
@@ -84,9 +84,7 @@ else if(Player.Instance.LighthouseLocation == "AutoRaid")
     {
         <button class="btn btn-primary m-2" @onclick=@(() => CancelAutoRaid())>Flee the Lighthouse</button>
     }
-    
-
-    
+  
 }
 else if (Player.Instance.LighthouseLocation == "B-2")
 {
@@ -197,7 +195,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
 
     private string room = "Entrance";
     private int currentFloor = 1;
-    AFKAction afkAction;
+
     private Dictionary<string, List<string>> RoomEnemies = new Dictionary<string, List<string>>()
     {
         {"Artisan",new List<string>(){ "Wilting Stormling", "Wilting Stormling", "Waning Stormling", "Degenerate Stormling" } },
@@ -216,11 +214,18 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     };
     public void AutoRaid()
     {
+        if (CheckForItemsInInventory())
+        {
+            MessageManager.AddMessage("Your follower reminds you you can't take anything with you inside the dungeon.");
+            GameState.UpdateState();
+            return;
+        }
         var raidCompletionTime = GameState.Random.Next((int)(GameState.BestLighthouseTime * 1.5), GameState.BestLighthouseTime * 2);
         int minutes = Math.Max(10, GameState.TicksToSeconds(raidCompletionTime) / 60);
-        afkAction = new AFKAction();
+        AFKAction afkAction = new AFKAction();
         afkAction.IsActive = true;
         afkAction.StartTime = DateTime.UtcNow;
+        afkAction.ButtonText = "Lighthouse";
         afkAction.ReturnTime = DateTime.UtcNow.AddMinutes(minutes);
         MessageManager.AddMessage($"You enter the lighthouse with {Player.Instance.CurrentFollower.Name}."); 
         Player.Instance.LighthouseLocation = "AutoRaid";
@@ -228,12 +233,13 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         GameState.IsInLighthouse = true;
         GameState.CurrentAFKAction = afkAction;
         GameState.SaveGame = true;
+        GameState.UpdateState();
     }
     public string GetRaidProgress()
     {
-        if(afkAction != null)
+        if (GameState.CurrentAFKAction != null)
         {
-            var total = afkAction.ReturnTime.Subtract(afkAction.StartTime).TotalSeconds;
+            var total = GameState.CurrentAFKAction.ReturnTime.Subtract(GameState.CurrentAFKAction.StartTime).TotalSeconds;
             var timeSinceStart = GameState.TicksToSeconds(GameState.CurrentTick - GameState.StartingLighthouseTick);
             return ((timeSinceStart / total) * 100) + "%";
         }
@@ -242,7 +248,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     public void CompleteAutoRaid()
     {
         LootAndLeave();
-        afkAction.IsActive = false;
+        GameState.CurrentAFKAction.IsActive = false;
         GameState.CurrentAFKAction = null;
         GameState.UpdateState();
     }
@@ -250,7 +256,11 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     {
         Player.Instance.LighthouseLocation = "Outside";
         GameState.IsInLighthouse = false;
-        afkAction.IsActive = false;
+        if (GameState.CurrentAFKAction != null)
+        {
+            GameState.CurrentAFKAction.IsActive = false;
+        }
+        
         GameState.CurrentAFKAction = null;
         GameState.UpdateState();
     }
@@ -296,7 +306,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         var drop2 = table.GetDrop();
 
         Player.Instance.Inventory.AddDrop(drop1, out int dropAmount1);
-        if (afkAction == null)
+        if (GameState.CurrentAFKAction == null)
         {            
             Player.Instance.Inventory.AddDrop(drop2, out int dropAmount2);
             MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} and {dropAmount2} {drop2.Item.GetName(dropAmount2)}.");
@@ -304,7 +314,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         else
         {
             MessageManager.AddMessage($"You successfully escape the lighthouse and split your loot with your adventuring partner.");
-            MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} from your raid and {Player.Instance.CurrentFollower.Name} gets {drop2.Item.GetName(drop2.Amount)}.");
+            MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} from your raid and {Player.Instance.CurrentFollower.Name} gets {drop2.Amount} {drop2.Item.GetName(drop2.Amount)}.");
         }
 
     }
@@ -329,9 +339,19 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         BattleManager.Instance.CurrentOpponents.Add(BattleManager.Instance.GetMonsterByName("Wilting Stormling"));
         BattleManager.Instance.StartBattle();
     }
+    private bool CheckForItemsInInventory()
+    {
+        if (Player.Instance.Inventory.GetUsedSpaces() != 0)
+        {
+
+
+            return true;
+        }
+        return false;
+    }
     private void EnterGauntlet()
     {
-        if(Player.Instance.Inventory.GetUsedSpaces() != 0)
+        if (CheckForItemsInInventory())
         {
             string msg = "The handle feels hot to the touch.";
             string item = " Your " + Player.Instance.Inventory.GetUniqueItems()[0].Key.Name + " begins to tremble violently.";
@@ -352,7 +372,8 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     }
     private void Exit()
     {
-        UriHelper.NavigateTo("/World/CantilaBeach");
+        GameState.GoToArea("CantilaBeach");
+        //UriHelper.NavigateTo("/World/CantilaBeach");
         GameState.UpdateState();
     }
     protected override void OnInitialized()

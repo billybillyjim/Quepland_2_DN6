@@ -123,6 +123,11 @@
         }
 
     }
+
+    @if (scrollSpawned)
+    {
+        <button class="btn btn-primary my-2" @onclick="@(() => TakeScroll())">Pick up magic scroll</button>
+    }
 }
 
 @code {
@@ -131,6 +136,19 @@
     public string areaURL { get; set; }
     public Area thisArea { get; set; }
 
+    private bool scrollSpawned = false;
+
+    private GameItem? scroll = null;
+
+    private void TakeScroll()
+    {
+        if(scroll != null)
+        {
+            Player.Instance.Inventory.AddItem(scroll);
+            scroll = null;
+            scrollSpawned = false;
+        }
+    }
 
     private void FindBattles()
     {
@@ -172,13 +190,28 @@
             GameState.StopActions();
         }
         
+
     }
     protected override void OnParametersSet()
     {
         thisArea = AreaManager.Instance.GetAreaByURL(areaURL);
         //GameState.NavMenu.ChangeOpenRegion(AreaManager.Instance.GetRegionForArea(thisArea), false);
         GameState.UpdateState();
-
+        scrollSpawned = false;
+        if (GameState.TicksSinceLastScroll > 500)
+        {
+            if (GameState.Random.Next(10) > 8)
+            {
+                scrollSpawned = true;
+                scroll = ItemManager.Instance.GetItemByUniqueID("Spell Scroll0").Copy();
+                scroll.Parameter = MagicManager.Instance.GetRandomSpell().Name;
+            }
+            else
+            {
+                scrollSpawned = false;
+            }
+            GameState.TicksSinceLastScroll = 0;
+        }
     }
     public void Dispose()
     {

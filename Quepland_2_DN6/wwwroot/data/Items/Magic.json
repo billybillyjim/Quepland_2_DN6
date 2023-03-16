@@ -123,5 +123,13 @@
     "secondaryColor": "#BBFFBB",
     "icon": "Sticks",
     "isStackable": true
+  },
+  {
+    "name": "Spell Scroll",
+    "description": "It has a magic spell written on it.",
+    "gatherString": "You get a magic spell.",
+    "value": 3500,
+    "secondaryColor": "#FFFFFF",
+    "icon": "Scroll"
   }
 ]

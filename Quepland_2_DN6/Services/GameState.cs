@@ -102,6 +102,7 @@ using System.Threading.Tasks;
     public static NavigationManager UriHelper;
     public static ArtisanTask CurrentArtisanTask;
 
+    public static int TicksSinceLastScroll = 0;
     public static int TicksToNextAction;
     public static readonly int GameSpeed = 200;
     public static bool CompactInventoryView;
@@ -321,6 +322,7 @@ using System.Threading.Tasks;
         
         await GetDimensions();
         TicksToNextAction--;
+        TicksSinceLastScroll++;
         CurrentTick++;
         TooltipManager.currentDelay++;
         if (SaveGame)
@@ -1416,7 +1418,8 @@ using System.Threading.Tasks;
             CompactInventory = CompactInventoryView,
             ShowBackgrounds = ShowBackgrounds,
             UseOldBankView = UseOldBank,
-            ExtractWarningValue = ExtractWarningValue
+            ExtractWarningValue = ExtractWarningValue,
+            StartingLighthouseTick = StartingLighthouseTick
         };
     }
     public static void LoadSaveData(GameStateSaveData data)
@@ -1428,6 +1431,7 @@ using System.Threading.Tasks;
         CurrentArtisanTask = data.CurrentTask;
         UseOldBank = data.UseOldBankView;      
         ExtractWarningValue = data.ExtractWarningValue;
+        StartingLighthouseTick = data.StartingLighthouseTick;
         if (data.Location == null || data.Location == "" || data.Location == "Battle")
         {
             Location = "QueplandFields";
@@ -1469,10 +1473,23 @@ using System.Threading.Tasks;
         {
             try
             {
-                AreaManager.Instance.GetAFKActionByUniqueID(action.UniqueID).ReturnTime = action.ReturnTime;
-                AreaManager.Instance.GetAFKActionByUniqueID(action.UniqueID).StartTime = action.StartTime;
-                AreaManager.Instance.GetAFKActionByUniqueID(action.UniqueID).IsActive = action.IsActive;
-                CurrentAFKAction = AreaManager.Instance.GetAFKActionByUniqueID(action.UniqueID);
+                if(action.ButtonText == "Lighthouse")
+                {
+                    CurrentAFKAction = action;
+                    GameState.IsInLighthouse = true;
+                    Player.Instance.LighthouseLocation = "AutoRaid";
+                    Console.WriteLine(action.GetRemainingTime());
+                    Console.WriteLine(action.IsReady());
+                    Console.WriteLine(action.IsActive);
+                }
+                else
+                {
+                    AreaManager.Instance.GetAFKActionByUniqueID(action.UniqueID).ReturnTime = action.ReturnTime;
+                    AreaManager.Instance.GetAFKActionByUniqueID(action.UniqueID).StartTime = action.StartTime;
+                    AreaManager.Instance.GetAFKActionByUniqueID(action.UniqueID).IsActive = action.IsActive;
+                    CurrentAFKAction = AreaManager.Instance.GetAFKActionByUniqueID(action.UniqueID);
+                }
+                
             }
             catch(Exception e)
             {
