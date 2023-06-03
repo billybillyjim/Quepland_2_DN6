@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 public class ItemManager
 {
@@ -176,8 +177,20 @@ public class ItemManager
     }
     public GameItem GenerateNewItem(string[] data)
     {
-        GameItem i = new GameItem();
-        Console.WriteLine(data);
+        foreach(string s in data)
+        {
+            Console.WriteLine(s);
+        }
+        string[] info = data[0].Split('0');
+        GameItem i = GetCopyOfItem(info[0]);
+        
+        if (i == null)
+        {
+            i = new GameItem();
+        }
+        i.Name = info[0];
+        i.Parameter = info[1];
+
 
         Items.Add(i);
         return i;
@@ -432,6 +445,12 @@ public class ItemManager
             {
                 continue;
             }
+            if((r.Output.Name.Contains("Silver") ||
+                r.Output.Name.Contains("Gold") ||
+                r.Output.Name.Contains("Platinum")) && Player.Instance.GetLevel("Artisan") < 50)
+            {
+                continue;
+            }
             if (r.GetRequiredSkills().Contains(skill))
             {
                 
@@ -441,6 +460,7 @@ public class ItemManager
                 }
             }
         }
+        
         Recipe task = possibleRecipes[GameState.Random.Next(possibleRecipes.Count)];
         int amount = GameState.Random.Next(50, 200);
         if (task.Output.Category == "Armors")

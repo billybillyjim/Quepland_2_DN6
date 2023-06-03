@@ -61,16 +61,8 @@ public class MagicManager
 
     public ISpell GetRandomSpell()
     {
-        var count = 0;
-        foreach (ISpell spell in Spells)
-        {
-            if (GameState.Random.Next(Spells.Count) == count)
-            {
-                return spell;
-            }
-            count++;
-        }
-        return Spells[count - 1];
+        return Spells[GameState.Random.Next(Spells.Count)];
+
     }
 
     public bool NoSpellsUnlocked()

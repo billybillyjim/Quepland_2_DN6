@@ -30,59 +30,63 @@
                 MessageManager.AddMessage($"You don't have the seeds or MP to cast this spell.");
                 return;
             }
-            spell.PayCost();
-            foreach (Building b in AreaManager.Instance.Buildings)
+            if (spell.PayCost())
             {
-                if (b.TanningSlots.Count > 0)
+                double timeSkip = -6 * Math.Min(1.5, (Player.Instance.GetLevel("Magic") / 100d));
+                foreach (Building b in AreaManager.Instance.Buildings)
                 {
-                    foreach (TanningSlot slot in b.TanningSlots)
+                    if (b.TanningSlots.Count > 0)
                     {
-                        if(slot.FinishTime.Year > 1999)
+                        foreach (TanningSlot slot in b.TanningSlots)
                         {
-                            try
+                            if (slot.FinishTime.Year > 1999)
                             {
-                                var newTime = slot.FinishTime.AddHours(-6);
-                                slot.FinishTime = newTime;
-                            }
-                            catch
-                            {
+                                try
+                                {
+                                    var newTime = slot.FinishTime.AddHours(timeSkip);
+                                    slot.FinishTime = newTime;
+                                }
+                                catch
+                                {
 
+                                }
                             }
+
                         }
-                        
                     }
                 }
-            }
-            foreach (Dojo d in AreaManager.Instance.Dojos)
-            {
-                try
-                {
-                    d.LastWinTime = d.LastWinTime?.AddHours(-6);
-                    d.LastLossTime = d.LastLossTime?.AddHours(-6);
-                }
-                catch
-                {
-
-                }
-                
-            }
-            foreach(Area a in AreaManager.Instance.Areas)
-            {
-                if(a.TrapSlot != null)
+                foreach (Dojo d in AreaManager.Instance.Dojos)
                 {
                     try
                     {
-                        a.TrapSlot.HarvestTime = a.TrapSlot.HarvestTime.AddHours(-6);
+                        d.LastWinTime = d.LastWinTime?.AddHours(timeSkip);
+                        d.LastLossTime = d.LastLossTime?.AddHours(timeSkip);
                     }
                     catch
                     {
 
                     }
+
                 }
+                foreach (Area a in AreaManager.Instance.Areas)
+                {
+                    if (a.TrapSlot != null)
+                    {
+                        try
+                        {
+                            a.TrapSlot.HarvestTime = a.TrapSlot.HarvestTime.AddHours(timeSkip);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                }
+                CooldownRemaining = Cooldown;
+                MessageManager.AddMessage(Message);
+                Player.Instance.GainExperience("Magic", 400);
             }
-            CooldownRemaining = Cooldown;
-            MessageManager.AddMessage(Message);
-            Player.Instance.GainExperience("Magic", 600);
+            
         }
         public ISpell Copy()
         {

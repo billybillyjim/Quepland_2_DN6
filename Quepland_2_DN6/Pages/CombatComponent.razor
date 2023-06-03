@@ -110,13 +110,24 @@
                 </div>
                 @foreach(var pair in Player.Instance.Inventory.GetUniqueItems())
                 {
-                    @if(pair.Key.WeaponInfo != null)
+                    @if(pair.Key.WeaponInfo != null && pair.Key.EquipSlot != "None")
                     {
-                        <div @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Equip " + pair.Key.Name, pair.Key.Description)))"
-                             @onmouseout="@(new Action(() => GameState.HideTooltip()))"
-                             @onclick="@(() => Player.Instance.Equip(pair.Key))">
-                            <Quepland_2_DN6.Components.ItemBoxComponent Item="pair.Key" shouldRender="@pair.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
-                        </div>
+                        @if (pair.Key.HasRequirements())
+                        {
+                            <div @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Equip " + pair.Key.Name, pair.Key.Description)))"
+                                 @onmouseout="@(new Action(() => GameState.HideTooltip()))"
+                                 @onclick="@(() => Player.Instance.Equip(pair.Key))">
+                                <Quepland_2_DN6.Components.ItemBoxComponent Item="pair.Key" shouldRender="@pair.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
+                            </div>
+                        }
+                        else
+                        {
+                            <div @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "Cannot Equip " + pair.Key.Name, pair.Key.GetRequirementTooltip())))"
+                                 @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+                                <Quepland_2_DN6.Components.ItemBoxComponent Item="pair.Key" shouldRender="@pair.Key.Rerender"></Quepland_2_DN6.Components.ItemBoxComponent>
+                            </div>
+                        }
+                        
                     }
                     @if(pair.Key.FoodInfo != null)
                     {

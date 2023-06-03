@@ -294,7 +294,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
         if (GameState.Random.Next(7) == 0 && GameState.BestLighthouseTime != int.MaxValue && !FollowerManager.Instance.GetFollowerByName("Kenbo Daito").IsUnlocked)
         {
             FollowerManager.Instance.GetFollowerByName("Kenbo Daito").IsUnlocked = true;
-            MessageManager.AddMessage($"You meet another adventurer in the workshop. He grasps your ankle before you depart. Back in the lighthouse, he offers to help you for saving his life. He spent years in the labyrinth and could never find a way to escape... But now he kind of misses it back there.");
+            MessageManager.AddMessage($"You meet another adventurer in the workshop. He grasps your ankle before you depart. Back in the lighthouse, he offers to help you for saving his life. He spent years in the labyrinth and could never find a way to escape... But now he kind of misses it back there.", "red");
         }
         else
         {
@@ -320,11 +320,11 @@ else if(Player.Instance.LighthouseLocation == "Boss")
             Player.Instance.Inventory.AddDrop(drop2, out int dropAmount2);
             MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} and {dropAmount2} {drop2.Item.GetName(dropAmount2)}.");
 
-           
+
         }
         else
         {
-            
+
             MessageManager.AddMessage($"You successfully escape the lighthouse and split your loot with your adventuring partner.");
             MessageManager.AddMessage($"You get {dropAmount1} {drop1.Item.GetName(dropAmount1)} from your raid and {Player.Instance.CurrentFollower.Name} gets {drop2.Amount} {drop2.Item.GetName(drop2.Amount)}.");
         }
@@ -334,9 +334,12 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     {
         GameState.StopNonCombatActions();
         room = newRoom;
+        if (RoomEnemies.ContainsKey(room))
+        {
+            string opponent = RoomEnemies[room][currentFloor];
+            BattleManager.Instance.StartBattle(BattleManager.Instance.GetMonsterByName(opponent));
+        }
 
-        string opponent = RoomEnemies[room][currentFloor];
-        BattleManager.Instance.StartBattle(BattleManager.Instance.GetMonsterByName(opponent));
 
         GameState.UpdateState();
     }
@@ -355,8 +358,6 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     {
         if (Player.Instance.Inventory.GetUsedSpaces() != 0)
         {
-
-
             return true;
         }
         return false;
@@ -391,6 +392,7 @@ else if(Player.Instance.LighthouseLocation == "Boss")
     protected override void OnInitialized()
     {
         GameState.StateChanged += OnGameStateChanged;
+        ChangeLocations("Outside");
     }
     public void Dispose()
     {

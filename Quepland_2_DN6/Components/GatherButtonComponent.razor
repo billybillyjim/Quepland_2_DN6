@@ -20,7 +20,8 @@
         else
         {
             <div style="position:relative" >
-                <button class="btn btn-primary" style="position:relative"disabled>
+                <button class="btn btn-primary" style="position:relative;opacity: .65;" oncontextmenu="return false;" draggable="false"
+                        onmouseup="@(new Action<MouseEventArgs>((args) => ShowMenu(args)))">
                     @gatherText
                     <div style="position:absolute;top:0px;bottom:0px;left:0px;right:0px;" 
                          onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, GetLowestReqTooltip())))"
@@ -161,6 +162,41 @@
         }
         return "";
     }
+
+    private void ShowMenu(MouseEventArgs args)
+    {
+        if (args.Button == 2)
+        {
+            GameState.CurrentContextMenu = new ContextMenu();
+            GameItem it = null;
+            foreach (GameItem i in items)
+            {
+                foreach (Requirement r in i.Requirements)
+                {
+                    if (r.Action != "None" && r.IsMet() == false)
+                    {
+                        it = Bank.Instance.Inventory.FindBestItemCapableOfAction(r.Action);
+                        if (it != null)
+                        {
+                            GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Withdraw " + it.Name + " from bank", new Action(() => Bank.Instance.Withdraw(it, 1))));
+                            break;
+                        }
+
+                    }
+
+
+                }
+                if(it != null)
+                {
+                    break;
+                }
+            }
+            
+
+            GameState.ShowContextMenu(args);
+        }
+    }
+
     public void Dispose()
     {
         GameState.StateChanged -= OnGameStateChanged;

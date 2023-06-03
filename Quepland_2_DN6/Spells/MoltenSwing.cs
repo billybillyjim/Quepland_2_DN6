@@ -18,23 +18,23 @@
 
         public static Dictionary<string, string> replacements = new Dictionary<string, string>()
         {
-            { "Copper Ore", "Molten Copper Bar" },
-            { "Tin Ore", "Molten Tin Bar" },
-            { "Calamine", "Molten Zinc Bar" },
-            { "Pentlandite", "Molten Nickel Bar" },
-            { "Iron Ore", "Molten Iron Bar" },
-            { "Coal", "Ashes" },
-            { "Silver Ore", "Molten Silver Bar" },
-            { "Galena", "Molten Lead Bar" },
+            { "Copper Ore", "Molten Copper Bar0" },
+            { "Tin Ore", "Molten Tin Bar0" },
+            { "Calamine", "Molten Zinc Bar0" },
+            { "Pentlandite", "Molten Nickel Bar0" },
+            { "Iron Ore", "Molten Iron Bar0" },
+            { "Coal", "Ashes0" },
+            { "Silver Ore", "Molten Silver Bar0" },
+            { "Galena", "Molten Lead Bar0" },
             { "Cinnabar", "" },
-            { "Bauxite", "Molten Aluminum Bar" },
-            { "Chelonite", "Molten Iseroite Bar" },
-            { "Gold Ore", "Molten Gold Bar" },
-            { "Platinum Ore", "Molten Platinum Bar" },
-            { "Strongtium Ore", "Molten Strongtium Bar" },
+            { "Bauxite", "Molten Aluminum Bar0" },
+            { "Chelonite", "Molten Iseroite Bar0" },
+            { "Gold Ore", "Molten Gold Bar0" },
+            { "Platinum Ore", "Molten Platinum Bar0" },
+            { "Strongtium Ore", "Molten Strongtium Bar0" },
             { "Sahotite Ore", "" },
-            { "Plastinium Ore", "Molten Plastinium Bar" },
-            { "Queplinium Ore", "Molten Queplinium Bar" }
+            { "Plastinium Ore", "Molten Plastinium Bar0" },
+            { "Queplinium Ore", "Molten Queplinium Bar0" }
         };
 
         public void Cast()
@@ -67,7 +67,23 @@
         {
             if (replacements.ContainsKey(item.Name))
             {
-                Data = replacements[item.Name];
+                if(item.Name == "Cinnabar")
+                {
+                    MessageManager.AddMessage("The cinnabar bursts into a thousand shards as you strike it with your pickaxe.");
+                }
+                else if(item.Name == "Sahotite Ore")
+                {
+                    MessageManager.AddMessage("The sahotite bursts into a cloud of vapor as you strike it with your pickaxe.");
+                }
+                else if (item.Name == "Coal")
+                {
+                    MessageManager.AddMessage("The coal quickly burns into ash as you strike it with your pickaxe.");
+                }
+                else
+                {
+                    Data = replacements[item.Name];
+                }
+                
             }
         }
 

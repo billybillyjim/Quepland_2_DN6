@@ -126,7 +126,7 @@
 
     @if (scrollSpawned)
     {
-        <button class="btn btn-primary my-2" @onclick="@(() => TakeScroll())">Pick up magic scroll</button>
+        <button class="btn btn-primary my-2" style="background-color:slateblue;border-color:darkslateblue" @onclick="@(() => TakeScroll())">Pick up magic scroll</button>
     }
 }
 
@@ -144,9 +144,12 @@
     {
         if(scroll != null)
         {
-            Player.Instance.Inventory.AddItem(scroll);
-            scroll = null;
-            scrollSpawned = false;
+            if (Player.Instance.Inventory.AddItem(scroll))
+            {
+                scroll = null;
+                scrollSpawned = false;
+            }
+            
         }
     }
 
@@ -198,7 +201,7 @@
         //GameState.NavMenu.ChangeOpenRegion(AreaManager.Instance.GetRegionForArea(thisArea), false);
         GameState.UpdateState();
         scrollSpawned = false;
-        if (GameState.TicksSinceLastScroll > 500)
+        if (GameState.TicksSinceLastScroll > 5)
         {
             if (GameState.Random.Next(10) > 8)
             {

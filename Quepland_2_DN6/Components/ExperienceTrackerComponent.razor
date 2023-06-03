@@ -50,7 +50,7 @@
         string t = s.Experience.ToString("#,##0.##") + " / ";
         if (s.EXPTracker.GoalExperience == 0)
         {
-            t += Skill.GetExperienceRequired(s.GetSkillLevelUnboosted() + 1).ToString("#,##0.##") + "\n";
+            t += Skill.GetExperienceRequired(s.GetSkillLevelUnboosted()).ToString("#,##0.##") + "\n";
         }
         else
         {

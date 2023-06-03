@@ -6,7 +6,7 @@
 {
     <h3>Smithy</h3>
 
-    <CustomDropdownComponent BoxText="Select an Ore or Bar" EmptyText="You don't have any ores or bars." MinWidth="300" @bind-value="Source" DropdownItems="@GetSmeltables()"></CustomDropdownComponent>
+    <CustomDropdownComponent BoxText="Select an Ore or Bar" EmptyText="You don't have any ores or bars." MinWidth="300" @bind-value="Source" DropdownItems="@GetSmeltables()" ></CustomDropdownComponent>
     <CustomDropdownComponent BoxText="Select a Product" EmptyText="Please select a source." MinWidth="300" @bind-value="Product" DropdownItems="@GetSmithables()"></CustomDropdownComponent>
 
     <button class="btn btn-primary m-2" disabled="@(GameState.SmithX == 1)" @onclick="(() => SetNumberToMake(1))">
@@ -132,10 +132,11 @@
     {
         if (smeltables.Count > 0)
         {
-            return smeltables.Where(x => x.CanCreate()).OrderBy(x => x.GetShortIngredientsString()).Select(x => x.GetShortIngredientsString()).ToList();
+            return smeltables.OrderBy(x => x.GetShortIngredientsString()).Select(x => x.GetShortIngredientsString()).ToList();
         }
         return new List<string>();
     }
+
     public void Smith()
     {
         GameState.SmithingActionsRemaining = GameState.SmithX;

@@ -19,7 +19,9 @@
     {
         <ul class="nav flex-column">
             <li class="nav-item px-3 mr-0">
-                <div class="ml-2" style="@GetStyle("Bank")" onclick="@(new Action(() => GoToArea("Bank")))">
+                <div class="ml-2" style="@GetStyle("Bank")" onclick="@(new Action(() => GoToArea("Bank")))"
+                     oncontextmenu="return false;" draggable="false"
+                     onmouseup="@(new Action<MouseEventArgs>((args) => ShowBankMenu(args)))">
                     <img style="height: 45px; width: 45px; padding: 5px; margin-right: 10px; border-radius: 0.25rem; background-color: white;" src="@("data/Images/Bank.png")" />Bank
                 </div>
 
@@ -330,6 +332,23 @@
 
             GameState.ShowContextMenu(args);
         }
+    }
+    private void ShowBankMenu(MouseEventArgs args)
+    {
+        if (args.Button == 2)
+        {
+            GameState.CurrentContextMenu = new ContextMenu();
+
+            GameState.CurrentContextMenu.Buttons.Add(new ContextButton("Deposit all items into bank", new Action(() => DepositAll())));
+
+
+            GameState.ShowContextMenu(args);
+        }
+    }
+    public void DepositAll()
+    {
+        GameState.StopActions();
+        Bank.Instance.DepositAll(Player.Instance.Inventory);
     }
     private string GetStyle(string loc)
     {

@@ -31,7 +31,7 @@ public class HatchEffect : IStatusEffect
     }
     public string GetDescription()
     {
-        return "Hatches an enemy monster from " + CustomData;
+        return "Hatches a chicken from " + CustomData;
     }
     public void DoEffect(Monster m)
     {

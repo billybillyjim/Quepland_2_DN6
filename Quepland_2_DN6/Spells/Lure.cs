@@ -51,6 +51,10 @@
                 MessageManager.AddMessage($"An extra {item.Name} leaps out into your inventory!");
                 Data = item.UniqueID;
             }
+            else
+            {
+                Data = "";
+            }
         }
 
         public ISpell Copy()

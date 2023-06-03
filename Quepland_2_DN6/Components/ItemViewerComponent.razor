@@ -256,14 +256,25 @@
                     MagicManager.Instance.UnlockSpell(Item.Parameter);
                     MessageManager.AddMessage("You read the scroll to find that it contains the spell " + s.Name + ". You've unlocked a new spell!");
                 }
-                
+
             }
-            if (Player.Instance.Inventory.RemoveItems(Item, 1) == 1)
+            else
             {
-                if (Player.Instance.Inventory.HasItem(Item) == false)
-                {
-                    ClearItem();
-                }
+                MessageManager.AddMessage("You read the scroll to find that it contains information about general magic spell casting best practices. You learned a little bit more about magic.");
+                Player.Instance.GainExperience("Magic", Player.Instance.GetLevel("Magic") * 15);
+            }
+            
+        }
+        else
+        {
+            MessageManager.AddMessage("You read the scroll to find that it contains information about general magic spell casting best practices. You learned a little bit more about magic.");
+            Player.Instance.GainExperience("Magic", Player.Instance.GetLevel("Magic") * 15);
+        }
+        if (Player.Instance.Inventory.RemoveItems(Item, 1) == 1)
+        {
+            if (Player.Instance.Inventory.HasItem(Item) == false)
+            {
+                ClearItem();
             }
         }
     }

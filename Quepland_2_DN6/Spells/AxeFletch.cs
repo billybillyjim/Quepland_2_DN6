@@ -49,7 +49,7 @@
             {"White Pine Logs", "White Pine Arrow0"},
             {"Poplar Logs", "Poplar Arrow0"},
             {"Oak Logs", "Oak Arrow0"},
-            {"Maple Logs", "Maple Arrow0"},
+            {"Sugar Maple Logs", "Maple Arrow0"},
             {"Birch Logs", "Birch Arrow0"},
             {"Mesquite Logs", "Mesquite Arrow0"},
             {"Mahogany Logs", "Mahogany Arrow0"},

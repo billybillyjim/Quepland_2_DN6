@@ -5,30 +5,32 @@
         {
             @foreach (Skill s in Player.Instance.Skills)
             {
-        <div class="row" style="position:relative">
-            <div class="col" style="cursor:pointer" @onclick="@(() => SetMenu(s.Name))">@s.Name</div>
-            @if (s.GetSkillLevel() == s.GetSkillLevelUnboosted())
-            {
-                <div class="col">Level:@s.GetSkillLevelUnboosted()</div>
+                <div class="row" style="position:relative">
+                    <div class="col" style="cursor:pointer" @onclick="@(() => SetMenu(s.Name))">@s.Name</div>
+                    @if (s.GetSkillLevel() == s.GetSkillLevelUnboosted())
+                    {
+                        <div class="col">Level:@s.GetSkillLevelUnboosted()</div>
 
-            }
-            else if (GameState.CurrentFood != null)
-            {
-                <div class="col">
-                    Level:@s.GetSkillLevelUnboosted()
-                    (<span style="color:limegreen"
-                           @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, "This stat is being boosted by " + s.Boost + " levels for the next " + (GameState.CurrentFood.FoodInfo.HealDuration - GameState.HealingTicks) + " game ticks.")))"
-                           @onmouseout="@(new Action(() => GameState.HideTooltip()))">
-                        @s.GetSkillLevel()
-                    </span>)
+                    }
+                    else if (GameState.CurrentFood != null)
+                    {
+                        <div class="col">
+                            Level:@s.GetSkillLevelUnboosted()
+                            (<span style="color:limegreen"
+                                   @onmouseover="@(new Action<MouseEventArgs>(e => 
+                                       GameState.ShowTooltip(e, "This stat is being boosted by " + s.Boost + " levels for the next " + 
+                                       (GameState.HealingTicks) + " game ticks.")))"
+                                   @onmouseout="@(new Action(() => GameState.HideTooltip()))">
+                                @s.GetSkillLevel()
+                            </span>)
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="col">Level:@s.GetSkillLevelUnboosted()</div>
+                    }
                 </div>
-
-            }
-            else
-            {
-                <div class="col">Level:@s.GetSkillLevelUnboosted()</div>
-            }
-        </div>
                 <div class="progress" @onmouseover="@(new Action<MouseEventArgs>(e => GameState.ShowTooltip(e, s.Name, GetSkillTooltip(s))))"
                                       @onmouseout="@(new Action(() => GameState.HideTooltip()))" style="border-radius:0;background-color:darkgray">                
                     <div class="progress-bar" style="width:@(s.Progress.ToSafeRenderString())%;color:black;background-color:#51d051">

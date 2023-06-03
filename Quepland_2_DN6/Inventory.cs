@@ -230,6 +230,25 @@ public class Inventory
         }
         return null;
     }
+
+    public GameItem? FindBestItemCapableOfAction(string action)
+    {
+        GameItem best = null;
+        foreach (KeyValuePair<GameItem, int> item in items)
+        {
+            if (item.Key.EnabledActions != null)
+            {
+                if (item.Key.EnabledActions.Contains(action))
+                {
+                    if (best == null || item.Key.GatherSpeedBonus > best.GatherSpeedBonus)
+                    {
+                        best = item.Key;
+                    }                    
+                }
+            }
+        }
+        return best;
+    }
     public bool HasArrows()
     {
         foreach (KeyValuePair<GameItem, int> item in items)
@@ -262,15 +281,7 @@ public class Inventory
         }
         return strongest;
     }
-    /*
-    public int GetCoins()
-    {
-        if(items.TryGetValue(ItemManager.Instance.GetItemByName("Coins"), out int val))
-        {
-            return val;
-        }
-        return 0;
-    }*/
+
     public bool AddItem(GameItem item)
     {
         //If the added item is null, the inventory is full and the item is not stackable, 
@@ -395,9 +406,7 @@ public class Inventory
                 }
                 int oldAmt = pair.Value;
                 items.Remove(pair);
-                //pair.Key.Rerender = true;
                 items.Add(new KeyValuePair<GameItem, int>(pair.Key, oldAmt + amount));
-                //Console.WriteLine("Adding item:" + item.Name + ", old:" + oldAmt + "/" + (oldAmt + amount));
             }
             else
             {
@@ -410,9 +419,7 @@ public class Inventory
             if (item.IsStackable || AllItemsStack)
             {
                 item.Rerender = true;
-                //item.itemPos = inventorySlotPos;
                 items.Add(new KeyValuePair<GameItem, int>(item, amount));
-                //Console.WriteLine("Has item was false:" + item.Name + ", adding " + amount);
             }
             else
             {
@@ -759,6 +766,7 @@ public class Inventory
         {
             return;
         }
+        List<string> itemsToCreate = new List<string>();
         foreach (string line in i)
         {
             string[] s = line.Split('_');
@@ -770,44 +778,55 @@ public class Inventory
             GameItem it = ItemManager.Instance.LoadItemByUniqueID(id);
             if(it == null)
             {
-                Console.WriteLine("Failed to find item with id:" + id);
-                Console.WriteLine(line);
-                it = ItemManager.Instance.GenerateNewItem(s);
-            }
-            if (s.Length >= 3)
-            {
-                List<string> tabs = JsonConvert.DeserializeObject<List<string>>(s[2]);
-                foreach (string tag in tabs)
-                {
-                    it.AddTag(tag);
-                }
-            }
-            if (s.Length >= 4)
-            {
-                if (bool.TryParse(s[3], out bool res))
-                {
-
-                    it.IsLocked = res;
-
-                }
-            }
-            if (int.TryParse(s[1], out int amt))
-            {
-                AddMultipleOfItem(it, amt);
+                itemsToCreate.Add(line);                
             }
             else
             {
-                Console.WriteLine("Error loading item in line:" + line);
+                LoadItemData(s, it);
             }
-            if(it != null)
-            {
-                it.IsLocked = false;
-            }
-
         }
-        //FixItems = true;
+        foreach(string line in itemsToCreate)
+        {
+            string[] s = line.Split('_');
+            GameItem it = ItemManager.Instance.GenerateNewItem(s);
+            LoadItemData(s, it);
+        }
+
         IsLoadingSave = false;
         UpdateItemCount();
+    }
+
+    public void LoadItemData(string[] s, GameItem it)
+    {
+        if (s.Length >= 3)
+        {
+            List<string> tabs = JsonConvert.DeserializeObject<List<string>>(s[2]);
+            foreach (string tag in tabs)
+            {
+                it.AddTag(tag);
+            }
+        }
+        if (s.Length >= 4)
+        {
+            if (bool.TryParse(s[3], out bool res))
+            {
+
+                it.IsLocked = res;
+
+            }
+        }
+        if (int.TryParse(s[1], out int amt))
+        {
+            AddMultipleOfItem(it, amt);
+        }
+        else
+        {
+            Console.WriteLine("Error loading item in line:" + s);
+        }
+        if (it != null)
+        {
+            it.IsLocked = false;
+        }
     }
 
 }

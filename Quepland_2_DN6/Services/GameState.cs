@@ -352,6 +352,7 @@ using System.Threading.Tasks;
     private void ClearActions()
     {
         CurrentGatherItem = null;
+        
         RequiredForGatherItem = null;
         CurrentRecipe = null;
         BattleManager.Instance.CurrentOpponents.Clear();
@@ -1461,7 +1462,11 @@ using System.Threading.Tasks;
     public static void AddActiveSpell(ISpell spell, int duration)
     {
         spell.TimeRemaining = duration;
-        ActiveSpells.Add(spell);
+        if(ActiveSpells.Contains(spell) == false)
+        {
+            ActiveSpells.Add(spell);
+        }
+        
     }
     public static void RemoveActiveSpellByName(string spell)
     {
