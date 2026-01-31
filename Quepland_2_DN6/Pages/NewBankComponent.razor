@@ -230,7 +230,7 @@ else
 
     private List<KeyValuePair<GameItem, int>> BankItems = new List<KeyValuePair<GameItem, int>>();
     public List<KeyValuePair<GameItem, int>> GetItemsOld()
-    {   
+    {
         var items = Bank.Instance.Inventory.GetItems().OrderBy(x => x.Key.ID);
         if(Bank.Instance.CurrentTab == "Main" || addingTags)
         {

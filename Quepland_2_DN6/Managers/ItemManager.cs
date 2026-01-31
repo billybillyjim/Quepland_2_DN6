@@ -191,8 +191,8 @@ public class ItemManager
         i.Name = info[0];
         i.Parameter = info[1];
 
-
         Items.Add(i);
+        UniqueIDLookupDic.Add(i.UniqueID, i);
         return i;
     }
     public GameItem LoadItemByUniqueID(string uniqueID)

@@ -28,7 +28,7 @@ using System.Threading.Tasks;
     public event EventHandler StateChanged;
     public IJSRuntime JSRuntime { get; set; }
 
-    public static string Version { get; set; } = "1.2.0";
+    public static string Version { get; set; } = "1.2.2";
     public static List<Update> Updates { get; set; } = new List<Update>();
     public static Pluralizer Pluralizer = new Pluralizer();
 

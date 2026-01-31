@@ -201,7 +201,7 @@
         //GameState.NavMenu.ChangeOpenRegion(AreaManager.Instance.GetRegionForArea(thisArea), false);
         GameState.UpdateState();
         scrollSpawned = false;
-        if (GameState.TicksSinceLastScroll > 5)
+        if (GameState.TicksSinceLastScroll > 500)
         {
             if (GameState.Random.Next(10) > 8)
             {
